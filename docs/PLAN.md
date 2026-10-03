@@ -283,8 +283,8 @@ Pour éviter les requêtes N+1, toute liste de cartes charge les membres avec
 
 ### Phase 3 — L'album de cartes, la fiche, le QR, le profil (2 h)
 
-- [ ] **3.1** Le composant `templates/club/_card.html`, conforme au § 4.3.
-- [ ] **3.2** La vue `member.album`, route `club:album`, `/album/` :
+- [x] **3.1** Le composant `templates/club/_card.html`, conforme au § 4.3.
+- [x] **3.2** La vue `member.album`, route `club:album`, `/album/` :
   - Membres affichés : visibles (`visible_in_directory=True`), actifs (`user__is_active=True`), sauf soi-même.
     Avec `select_related` et `prefetch_related`.
   - Filtres GET (un formulaire GET, sans JavaScript) :
@@ -308,7 +308,7 @@ Pour éviter les requêtes N+1, toute liste de cartes charge les membres avec
   - Ajoute `"club:album"` à `PAGES_TO_CHECK` dans `club/tests/test_album.py`.
   - ✅ Avec Camille : 49 cartes, filtre `statut=album` → 2 cartes, filtre `langue=de` → seulement des
     germanophones, `q=Lukas` → 1 carte.
-- [ ] **3.3** Refaire `templates/club/member_detail.html` :
+- [x] **3.3** Refaire `templates/club/member_detail.html` :
   - `_card.html` en `full` ;
   - « Vos points communs » si ce n'est pas moi : `common_tags(request.member, target)` (dans
     `club/services/profile.py`), à ajouter au contexte de la vue, affiché en chips ❤️ et 💀 ;
@@ -318,14 +318,14 @@ Pour éviter les requêtes N+1, toute liste de cartes charge les membres avec
   - **sinon** : 🔒 « Scanne son QR code lors d'un événement pour débloquer ses coordonnées. » ;
   - si `is_me` : des boutons « Modifier mon profil » et « Mon QR code ».
   - ✅ Le test `test_contact_details_only_after_meeting` reste vert.
-- [ ] **3.4** Refaire `templates/club/my_qr.html` : une grande `card` centrée qui contient le QR
+- [x] **3.4** Refaire `templates/club/my_qr.html` : une grande `card` centrée qui contient le QR
   (`{{ qr_svg|safe }}` dans un `div` blanc arrondi, `[&>svg]:mx-auto [&>svg]:h-64 [&>svg]:w-64`), le nom, le texte
   « Fais scanner ce code pour échanger vos cartes » et l'astuce « Fais une capture d'écran pour l'avoir même sans
   réseau ». Garde le lien `scan_url` en petit : il sert en démo.
-- [ ] **3.5** Refaire `templates/club/scan_confirm.html` : la carte `compact` de `target`, la question
+- [x] **3.5** Refaire `templates/club/scan_confirm.html` : la carte `compact` de `target`, la question
   « Vous venez de vous rencontrer ? » et un formulaire POST (avec `{% csrf_token %}`) contenant un bouton
   `btn btn-primary w-full` « Ajouter {{ target.first_name }} à mon album ».
-- [ ] **3.6** Édition du profil, vue `member.profile_edit`, route `club:profile_edit`, `/moi/` :
+- [x] **3.6** Édition du profil, vue `member.profile_edit`, route `club:profile_edit`, `/moi/` :
   - `MemberProfileForm(ModelForm)` dans `club/forms.py`. Champs autorisés **et seulement eux** : `first_name`,
     `last_name`, `company`, `job_title`, `sector`, `region`, `speaks_fr`, `speaks_de`, `speaks_en`, `fun_fact`,
     `talk_to_me_about`, `phone`, `linkedin_url`, `visible_in_directory`.
@@ -342,7 +342,7 @@ Pour éviter les requêtes N+1, toute liste de cartes charge les membres avec
   - Ajoute `club/tests/test_profile_edit.py` avec deux tests :
     1. un POST qui inclut `member_since=1990` ne change **pas** `member_since` ;
     2. un POST modifie bien le profil du membre connecté, et seulement le sien.
-- [ ] **3.7** Décommenter les liens Album et Profil dans `base.html`. Dans `home.html`, ajouter le bouton
+- [x] **3.7** Décommenter les liens Album et Profil dans `base.html`. Dans `home.html`, ajouter le bouton
   « Voir l'album ».
 - ✅ **Fin de phase** :
   - Les tests sont verts.

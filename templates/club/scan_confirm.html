@@ -1,6 +1,16 @@
-{# PLACEHOLDER minimal pour les tests — à remplacer par la vraie UI (voir docs/PLAN.md) #}
-{% extends "base.html" %}{% load i18n %}{% block content %}
-<h1>{{ target.full_name }}</h1>
-<p>{{ target.job_title }} · {{ target.company }}</p>
-<form method="post">{% csrf_token %}<button type="submit">{% blocktranslate with name=target.first_name %}Ajouter {{ name }} à mon album{% endblocktranslate %}</button></form>
+{% extends "base.html" %}{% load i18n %}
+{% block title %}{{ target.full_name }} · {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<div class="mx-auto max-w-md space-y-4">
+  {% include "club/_card.html" with member=target collected=False size="compact" %}
+
+  <section class="card space-y-4 text-center">
+    <h1 class="text-lg font-semibold">{% translate "Vous venez de vous rencontrer ?" %}</h1>
+    <p class="text-sm text-stone-600">{% translate "Ajoute cette carte à ton album : vous pourrez alors échanger vos coordonnées." %}</p>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-primary w-full">{% blocktranslate with name=target.first_name %}Ajouter {{ name }} à mon album{% endblocktranslate %}</button>
+    </form>
+  </section>
+</div>
 {% endblock %}

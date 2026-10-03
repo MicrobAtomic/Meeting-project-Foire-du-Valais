@@ -1,6 +1,16 @@
-{# PLACEHOLDER minimal pour les tests — à remplacer par la vraie UI (voir docs/PLAN.md) #}
-{% extends "base.html" %}{% load i18n %}{% block content %}
-<h1>{% translate "Mon QR code" %}</h1>
-{{ qr_svg|safe }}
-<p>{% translate "Lien encodé :" %} <a href="{{ scan_url }}">{{ scan_url }}</a></p>
+{% extends "base.html" %}{% load i18n club_ui %}
+{% block title %}{% translate "Mon QR code" %} · {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<div class="mx-auto max-w-sm">
+  <section class="card space-y-4 p-6 text-center">
+    <div>
+      <h1 class="text-xl font-semibold">{{ request.member.full_name }}</h1>
+      <p class="text-sm text-stone-600">{{ request.member.job_title }} · {{ request.member.company }}</p>
+    </div>
+    <div class="rounded-2xl bg-white p-3 ring-1 ring-stone-200 [&>svg]:mx-auto [&>svg]:h-64 [&>svg]:w-64">{{ qr_svg|scalable_svg }}</div>
+    <p class="font-medium">{% translate "Fais scanner ce code pour échanger vos cartes" %}</p>
+    <p class="text-xs text-stone-500">📸 {% translate "Fais une capture d'écran pour l'avoir même sans réseau." %}</p>
+    <p class="break-all text-[11px] text-stone-400"><a href="{{ scan_url }}" class="underline">{{ scan_url }}</a></p>
+  </section>
+</div>
 {% endblock %}

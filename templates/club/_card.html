@@ -1,0 +1,41 @@
+{% comment %}
+Carte membre. Usage : {% include "club/_card.html" with member=m collected=True size="compact" %}
+  size      : "compact" (défaut, toute la carte est un lien) ou "full"
+  collected : True / False pour afficher le pied de carte, None pour le masquer (ma propre carte)
+Pour éviter les requêtes N+1, charger les membres avec select_related("user").prefetch_related("tag_links__tag").
+{% endcomment %}{% load i18n club_ui %}{% tags_with member "like" as likes %}{% tags_with member "dislike" as dislikes %}
+{% if size != "full" %}<a href="{% url 'club:member_detail' member.pk %}" class="block h-full rounded-2xl transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700">{% endif %}
+<article class="card h-full space-y-3 {{ member|rank_ring }}">
+  <header class="flex items-center gap-3">
+    <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-base font-semibold {{ member|sector_classes }}" aria-hidden="true">{{ member.initials }}</div>
+    <div class="min-w-0">
+      <h3 class="truncate font-semibold">{{ member.full_name }}</h3>
+      <p class="truncate text-sm text-stone-600">{{ member.job_title }} · {{ member.company }}</p>
+    </div>
+  </header>
+
+  <div class="flex flex-wrap gap-1.5">
+    <span class="chip {{ member|rank_badge }}">{{ member|rank_label }}</span>
+    <span class="chip">{{ member|sector_emoji }} {{ member.get_sector_display }}</span>
+    <span class="chip">{% if member.seniority_years %}{% blocktranslate with year=member.member_since count years=member.seniority_years %}Membre depuis {{ year }} · {{ years }} an{% plural %}Membre depuis {{ year }} · {{ years }} ans{% endblocktranslate %}{% else %}{% blocktranslate with year=member.member_since %}Membre depuis {{ year }}{% endblocktranslate %}{% endif %}</span>
+    <span class="chip">{{ member|language_codes }}</span>
+  </div>
+
+  {% if size == "full" %}
+    {% include "club/_tag_chips.html" with tags=likes icon="❤️" title=_("J'adore") %}
+    {% include "club/_tag_chips.html" with tags=dislikes icon="💀" title=_("Je déteste") %}
+    {% if member.fun_fact %}<p class="text-sm italic text-stone-700">« {{ member.fun_fact }} »</p>{% endif %}
+    {% if member.talk_to_me_about %}<p class="text-sm"><span class="font-medium">{% translate "Parle-moi de…" %}</span> {{ member.talk_to_me_about }}</p>{% endif %}
+    {% if member.region %}<p class="text-sm text-stone-600">📍 {{ member.region }}</p>{% endif %}
+  {% else %}
+    {% include "club/_tag_chips.html" with tags=likes|slice:":4" icon="❤️" title=_("J'adore") %}
+    {% include "club/_tag_chips.html" with tags=dislikes|slice:":2" icon="💀" title=_("Je déteste") %}
+  {% endif %}
+
+  {% if collected is not None %}
+  <footer class="border-t border-stone-100 pt-2 text-xs">
+    {% if collected %}<span class="font-medium text-emerald-700">✅ {% translate "Dans ton album" %}</span>{% else %}<span class="text-stone-500">🔒 {% translate "À rencontrer" %}</span>{% endif %}
+  </footer>
+  {% endif %}
+</article>
+{% if size != "full" %}</a>{% endif %}

@@ -1,0 +1,14 @@
+{% comment %}Un champ de formulaire (libellé, aide, erreurs). Usage : {% include "club/_field.html" with field=form.company %}{% endcomment %}
+<div>
+  {% if field.field.widget.input_type == "checkbox" %}
+  <label class="flex items-start gap-3 text-sm">
+    <span class="pt-0.5">{{ field }}</span>
+    <span>{{ field.label|capfirst }}{% if field.help_text %}<span class="mt-0.5 block text-xs text-stone-500">{{ field.help_text }}</span>{% endif %}</span>
+  </label>
+  {% else %}
+  <label for="{{ field.id_for_label }}" class="mb-1 block text-sm font-medium">{{ field.label|capfirst }}</label>
+  {{ field }}
+  {% if field.help_text %}<p class="mt-1 text-xs text-stone-500">{{ field.help_text }}</p>{% endif %}
+  {% endif %}
+  {% for error in field.errors %}<p class="mt-1 text-xs text-red-700" role="alert">{{ error }}</p>{% endfor %}
+</div>

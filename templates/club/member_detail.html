@@ -1,15 +1,42 @@
-{# PLACEHOLDER minimal pour les tests — à remplacer par la vraie UI (voir docs/PLAN.md) #}
-{% extends "base.html" %}{% load i18n club_ui %}{% block content %}
-<h1>{{ target|sector_emoji }} {{ target.full_name }}</h1>
-<p>{{ target.job_title }} · {{ target.company }} · {{ target|rank_label }} · {% translate "membre depuis" %} {{ target.member_since }}</p>
-{% tags_with target "like" as likes %}{% tags_with target "dislike" as dislikes %}
-<p>❤️ {% for tag in likes %}{{ tag.emoji }} {{ tag.label }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-<p>💀 {% for tag in dislikes %}{{ tag.emoji }} {{ tag.label }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-<p><em>{{ target.fun_fact }}</em></p>
-{% if can_see_contact %}
-<p>{{ target.user.email }} · {{ target.phone }}</p>
-<p><a href="{% url 'club:member_vcard' target.pk %}">{% translate "Ajouter à mes contacts (vCard)" %}</a></p>
-{% else %}
-<p>🔒 {% translate "Rencontre cette personne et scanne son QR code pour débloquer ses coordonnées." %}</p>
-{% endif %}
+{% extends "base.html" %}{% load i18n club_ui %}
+{% block title %}{{ target.full_name }} · {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<div class="mx-auto max-w-2xl space-y-4">
+  <p><a href="{% url 'club:album' %}" class="text-sm text-stone-600 hover:text-red-700">← {% translate "Retour à l'album" %}</a></p>
+
+  {% include "club/_card.html" with member=target collected=card_collected size="full" %}
+
+  {% if common %}
+  <section class="card space-y-3">
+    <h2 class="font-semibold">🤝 {% translate "Vos points communs" %}</h2>
+    {% if common.likes or common.dislikes %}
+      {% include "club/_tag_chips.html" with tags=common.likes icon="❤️" title=_("Vous aimez tous les deux") %}
+      {% include "club/_tag_chips.html" with tags=common.dislikes icon="💀" title=_("Vous détestez tous les deux") %}
+    {% else %}
+      <p class="text-sm text-stone-600">{% translate "Pas encore de point commun… à vous de les découvrir 😉" %}</p>
+    {% endif %}
+  </section>
+  {% endif %}
+
+  <section class="card space-y-3">
+    <h2 class="font-semibold">📇 {% translate "Coordonnées" %}</h2>
+    {% if can_see_contact %}
+      <ul class="space-y-2 text-sm">
+        <li>✉️ <a href="mailto:{{ target.user.email }}" class="text-red-700 underline">{{ target.user.email }}</a></li>
+        {% if target.phone %}<li>📞 <a href="tel:{{ target.phone|cut:' ' }}" class="text-red-700 underline">{{ target.phone }}</a></li>{% endif %}
+        {% if target.linkedin_url|slice:":4" == "http" %}<li>💼 <a href="{{ target.linkedin_url }}" target="_blank" rel="noopener noreferrer" class="text-red-700 underline">LinkedIn</a></li>{% endif %}
+      </ul>
+      <a href="{% url 'club:member_vcard' target.pk %}" class="btn btn-primary">📇 {% translate "Ajouter à mes contacts" %}</a>
+    {% else %}
+      <p class="text-sm text-stone-600">🔒 {% translate "Scanne son QR code lors d'un événement pour débloquer ses coordonnées." %}</p>
+    {% endif %}
+  </section>
+
+  {% if is_me %}
+  <div class="flex flex-wrap gap-2">
+    <a href="{% url 'club:profile_edit' %}" class="btn btn-primary">✏️ {% translate "Modifier mon profil" %}</a>
+    <a href="{% url 'club:my_qr' %}" class="btn btn-secondary">🔳 {% translate "Mon QR code" %}</a>
+  </div>
+  {% endif %}
+</div>
 {% endblock %}

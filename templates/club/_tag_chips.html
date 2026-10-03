@@ -1,0 +1,6 @@
+{% if tags %}
+<p class="flex flex-wrap items-center gap-1.5 text-sm">
+  <span role="img" title="{{ title }}" aria-label="{{ title }}">{{ icon }}</span>
+  {% for tag in tags %}<span class="chip">{{ tag.emoji }} {{ tag.label }}</span>{% endfor %}
+</p>
+{% endif %}

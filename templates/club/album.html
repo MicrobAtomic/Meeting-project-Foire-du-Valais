@@ -1,0 +1,53 @@
+{% extends "base.html" %}{% load i18n club_ui %}
+{% block title %}{% translate "Album" %} · {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<h1 class="text-2xl font-semibold">🃏 {% translate "L'album du Club" %}</h1>
+<p class="mt-1 text-sm text-stone-600">{% blocktranslate with done=progress.0 total=progress.1 %}{{ done }} / {{ total }} cartes{% endblocktranslate %}</p>
+<progress class="bar mt-3" value="{{ progress.0 }}" max="{{ progress.1|default:1 }}"></progress>
+
+<form method="get" class="card mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+  <div class="sm:col-span-2 lg:col-span-4">
+    <label for="f-q" class="sr-only">{% translate "Rechercher" %}</label>
+    <input type="search" id="f-q" name="q" value="{{ filters.q }}" placeholder="{% translate 'Un nom, une entreprise…' %}" class="input">
+  </div>
+  <div>
+    <label for="f-secteur" class="sr-only">{% translate "Secteur" %}</label>
+    <select id="f-secteur" name="secteur" class="input">
+      <option value="">{% translate "Tous les secteurs" %}</option>
+      {% for value, label in sectors %}<option value="{{ value }}"{% if filters.sector == value %} selected{% endif %}>{{ label }}</option>{% endfor %}
+    </select>
+  </div>
+  <div>
+    <label for="f-langue" class="sr-only">{% translate "Langue" %}</label>
+    <select id="f-langue" name="langue" class="input">
+      <option value="">{% translate "Toutes les langues" %}</option>
+      <option value="fr"{% if filters.language == "fr" %} selected{% endif %}>{% translate "Francophones" %}</option>
+      <option value="de"{% if filters.language == "de" %} selected{% endif %}>{% translate "Germanophones" %}</option>
+      <option value="en"{% if filters.language == "en" %} selected{% endif %}>{% translate "Anglophones" %}</option>
+    </select>
+  </div>
+  <div>
+    <label for="f-statut" class="sr-only">{% translate "Statut" %}</label>
+    <select id="f-statut" name="statut" class="input">
+      {% for value, label in statuses %}<option value="{{ value }}"{% if filters.status == value %} selected{% endif %}>{{ label }}</option>{% endfor %}
+    </select>
+  </div>
+  <div class="flex gap-2">
+    <button type="submit" class="btn btn-primary flex-1">{% translate "Filtrer" %}</button>
+    <a href="{% url 'club:album' %}" class="btn btn-secondary">{% translate "Réinitialiser" %}</a>
+  </div>
+</form>
+
+{% if cards %}
+<p class="mt-4 text-sm text-stone-600">{% blocktranslate count n=members|length %}{{ n }} carte{% plural %}{{ n }} cartes{% endblocktranslate %}</p>
+<div class="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+  {% for m, is_collected in cards %}{% include "club/_card.html" with member=m collected=is_collected size="compact" %}{% endfor %}
+</div>
+{% else %}
+<div class="card mt-6 space-y-2 p-8 text-center">
+  <p class="text-4xl" aria-hidden="true">🕵️</p>
+  <p class="font-medium">{% translate "Personne ne correspond à ta recherche." %}</p>
+  <p class="text-sm text-stone-600">{% translate "Essaie avec d'autres filtres." %}</p>
+</div>
+{% endif %}
+{% endblock %}

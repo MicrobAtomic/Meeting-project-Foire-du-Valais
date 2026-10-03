@@ -11,7 +11,7 @@
     <progress class="bar" value="{{ collected }}" max="{{ total|default:1 }}"></progress>
     <div class="flex flex-wrap gap-2 pt-1">
       <a href="{% url 'club:my_qr' %}" class="btn btn-primary">🔳 {% translate "Montrer mon QR" %}</a>
-      {% comment %}Phase 3 : <a href="{% url 'club:album' %}" class="btn btn-secondary">Voir l'album</a>{% endcomment %}
+      <a href="{% url 'club:album' %}" class="btn btn-secondary">🃏 {% translate "Voir l'album" %}</a>
     </div>
   </section>
 

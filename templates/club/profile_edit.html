@@ -1,0 +1,76 @@
+{% extends "base.html" %}{% load i18n club_ui %}
+{% block title %}{% translate "Mon profil" %} · {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<div class="mx-auto max-w-2xl">
+  <h1 class="text-2xl font-semibold">✏️ {% translate "Mon profil" %}</h1>
+  <p class="mt-1 text-sm text-stone-600">{% translate "C'est ta carte : les autres membres la voient dans l'album." %}</p>
+
+  <form method="post" class="mt-6 space-y-6">
+    {% csrf_token %}
+    {% if form.non_field_errors %}<p class="rounded-xl bg-red-50 p-3 text-sm text-red-900" role="alert">{{ form.non_field_errors.0 }}</p>{% endif %}
+
+    <section class="card space-y-4">
+      <h2 class="font-semibold">🧑 {% translate "Qui es-tu ?" %}</h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        {% include "club/_field.html" with field=form.first_name %}
+        {% include "club/_field.html" with field=form.last_name %}
+        {% include "club/_field.html" with field=form.company %}
+        {% include "club/_field.html" with field=form.job_title %}
+        {% include "club/_field.html" with field=form.sector %}
+        {% include "club/_field.html" with field=form.region %}
+      </div>
+      <fieldset>
+        <legend class="mb-2 text-sm font-medium">{% translate "Langues parlées" %}</legend>
+        <div class="flex flex-wrap gap-x-6 gap-y-2">
+          {% include "club/_field.html" with field=form.speaks_fr %}
+          {% include "club/_field.html" with field=form.speaks_de %}
+          {% include "club/_field.html" with field=form.speaks_en %}
+        </div>
+      </fieldset>
+    </section>
+
+    <section class="card space-y-4">
+      <h2 class="font-semibold">💬 {% translate "Pour briser la glace" %}</h2>
+      {% include "club/_field.html" with field=form.fun_fact %}
+      {% include "club/_field.html" with field=form.talk_to_me_about %}
+    </section>
+
+    <section class="card space-y-4">
+      <h2 class="font-semibold">📇 {% translate "Contact et confidentialité" %}</h2>
+      {% include "club/_field.html" with field=form.phone %}
+      {% include "club/_field.html" with field=form.linkedin_url %}
+      {% include "club/_field.html" with field=form.visible_in_directory %}
+    </section>
+
+    <section class="card space-y-4">
+      <div>
+        <h2 class="font-semibold">❤️ {% translate "Ce que tu aimes, ce que tu détestes" %}</h2>
+        <p class="mt-1 text-sm text-stone-600">{% translate "Ça nous aide à te présenter les bonnes personnes." %}
+          {% comment %}Phase 6 : lien « Refaire le swipe » vers club:onboarding{% endcomment %}</p>
+      </div>
+      {% for label, items in groups %}
+      <fieldset>
+        <legend class="mb-1 text-sm font-semibold text-stone-700">{{ label }}</legend>
+        <ul class="divide-y divide-stone-100">
+          {% for tag, current in items %}
+          <li class="flex items-center justify-between gap-3 py-2">
+            <span class="min-w-0 text-sm">{{ tag.emoji }} {{ tag.label }}</span>
+            <div class="flex shrink-0 gap-1" role="radiogroup" aria-label="{{ tag.label }}">
+              <label class="cursor-pointer"><input type="radio" name="tag_{{ tag.slug }}" value="like" class="peer sr-only"{% if current == "like" %} checked{% endif %}><span class="flex h-10 w-10 items-center justify-center rounded-lg text-lg ring-1 ring-stone-200 peer-checked:bg-emerald-50 peer-checked:ring-2 peer-checked:ring-emerald-500 peer-focus-visible:outline-2 peer-focus-visible:outline-red-700"><span aria-hidden="true">❤️</span><span class="sr-only">{% translate "J'adore" %}</span></span></label>
+              <label class="cursor-pointer"><input type="radio" name="tag_{{ tag.slug }}" value="neutral" class="peer sr-only"{% if current == "neutral" %} checked{% endif %}><span class="flex h-10 w-10 items-center justify-center rounded-lg text-lg ring-1 ring-stone-200 peer-checked:bg-stone-100 peer-checked:ring-2 peer-checked:ring-stone-400 peer-focus-visible:outline-2 peer-focus-visible:outline-red-700"><span aria-hidden="true">😐</span><span class="sr-only">{% translate "Bof" %}</span></span></label>
+              <label class="cursor-pointer"><input type="radio" name="tag_{{ tag.slug }}" value="dislike" class="peer sr-only"{% if current == "dislike" %} checked{% endif %}><span class="flex h-10 w-10 items-center justify-center rounded-lg text-lg ring-1 ring-stone-200 peer-checked:bg-red-50 peer-checked:ring-2 peer-checked:ring-red-500 peer-focus-visible:outline-2 peer-focus-visible:outline-red-700"><span aria-hidden="true">💀</span><span class="sr-only">{% translate "Je déteste" %}</span></span></label>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </fieldset>
+      {% endfor %}
+    </section>
+
+    <div class="flex flex-wrap gap-2">
+      <button type="submit" class="btn btn-primary">{% translate "Enregistrer" %}</button>
+      <a href="{% url 'club:member_detail' request.member.pk %}" class="btn btn-secondary">{% translate "Annuler" %}</a>
+    </div>
+  </form>
+</div>
+{% endblock %}
