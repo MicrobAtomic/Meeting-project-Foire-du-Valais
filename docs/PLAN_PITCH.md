@@ -13,13 +13,18 @@
 - [x] T2 — Défi : quatre demandes lisibles ; diapositive 2 inspectée en 1920 × 1080, exports PNG/PDF/PPTX reconstruits.
 - [x] T3 — Quatre diapositives principales, séparation et huit annexes ; 13 diapositives exportées, couverture/impact/séparation/annexe A1 inspectées.
 - [x] T4 — Vidéo H.264 1920 × 1080 de 76,8 s, six scènes téléphone et une scène staff ; captures inspectées, Lukas cadré dans l’album, synergies/coordonnées/bingo/palier/tables visibles, bandeau absent. Sous-titre bingo générique car les cases varient à chaque base jetable.
-- [ ] T5 — Coûts documentés, retrait de l'ancienne enveloppe.
+- [x] T5 — Coûts documentés dans le deck, PITCH, ARCHITECTURE et SUBMISSION ; ancienne enveloppe retirée, annexes A3/A8 inspectées. Estimations : ≈ 30 CHF/mois et ≈ 20 CHF de mise en place hors développement ; tarifs publics revérifiés le 4 octobre 2026.
 - [ ] T6 — Notes françaises et conducteur de deux minutes.
 - [ ] T7 — Exports, inspection visuelle et suite de tests finale.
 - [ ] T8 — Livraison et push final.
 
 La recette utilise uniquement `docs/pitch/.build/pitch.sqlite3`, sans modifier la base locale ni le code de l'application.
 Chaque étape est cochée dans son commit et poussée sur `main`.
+
+Actualisation de T5 : l’[API officielle Exoscale](https://portal.exoscale.com/api/pricing/dbaas-pg) indique
+0,05811 CHF/h pour Hobbyist-2, soit 41,84 CHF/30 jours hors taxes. Les livrables affichent donc ≈ 42 CHF,
+qui remplace le ≈ 48 CHF cité dans les exemples du plan initial. La recherche des anciennes mentions ne laisse
+que « 10 000 pixels » dans EXPLOITATION, une limite technique sans rapport avec un budget.
 
 ## 0. Règles et outils
 

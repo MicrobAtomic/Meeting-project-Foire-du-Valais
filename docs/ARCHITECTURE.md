@@ -17,7 +17,7 @@ Les contraintes qui ont guidé l'architecture :
 | Personne pour animer au quotidien | Pas de fil d'actualité ni de chat. La plateforme vit au rythme des événements. |
 | Membres pressés, pas tous à l'aise avec le numérique | Web app sans installation, connexion par lien magique, pages légères, tout fonctionne sans JS. |
 | Annuaire visible par les membres, jamais de l'extérieur | Tout est fermé par défaut ; coordonnées visibles seulement après une vraie rencontre. |
-| Budget d'environ 10 000 CHF, une seule fois | Technologie standard, maintenable par n'importe quelle agence, faible coût d'hébergement. |
+| Coûts de mise en place et de fonctionnement à chiffrer | Technologie standard, maintenable par n'importe quelle agence, faible coût d'hébergement. |
 | Ambition suisse (FR, DE, EN) | Internationalisation native du framework, contenus traduits en base. |
 | Hackathon de 24 h en solo, jugé sur la faisabilité | Un seul framework « batteries incluses », peu de pièces mobiles, des tests automatisés. |
 
@@ -257,11 +257,19 @@ le choix des cases, les lignes et les cas de concurrence.
 
 | Poste | Estimation |
 |---|---|
-| Hébergement suisse (petit serveur + PostgreSQL managé) | de l'ordre de 10 à 30 CHF/mois |
+| Hébergement suisse : application + PostgreSQL, avec une marge de ressources | environ 20 à 35 CHF/mois |
 | E-mails transactionnels, au volume d'un club | gratuit à quelques CHF/mois |
-| Nom de domaine `.ch` | environ 15 CHF/an |
-| **Total de fonctionnement** | **moins de 500 CHF/an, soit moins de 2 % des cotisations** (50 × 500 CHF) |
-| Mise en production depuis ce MVP (hébergement suisse, e-mails, charte graphique, import des membres, double authentification staff, politique de confidentialité, formation) | environ 6 à 8 jours de développement, dans l'enveloppe de 10 000 CHF |
+| Nom de domaine `.ch` | budget d'environ 15 à 20 CHF/an |
+| Certificat HTTPS | gratuit |
+| **Total de fonctionnement retenu** | **environ 30 CHF/mois, soit 300 à 450 CHF/an** |
+| Mise en place hors développement | ≈ 20 CHF (nom de domaine) |
+| Développement supplémentaire (double authentification du staff, import des membres, nouvelles fonctionnalités) | seulement sur demande, sur devis |
+
+Estimations pour un petit club, à confirmer sur la configuration retenue. [Infomaniak Jelastic Cloud](https://www.infomaniak.com/en/hosting/dedicated-and-cloud-servers/jelastic-cloud)
+affiche 6,31 CHF/mois pour sa configuration minimale ; ce prix de départ n'est pas le budget d'une application avec sa
+base et ses sauvegardes. [Exoscale](https://www.exoscale.com/pricing/) reste une alternative suisse plus chère :
+PostgreSQL Hobbyist-2 seul coûte 0,05811 CHF/h hors taxes, soit 41,84 CHF pour 30 jours, d'après son
+[API publique de tarification](https://portal.exoscale.com/api/pricing/dbaas-pg). Tarifs revérifiés le 4 octobre 2026.
 
 - **Au quotidien**, l'équipe événements gère tout depuis l'admin : membres, événements, génération des rencontres
   et des tables. Aucun développeur n'est nécessaire.

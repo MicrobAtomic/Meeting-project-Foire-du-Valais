@@ -22,7 +22,7 @@ complementary businesses, a need the other can meet. At the event, scanning a ba
 unlocks contact details, while a **people bingo** computed for each guest, or rotating tables at seated dinners,
 breaks the ice. All year long, a federation index and shared Valais-flavoured milestones show the Club growing closer.
 Built for a small team (a guided admin, a few clicks per event), trilingual FR / DE / EN, secure by default, covered
-by automated tests, and under CHF 500 a year to run.
+by automated tests, and about CHF 30 a month to run.
 
 ## Description courte (français)
 
@@ -35,4 +35,4 @@ ajoute la carte à son album et débloque les coordonnées, pendant qu'un **bing
 invité, ou des tables tournantes aux dîners assis, brise la glace. Toute l'année, un indice de fédération et des paliers
 aux récompenses valaisannes montrent le Club qui se resserre. Pensée pour une petite équipe (une administration guidée,
 quelques clics par événement), en français, allemand et anglais, sécurisée par défaut, couverte par des tests
-automatisés, pour moins de 500 CHF par an.
+automatisés, pour environ 30 CHF par mois.

@@ -62,7 +62,7 @@ membres, coûts et feuille de route. Ne les montre que si une question y mène.
 | **49 ms** pour les rencontres de 200 inscrits · **0,8 s** pour le plan de tables de 200 invités | mesuré ([ARCHITECTURE §7](ARCHITECTURE.md)) |
 | **251 nouvelles paires, 1 répétition** : dîner de démo, 38 inscrits, tables de 6, 3 services | la vidéo, en direct |
 | **400 tests automatisés**, SQLite et PostgreSQL | `python manage.py test club` |
-| **< 500 CHF par an** de fonctionnement, **6 à 8 jours** de mise en production | estimation ([ARCHITECTURE §9](ARCHITECTURE.md)) |
+| **≈ 30 CHF par mois** de fonctionnement, **≈ 20 CHF** de mise en place hors développement | estimation ([ARCHITECTURE §9](ARCHITECTURE.md)) |
 
 ## 6. Les 7 minutes de questions
 
@@ -127,7 +127,7 @@ aux membres : secteurs différents, nouvelle recrue avec un pilier, langue commu
 
 **Est-ce que ça tient à l'échelle ?**
 L'application est sans état : on ajoute des processus. 200 inscrits : moins d'une seconde pour les algorithmes. Au-delà de
-quelques milliers de membres, on déporterait les calculs en tâche de fond. La V3 prévoit plusieurs clubs sur la même plateforme.
+quelques milliers de membres, on déporterait les calculs en tâche de fond. Une possibilité ultérieure : plusieurs clubs sur la même plateforme, si la demande existe.
 
 **Comment gérez-vous les langues ?**
 L'internationalisation de Django pour l'interface, des champs traduits pour les affinités, les thèmes et les événements (un
@@ -140,8 +140,9 @@ de Suisse, un fil d'actualité vide sans animateur. Brella et consorts : pensés
 « vente forcée » que le client ne veut pas.
 
 **Combien ça coûte, et en combien de temps ?**
-Moins de 500 CHF par an de fonctionnement (hébergement suisse, e-mails, nom de domaine), moins de 2 % des cotisations.
-Environ 6 à 8 jours pour passer du prototype à la production, dans l'enveloppe de 10 000 CHF.
+Environ 30 francs par mois de fonctionnement en Suisse (hébergement avec base de données, sauvegardes, e-mails,
+domaine), soit 300 à 450 francs par an ; une vingtaine de francs de mise en place hors développement (le nom de
+domaine). Du développement ne s'ajoute que si le Club veut de nouvelles fonctionnalités, sur devis.
 
 **Qu'est-ce qui n'est pas fait ?** *(réponds franchement)*
 Le paiement des cotisations (facturation manuelle aujourd'hui), l'activation des envois automatiques (SMTP et tâche
