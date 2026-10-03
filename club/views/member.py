@@ -12,9 +12,10 @@ from django.views.decorators.http import require_http_methods
 
 from club.decorators import member_required
 from club.forms import MemberProfileForm
-from club.models import Connection, Member, MemberTag, Sector, Tag
+from club.models import RSVP, Connection, Event, Member, MemberTag, Sector, Tag
 from club.services.events import current_event
 from club.services.federation import club_stats, collected_ids, collection_progress
+from club.services.intros import intros_for
 from club.services.profile import common_tags, save_tag_answers
 from club.services.qr import qr_svg
 from club.services.vcard import build_vcard
@@ -31,7 +32,21 @@ STATUS_CHOICES = [
 @member_required
 def home(request):
     collected, total = collection_progress(request.member)
-    context = {"collected": collected, "total": total, "stats": club_stats()}
+    next_event = Event.objects.filter(starts_at__gte=timezone.now()).order_by("starts_at").first()
+    answer = None
+    next_intros = []
+    if next_event:
+        answer = RSVP.objects.filter(event=next_event, member=request.member).values_list("status", flat=True).first()
+        if answer == RSVP.Status.YES:  # people who hide their card are never introduced
+            next_intros = [i for i in intros_for(request.member, next_event) if i["other"].visible_in_directory]
+    context = {
+        "collected": collected,
+        "total": total,
+        "stats": club_stats(),
+        "next_event": next_event,
+        "next_status": answer,
+        "next_intros": next_intros,
+    }
     return render(request, "club/home.html", context)
 
 

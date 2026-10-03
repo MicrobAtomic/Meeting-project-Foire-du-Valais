@@ -1,0 +1,26 @@
+{% comment %}
+Une rencontre proposée. Usage : {% include "club/_intro.html" with intro=intro %}  (ajoute short=True pour la version courte)
+{% endcomment %}{% load i18n club_ui %}
+<article class="card space-y-3">
+  <a href="{% url 'club:member_detail' intro.other.pk %}" class="flex items-center gap-3">
+    <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-base font-semibold {{ intro.other|sector_classes }}" aria-hidden="true">{{ intro.other.initials }}</div>
+    <div class="min-w-0">
+      <p class="truncate font-semibold">{{ intro.other.full_name }}</p>
+      <p class="truncate text-sm text-stone-600">{{ intro.other.job_title }} · {{ intro.other.company }}</p>
+    </div>
+  </a>
+  {% if short %}
+    {% if intro.likes %}<p><span class="chip">❤️ {{ intro.likes.0.emoji }} {{ intro.likes.0.label }}</span></p>
+    {% elif intro.dislikes %}<p><span class="chip">💀 {{ intro.dislikes.0.emoji }} {{ intro.dislikes.0.label }}</span></p>{% endif %}
+  {% else %}
+    {% include "club/_tag_chips.html" with tags=intro.likes icon="❤️" title=_("Vous aimez tous les deux") %}
+    {% include "club/_tag_chips.html" with tags=intro.dislikes icon="💀" title=_("Vous détestez tous les deux") %}
+    {% if intro.cross_sector or intro.welcomes_newcomer %}
+    <p class="flex flex-wrap gap-1.5">
+      {% if intro.cross_sector %}<span class="chip">🔀 {% translate "Secteurs complémentaires" %}</span>{% endif %}
+      {% if intro.welcomes_newcomer %}<span class="chip">🌱 {% translate "Accueille une nouvelle recrue" %}</span>{% endif %}
+    </p>
+    {% endif %}
+  {% endif %}
+  <p class="rounded-xl bg-amber-50 p-3 text-sm text-amber-900">💬 {{ intro.icebreaker }}</p>
+</article>

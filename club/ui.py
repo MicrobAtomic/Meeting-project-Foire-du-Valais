@@ -24,6 +24,8 @@ RANK_STYLE = {  # rank -> (label, card ring classes, badge classes)
     "newcomer": (_("Nouvelle recrue"), "ring-4 ring-emerald-400", "bg-emerald-500 text-white"),
 }
 
+EVENT_KIND_EMOJI = {"apero": "🥂", "dinner": "🍽️", "conference": "🎤", "visit": "🏭"}
+
 ROUND_LABELS = [_("Entrée"), _("Plat"), _("Dessert"), _("Café")]  # tables tournantes: one label per service
 
 GENERIC_ICEBREAKER = _("Demande-lui comment a commencé son aventure au Club.")

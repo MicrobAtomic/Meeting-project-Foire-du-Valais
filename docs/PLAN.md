@@ -354,7 +354,7 @@ Pour éviter les requêtes N+1, toute liste de cartes charge les membres avec
 
 ### Phase 4 — Événements (1 h 30)
 
-- [ ] **4.1** Créer `club/views/events.py` et déclarer les 3 routes.
+- [x] **4.1** Créer `club/views/events.py` et déclarer les 3 routes.
   - **`event_list`** : les événements à venir (`starts_at >= now`, par ordre croissant), puis les passés (par ordre
     décroissant). Pour chacun : la date en français (`{{ e.starts_at|date:"l j F, H:i" }}`), le lieu, le nombre
     d'inscrits (annotation `Count` filtrée sur `status="yes"`), et ma réponse (un dictionnaire
@@ -377,16 +377,16 @@ Pour éviter les requêtes N+1, toute liste de cartes charge les membres avec
     - événement passé : message d'erreur et redirection ;
     - sinon `RSVP.objects.update_or_create(event=event, member=request.member, defaults={"status": status})`,
       puis un message et une redirection vers `event_detail`.
-- [ ] **4.2** Accueil : la `card` « Prochain événement » avec le prochain événement à venir et ma réponse.
+- [x] **4.2** Accueil : la `card` « Prochain événement » avec le prochain événement à venir et ma réponse.
   Si je suis inscrit, elle affiche aussi les 3 rencontres en version courte (nom, première affinité commune,
   icebreaker) et un lien vers l'événement.
-- [ ] **4.3** Ajouter `club/tests/test_events.py` :
+- [x] **4.3** Ajouter `club/tests/test_events.py` :
   - un POST d'inscription crée ou modifie **seulement** mon RSVP ;
   - le GET sur `event_rsvp` renvoie 405 ;
   - l'inscription à un événement passé est refusée ;
   - `club:event_list` est ajouté à `PAGES_TO_CHECK`. Pour la page d'un événement (elle a un paramètre), appelle
     `assert_csp_clean(self, response)` (dans `club/tests/helpers.py`) dans ton propre test.
-- [ ] **4.4** Décommenter le lien Événements dans `base.html`.
+- [x] **4.4** Décommenter le lien Événements dans `base.html`.
 - ✅ **Fin de phase** :
   - Avec Camille, l'accueil montre « Dîner d'automne » et les rencontres **Lukas Imboden**, Joëlle Moret et
     Olivier Gay, avec leurs raisons (❤️ Petite Arvine, ⛷️ Ski de randonnée…).

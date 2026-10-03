@@ -23,7 +23,7 @@
       {% if user.member %}
       <a href="{% url 'club:home' %}" class="rounded-lg px-3 py-2 text-sm font-medium {% if current == 'club:home' %}bg-red-50 text-red-700{% else %}text-stone-600 hover:bg-stone-100{% endif %}">🏠 {% translate "Accueil" %}</a>
       <a href="{% url 'club:album' %}" class="rounded-lg px-3 py-2 text-sm font-medium {% if current == 'club:album' %}bg-red-50 text-red-700{% else %}text-stone-600 hover:bg-stone-100{% endif %}">🃏 {% translate "Album" %}</a>
-      {% comment %}Phase 4 : <a href="{% url 'club:event_list' %}">📅 Événements</a>{% endcomment %}
+      <a href="{% url 'club:event_list' %}" class="rounded-lg px-3 py-2 text-sm font-medium {% if current == 'club:event_list' or current == 'club:event_detail' %}bg-red-50 text-red-700{% else %}text-stone-600 hover:bg-stone-100{% endif %}">📅 {% translate "Événements" %}</a>
       <a href="{% url 'club:my_qr' %}" class="rounded-lg px-3 py-2 text-sm font-medium {% if current == 'club:my_qr' %}bg-red-50 text-red-700{% else %}text-stone-600 hover:bg-stone-100{% endif %}">🔳 {% translate "Mon QR" %}</a>
       <a href="{% url 'club:profile_edit' %}" class="rounded-lg px-3 py-2 text-sm font-medium {% if current == 'club:profile_edit' %}bg-red-50 text-red-700{% else %}text-stone-600 hover:bg-stone-100{% endif %}">👤 {% translate "Profil" %}</a>
       {% endif %}
@@ -69,7 +69,7 @@
     {% if user.member %}
     <li><a href="{% url 'club:home' %}" class="flex flex-col items-center gap-0.5 py-2 text-[11px] font-medium {% if current == 'club:home' %}text-red-700{% else %}text-stone-600{% endif %}"><span class="text-xl" aria-hidden="true">🏠</span>{% translate "Accueil" %}</a></li>
     <li><a href="{% url 'club:album' %}" class="flex flex-col items-center gap-0.5 py-2 text-[11px] font-medium {% if current == 'club:album' %}text-red-700{% else %}text-stone-600{% endif %}"><span class="text-xl" aria-hidden="true">🃏</span>{% translate "Album" %}</a></li>
-    {% comment %}Phase 4 : <li><a href="{% url 'club:event_list' %}">📅 Événements</a></li>{% endcomment %}
+    <li><a href="{% url 'club:event_list' %}" class="flex flex-col items-center gap-0.5 py-2 text-[11px] font-medium {% if current == 'club:event_list' or current == 'club:event_detail' %}text-red-700{% else %}text-stone-600{% endif %}"><span class="text-xl" aria-hidden="true">📅</span>{% translate "Événements" %}</a></li>
     <li><a href="{% url 'club:my_qr' %}" class="flex flex-col items-center gap-0.5 py-2 text-[11px] font-medium {% if current == 'club:my_qr' %}text-red-700{% else %}text-stone-600{% endif %}"><span class="text-xl" aria-hidden="true">🔳</span>{% translate "Mon QR" %}</a></li>
     <li><a href="{% url 'club:profile_edit' %}" class="flex flex-col items-center gap-0.5 py-2 text-[11px] font-medium {% if current == 'club:profile_edit' %}text-red-700{% else %}text-stone-600{% endif %}"><span class="text-xl" aria-hidden="true">👤</span>{% translate "Profil" %}</a></li>
     {% endif %}

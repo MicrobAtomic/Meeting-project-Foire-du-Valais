@@ -4,7 +4,7 @@ from django import template
 from django.utils.safestring import mark_safe
 
 from club.models import MemberTag
-from club.ui import RANK_STYLE, SECTOR_STYLE
+from club.ui import EVENT_KIND_EMOJI, RANK_STYLE, SECTOR_STYLE
 
 register = template.Library()
 
@@ -41,6 +41,11 @@ def rank_badge(member):
 def tags_with(member, sentiment):
     """{% tags_with member "like" as likes %} — needs prefetch_related("tag_links__tag") to avoid N+1 queries."""
     return [link.tag for link in member.tag_links.all() if link.sentiment == sentiment]
+
+
+@register.filter
+def kind_emoji(event):
+    return EVENT_KIND_EMOJI.get(event.kind, "📅")
 
 
 @register.filter

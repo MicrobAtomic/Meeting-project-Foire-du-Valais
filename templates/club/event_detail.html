@@ -1,0 +1,70 @@
+{% extends "base.html" %}{% load i18n club_ui %}
+{% block title %}{{ event.title }} · {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<div class="space-y-5">
+  <p><a href="{% url 'club:event_list' %}" class="text-sm text-stone-600 hover:text-red-700">← {% translate "Tous les événements" %}</a></p>
+
+  <section class="card space-y-2">
+    <div class="flex items-start gap-3">
+      <div class="text-4xl" aria-hidden="true">{{ event|kind_emoji }}</div>
+      <div class="min-w-0">
+        <h1 class="text-2xl font-semibold">{{ event.title }}</h1>
+        <p class="text-stone-600">{{ event.starts_at|date:"l j F Y, H:i" }}</p>
+        <p class="text-stone-600">📍 {{ event.location }}</p>
+      </div>
+    </div>
+    {% if event.description %}<p class="pt-1 text-sm">{{ event.description }}</p>{% endif %}
+    {% if event.has_seating %}<p class="text-sm text-stone-600">🔀 {% translate "Tables tournantes : à chaque service, tu changes de table pour rencontrer de nouvelles personnes." %}</p>{% endif %}
+  </section>
+
+  {% if not event.is_past %}
+  <section class="card space-y-3">
+    <h2 class="font-semibold">{% translate "Ta réponse" %}</h2>
+    <form method="post" action="{% url 'club:event_rsvp' event.pk %}" class="flex flex-wrap gap-2">
+      {% csrf_token %}
+      <button type="submit" name="status" value="yes" class="btn {% if my_status == 'no' %}btn-secondary{% else %}btn-primary{% endif %}">{% translate "Je viens" %} ✅</button>
+      <button type="submit" name="status" value="no" class="btn {% if my_status == 'no' %}btn-primary{% else %}btn-secondary{% endif %}">{% translate "Je ne viens pas" %}</button>
+    </form>
+    <p class="text-sm text-stone-600">
+      {% if my_status == "yes" %}✅ {% translate "Tu es inscrit·e." %}
+      {% elif my_status == "no" %}{% translate "Tu as répondu que tu ne viens pas." %}
+      {% else %}❓ {% translate "Tu n'as pas encore répondu." %}{% endif %}
+    </p>
+  </section>
+  {% endif %}
+
+  {% if seats %}
+  <section class="card space-y-2">
+    <h2 class="font-semibold">🪑 {% translate "Ton placement" %}</h2>
+    <p class="flex flex-wrap gap-x-4 gap-y-1 text-sm">
+      {% for seat in seats %}<span><span class="font-medium">{{ seat.label }}</span> : {% blocktranslate with number=seat.table %}table {{ number }}{% endblocktranslate %}</span>{% if not forloop.last %}<span aria-hidden="true">·</span>{% endif %}{% endfor %}
+    </p>
+  </section>
+  {% endif %}
+
+  {% if show_intros %}
+  <section class="space-y-3">
+    <h2 class="text-lg font-semibold">🤝 {% translate "Tes rencontres" %}</h2>
+    {% if intros %}
+    <div class="grid gap-4 md:grid-cols-3">
+      {% for intro in intros %}{% include "club/_intro.html" with intro=intro %}{% endfor %}
+    </div>
+    {% else %}
+    <p class="card text-sm text-stone-600">{% translate "Tes rencontres arrivent bientôt 🍷" %}</p>
+    {% endif %}
+  </section>
+  {% endif %}
+
+  <section class="space-y-3">
+    <h2 class="text-lg font-semibold">👥 {% translate "Qui vient ?" %}</h2>
+    <p class="text-sm text-stone-600">{% blocktranslate count n=attendee_count %}{{ n }} inscrit{% plural %}{{ n }} inscrits{% endblocktranslate %}</p>
+    {% if attendees %}
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {% for m, flag in attendees %}{% include "club/_card.html" with member=m collected=flag size="compact" %}{% endfor %}
+    </div>
+    {% else %}
+    <p class="card text-sm text-stone-600">{% translate "Personne ne s'est encore inscrit·e : sois le premier ! 🥂" %}</p>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}
