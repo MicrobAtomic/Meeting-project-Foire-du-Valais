@@ -14,8 +14,8 @@
 
 /* Swipe des affinités — classes posées par static/js/swipe.js (pas de style inline : CSP stricte) */
 .js-swipe .swipe-deck { position: relative; height: 24rem; }
-.js-swipe .swipe-card { position: absolute; inset: 0; touch-action: none; transition: transform 200ms ease; }
-.js-swipe .swipe-card.is-dragging { transition: none; }
+.js-swipe .swipe-card { position: absolute; inset: 0; touch-action: none; transition: transform 200ms ease; cursor: grab; user-select: none; -webkit-user-select: none; }
+.js-swipe .swipe-card.is-dragging { transition: none; cursor: grabbing; }
 .js-swipe .swipe-card .swipe-choices { display: none; }
 .swipe-out-like { transform: translateX(150%) rotate(20deg); }
 .swipe-out-dislike { transform: translateX(-150%) rotate(-20deg); }

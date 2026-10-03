@@ -4,6 +4,13 @@
 <h1 class="text-2xl font-semibold">{% blocktranslate with name=request.member.first_name %}Salut {{ name }} 👋{% endblocktranslate %}</h1>
 <p class="mt-1 text-stone-600">{% translate "Plus jamais d'inconnus au Club." %}</p>
 
+{% if not request.member.onboarding_done %}
+<a href="{% url 'club:onboarding' %}" class="card mt-5 flex items-center justify-between gap-3 bg-amber-50 ring-amber-300 transition hover:shadow-md">
+  <span><span class="font-semibold">✨ {% translate "Complète ton profil en 2 minutes" %}</span><span class="block text-sm text-stone-600">{% translate "Swipe tes affinités : on te présentera les bonnes personnes." %}</span></span>
+  <span class="text-2xl" aria-hidden="true">👉</span>
+</a>
+{% endif %}
+
 <div class="mt-6 grid gap-4 md:grid-cols-2">
   <section class="card space-y-3">
     <h2 class="font-semibold">🃏 {% translate "Ton album" %}</h2>

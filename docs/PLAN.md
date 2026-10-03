@@ -114,7 +114,7 @@ Ton : détendu, premium, valaisan (rouge valaisan et or, vins, montagne, apéro)
 | `club:my_qr` | `/moi/qr/` | `member.my_qr` | membre | ✅ (template à refaire) |
 | `club:profile_edit` | `/moi/` | `member.profile_edit` | membre | phase 3 |
 | `club:invite` | `/moi/inviter/` | `member.invite` | membre | phase 7 |
-| `club:onboarding` | `/bienvenue/` | `member.onboarding` | membre | phase 6 |
+| `club:onboarding` | `/bienvenue/` | `member.onboarding` | membre | ✅ |
 | `club:scan` | `/m/<token>/` | `member.scan` | membre | ✅ (template à refaire) |
 | `club:event_list` | `/evenements/` | `events.event_list` | membre | phase 4 |
 | `club:event_detail` | `/evenements/<pk>/` | `events.event_detail` | membre | phase 4 |
@@ -432,11 +432,11 @@ Pour éviter les requêtes N+1, toute liste de cartes charge les membres avec
 
 ### Phase 6 — Swipe des affinités (1 h)
 
-- [ ] **6.1** La vue `member.onboarding`, route `club:onboarding`, `/bienvenue/` :
+- [x] **6.1** La vue `member.onboarding`, route `club:onboarding`, `/bienvenue/` :
   - en GET : tous les `Tag` et les réponses actuelles ;
   - en POST : `save_tag_answers(request.member, request.POST)`, puis `onboarding_done=True`, le message
     « Profil complété 🎉 » et une redirection vers l'accueil.
-- [ ] **6.2** Template `club/onboarding.html`. Il **doit** respecter le contrat de `static/js/swipe.js` :
+- [x] **6.2** Template `club/onboarding.html`. Il **doit** respecter le contrat de `static/js/swipe.js` :
   ```html
   <form method="post" id="swipe-form">{% csrf_token %}
     <div class="swipe-deck">
@@ -464,9 +464,9 @@ Pour éviter les requêtes N+1, toute liste de cartes charge les membres avec
   ```
   - Dans la vraie version, `checked` doit refléter la réponse existante.
   - Style les boutons de `#swipe-controls` en gros ronds : `h-16 w-16 rounded-full text-3xl bg-white shadow`.
-- [ ] **6.3** Sur l'accueil, si `not request.member.onboarding_done` : une bannière « Complète ton profil en
+- [x] **6.3** Sur l'accueil, si `not request.member.onboarding_done` : une bannière « Complète ton profil en
   2 minutes 👉 » vers `club:onboarding`. Sur la page profil, un lien « Refaire le swipe ».
-- [ ] **6.4** Les tests : un POST enregistre les réponses, les valeurs invalides sont ignorées, et la page fait
+- [x] **6.4** Les tests : un POST enregistre les réponses, les valeurs invalides sont ignorées, et la page fait
   partie de `PAGES_TO_CHECK`.
 - ✅ **Fin de phase**, sur téléphone (ou en mode mobile) :
   - glisser à droite = ❤️, à gauche = 💀, vers le bas = 😐 ;

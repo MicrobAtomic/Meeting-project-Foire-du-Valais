@@ -46,7 +46,7 @@
       <div>
         <h2 class="font-semibold">❤️ {% translate "Ce que tu aimes, ce que tu détestes" %}</h2>
         <p class="mt-1 text-sm text-stone-600">{% translate "Ça nous aide à te présenter les bonnes personnes." %}
-          {% comment %}Phase 6 : lien « Refaire le swipe » vers club:onboarding{% endcomment %}</p>
+          <a href="{% url 'club:onboarding' %}" class="font-medium text-red-700 underline">{% translate "Refaire le swipe" %}</a></p>
       </div>
       {% for label, items in groups %}
       <fieldset>

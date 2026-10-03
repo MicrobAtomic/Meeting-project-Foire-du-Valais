@@ -8,6 +8,7 @@ urlpatterns = [
     path("rejoindre/", public.join, name="join"),
     path("rejoindre/merci/", public.join_thanks, name="join_thanks"),
     path("accueil/", member.home, name="home"),
+    path("bienvenue/", member.onboarding, name="onboarding"),
     path("album/", member.album, name="album"),
     path("moi/", member.profile_edit, name="profile_edit"),
     path("moi/qr/", member.my_qr, name="my_qr"),

@@ -173,3 +173,20 @@ def profile_edit(request):
         if items:
             groups.append((label, items))
     return render(request, "club/profile_edit.html", {"form": form, "groups": groups})
+
+
+@member_required
+@require_http_methods(["GET", "POST"])
+def onboarding(request):
+    """'Swipe tes affinités': one card per tag, answered like / neutral / dislike (progressively enhanced by swipe.js)."""
+    member = request.member
+    if request.method == "POST":
+        save_tag_answers(member, request.POST)
+        if not member.onboarding_done:
+            member.onboarding_done = True
+            member.save(update_fields=["onboarding_done"])
+        messages.success(request, _("Profil complété 🎉"))
+        return redirect("club:home")
+    answers = {link.tag.slug: link.sentiment for link in member.tag_links.select_related("tag")}
+    items = [(tag, answers.get(tag.slug, MemberTag.Sentiment.NEUTRAL)) for tag in Tag.objects.all()]
+    return render(request, "club/onboarding.html", {"items": items})
