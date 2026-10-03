@@ -7,7 +7,7 @@ Texts ready to paste into the submission form (English first, French below).
 - **GitHub**: https://github.com/MicrobAtomic/Meeting-project-Foire-du-Valais
 - **Pitch deck**: [docs/pitch/Club-des-Affaires-pitch.pptx](pitch/Club-des-Affaires-pitch.pptx) (demo video embedded,
   French talk in the speaker notes) · PDF: [docs/pitch/Club-des-Affaires-pitch.pdf](pitch/Club-des-Affaires-pitch.pdf)
-- **Demo video** (42 s): [docs/pitch/demo.mp4](pitch/demo.mp4)
+- **Demo video** (about 77 s): [docs/pitch/demo.mp4](pitch/demo.mp4)
 - **Live demo**: *to fill in once deployed (README, “Démo en ligne”)*. Accounts: `camille.rey@example.com` (new member),
   `lukas.imboden@example.com` (Club pillar), `equipe@example.com` (events team). The password is given with the
   submission.

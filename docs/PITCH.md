@@ -6,7 +6,7 @@
 > **Critères** : compréhension du défi · innovation et originalité · faisabilité · impact potentiel · qualité du pitch.
 > **Fichiers** : [pitch/Club-des-Affaires-pitch.pptx](pitch/Club-des-Affaires-pitch.pptx) (vidéo intégrée, texte dans les
 > notes de l'orateur) · [pitch/Club-des-Affaires-pitch.pdf](pitch/Club-des-Affaires-pitch.pdf) (secours) ·
-> [pitch/demo.mp4](pitch/demo.mp4) (42 s) · description courte : [SUBMISSION.md](SUBMISSION.md).
+> [pitch/demo.mp4](pitch/demo.mp4) (environ 77 s, cible 70 à 80 s) · description courte : [SUBMISSION.md](SUBMISSION.md).
 
 ## 1. Le message en une phrase
 
@@ -17,37 +17,53 @@ Slogan : **« Plus jamais d'inconnus au Club. »** · *Never a stranger at the C
 
 ## 2. Le texte, diapositive par diapositive (2 minutes)
 
-Environ 290 mots : un débit posé. Le même texte est dans les notes de l'orateur du `.pptx`.
+Environ 238 mots. Le même texte est dans les notes de l'orateur du `.pptx`. La vidéo dure environ 77 s :
+on passe à l'impact vers **1:47**, pour finir avant **2:00**. Les treize dernières secondes sont réservées à la conclusion.
 
 | Temps | Diapo | À dire |
 |---|---|---|
-| 0:00 – 0:10 | 1 · Titre | « Bonjour ! Le Club des Affaires de la Foire du Valais, c'est une cinquantaine de dirigeantes et de dirigeants qui paient 500 francs par an pour quatre à cinq soirées. » |
-| 0:10 – 0:30 | 2 · Le défi | « Ils viennent : 80 % de présence. Mais ils arrivent en inconnus, restent entre habitués, et entre deux soirées, le réseau n'existe pas. Le client nous a posé ses règles : pas de business forcé, une équipe qui a très peu de temps, des membres francophones et germanophones, et un club qui reste premium. » |
-| 0:30 – 0:50 | 3 · La solution | « Notre réponse : une web app qui suit le rythme du Club, sur les quatre piliers du défi. Se trouver : chaque membre a sa carte, ses passions, ce qu'il peut offrir et ce qu'il cherche. Repérer les synergies : avant chaque soirée, trois personnes à rencontrer, et pourquoi. Le soir même, on scanne un badge, et un jeu brise la glace. Et toute l'année, le Club se resserre. » |
-| 0:50 – 1:32 | 4 · **Vidéo** | « Voici Camille, nouvelle membre. Avant le dîner, elle sait déjà qui rencontrer : Lukas. Ils aiment tous deux la Petite Arvine et le ski de randonnée ; il cherche du digital, son métier à elle, et elle veut s'ouvrir au marché alémanique, le sien. Au dîner, elle scanne son badge : la carte entre dans son album, ses coordonnées se débloquent, une case de son bingo se coche. Et côté équipe : un clic, et 38 invités changent de table à chaque service. » |
-| 1:32 – 1:47 | 5 · Ce qui est nouveau | « Ce qui est nouveau : chaque vraie rencontre compte, et se compte. Le Club est connecté à 15 % aujourd'hui ; au prochain palier, une tournée de Petite Arvine pour tous. Mesurable pour le comité, motivant pour les membres. » |
-| 1:47 – 2:00 | 6 · Faisabilité | « Et c'est faisable : ça tourne aujourd'hui, en trois langues, sécurisé, testé, pour moins de 500 francs par an. Un club qui se connaît se retrouve. Merci ! » |
+| 0:00 – 0:12 | 1 · Titre | « Bonjour ! Le Club des Affaires de la Foire du Valais, c'est une cinquantaine de dirigeantes et de dirigeants qui se retrouvent quatre à cinq fois par an. Notre promesse : plus jamais d'inconnus au Club. » |
+| 0:12 – 0:30 | 2 · Le défi | « Aujourd'hui, ils viennent, mais arrivent en inconnus, restent entre habitués, et entre deux soirées, le réseau n'existe pas. Le client a quatre exigences : pas de business forcé, plusieurs langues, aider les gens à se rencontrer, et garder un esprit premium. » |
+| 0:30 – 1:47 | 3 · **Vidéo** (lecture automatique) | « Voici Camille, nouvelle membre. Dans l'album, elle découvre les cartes des membres : leur métier, leurs passions, ce qu'ils peuvent offrir et ce qu'ils cherchent. — Avant le dîner, l'application lui présente trois personnes, et pourquoi. Lukas : ils aiment tous deux la Petite Arvine ; il cherche du digital, son métier à elle, et elle veut s'ouvrir au marché alémanique, le sien. — Le soir même, elle scanne son badge : sa carte rejoint son album, ses coordonnées se débloquent, une case de son bingo des rencontres se coche. — Chaque rencontre fait avancer tout le Club : il est connecté à 15 %, et au prochain palier, une tournée de Petite Arvine. — Et pour l'équipe, un clic : trente-huit invités changent de table à chaque service. » |
+| 1:47 – 2:00 | 4 · Impact | « C'est prêt à lancer : une trentaine de francs par mois d'hébergement en Suisse, du développement seulement si vous voulez aller plus loin. Un club qui se connaît se retrouve. Merci ! » |
 
-Les diapositives 7 à 11 sont des **annexes** pour les questions : architecture, algorithmes, sécurité, conquête des
-membres, coûts et feuille de route. Ne les montre que si une question y mène.
+La diapositive **5** sépare les annexes **A1 à A8** (diapositives 6 à 13) : solution, nouveautés, faisabilité,
+architecture, algorithmes, sécurité, recrutement et coûts. Ne les montre que si une question y mène.
+
+Repères pendant la vidéo, pour placer les phrases et laisser le jury lire :
+
+| Temps dans la vidéo | Temps dans le pitch | À l'écran |
+|---|---|---|
+| 0–10 s | 0:30–0:40 | Album filtré, carte de Lukas |
+| 10–22 s | 0:40–0:52 | Rencontres proposées et les deux synergies avec Lukas |
+| 22–30 s | 0:52–1:00 | Son badge, puis ajout de sa carte |
+| 30–40 s | 1:00–1:10 | Coordonnées débloquées |
+| 40–50 s | 1:10–1:20 | Bingo, case cochée grâce à Lukas |
+| 50–59 s | 1:20–1:29 | Album à 3 / 49 cartes, Club à 15 %, prochain palier à 20 % |
+| 59–77 s | 1:29–1:47 | Équipe : génération des tables pour 38 invités |
+
+Contrôle de débit avec une lecture synthétique française locale (Thomas, sans ajouter d'audio à la vidéo) :
+11,2 s pour le titre à 180 mots/min, 17,9 s pour le défi à 150 mots/min, 50,1 s de narration pendant la vidéo
+à 140 mots/min, 11,0 s pour la conclusion à 150 mots/min. Les pauses de la vidéo servent à regarder les écrans.
+La répétition personnelle au chronomètre reste dans la liste avant scène ci-dessous.
 
 ## 3. Ce que le jury note, et où il le trouve
 
 | Critère | Où | La preuve |
 |---|---|---|
-| Compréhension du défi | diapos 2 et 3 | le problème du brief (« le réseau n'existe pas entre les rencontres ») et les règles du client ; les quatre piliers du défi repris un par un |
-| Innovation et originalité | diapo 5, vidéo | l'album qu'on remplit en se rencontrant pour de vrai ; l'indice de fédération et les paliers à récompense valaisanne ; un bingo calculé pour chaque invité ; des tables tournantes qui mélangent vraiment |
-| Faisabilité | diapo 6, vidéo, annexes 7 à 9 | ça tourne (vidéo, démo en ligne, code public) ; tests automatisés ; sécurité fermée par défaut ; coûts et délais chiffrés |
-| Impact potentiel | diapos 5 et 6, annexe 10 | intégration des nouveaux dès la première soirée ; de 50 à 100 membres par invitation, sans publicité ; la même plateforme pour d'autres clubs |
-| Qualité du pitch | tout | une seule histoire (Camille), une vidéo de 42 s, six diapositives, deux minutes chronométrées |
+| Compréhension du défi | diapo 2 et vidéo par piliers | le problème du brief, les quatre demandes du client et leur traduction dans le parcours |
+| Innovation et originalité | vidéo et annexe A2 | l'album rempli en se rencontrant, les synergies, le bingo personnalisé et les paliers collectifs |
+| Faisabilité | vidéo, diapo 4 et annexes A3 à A6 | application réelle filmée, tests, architecture, algorithmes et contrôle d'accès |
+| Impact potentiel | diapo 4 et annexe A7 | lancement concret, intégration des nouveaux et recrutement par invitation |
+| Qualité du pitch | les quatre diapositives principales | une histoire (Camille), une vidéo de 70 à 80 s, un conducteur de deux minutes |
 
 ## 4. Avant de monter sur scène
 
-- [ ] Ouvrir le `.pptx` sur l'ordinateur de présentation et **vérifier que la vidéo démarre** (diapo 4). Dans
+- [ ] Ouvrir le `.pptx` sur l'ordinateur de présentation et **vérifier que la vidéo démarre** (diapo 3). Dans
       PowerPoint : onglet *Lecture* → *Démarrer : automatiquement*. Dans Keynote : clic sur la vidéo → *Lecture
       automatique*.
 - [ ] Mode présentateur : les notes (ton texte) à l'écran de l'ordinateur, les diapositives au projecteur.
-- [ ] Répéter **cinq fois avec un chronomètre**, viser 1 min 50. Apprendre par cœur la première et la dernière phrase.
+- [ ] Répéter **cinq fois avec un chronomètre**, viser 1 min 55 à 2 min. Apprendre par cœur la première et la dernière phrase.
 - [ ] Le PDF et la vidéo seule sur une clé USB, au cas où.
 - [ ] Pour les questions : la démo en ligne ouverte dans un onglet (l'offre gratuite de Render se met en veille après
       15 minutes : l'ouvrir 2 minutes avant), connecté en Camille, et un onglet en staff.
@@ -60,8 +76,8 @@ membres, coûts et feuille de route. Ne les montre que si une question y mène.
 | ~50 membres, 500 CHF par an, 80 % de présence, 4 à 5 soirées par an, objectif 100 à 200+ | le client |
 | **15 %** : indice de fédération des données de démo (180 paires sur 1 225) ; prochain palier à 20 % | `seed_demo` |
 | **49 ms** pour les rencontres de 200 inscrits · **0,8 s** pour le plan de tables de 200 invités | mesuré ([ARCHITECTURE §7](ARCHITECTURE.md)) |
-| **251 nouvelles paires, 1 répétition** : dîner de démo, 38 inscrits, tables de 6, 3 services | la vidéo, en direct |
-| **400 tests automatisés**, SQLite et PostgreSQL | `python manage.py test club` |
+| **251 nouvelles paires, 1 répétition** : dîner de démo, 38 inscrits, tables de 6, 3 services | parcours enregistré dans la vidéo |
+| **401 tests automatisés** : dernière recette SQLite OK (6 tests de concurrence réservés à PostgreSQL) ; recette précédente de 400 tests OK sur PostgreSQL | `python manage.py test club`, [ARCHITECTURE §10](ARCHITECTURE.md) |
 | **≈ 30 CHF par mois** de fonctionnement, **≈ 20 CHF** de mise en place hors développement | estimation ([ARCHITECTURE §9](ARCHITECTURE.md)) |
 
 ## 6. Les 7 minutes de questions

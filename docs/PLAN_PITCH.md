@@ -14,7 +14,7 @@
 - [x] T3 — Quatre diapositives principales, séparation et huit annexes ; 13 diapositives exportées, couverture/impact/séparation/annexe A1 inspectées.
 - [x] T4 — Vidéo H.264 1920 × 1080 de 76,8 s, six scènes téléphone et une scène staff ; captures inspectées, Lukas cadré dans l’album, synergies/coordonnées/bingo/palier/tables visibles, bandeau absent. Sous-titre bingo générique car les cases varient à chaque base jetable.
 - [x] T5 — Coûts documentés dans le deck, PITCH, ARCHITECTURE et SUBMISSION ; ancienne enveloppe retirée, annexes A3/A8 inspectées. Estimations : ≈ 30 CHF/mois et ≈ 20 CHF de mise en place hors développement ; tarifs publics revérifiés le 4 octobre 2026.
-- [ ] T6 — Notes françaises et conducteur de deux minutes.
+- [x] T6 — Notes françaises identiques dans le PowerPoint et PITCH, quatre diapositives et repères par scène ; conclusion ajustée à 1:47 pour la vidéo de ≈ 77 s. Contrôle de débit par lecture synthétique locale : textes compatibles avec les créneaux ; répétition personnelle avant scène à effectuer.
 - [ ] T7 — Exports, inspection visuelle et suite de tests finale.
 - [ ] T8 — Livraison et push final.
 

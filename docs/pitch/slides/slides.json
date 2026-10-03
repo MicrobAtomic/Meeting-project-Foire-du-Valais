@@ -1,17 +1,17 @@
 [
   {
     "image": "slides/slide-01.png",
-    "notes": "(0:00 – 0:10) Bonjour ! Le Club des Affaires de la Foire du Valais, c'est une cinquantaine de dirigeantes et de dirigeants qui paient 500 francs par an pour quatre à cinq soirées.",
+    "notes": "(0:00 – 0:12) Bonjour ! Le Club des Affaires de la Foire du Valais, c'est une cinquantaine de dirigeantes et de dirigeants qui se retrouvent quatre à cinq fois par an. Notre promesse : plus jamais d'inconnus au Club.",
     "video": null
   },
   {
     "image": "slides/slide-02.png",
-    "notes": "(0:10 – 0:30) Ils viennent : 80 % de présence. Mais ils arrivent en inconnus, restent entre habitués, et entre deux soirées, le réseau n'existe pas. Le client nous a posé ses règles : pas de business forcé, une équipe qui a très peu de temps, des membres francophones et germanophones, et un club qui reste premium.",
+    "notes": "(0:12 – 0:30) Aujourd'hui, ils viennent, mais arrivent en inconnus, restent entre habitués, et entre deux soirées, le réseau n'existe pas. Le client a quatre exigences : pas de business forcé, plusieurs langues, aider les gens à se rencontrer, et garder un esprit premium.",
     "video": null
   },
   {
     "image": "slides/slide-03.png",
-    "notes": "(0:50 – 1:32, la vidéo tourne) Voici Camille, nouvelle membre. Avant le dîner, elle sait déjà qui rencontrer : Lukas. Ils aiment tous deux la Petite Arvine et le ski de randonnée ; il cherche du digital, son métier à elle, et elle veut s'ouvrir au marché alémanique, le sien. Au dîner, elle scanne son badge : la carte entre dans son album, ses coordonnées se débloquent, une case de son bingo se coche. Et côté équipe : un clic, et 38 invités changent de table à chaque service.",
+    "notes": "(0:30 – 1:47, la vidéo tourne) Voici Camille, nouvelle membre. Dans l'album, elle découvre les cartes des membres : leur métier, leurs passions, ce qu'ils peuvent offrir et ce qu'ils cherchent. — Avant le dîner, l'application lui présente trois personnes, et pourquoi. Lukas : ils aiment tous deux la Petite Arvine ; il cherche du digital, son métier à elle, et elle veut s'ouvrir au marché alémanique, le sien. — Le soir même, elle scanne son badge : sa carte rejoint son album, ses coordonnées se débloquent, une case de son bingo des rencontres se coche. — Chaque rencontre fait avancer tout le Club : il est connecté à 15 %, et au prochain palier, une tournée de Petite Arvine. — Et pour l'équipe, un clic : trente-huit invités changent de table à chaque service.",
     "video": {
       "x": 120,
       "y": 128,
@@ -21,7 +21,7 @@
   },
   {
     "image": "slides/slide-04.png",
-    "notes": "Impact : la feuille de route et les coûts. Texte du conducteur dans T6.",
+    "notes": "(1:47 – 2:00) C'est prêt à lancer : une trentaine de francs par mois d'hébergement en Suisse, du développement seulement si vous voulez aller plus loin. Un club qui se connaît se retrouve. Merci !",
     "video": null
   },
   {
@@ -41,7 +41,7 @@
   },
   {
     "image": "slides/slide-08.png",
-    "notes": "Annexe A3 : Et c'est faisable : ça tourne aujourd'hui, en trois langues, sécurisé, testé, pour moins de 500 francs par an. Un club qui se connaît se retrouve. Merci !",
+    "notes": "Annexe A3 : la faisabilité. L’application tourne aujourd’hui, en trois langues, avec une matrice d’accès testée et une administration guidée pour l’équipe.",
     "video": null
   },
   {
