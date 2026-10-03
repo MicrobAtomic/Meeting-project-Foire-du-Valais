@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Club des Affaires\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 19:43+0200\n"
+"POT-Creation-Date: 2026-10-03 21:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Club des Affaires\n"
 "Language-Team: Club des Affaires\n"
@@ -88,6 +88,18 @@ msgstr "Zugang zum angenommenen Konto vorbereiten"
 msgid "Accès préparé dans la file d'emails."
 msgstr "Zugang in der E-Mail-Warteschlange vorbereitet."
 
+msgid "Valider l'identité et l'accès du remplaçant"
+msgstr "Identität und Zugang der Vertretung bestätigen"
+
+msgid "Remplacement validé, accès invité préparé."
+msgstr "Vertretung bestätigt, Gastzugang vorbereitet."
+
+msgid "Annuler ou refuser le remplacement"
+msgstr "Vertretung absagen oder ablehnen"
+
+msgid "Remplacement annulé. Tu peux répondre de nouveau."
+msgstr "Vertretung abgesagt. Du kannst erneut antworten."
+
 msgid "États des envois"
 msgstr "Versandstatus"
 
@@ -169,6 +181,9 @@ msgstr "Wenn du das Häkchen entfernst, können nur Mitglieder, die du schon get
 msgid "Poste"
 msgstr "Position"
 
+msgid "Choisis au moins une langue parlée."
+msgstr "Wähle mindestens eine gesprochene Sprache."
+
 msgid "Ma note personnelle"
 msgstr "Meine persönliche Notiz"
 
@@ -216,6 +231,12 @@ msgstr "Kommunikation & Medien"
 
 msgid "Autre secteur"
 msgstr "Andere Branche"
+
+msgid "Membre"
+msgstr "Mitglied"
+
+msgid "Invité"
+msgstr "Gast"
 
 msgid "prénom"
 msgstr "Vorname"
@@ -496,6 +517,10 @@ msgstr "Erinnerung"
 msgid "Nouveaux membres"
 msgstr "Neue Mitglieder"
 
+#| msgid "Accès réservé"
+msgid "Accès invité"
+msgstr "Gastzugang"
+
 msgid "En attente"
 msgstr "Ausstehend"
 
@@ -531,6 +556,13 @@ msgstr "Bingo-Feld"
 
 msgid "cases de bingo"
 msgstr "Bingo-Felder"
+
+msgid "Validé"
+msgstr "Bestätigt"
+
+#| msgid "Annuler"
+msgid "Annulé"
+msgstr "Abgesagt"
 
 msgid "membre remplacé"
 msgstr "vertretenes Mitglied"
@@ -619,6 +651,10 @@ msgstr "Prüfe Titel, Ort, zukünftiges Datum und Antwortfrist vor der Veröffen
 msgid "Bienvenue au Club des Affaires"
 msgstr "Willkommen im Club des Affaires"
 
+#| msgid "Ton accès au Club des Affaires"
+msgid "Ton accès invité au Club des Affaires"
+msgstr "Dein Gastzugang zum Club des Affaires"
+
 msgid "Un nouveau visage au Club !"
 msgstr "Ein neues Gesicht im Club!"
 
@@ -635,6 +671,44 @@ msgstr "Deine Antwort für: %(title)s"
 
 msgid "Photo invalide : JPEG, PNG ou WebP non animé, 2 Mio et 4096 × 4096 pixels maximum."
 msgstr "Ungültiges Foto: nicht animiertes JPEG, PNG oder WebP, maximal 2 MiB und 4096 × 4096 Pixel."
+
+msgid "Les réponses sont fermées pour cet événement."
+msgstr "Für diese Veranstaltung ist die Antwortfrist abgelaufen."
+
+msgid "Annule le remplacement validé avant de le modifier."
+msgstr "Sage die bestätigte Vertretung ab, bevor du sie änderst."
+
+msgid "Le titulaire doit être un membre actif."
+msgstr "Das vertretene Mitglied muss aktiv sein."
+
+msgid "Le profil invité a été supprimé. Crée une nouvelle demande."
+msgstr "Das Gastprofil wurde gelöscht. Erstelle eine neue Anfrage."
+
+#| msgid "Cette page s'est perdue en montagne"
+msgid "Cette demande n'est plus en attente."
+msgstr "Diese Anfrage ist nicht mehr offen."
+
+msgid "Confirme que la personne représente la même entreprise."
+msgstr "Bestätige, dass die Person dasselbe Unternehmen vertritt."
+
+#| msgid "Demande déjà acceptée sans compte lié : rapprochement manuel nécessaire."
+msgid "Identité ambiguë : rapprochement manuel nécessaire."
+msgstr "Identität unklar: manuelle Prüfung erforderlich."
+
+msgid "Cette adresse appartient à un membre ou au staff. Aucun compte ne sera converti."
+msgstr "Diese Adresse gehört einem Mitglied oder dem Team. Kein Konto wird umgewandelt."
+
+msgid "Les noms diffèrent du compte invité existant. Vérifie l'identité avant validation."
+msgstr "Die Namen stimmen nicht mit dem bestehenden Gastkonto überein. Prüfe die Identität vor der Bestätigung."
+
+msgid "Cet invité représente déjà un autre membre à cet événement."
+msgstr "Dieser Gast vertritt bei diesem Anlass bereits ein anderes Mitglied."
+
+msgid "Conflit de validation : vérifie la demande et réessaie."
+msgstr "Bestätigungskonflikt: Prüfe die Anfrage und versuche es erneut."
+
+msgid "Cet événement est déjà passé."
+msgstr "Dieser Anlass ist bereits vorbei."
 
 #. Translators: a percentage; French and German put a space before the % sign, English does not.
 #, python-format
@@ -663,9 +737,6 @@ msgstr "Gründungsmitglied"
 msgid "Pilier du Club"
 msgstr "Eckpfeiler des Clubs"
 
-msgid "Membre"
-msgstr "Mitglied"
-
 msgid "Nouvelle recrue"
 msgstr "Neumitglied"
 
@@ -688,17 +759,17 @@ msgstr "Frag nach, wie das Abenteuer im Club begonnen hat."
 msgid "Service %(number)s"
 msgstr "Gang %(number)s"
 
-msgid "Cet événement est déjà passé."
-msgstr "Dieser Anlass ist bereits vorbei."
-
-msgid "Les réponses sont fermées pour cet événement."
-msgstr "Für diese Veranstaltung ist die Antwortfrist abgelaufen."
+msgid "Annule ton remplacement avant de répondre que tu viens."
+msgstr "Sage deine Vertretung ab, bevor du zusagst."
 
 msgid "C'est noté, à bientôt ! 🥂"
 msgstr "Notiert, bis bald! 🥂"
 
 msgid "C'est noté. On pensera à toi !"
 msgstr "Notiert. Wir denken an dich!"
+
+msgid "Remplacement demandé. L'équipe vérifiera l'identité avant d'envoyer l'accès."
+msgstr "Vertretung angefragt. Das Team prüft die Identität, bevor es den Zugang sendet."
 
 msgid "Toutes les cartes"
 msgstr "Alle Karten"
@@ -789,6 +860,13 @@ msgid "Déconnexion"
 msgstr "Abmelden"
 
 #, python-format
+msgid "Représente %(company)s"
+msgstr "Vertritt %(company)s"
+
+msgid "Invité, accès terminé"
+msgstr "Gast, Zugang beendet"
+
+#, python-format
 msgid "Membre depuis %(year)s · %(years)s an"
 msgid_plural "Membre depuis %(year)s · %(years)s ans"
 msgstr[0] "Mitglied seit %(year)s · %(years)s Jahr"
@@ -822,6 +900,10 @@ msgstr "Das Album des Clubs"
 #, python-format
 msgid "%(done)s / %(total)s cartes"
 msgstr "%(done)s / %(total)s Karten"
+
+#, python-format
+msgid "Invités rencontrés : %(guest_collected)s."
+msgstr "Getroffene Gäste: %(guest_collected)s."
 
 msgid "Rechercher"
 msgstr "Suchen"
@@ -888,6 +970,17 @@ msgstr "Du hast geantwortet, dass du nicht kommst."
 
 msgid "Tu n'as pas encore répondu."
 msgstr "Du hast noch nicht geantwortet."
+
+#| msgid "Ton placement"
+msgid "Ton remplacement"
+msgstr "Deine Vertretung"
+
+#| msgid "Ton placement"
+msgid "Annuler mon remplacement"
+msgstr "Meine Vertretung absagen"
+
+msgid "Proposer un remplaçant"
+msgstr "Eine Vertretung vorschlagen"
 
 msgid "Ton placement"
 msgstr "Dein Sitzplatz"
@@ -1137,6 +1230,16 @@ msgstr "Füge diese Karte deinem Album hinzu: dann könnt ihr eure Kontaktdaten 
 msgid "Ajouter %(name)s à mon album"
 msgstr "%(name)s zu meinem Album hinzufügen"
 
+msgid "Propose un collègue de ton entreprise. Il aura son propre profil et ses rencontres resteront les siennes. L'équipe doit valider son accès temporaire."
+msgstr "Schlage eine Person aus deinem Unternehmen vor. Sie erhält ein eigenes Profil und behält ihre eigenen Begegnungen. Das Team muss ihren befristeten Zugang bestätigen."
+
+msgid "Envoyer ma demande"
+msgstr "Anfrage senden"
+
+#| msgid "Voir l'événement"
+msgid "Retour à l'événement"
+msgstr "Zurück zum Anlass"
+
 msgid "Découvre les nouveaux profils et fais connaissance avant le prochain événement."
 msgstr "Entdecke die neuen Profile und lerne die Personen vor der nächsten Veranstaltung kennen."
 
@@ -1147,7 +1250,6 @@ msgstr "Profil entdecken"
 msgid "Découvre d'autres profils dans l'album (%(remaining)s)."
 msgstr "Entdecke weitere Profile im Album (%(remaining)s)."
 
-#| msgid "Accroche pour le récapitulatif"
 msgid "Me désabonner du récapitulatif"
 msgstr "Zusammenfassung abbestellen"
 
@@ -1158,8 +1260,9 @@ msgstr "Hallo %(name)s,"
 msgid "Découvre cet événement et indique ta réponse sur le site."
 msgstr "Entdecke diese Veranstaltung und gib deine Antwort auf der Website an."
 
-msgid "Ton compte est prêt. Complète ton profil pour préparer tes rencontres."
-msgstr "Dein Konto ist bereit. Vervollständige dein Profil, um deine Begegnungen vorzubereiten."
+#, python-format
+msgid "Ton accès temporaire est ouvert jusqu'au %(until)s. Complète ton propre profil ; tes rencontres restent les tiennes."
+msgstr "Dein befristeter Zugang gilt bis %(until)s. Vervollständige dein eigenes Profil; deine Begegnungen bleiben deine eigenen."
 
 msgid "Se connecter"
 msgstr "Anmelden"
@@ -1168,19 +1271,18 @@ msgstr "Anmelden"
 msgid "Ce lien est valable %(minutes)s minutes et utilisable une seule fois."
 msgstr "Dieser Link ist %(minutes)s Minuten gültig und kann nur einmal verwendet werden."
 
-#| msgid "Mes préférences email"
+msgid "Ton compte est prêt. Complète ton profil pour préparer tes rencontres."
+msgstr "Dein Konto ist bereit. Vervollständige dein Profil, um deine Begegnungen vorzubereiten."
+
 msgid "Préférences email"
 msgstr "E-Mail-Einstellungen"
 
-#| msgid "Récapitulatif mensuel des nouveaux membres"
 msgid "Récapitulatif mensuel"
 msgstr "Monatliche Zusammenfassung"
 
-#| msgid "Accroche pour le récapitulatif"
 msgid "Tu ne recevras plus le récapitulatif mensuel."
 msgstr "Du erhältst die monatliche Zusammenfassung nicht mehr."
 
-#| msgid "Récapitulatif mensuel des nouveaux membres"
 msgid "Confirme pour arrêter uniquement le récapitulatif mensuel des nouveaux membres."
 msgstr "Bestätige, um nur die monatliche Zusammenfassung neuer Mitglieder abzubestellen."
 
@@ -1206,9 +1308,6 @@ msgstr "Zahlung per Rechnung, vom Club-Team verwaltet."
 
 msgid "Envoyer une demande d'invitation ne déclenche aucun paiement."
 msgstr "Mit einer Einladungsanfrage löst du keine Zahlung aus."
-
-msgid "Envoyer ma demande"
-msgstr "Anfrage senden"
 
 msgid "Déjà membre ?"
 msgstr "Schon Mitglied?"
@@ -1439,6 +1538,17 @@ msgstr "Administration öffnen"
 
 msgid "Publication et emails"
 msgstr "Veröffentlichung und E-Mails"
+
+#| msgid "Ton placement"
+msgid "Remplacements"
+msgstr "Vertretungen"
+
+msgid "Aucune demande de remplacement."
+msgstr "Keine Vertretungsanfragen."
+
+#| msgid "Traiter dans l'administration"
+msgid "Vérifier les demandes dans l'administration"
+msgstr "Anfragen in der Administration prüfen"
 
 msgid "Un badge par inscrit à imprimer sur feuilles A4 : prénom, entreprise, sujet de conversation et QR code."
 msgstr "Ein Namensschild pro angemeldeter Person zum Drucken auf A4-Blättern: Vorname, Unternehmen, Gesprächsthema und QR-Code."

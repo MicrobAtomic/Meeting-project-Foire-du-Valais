@@ -135,6 +135,9 @@ DEMO_MODE = os.environ.get("DEMO_MODE", "1") == "1"  # shows the "fictitious dat
 MEDIA_ROOT = Path(os.environ.get("MEDIA_ROOT", BASE_DIR / "media"))
 # Enable in production only after provisioning a private, durable, backed-up volume.
 PROFILE_PHOTO_UPLOADS_ENABLED = os.environ.get("PROFILE_PHOTO_UPLOADS_ENABLED", "1" if DEBUG else "0") == "1"
+GUEST_ACCESS_HOURS = int(os.environ.get("GUEST_ACCESS_HOURS", "48"))
+if not 1 <= GUEST_ACCESS_HOURS <= 168:
+    raise ImproperlyConfigured("GUEST_ACCESS_HOURS must be between 1 and 168")
 
 # Membership & referral offer (CHF) — placeholder amounts, to be validated with the client.
 MEMBERSHIP_PRICE = 500

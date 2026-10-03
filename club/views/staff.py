@@ -13,8 +13,8 @@ from django.views.decorators.http import require_http_methods
 
 from club.decorators import staff_required
 from club.forms import SeatingForm
-from club.models import RSVP, Event, InvitationRequest, Match, SeatingPlan, Tag
-from club.services.events import attendees, generate_matches, generate_seating
+from club.models import RSVP, Event, InvitationRequest, Match, SeatingPlan, Substitute, Tag
+from club.services.events import attendees, generate_matches, generate_seating, with_attendee_counts
 from club.services.notifications import cancel_event, publish_event
 from club.services.federation import (
     active_connections,
@@ -44,9 +44,7 @@ def dashboard(request):
         "new_recruits": active_members().filter(member_since=timezone.localdate().year).count(),
         "isolated": [(m, counts[m.pk]) for m in isolated[:ISOLATED_SHOWN]],
         "isolated_more": max(len(isolated) - ISOLATED_SHOWN, 0),
-        "upcoming": Event.objects.filter(starts_at__gte=now)
-        .annotate(yes_count=Count("rsvps", filter=Q(rsvps__status=RSVP.Status.YES)))
-        .order_by("starts_at"),
+        "upcoming": with_attendee_counts(Event.objects.filter(starts_at__gte=now).order_by("starts_at")),
         "past": Event.objects.filter(starts_at__lt=now)
         .annotate(meetings=Count("connections"))
         .order_by("-starts_at"),
@@ -127,6 +125,7 @@ def event_tools(request, pk):
         "matches": matches_for_display(event),
         "plan": plan,
         "rounds": seating_for_display(plan) if plan else [],
+        "substitutions": event.substitutes.select_related("member", "guest"),
     }
     return render(request, "staff/event_tools.html", context)
 
@@ -140,7 +139,7 @@ def badges(request, pk):
     event = get_object_or_404(Event, pk=pk)
     members = attendees(event).select_related("user").order_by("last_name", "first_name")
     badges = [
-        (member, qr_svg(request.build_absolute_uri(reverse("club:scan", args=[member.qr_token]))))
+        (member, qr_svg(request.build_absolute_uri(reverse("club:scan", args=[member.qr_token])) + (f"?event={event.pk}" if member.kind == member.Kind.GUEST else "")))
         for member in members
     ]
     pages = [badges[i : i + BADGES_PER_PAGE] for i in range(0, len(badges), BADGES_PER_PAGE)]

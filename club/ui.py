@@ -19,6 +19,7 @@ SECTOR_STYLE = {  # sector -> (emoji, avatar classes)
 }
 
 RANK_STYLE = {  # rank -> (label, card ring classes, badge classes)
+    "guest": (_("Invité"), "ring-1 ring-sky-200", "bg-sky-100 text-sky-800"),
     "founder": (_("Membre fondateur"), "ring-4 ring-amber-400", "bg-amber-400 text-stone-900"),
     "pillar": (_("Pilier du Club"), "ring-2 ring-stone-400", "bg-stone-700 text-white"),
     "member": (_("Membre"), "ring-1 ring-stone-200", "bg-stone-100 text-stone-700"),

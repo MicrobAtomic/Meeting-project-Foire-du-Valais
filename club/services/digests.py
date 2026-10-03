@@ -12,7 +12,7 @@ UNSUBSCRIBE_SALT = "club.monthly-digest.unsubscribe.v1"
 
 
 def presentable_members():
-    return Member.objects.filter(user__is_active=True, onboarding_done=True, visible_in_directory=True,
+    return Member.objects.filter(kind=Member.Kind.MEMBER, user__is_active=True, onboarding_done=True, visible_in_directory=True,
                                   admitted_at__isnull=False, email_preferences__allow_member_spotlight=True)
 
 
@@ -29,7 +29,7 @@ def prepare_digest(now=None, dry_run=False):
     if local < start.replace(hour=9) or NotificationCampaign.objects.filter(scope_key=scope).exists():
         return 0
     candidates = list(presentable_members().filter(admitted_at__lt=start, digest_entry__isnull=True))
-    recipients = [member for member in Member.objects.filter(user__is_active=True, email_preferences__monthly_digest=True)
+    recipients = [member for member in Member.objects.filter(kind=Member.Kind.MEMBER, user__is_active=True, email_preferences__monthly_digest=True)
                   .exclude(user__email="") if any(candidate.pk != member.pk for candidate in candidates)]
     if not candidates or not recipients:
         return 0

@@ -60,7 +60,7 @@ def publish_event(event_id, actor):
     event.is_published, event.published_at = True, now
     event.save(update_fields=["is_published", "published_at"])
     campaign = NotificationCampaign.objects.create(kind=Kind.ANNOUNCEMENT, scope_key=f"event:{event.pk}:announcement", event=event)
-    recipients = Member.objects.filter(user__is_active=True).exclude(user__email="").filter(
+    recipients = Member.objects.filter(user__is_active=True, kind=Member.Kind.MEMBER).exclude(user__email="").filter(
         Q(email_preferences__isnull=True) | Q(email_preferences__event_announcements=True)
     )
     queue_recipients(campaign, recipients)
@@ -98,7 +98,7 @@ def prepare_reminders(now=None, dry_run=False):
         if not stages:
             continue
         stage = min(stages)  # Only the latest due stage after a scheduler interruption.
-        members = [member for member in Member.objects.filter(user__is_active=True).exclude(user__email="")
+        members = [member for member in Member.objects.filter(user__is_active=True, kind=Member.Kind.MEMBER).exclude(user__email="")
                    if reminder_eligible(member, event, now)]
         scope = f"event:{event.pk}:reminder:{stage}"
         existing = NotificationDelivery.objects.filter(campaign__scope_key=scope).values_list("recipient_id", flat=True)
@@ -118,12 +118,20 @@ def eligible(delivery, now):
     if not member.user.is_active or not member.user.email or campaign.cancelled_at:
         return False
     if campaign.kind == Kind.WELCOME:
-        return bool(campaign.invitation_id and campaign.invitation.member_id == member.pk
+        return bool(member.kind == Member.Kind.MEMBER and campaign.invitation_id and campaign.invitation.member_id == member.pk
                     and campaign.invitation.status == InvitationRequest.Status.ACCEPTED)
+    if campaign.kind == Kind.GUEST_ACCESS:
+        from club.services.substitutions import member_access_valid, valid_guest_invitations
+        return bool(member.kind == Member.Kind.GUEST and member_access_valid(member, now) and campaign.substitute_id
+                    and campaign.substitute.status == "approved" and campaign.substitute.guest_id == member.pk
+                    and campaign.event_id and not campaign.event.cancelled_at
+                    and valid_guest_invitations(member, now).filter(pk=campaign.substitute_id).exists())
     if campaign.kind == Kind.DIGEST:
         from club.services.digests import digest_members
-        return preferences(member).monthly_digest and bool(digest_members(campaign, member))
+        return member.kind == Member.Kind.MEMBER and preferences(member).monthly_digest and bool(digest_members(campaign, member))
     if campaign.kind in (Kind.ANNOUNCEMENT, Kind.REMINDER):
+        if member.kind != Member.Kind.MEMBER:
+            return False
         event = campaign.event
         if not event or not event.is_published or event.cancelled_at or min(event.starts_at, event.rsvp_deadline or event.starts_at) <= now:
             return False
@@ -145,6 +153,10 @@ def build_message(delivery, connection):
         if campaign.kind == Kind.WELCOME:
             context.update(link=private_url("magic_login") + get_query_string(member.user), minutes=settings.SESAME_MAX_AGE // 60)
             subject, template = _("Bienvenue au Club des Affaires"), "welcome"
+        elif campaign.kind == Kind.GUEST_ACCESS:
+            context.update(link=private_url("magic_login") + get_query_string(member.user), minutes=settings.SESAME_MAX_AGE // 60,
+                           until=date_format(timezone.localtime(member.guest_access_until), "DATETIME_FORMAT"))
+            subject, template = _("Ton accès invité au Club des Affaires"), "guest_access"
         elif campaign.kind == Kind.DIGEST:
             from club.services.digests import digest_members, unsubscribe_token
             members = digest_members(campaign, member)
@@ -210,7 +222,7 @@ def process_notifications(limit=50, dry_run=False, now=None):
         for pk in list(pending.order_by("next_attempt_at", "pk").values_list("pk", flat=True)[:limit]):
             if not claim_delivery(pk, now):
                 continue
-            delivery = NotificationDelivery.objects.select_related("recipient__user", "campaign__event", "campaign__invitation").get(pk=pk)
+            delivery = NotificationDelivery.objects.select_related("recipient__user", "campaign__event", "campaign__invitation", "campaign__substitute").get(pk=pk)
             if not eligible(delivery, timezone.now()):
                 delivery.status = Status.SKIPPED
             else:

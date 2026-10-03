@@ -1,0 +1,6 @@
+{% autoescape off %}{% load i18n %}{% translate "Ton accès invité au Club des Affaires" %}
+{% blocktranslate %}Salut {{ name }},{% endblocktranslate %}
+{% blocktranslate %}Ton accès temporaire est ouvert jusqu'au {{ until }}. Complète ton propre profil ; tes rencontres restent les tiennes.{% endblocktranslate %}
+{{ link }}
+{% blocktranslate %}Ce lien est valable {{ minutes }} minutes et utilisable une seule fois.{% endblocktranslate %}
+{{ site_name }}{% endautoescape %}

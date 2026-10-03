@@ -1,17 +1,24 @@
 from collections import defaultdict
 
 from django.db import transaction
+from django.db.models import Exists, OuterRef, Q
 from django.utils import timezone
 
-from club.models import RSVP, Connection, Event, Match, Member, MemberTag, SeatAssignment, SeatingPlan
+from club.models import RSVP, Connection, Event, Match, Member, MemberTag, SeatAssignment, SeatingPlan, Substitute
 from club.services.matching import Profile, compute_matches
 from club.services.seating import Guest, compute_seating
 
 
 def attendees(event):
-    return Member.objects.filter(
-        rsvps__event=event, rsvps__status=RSVP.Status.YES, user__is_active=True
-    ).distinct()
+    if event.cancelled_at and not event.is_past:
+        return Member.objects.none()
+    replacements = Substitute.objects.filter(event=event, member_id=OuterRef("pk"), status__in=["pending", "approved"])
+    approvals = Substitute.objects.filter(event=event, guest_id=OuterRef("pk"), status="approved")
+    members = Member.objects.filter(rsvps__event=event, rsvps__status=RSVP.Status.YES).annotate(
+        has_replacement=Exists(replacements), approved_guest=Exists(approvals))
+    guest_access = Q() if event.is_past else Q(user__is_active=True, guest_access_until__gt=timezone.now())
+    return members.filter(Q(kind=Member.Kind.MEMBER, user__is_active=True, has_replacement=False)
+                          | (Q(kind=Member.Kind.GUEST, approved_guest=True) & guest_access)).distinct()
 
 
 def connected_pairs(member_ids) -> set[tuple[int, int]]:
@@ -28,11 +35,27 @@ def current_event():
 
 
 def visible_events(member=None):
-    return Event.objects.filter(is_published=True)
+    events = Event.objects.filter(is_published=True)
+    if member and member.kind == Member.Kind.GUEST:
+        events = events.filter(substitutes__guest=member, substitutes__status=Substitute.Status.APPROVED)
+    return events
+
+
+def invalidate_event_plans(event):
+    Match.objects.filter(event=event).delete()
+    SeatingPlan.objects.filter(event=event).delete()
+
+
+def with_attendee_counts(events):
+    result = list(events)
+    for event in result:
+        event.yes_count = attendees(event).count()
+    return result
 
 
 @transaction.atomic
 def generate_matches(event, per_person: int = 3) -> int:
+    event = Event.objects.select_for_update().get(pk=event.pk)
     members = list(attendees(event))
     ids = [m.pk for m in members]
     likes, dislikes = defaultdict(set), defaultdict(set)
@@ -75,6 +98,7 @@ def generate_matches(event, per_person: int = 3) -> int:
 
 @transaction.atomic
 def generate_seating(event, rounds: int = 3, table_size: int = 6) -> SeatingPlan:
+    event = Event.objects.select_for_update().get(pk=event.pk)
     members = list(attendees(event))
     ids = [m.pk for m in members]
     result = compute_seating(

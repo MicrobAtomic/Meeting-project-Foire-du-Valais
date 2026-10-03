@@ -10,11 +10,12 @@ def federation_index(member_count: int, connection_count: int) -> float:
 
 
 def active_members():
-    return Member.objects.filter(user__is_active=True)
+    return Member.objects.filter(user__is_active=True, kind=Member.Kind.MEMBER)
 
 
 def active_connections():
-    return Connection.objects.filter(member_a__user__is_active=True, member_b__user__is_active=True)
+    return Connection.objects.filter(member_a__user__is_active=True, member_b__user__is_active=True,
+                                     member_a__kind=Member.Kind.MEMBER, member_b__kind=Member.Kind.MEMBER)
 
 
 def club_stats() -> dict:
@@ -38,11 +39,18 @@ def isolated_members(max_connections: int = 2):
 
 def collection_progress(member) -> tuple[int, int]:
     """(cards collected, cards available) for the member's album."""
-    collected = Connection.involving(member).count()
-    return collected, max(active_members().count() - 1, 0)
+    eligible = active_members().exclude(pk=member.pk)
+    if member.kind == Member.Kind.GUEST:
+        from club.services.access import visible_members
+        eligible = eligible.filter(pk__in=visible_members(member).values("pk"))
+    return eligible.filter(pk__in=collected_ids(member)).count(), eligible.count()
 
 
 def collected_ids(member) -> set[int]:
     """Ids of the members already met by `member` (the cards in their album)."""
     pairs = Connection.involving(member).values_list("member_a_id", "member_b_id")
     return {b if a == member.pk else a for a, b in pairs}
+
+
+def collected_guest_count(member):
+    return Member.objects.filter(kind=Member.Kind.GUEST, pk__in=collected_ids(member)).count()

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Club des Affaires\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 19:43+0200\n"
+"POT-Creation-Date: 2026-10-03 21:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Club des Affaires\n"
 "Language-Team: Club des Affaires\n"
@@ -88,6 +88,18 @@ msgstr "Prepare access to the accepted account"
 msgid "Accès préparé dans la file d'emails."
 msgstr "Access prepared in the email queue."
 
+msgid "Valider l'identité et l'accès du remplaçant"
+msgstr "Approve the substitute’s identity and access"
+
+msgid "Remplacement validé, accès invité préparé."
+msgstr "Substitution approved; guest access prepared."
+
+msgid "Annuler ou refuser le remplacement"
+msgstr "Cancel or decline the substitution"
+
+msgid "Remplacement annulé. Tu peux répondre de nouveau."
+msgstr "Substitution cancelled. You can respond again."
+
 msgid "États des envois"
 msgstr "Delivery statuses"
 
@@ -169,6 +181,9 @@ msgstr "If you untick this, only members you have already met will see your card
 msgid "Poste"
 msgstr "Position"
 
+msgid "Choisis au moins une langue parlée."
+msgstr "Select at least one spoken language."
+
 msgid "Ma note personnelle"
 msgstr "My personal note"
 
@@ -216,6 +231,12 @@ msgstr "Communication & media"
 
 msgid "Autre secteur"
 msgstr "Other sector"
+
+msgid "Membre"
+msgstr "Member"
+
+msgid "Invité"
+msgstr "Guest"
 
 msgid "prénom"
 msgstr "first name"
@@ -496,6 +517,10 @@ msgstr "Reminder"
 msgid "Nouveaux membres"
 msgstr "New members"
 
+#| msgid "Accès réservé"
+msgid "Accès invité"
+msgstr "Guest access"
+
 msgid "En attente"
 msgstr "Pending"
 
@@ -531,6 +556,13 @@ msgstr "bingo square"
 
 msgid "cases de bingo"
 msgstr "bingo squares"
+
+msgid "Validé"
+msgstr "Approved"
+
+#| msgid "Annuler"
+msgid "Annulé"
+msgstr "Cancelled"
 
 msgid "membre remplacé"
 msgstr "member replaced"
@@ -619,6 +651,10 @@ msgstr "Check the title, venue, future date and response deadline before publish
 msgid "Bienvenue au Club des Affaires"
 msgstr "Welcome to the Club des Affaires"
 
+#| msgid "Ton accès au Club des Affaires"
+msgid "Ton accès invité au Club des Affaires"
+msgstr "Your guest access to the Club des Affaires"
+
 msgid "Un nouveau visage au Club !"
 msgstr "A new face at the Club!"
 
@@ -635,6 +671,44 @@ msgstr "Your response for: %(title)s"
 
 msgid "Photo invalide : JPEG, PNG ou WebP non animé, 2 Mio et 4096 × 4096 pixels maximum."
 msgstr "Invalid photo: non-animated JPEG, PNG or WebP, at most 2 MiB and 4096 × 4096 pixels."
+
+msgid "Les réponses sont fermées pour cet événement."
+msgstr "Responses are closed for this event."
+
+msgid "Annule le remplacement validé avant de le modifier."
+msgstr "Cancel the approved substitution before changing it."
+
+msgid "Le titulaire doit être un membre actif."
+msgstr "The principal must be an active member."
+
+msgid "Le profil invité a été supprimé. Crée une nouvelle demande."
+msgstr "The guest profile was deleted. Create a new request."
+
+#| msgid "Cette page s'est perdue en montagne"
+msgid "Cette demande n'est plus en attente."
+msgstr "This request is no longer pending."
+
+msgid "Confirme que la personne représente la même entreprise."
+msgstr "Confirm that the person represents the same company."
+
+#| msgid "Demande déjà acceptée sans compte lié : rapprochement manuel nécessaire."
+msgid "Identité ambiguë : rapprochement manuel nécessaire."
+msgstr "Ambiguous identity: manual review required."
+
+msgid "Cette adresse appartient à un membre ou au staff. Aucun compte ne sera converti."
+msgstr "This address belongs to a member or staff. No account will be converted."
+
+msgid "Les noms diffèrent du compte invité existant. Vérifie l'identité avant validation."
+msgstr "The names differ from the existing guest account. Check the identity before approval."
+
+msgid "Cet invité représente déjà un autre membre à cet événement."
+msgstr "This guest already represents another member at this event."
+
+msgid "Conflit de validation : vérifie la demande et réessaie."
+msgstr "Approval conflict: check the request and try again."
+
+msgid "Cet événement est déjà passé."
+msgstr "This event has already taken place."
 
 #. Translators: a percentage; French and German put a space before the % sign, English does not.
 #, python-format
@@ -663,9 +737,6 @@ msgstr "Founding member"
 msgid "Pilier du Club"
 msgstr "Club pillar"
 
-msgid "Membre"
-msgstr "Member"
-
 msgid "Nouvelle recrue"
 msgstr "Newcomer"
 
@@ -688,17 +759,17 @@ msgstr "Ask how their adventure at the Club began."
 msgid "Service %(number)s"
 msgstr "Course %(number)s"
 
-msgid "Cet événement est déjà passé."
-msgstr "This event has already taken place."
-
-msgid "Les réponses sont fermées pour cet événement."
-msgstr "Responses are closed for this event."
+msgid "Annule ton remplacement avant de répondre que tu viens."
+msgstr "Cancel your substitution before confirming your attendance."
 
 msgid "C'est noté, à bientôt ! 🥂"
 msgstr "Noted, see you soon! 🥂"
 
 msgid "C'est noté. On pensera à toi !"
 msgstr "Noted. We'll be thinking of you!"
+
+msgid "Remplacement demandé. L'équipe vérifiera l'identité avant d'envoyer l'accès."
+msgstr "Substitution requested. The team will check the identity before sending access."
 
 msgid "Toutes les cartes"
 msgstr "All cards"
@@ -789,6 +860,13 @@ msgid "Déconnexion"
 msgstr "Log out"
 
 #, python-format
+msgid "Représente %(company)s"
+msgstr "Represents %(company)s"
+
+msgid "Invité, accès terminé"
+msgstr "Guest, access ended"
+
+#, python-format
 msgid "Membre depuis %(year)s · %(years)s an"
 msgid_plural "Membre depuis %(year)s · %(years)s ans"
 msgstr[0] "Member since %(year)s · %(years)s year"
@@ -822,6 +900,10 @@ msgstr "The Club album"
 #, python-format
 msgid "%(done)s / %(total)s cartes"
 msgstr "%(done)s / %(total)s cards"
+
+#, python-format
+msgid "Invités rencontrés : %(guest_collected)s."
+msgstr "Guests met: %(guest_collected)s."
 
 msgid "Rechercher"
 msgstr "Search"
@@ -888,6 +970,17 @@ msgstr "You said you're not coming."
 
 msgid "Tu n'as pas encore répondu."
 msgstr "You haven't answered yet."
+
+#| msgid "Ton placement"
+msgid "Ton remplacement"
+msgstr "Your substitution"
+
+#| msgid "Ton placement"
+msgid "Annuler mon remplacement"
+msgstr "Cancel my substitution"
+
+msgid "Proposer un remplaçant"
+msgstr "Propose a substitute"
 
 msgid "Ton placement"
 msgstr "Your seating"
@@ -1137,6 +1230,16 @@ msgstr "Add this card to your album: you'll then be able to swap contact details
 msgid "Ajouter %(name)s à mon album"
 msgstr "Add %(name)s to my album"
 
+msgid "Propose un collègue de ton entreprise. Il aura son propre profil et ses rencontres resteront les siennes. L'équipe doit valider son accès temporaire."
+msgstr "Propose a colleague from your company. They will have their own profile and keep their own meetings. The team must approve their temporary access."
+
+msgid "Envoyer ma demande"
+msgstr "Send my request"
+
+#| msgid "Voir l'événement"
+msgid "Retour à l'événement"
+msgstr "Back to the event"
+
 msgid "Découvre les nouveaux profils et fais connaissance avant le prochain événement."
 msgstr "Discover the new profiles and get acquainted before the next event."
 
@@ -1147,7 +1250,6 @@ msgstr "Discover the profile"
 msgid "Découvre d'autres profils dans l'album (%(remaining)s)."
 msgstr "Discover more profiles in the album (%(remaining)s)."
 
-#| msgid "Accroche pour le récapitulatif"
 msgid "Me désabonner du récapitulatif"
 msgstr "Unsubscribe from the digest"
 
@@ -1158,8 +1260,9 @@ msgstr "Hi %(name)s,"
 msgid "Découvre cet événement et indique ta réponse sur le site."
 msgstr "Discover this event and submit your response on the website."
 
-msgid "Ton compte est prêt. Complète ton profil pour préparer tes rencontres."
-msgstr "Your account is ready. Complete your profile to prepare for your meetings."
+#, python-format
+msgid "Ton accès temporaire est ouvert jusqu'au %(until)s. Complète ton propre profil ; tes rencontres restent les tiennes."
+msgstr "Your temporary access is open until %(until)s. Complete your own profile; your meetings remain yours."
 
 msgid "Se connecter"
 msgstr "Log in"
@@ -1168,19 +1271,18 @@ msgstr "Log in"
 msgid "Ce lien est valable %(minutes)s minutes et utilisable une seule fois."
 msgstr "This link is valid for %(minutes)s minutes and can be used only once."
 
-#| msgid "Mes préférences email"
+msgid "Ton compte est prêt. Complète ton profil pour préparer tes rencontres."
+msgstr "Your account is ready. Complete your profile to prepare for your meetings."
+
 msgid "Préférences email"
 msgstr "Email preferences"
 
-#| msgid "Récapitulatif mensuel des nouveaux membres"
 msgid "Récapitulatif mensuel"
 msgstr "Monthly digest"
 
-#| msgid "Accroche pour le récapitulatif"
 msgid "Tu ne recevras plus le récapitulatif mensuel."
 msgstr "You will no longer receive the monthly digest."
 
-#| msgid "Récapitulatif mensuel des nouveaux membres"
 msgid "Confirme pour arrêter uniquement le récapitulatif mensuel des nouveaux membres."
 msgstr "Confirm to unsubscribe only from the monthly new member digest."
 
@@ -1206,9 +1308,6 @@ msgstr "Payment by invoice, managed by the Club team."
 
 msgid "Envoyer une demande d'invitation ne déclenche aucun paiement."
 msgstr "Submitting an invitation request does not trigger any payment."
-
-msgid "Envoyer ma demande"
-msgstr "Send my request"
 
 msgid "Déjà membre ?"
 msgstr "Already a member?"
@@ -1439,6 +1538,17 @@ msgstr "Open the admin"
 
 msgid "Publication et emails"
 msgstr "Publication and emails"
+
+#| msgid "Ton placement"
+msgid "Remplacements"
+msgstr "Substitutions"
+
+msgid "Aucune demande de remplacement."
+msgstr "No substitution requests."
+
+#| msgid "Traiter dans l'administration"
+msgid "Vérifier les demandes dans l'administration"
+msgstr "Review requests in administration"
 
 msgid "Un badge par inscrit à imprimer sur feuilles A4 : prénom, entreprise, sujet de conversation et QR code."
 msgstr "One badge per attendee to print on A4 sheets: first name, company, conversation topic and QR code."

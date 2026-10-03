@@ -33,10 +33,17 @@ class Sector(models.TextChoices):
 
 
 class Member(models.Model):
+    class Kind(models.TextChoices):
+        MEMBER = "member", _("Membre")
+        GUEST = "guest", _("Invité")
+
+    kind = models.CharField(max_length=10, choices=Kind.choices, default=Kind.MEMBER)
+    guest_access_until = models.DateTimeField(null=True, blank=True, editable=False)
     RANK_FOUNDER = "founder"
     RANK_PILLAR = "pillar"
     RANK_MEMBER = "member"
     RANK_NEWCOMER = "newcomer"
+    RANK_GUEST = "guest"
 
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="member")
     first_name = models.CharField(_("prénom"), max_length=80)
@@ -101,6 +108,8 @@ class Member(models.Model):
 
     @property
     def rank(self):
+        if self.kind == self.Kind.GUEST:
+            return self.RANK_GUEST
         if self.is_founder:
             return self.RANK_FOUNDER
         if self.seniority_years >= 5:
@@ -403,11 +412,13 @@ class NotificationCampaign(models.Model):
         ANNOUNCEMENT = "event_announcement", _("Annonce")
         REMINDER = "event_reminder", _("Relance")
         DIGEST = "new_members", _("Nouveaux membres")
+        GUEST_ACCESS = "guest_access", _("Accès invité")
 
     kind = models.CharField(max_length=24, choices=Kind.choices)
     scope_key = models.CharField(max_length=120, unique=True)
     event = models.ForeignKey(Event, on_delete=models.SET_NULL, null=True, blank=True, related_name="notification_campaigns")
     invitation = models.ForeignKey(InvitationRequest, on_delete=models.SET_NULL, null=True, blank=True)
+    substitute = models.ForeignKey("Substitute", on_delete=models.SET_NULL, null=True, blank=True)
     month = models.DateField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     cancelled_at = models.DateTimeField(null=True, blank=True)
@@ -477,6 +488,20 @@ class BingoSquare(models.Model):
 class Substitute(models.Model):
     """Someone who represents a member at an event they cannot attend, usually a colleague from the same company."""
 
+    class Status(models.TextChoices):
+        PENDING = "pending", _("En attente")
+        APPROVED = "approved", _("Validé")
+        CANCELLED = "cancelled", _("Annulé")
+
+    guest = models.ForeignKey(Member, on_delete=models.SET_NULL, null=True, blank=True, related_name="guest_invitations")
+    status = models.CharField(max_length=10, choices=Status.choices, default=Status.PENDING)
+    approved_at = models.DateTimeField(null=True, blank=True, editable=False)
+    speaks_fr = models.BooleanField(_("parle français"), default=True)
+    speaks_de = models.BooleanField(_("parle allemand"), default=False)
+    speaks_en = models.BooleanField(_("parle anglais"), default=False)
+    preferred_language = models.CharField(_("Langue des emails"), max_length=2,
+        choices=[("fr", _("Français")), ("de", _("Allemand")), ("en", _("Anglais"))], default="fr")
+
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="substitutes", verbose_name=_("événement"))
     member = models.ForeignKey(
         Member, on_delete=models.CASCADE, related_name="substitutions", verbose_name=_("membre remplacé")
@@ -492,7 +517,11 @@ class Substitute(models.Model):
         ordering = ["event", "last_name", "first_name"]
         verbose_name = _("remplaçant·e")
         verbose_name_plural = _("remplaçant·e·s")
-        constraints = [models.UniqueConstraint(fields=["event", "member"], name="one_substitute_per_member")]
+        constraints = [
+            models.UniqueConstraint(fields=["event", "member"], name="one_substitute_per_member"),
+            models.UniqueConstraint(fields=["event", "guest"], condition=Q(status="approved"), name="unique_approved_event_guest"),
+            models.CheckConstraint(condition=Q(guest__isnull=True) | ~Q(guest=F("member")), name="substitute_not_principal"),
+        ]
 
     def __str__(self):
         return self.full_name

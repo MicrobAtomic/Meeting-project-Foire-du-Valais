@@ -12,6 +12,8 @@ from django.utils.translation import get_language
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.cache import never_cache
 from sesame.views import LoginView as SesameLoginView
+from django.contrib.auth import logout
+from club.services.substitutions import member_access_valid
 
 from club.forms import InvitationRequestForm, MagicLinkRequestForm
 from club.models import EmailPreferences, InvitationRequest, Member
@@ -24,7 +26,7 @@ logger = logging.getLogger(__name__)
 @login_not_required
 def landing(request):
     """Public showcase: only aggregate numbers, never a name."""
-    members = Member.objects.filter(user__is_active=True)
+    members = Member.objects.filter(user__is_active=True, kind=Member.Kind.MEMBER)
     context = {
         "member_count": members.count(),
         "sector_count": members.values("sector").distinct().count(),
@@ -37,7 +39,7 @@ def referrer_from(request):
     code = request.GET.get("ref", "").strip().upper()
     if not code:
         return None
-    return Member.objects.filter(referral_code=code, user__is_active=True).first()
+    return Member.objects.filter(referral_code=code, user__is_active=True, kind=Member.Kind.MEMBER).first()
 
 
 @login_not_required
@@ -89,6 +91,13 @@ class MagicLoginView(SesameLoginView):
     def login_failed(self):
         return render(self.request, "registration/magic_link_expired.html", status=403)
 
+    def login_success(self):
+        member = getattr(self.request.user, "member", None)
+        if member and not member_access_valid(member):
+            logout(self.request)
+            return self.login_failed()
+        return super().login_success()
+
 
 @login_not_required
 @require_http_methods(["GET", "POST"])
@@ -101,7 +110,7 @@ def magic_link_request(request):
             email = form.cleaned_data["email"]
             member = Member.objects.select_related("user").filter(user__email__iexact=email, user__is_active=True).first()
             # one e-mail per address and minute: this page cannot be used to flood someone's mailbox
-            if member and cache.add(f"magic-link:{email}", True, timeout=60):
+            if member and member_access_valid(member) and cache.add(f"magic-link:{email}", True, timeout=60):
                 try:
                     send_login_link(request, member)
                 except Exception:  # a failing mail server must not reveal that the address exists

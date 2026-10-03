@@ -19,6 +19,11 @@
       {% if not event.cancelled_at %}<form method="post">{% csrf_token %}<button type="submit" name="action" value="cancel" class="btn btn-secondary">{% translate "Annuler l'événement" %}</button></form>{% endif %}
     </section>
     <section class="card space-y-3 md:col-span-2">
+      <h2 class="font-semibold">{% translate "Remplacements" %}</h2>
+      <ul class="space-y-2 text-sm">{% for substitute in substitutions %}<li>{{ substitute.member.full_name }} → {{ substitute.full_name }} · {{ substitute.get_status_display }}</li>{% empty %}<li>{% translate "Aucune demande de remplacement." %}</li>{% endfor %}</ul>
+      <a href="{% url 'admin:club_substitute_changelist' %}" class="btn btn-secondary">{% translate "Vérifier les demandes dans l'administration" %}</a>
+    </section>
+    <section class="card space-y-3 md:col-span-2">
       <h2 class="font-semibold">🏷️ {% translate "Badges" %}</h2>
       <p class="text-sm text-stone-600">{% translate "Un badge par inscrit à imprimer sur feuilles A4 : prénom, entreprise, sujet de conversation et QR code." %}</p>
       <a href="{% url 'club:staff_badges' event.pk %}" class="btn btn-secondary">{% translate "Ouvrir les badges" %}</a>

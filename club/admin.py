@@ -17,6 +17,7 @@ from club.models import (
     NotificationDelivery,
     SeatAssignment,
     SeatingPlan,
+    Substitute,
     Tag,
     new_qr_token,
 )
@@ -25,6 +26,8 @@ from club.forms import MemberAdminForm
 from club.services.photos import save_profile_photo
 from club.services.membership import accept_invitation
 from club.services.notifications import cancel_event, publish_event, queue_welcome, retry_confirmed_failures
+from club.services.substitutions import approve_substitute, cancel_substitute, member_access_valid
+from club.services.events import attendees as event_attendees
 from django.core.exceptions import ValidationError
 from club.services.events import generate_matches, generate_seating
 from club.ui import RANK_STYLE
@@ -46,7 +49,7 @@ class MemberAdmin(admin.ModelAdmin):
     list_display = ["full_name", "company", "sector", "member_since", "rank_display", "connections", "visible_in_directory"]
     list_filter = ["sector", "member_since", "is_founder", "speaks_de", "speaks_en", "visible_in_directory"]
     search_fields = ["first_name", "last_name", "company", "user__email"]
-    readonly_fields = ["qr_token", "referral_code", "created_at"]
+    readonly_fields = ["qr_token", "referral_code", "created_at", "admitted_at", "kind", "guest_access_until"]
     autocomplete_fields = ["user"]
     inlines = [MemberTagInline]
     actions = ["send_login_links", "rotate_qr_token"]
@@ -71,7 +74,7 @@ class MemberAdmin(admin.ModelAdmin):
     def send_login_links(self, request, queryset):
         sent = 0
         for member in queryset.select_related("user"):
-            if not member.user.is_active or not member.user.email:
+            if not member_access_valid(member) or not member.user.email:
                 continue
             try:
                 send_login_link(request, member)
@@ -120,13 +123,11 @@ class EventAdmin(admin.ModelAdmin):
         self.message_user(request, _("Événement annulé. Contacte les inscrits via le processus habituel de l'équipe."))
 
     def get_queryset(self, request):
-        return super().get_queryset(request).annotate(
-            yes_count=Count("rsvps", filter=Q(rsvps__status=RSVP.Status.YES))
-        )
+        return super().get_queryset(request)
 
-    @admin.display(description=_("inscrits"), ordering="yes_count")
+    @admin.display(description=_("inscrits"))
     def attendees(self, obj):
-        return obj.yes_count
+        return event_attendees(obj).count()
 
     @admin.action(description=_("Générer « Tes 3 rencontres »"))
     def make_matches(self, request, queryset):
@@ -254,6 +255,31 @@ class ReadOnlyNotificationAdmin(admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return False
+
+
+@admin.register(Substitute)
+class SubstituteAdmin(ReadOnlyNotificationAdmin):
+    list_display = ["full_name", "company", "event", "member", "guest", "status", "approved_at"]
+    list_filter = ["status", "event"]
+    actions = ["approve", "cancel"]
+
+    @admin.action(description=_("Valider l'identité et l'accès du remplaçant"))
+    def approve(self, request, queryset):
+        for substitute in queryset:
+            try:
+                approve_substitute(substitute.pk, request.user)
+                self.message_user(request, _("Remplacement validé, accès invité préparé."))
+            except ValidationError as error:
+                self.message_user(request, " ".join(error.messages), level=messages.ERROR)
+
+    @admin.action(description=_("Annuler ou refuser le remplacement"))
+    def cancel(self, request, queryset):
+        for substitute in queryset.select_related("member"):
+            try:
+                cancel_substitute(substitute.event_id, substitute.member, actor=request.user)
+                self.message_user(request, _("Remplacement annulé. Tu peux répondre de nouveau."))
+            except ValidationError as error:
+                self.message_user(request, " ".join(error.messages), level=messages.ERROR)
 
 
 @admin.register(NotificationCampaign)

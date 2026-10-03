@@ -13,6 +13,7 @@ Les envois réels et les changements d'hébergement restent à configurer sépar
 
 | Phase | État | Vérifications / livraison |
 |---|---|---|
+| 8 | Terminée | 254 tests SQLite (4 cas PostgreSQL seuls) ; 254 tests PostgreSQL verts ; identité distincte, expiration de session, confidentialité et validations concurrentes vérifiées |
 | 7 | Terminée | 231 tests SQLite verts (2 cas PostgreSQL seuls) ; limite de 4 aperçus, consentements, 09 h suisse, désabonnement signé/CSRF et absence de données privées vérifiés |
 | 6 | Terminée ; SMTP/cron non activés | 222 tests SQLite (2 cas PostgreSQL seuls) ; 219 tests PostgreSQL verts, dont publications et réservations concurrentes ; backend mémoire uniquement |
 | 5 | Terminée | 206 tests verts ; acceptation idempotente et rollback vérifiés ; préférences et langue enregistrées uniquement pour soi |
@@ -622,28 +623,28 @@ Pour la première version, accepter un collègue de la même entreprise, avec co
 Un titulaire qui redevient présent doit d'abord annuler son remplacement. L'application interdit la double présence.
 Un invité n'est ni « nouveau membre », ni « fondateur », ni une cotisation supplémentaire.
 
-- [ ] **8.1** Ajouter les champs et migrations. Les anciens `Member` restent `kind=member` ; ne pas créer
+- [x] **8.1** Ajouter les champs et migrations. Les anciens `Member` restent `kind=member` ; ne pas créer
   un compte invité pour chaque ancienne ligne `Substitute` sans validation humaine de son identité.
   La migration de contrainte doit accepter les anciennes lignes `pending` avec `guest=NULL`.
-- [ ] **8.2** Ajouter `SubstituteForm` avec prénom, nom, email et fonction. L'entreprise est déduite du titulaire
+- [x] **8.2** Ajouter `SubstituteForm` avec prénom, nom, email et fonction. L'entreprise est déduite du titulaire
   puis contrôlée par le staff. Demander aussi les langues parlées et la langue souhaitée pour l'accès ; valider
   au moins une langue parlée. Ces données concernent l'invité et ne sont pas copiées du titulaire.
   `member`, `guest`, `status`, `is_staff`, `kind`, année d'adhésion et durée d'accès
   n'appartiennent jamais aux champs autoéditables.
-- [ ] **8.3** Écrire `request_substitute(event_id, principal, data)` et `cancel_substitute(event_id, principal)`.
+- [x] **8.3** Écrire `request_substitute(event_id, principal, data)` et `cancel_substitute(event_id, principal)`.
   Dans une transaction, vérifier titulaire régulier actif, événement publié/futur/non annulé et échéance ouverte.
   `principal` provient exclusivement de `request.member`. Une demande valide crée/met à jour la ligne `pending`
   et met le RSVP du titulaire à `NO`. Ne pas créer de compte ni de présence invitée avant validation du staff.
-- [ ] **8.4** Écrire `approve_substitute(substitute_id, actor)` : staff actif, ligne et événement verrouillés,
+- [x] **8.4** Écrire `approve_substitute(substitute_id, actor)` : staff actif, ligne et événement verrouillés,
   contrôles d'échéance, titularité et absence de conflit. Créer un `User` distinct et un `Member(kind=guest)` avec
   mot de passe inutilisable, ou réutiliser une personne invitée déjà identifiée par son adresse normalisée.
   Si l'adresse correspond à un membre régulier, au staff, au titulaire ou à des données ambiguës, bloquer et
   expliquer le conflit au staff ; ne pas convertir ni fusionner ces comptes automatiquement.
-- [ ] **8.5** Pour un invité réutilisé, vérifier que les noms correspondent et que son identité a été confirmée
+- [x] **8.5** Pour un invité réutilisé, vérifier que les noms correspondent et que son identité a été confirmée
   par le staff. Réactiver son `User`, borner l'accès à la dernière date des invitations approuvées pertinentes
   plus 48 h, garder son QR individuel, son historique et ses notes. Ne pas écraser ses coordonnées déjà complétées
   avec une demande faite par un autre titulaire. Un QR peut être régénéré pour raison de sécurité via l'action existante.
-- [ ] **8.6** À validation, lier `Substitute.guest`, passer `approved` et créer le RSVP `YES` de l'invité.
+- [x] **8.6** À validation, lier `Substitute.guest`, passer `approved` et créer le RSVP `YES` de l'invité.
   Le titulaire reste `NO`. La contrainte unique de présence et les contrôles service empêchent de compter un invité
   deux fois. Préparer dans la file d'emails un accès invité avec une clé unique `substitute:<pk>:access`, un type
   `guest_access` et un lien magique généré à l'envoi. Ce message est distinct de la newsletter des nouveaux membres.
@@ -654,21 +655,21 @@ Ajouter `/evenements/<pk>/remplacant/`, GET formulaire et POST de demande, et
 `/evenements/<pk>/remplacant/annuler/`, POST seulement. Les deux concernent uniquement le titulaire connecté.
 Le staff valide/refuse depuis l'administration ; afficher les demandes en attente dans les outils d'événement.
 
-- [ ] **8.7** Dans `event_detail`, après « Je ne viens pas », proposer « Proposer un remplaçant » et afficher
+- [x] **8.7** Dans `event_detail`, après « Je ne viens pas », proposer « Proposer un remplaçant » et afficher
   l'état de sa propre demande. Les autres membres voient la carte de la personne présente, avec « Invité » et
   « Représente [entreprise] », sans adresse de demande ni détails d'approbation.
   Le bouton « Je viens » refuse proprement si un remplacement `pending/approved` existe ; guider vers son annulation.
-- [ ] **8.8** Enregistrer `Substitute` dans l'admin, avec données d'identité et statut contrôlés par les actions
+- [x] **8.8** Enregistrer `Substitute` dans l'admin, avec données d'identité et statut contrôlés par les actions
   du service. Aucun changement manuel de `guest/status` qui contournerait les invariants.
   Proposer validation et annulation/refus sur POST. Une annulation enlève le RSVP invité de cet événement, ne touche
   pas ses autres invitations et invalide les propositions/places de l'événement. Le titulaire reste `NO` jusqu'à
   ce qu'il réponde de nouveau. Les anciens événements conservent leur historique.
-- [ ] **8.9** Étendre `@member_required` pour rejeter immédiatement un invité dont la date d'accès est expirée
+- [x] **8.9** Étendre `@member_required` pour rejeter immédiatement un invité dont la date d'accès est expirée
   ou dont aucune invitation valide ne donne accès, **même avec une session déjà ouverte**.
   Utiliser `timezone.now()` à chaque requête ; ne pas dépendre du passage du cron pour la confidentialité.
   Ajouter un contrôle « membre régulier » pour les actions de parrainage, remplacement et réponse de présence.
   Ne pas se fier uniquement à des boutons masqués dans les templates.
-- [ ] **8.10** Centraliser la visibilité dans `services/access.py`, puis l'appliquer aux fiches, photos, notes,
+- [x] **8.10** Centraliser la visibilité dans `services/access.py`, puis l'appliquer aux fiches, photos, notes,
   vCards, liste de participants, introductions et scans. Proposer les règles précises du tableau ci-dessous.
   Toute sortie de périmètre renvoie 404 pour une cible, ou 403 pour une action interdite.
 
@@ -691,56 +692,56 @@ non annulés pour lesquels le remplacement donne encore accès. Un invité en ve
 général. Les profils masqués ne redeviennent pas visibles au seul motif d'une coparticipation.
 Une personne déjà rencontrée reste soumise à la politique de suppression/conservation décidée par le Club.
 
-- [ ] **8.11** Appliquer ces règles également aux liens magiques : aucune nouvelle demande de lien pour un
+- [x] **8.11** Appliquer ces règles également aux liens magiques : aucune nouvelle demande de lien pour un
   invité expiré, même si la commande de veille n'est pas encore passée. Garder la réponse publique identique
   pour les adresses connues/inconnues. Un jeton ancien ne doit permettre aucune action privée hors durée.
   La navigation invitée retire les liens interdits, et les vues contrôlent aussi les URLs saisies directement.
 
 ### 8C. Présence réelle, rencontres et statistiques
 
-- [ ] **8.12** Faire de `attendees(event)` la source commune des personnes présentes : réguliers RSVP `YES`
+- [x] **8.12** Faire de `attendees(event)` la source commune des personnes présentes : réguliers RSVP `YES`
   sans remplacement en cours, et invités RSVP `YES` liés à un remplacement `approved` de cet événement.
   Pas d'invité en `pending`. Pour un événement passé, conserver les invités qui étaient approuvés et présents,
   même si leur connexion est maintenant désactivée. Une annulation retire leur présence future, pas les autres événements.
-- [ ] **8.13** Utiliser cette source dans cartes de participants, compteurs, tableaux staff, admin et badges.
+- [x] **8.13** Utiliser cette source dans cartes de participants, compteurs, tableaux staff, admin et badges.
   Remplacer les compteurs directs de `rsvps__status=YES` qui ignoreraient les invariants d'invitation.
   Les badges et placements montrent le nom et QR de l'invité ; aucune impression au nom du titulaire absent.
-- [ ] **8.14** Fournir l'invité à `compute_matches` et `compute_seating` avec ses propres langues, affinités
+- [x] **8.14** Fournir l'invité à `compute_matches` et `compute_seating` avec ses propres langues, affinités
   et secteur. Ne pas hériter des goûts ou langues du titulaire. Pour le score, un invité n'est ni pilier ni nouvelle
   recrue cotisante. Sa carte affiche un libellé « Invité » au lieu d'un rang calculé à partir d'une fausse ancienneté.
   Masquer aussi la mention « membre depuis » pour les invités. Le champ requis `member_since` peut recevoir l'année
   courante à la création technique, mais n'est jamais utilisé pour présenter une ancienneté d'adhésion d'invité.
-- [ ] **8.15** Sur changement de présence/remplacement, effacer les `Match` et `SeatAssignment` devenus obsolètes,
+- [x] **8.15** Sur changement de présence/remplacement, effacer les `Match` et `SeatAssignment` devenus obsolètes,
   ainsi que le plan agrégé de cet événement ; afficher « à régénérer » au staff et une attente claire aux membres.
   Aucun ancien placement du titulaire absent ne doit rester présenté comme valable. La régénération utilise les présents.
   Filtrer aussi toute introduction vers un profil auquel le lecteur n'a pas accès.
-- [ ] **8.16** Lors d'un scan confirmé, créer `Connection(invité, personne rencontrée)` et **aucune** connexion
+- [x] **8.16** Lors d'un scan confirmé, créer `Connection(invité, personne rencontrée)` et **aucune** connexion
   avec le titulaire. Pour les invités, vérifier le périmètre avant GET et POST du scan.
   Ne pas utiliser `current_event().first()` pour attribuer au hasard une rencontre lorsque plusieurs événements
   ont lieu le même jour : identifier un événement commun du jour avec contexte validé ; si un membre régulier
   n'a pas de contexte non ambigu, laisser `Connection.event=None`. Pour un invité, exiger un événement commun autorisé.
-- [ ] **8.17** Séparer les compteurs du Club et l'historique de rencontres : `active_members()` et l'indice
+- [x] **8.17** Séparer les compteurs du Club et l'historique de rencontres : `active_members()` et l'indice
   portent sur `kind=member`, et l'indice compte seulement les connexions entre ces membres réguliers actifs.
   Les invités ne gonflent ni le nombre de cotisants ni le dénominateur des paliers.
   Pour « X / Y cartes membres », calculer X et Y sur les mêmes réguliers actifs ; montrer les invités rencontrés
   dans une rubrique ou un compteur complémentaire. Aujourd'hui le numérateur prend toutes les connexions :
   le conserver tel quel pourrait produire X > Y après l'ajout d'invités ou des désactivations.
-- [ ] **8.18** Exclure `kind=guest` des chiffres de vitrine, des nouvelles recrues, du parrainage, des destinataires
+- [x] **8.18** Exclure `kind=guest` des chiffres de vitrine, des nouvelles recrues, du parrainage, des destinataires
   de campagnes générales et des profils présentés dans le récapitulatif mensuel.
   Un invité reçoit seulement son accès et les messages liés à ses événements autorisés.
   Le titulaire avec RSVP `NO` ne reçoit pas de relance, même si son invité n'a pas encore complété son profil.
 
 ### 8D. Mise en veille et tests de bout en bout
 
-- [ ] **8.19** Écrire `expire_guest_access --dry-run`, déclenchable périodiquement.
+- [x] **8.19** Écrire `expire_guest_access --dry-run`, déclenchable périodiquement.
   Pour les invités dont la dernière autorisation est terminée, désactiver `User.is_active`, sans effacer leurs vraies
   rencontres. Ne jamais désactiver un membre régulier. Recalculer la borne d'accès après annulation/réactivation
   et prolonger seulement si une autre invitation approuvée la justifie.
   La commande de notifications d'accès doit recontrôler cette borne avant envoi.
-- [ ] **8.20** Ajouter un scénario de démo **opt-in**, par exemple `seed_substitute_demo`, qui utilise un membre
+- [x] **8.20** Ajouter un scénario de démo **opt-in**, par exemple `seed_substitute_demo`, qui utilise un membre
   fictif secondaire absent et un invité `@example.com` ; ne pas modifier le scénario Camille–Lukas ni le seed de base.
   La commande ne change aucune donnée hors de cette démo et se réexécute sans créer de doublons.
-- [ ] **8.21** Tester toute la chaîne décrite ci-dessous sur SQLite ; utiliser PostgreSQL pour la validation
+- [x] **8.21** Tester toute la chaîne décrite ci-dessous sur SQLite ; utiliser PostgreSQL pour la validation
   simultanée d'une demande et des contraintes de présence. Étendre la matrice d'accès avec un invité actif et expiré.
 
 Scénario de recette obligatoire :
@@ -863,8 +864,7 @@ env DEBUG=1 NOTIFICATIONS_ENABLED=1 EMAIL_BACKEND=django.core.mail.backends.cons
 env DEBUG=1 .venv/bin/python manage.py expire_guest_access --dry-run
 ```
 
-Ces commandes n'existent pas encore au moment de la rédaction. Ne pas les remplacer par du SQL manuel ou une
-commande de reset. Elles prendront la base de l'environnement courant ; utiliser une base locale explicitement dédiée.
+Ces commandes sont maintenant disponibles. Elles prennent la base de l’environnement courant ; utiliser une base locale explicitement dédiée pour la recette. Ne pas les remplacer par du SQL manuel ni une commande de reset.
 
 ## 15. Message de démarrage à donner à l'IA
 

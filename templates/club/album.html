@@ -3,6 +3,7 @@
 {% block content %}
 <h1 class="text-2xl font-semibold">🃏 {% translate "L'album du Club" %}</h1>
 <p class="mt-1 text-sm text-stone-600">{% blocktranslate with done=progress.0 total=progress.1 %}{{ done }} / {{ total }} cartes{% endblocktranslate %}</p>
+{% if guest_collected %}<p class="text-sm">{% blocktranslate %}Invités rencontrés : {{ guest_collected }}.{% endblocktranslate %}</p>{% endif %}
 <progress class="bar mt-3" value="{{ progress.0 }}" max="{{ progress.1|default:1 }}"></progress>
 
 <form method="get" class="card mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">

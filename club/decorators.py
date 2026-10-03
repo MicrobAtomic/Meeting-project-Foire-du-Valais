@@ -2,6 +2,7 @@ from functools import wraps
 
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect
+from club.services.substitutions import member_access_valid
 
 
 def member_required(view):
@@ -15,6 +16,8 @@ def member_required(view):
                 return redirect("club:staff_dashboard")
             raise PermissionDenied
         request.member = member
+        if not member_access_valid(member):
+            raise PermissionDenied
         return view(request, *args, **kwargs)
 
     return wrapper

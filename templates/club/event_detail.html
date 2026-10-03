@@ -18,7 +18,7 @@
     {% if event.has_seating %}<p class="text-sm text-stone-600">🔀 {% translate "Tables tournantes : à chaque service, tu changes de table pour rencontrer de nouvelles personnes." %}</p>{% endif %}
   </section>
 
-  {% if event.responses_open %}
+  {% if event.responses_open and request.member.kind == 'member' %}
   <section class="card space-y-3">
     <h2 class="font-semibold">{% translate "Ta réponse" %}</h2>
     <form method="post" action="{% url 'club:event_rsvp' event.pk %}" class="flex flex-wrap gap-2">
@@ -31,6 +31,10 @@
       {% elif my_status == "no" %}{% translate "Tu as répondu que tu ne viens pas." %}
       {% else %}❓ {% translate "Tu n'as pas encore répondu." %}{% endif %}
     </p>
+    {% if substitution and substitution.status != 'cancelled' %}
+    <p class="text-sm">{% translate "Ton remplacement" %} : {{ substitution.full_name }} · {{ substitution.get_status_display }}</p>
+    <form method="post" action="{% url 'club:member_substitute_cancel' event.pk %}">{% csrf_token %}<button type="submit" class="btn btn-secondary">{% translate "Annuler mon remplacement" %}</button></form>
+    {% elif my_status == 'no' %}<a href="{% url 'club:member_substitute' event.pk %}" class="btn btn-secondary">{% translate "Proposer un remplaçant" %}</a>{% endif %}
   </section>
   {% endif %}
 

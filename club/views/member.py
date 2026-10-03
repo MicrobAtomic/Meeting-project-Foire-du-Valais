@@ -17,11 +17,12 @@ from django.views.decorators.vary import vary_on_cookie
 
 from club.decorators import member_required
 from club.forms import EmailPreferencesForm, MemberProfileForm, PersonalNoteForm
-from club.services.access import visible_target
+from club.services.access import can_open_profile, scan_event, visible_members, visible_target
+from club.services.substitutions import require_regular
 from club.services.notes import get_personal_note, save_personal_note
 from club.models import RSVP, Connection, EmailPreferences, Event, Member, MemberTag, Sector, Tag
 from club.services.events import current_event, visible_events
-from club.services.federation import club_stats, collected_ids, collection_progress
+from club.services.federation import club_stats, collected_guest_count, collected_ids, collection_progress
 from club.services.intros import intros_for
 from club.services.milestones import album_goal, club_progress
 from club.services.profile import common_tags, save_tag_answers
@@ -47,10 +48,11 @@ def home(request):
     if next_event:
         answer = RSVP.objects.filter(event=next_event, member=request.member).values_list("status", flat=True).first()
         if answer == RSVP.Status.YES:  # people who hide their card are never introduced
-            next_intros = [i for i in intros_for(request.member, next_event) if i["other"].visible_in_directory]
+            next_intros = [i for i in intros_for(request.member, next_event) if can_open_profile(request.member, i["other"])]
     context = {
         "collected": collected,
         "total": total,
+        "guest_collected": collected_guest_count(request.member),
         "album_goal": album_goal(collected, total),
         "stats": stats,
         "club_progress": club_progress(stats),
@@ -129,7 +131,7 @@ def member_photo(request, pk):
 
 @member_required
 def member_vcard(request, pk):
-    target = get_object_or_404(Member.objects.select_related("user"), pk=pk, user__is_active=True)
+    target = visible_target(request.member, pk)
     if target.pk != request.member.pk and not Connection.exists_between(request.member, target):
         raise PermissionDenied
     response = HttpResponse(build_vcard(target), content_type="text/vcard; charset=utf-8")
@@ -141,19 +143,21 @@ def member_vcard(request, pk):
 @require_http_methods(["GET", "POST"])
 def scan(request, token):
     """QR code target. GET only shows a confirmation (no side effect); POST (CSRF-protected) connects."""
-    target = get_object_or_404(Member, qr_token=token, user__is_active=True)
+    raw_target = get_object_or_404(Member, qr_token=token)
+    target = visible_target(request.member, raw_target.pk)
     me = request.member
     if target.pk == me.pk:
         messages.info(request, _("C'est ta propre carte 😉"))
         return redirect("club:member_detail", pk=me.pk)
+    context_event = scan_event(me, target, request.POST.get("event") or request.GET.get("event"))
     if request.method == "POST":
-        _connection, created = Connection.link(me, target, source=Connection.Source.QR, event=current_event())
+        _connection, created = Connection.link(me, target, source=Connection.Source.QR, event=context_event)
         if created:
             messages.success(request, _("Carte ajoutée à ton album ! 🎉"))
         return redirect("club:member_detail", pk=target.pk)
     if Connection.exists_between(me, target):
         return redirect("club:member_detail", pk=target.pk)
-    return render(request, "club/scan_confirm.html", {"target": target})
+    return render(request, "club/scan_confirm.html", {"target": target, "scan_event": context_event})
 
 
 @member_required
@@ -161,8 +165,7 @@ def album(request):
     me = request.member
     collected = collected_ids(me)
     members = (
-        Member.objects.filter(user__is_active=True)
-        .filter(Q(visible_in_directory=True) | Q(pk__in=collected))  # a card already collected stays in the album
+        visible_members(me)
         .exclude(pk=me.pk)
         .select_related("user")
         .prefetch_related("tag_links__tag")
@@ -184,13 +187,14 @@ def album(request):
     elif status == "a-rencontrer":
         members = members.exclude(pk__in=collected)
     elif status == "nouveaux":
-        members = members.filter(member_since=timezone.localdate().year)
+        members = members.filter(kind=Member.Kind.MEMBER, member_since=timezone.localdate().year)
     members = list(members)
     context = {
         "members": members,
         "cards": [(m, m.pk in collected) for m in members],
         "collected": collected,
         "progress": collection_progress(me),
+        "guest_collected": collected_guest_count(me),
         "stats": club_stats(),
         "sectors": Sector.choices,
         "statuses": STATUS_CHOICES,
@@ -250,6 +254,7 @@ def onboarding(request):
 def invite(request):
     """My personal referral link (?ref=CODE), its QR code, the offer, and the people I invited."""
     me = request.member
+    require_regular(me)
     link = request.build_absolute_uri(reverse("club:join")) + "?ref=" + me.referral_code
     context = {
         "invite_link": link,

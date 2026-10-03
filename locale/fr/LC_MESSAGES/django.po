@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Club des Affaires\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 19:43+0200\n"
+"POT-Creation-Date: 2026-10-03 21:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Club des Affaires\n"
 "Language-Team: Club des Affaires\n"
@@ -88,6 +88,18 @@ msgstr "Préparer l'accès au compte accepté"
 msgid "Accès préparé dans la file d'emails."
 msgstr "Accès préparé dans la file d'emails."
 
+msgid "Valider l'identité et l'accès du remplaçant"
+msgstr "Valider l'identité et l'accès du remplaçant"
+
+msgid "Remplacement validé, accès invité préparé."
+msgstr "Remplacement validé, accès invité préparé."
+
+msgid "Annuler ou refuser le remplacement"
+msgstr "Annuler ou refuser le remplacement"
+
+msgid "Remplacement annulé. Tu peux répondre de nouveau."
+msgstr "Remplacement annulé. Tu peux répondre de nouveau."
+
 msgid "États des envois"
 msgstr "États des envois"
 
@@ -169,6 +181,9 @@ msgstr "Si tu décoches, seuls les membres que tu as déjà rencontrés pourront
 msgid "Poste"
 msgstr "Poste"
 
+msgid "Choisis au moins une langue parlée."
+msgstr "Choisis au moins une langue parlée."
+
 msgid "Ma note personnelle"
 msgstr "Ma note personnelle"
 
@@ -216,6 +231,12 @@ msgstr "Communication & médias"
 
 msgid "Autre secteur"
 msgstr "Autre secteur"
+
+msgid "Membre"
+msgstr "Membre"
+
+msgid "Invité"
+msgstr "Invité"
 
 msgid "prénom"
 msgstr "prénom"
@@ -496,6 +517,10 @@ msgstr "Relance"
 msgid "Nouveaux membres"
 msgstr "Nouveaux membres"
 
+#| msgid "Accès réservé"
+msgid "Accès invité"
+msgstr "Accès invité"
+
 msgid "En attente"
 msgstr "En attente"
 
@@ -531,6 +556,13 @@ msgstr "case de bingo"
 
 msgid "cases de bingo"
 msgstr "cases de bingo"
+
+msgid "Validé"
+msgstr "Validé"
+
+#| msgid "Annuler"
+msgid "Annulé"
+msgstr "Annulé"
 
 msgid "membre remplacé"
 msgstr "membre remplacé"
@@ -619,6 +651,10 @@ msgstr "Vérifie le titre, le lieu, la date future et la fin des réponses avant
 msgid "Bienvenue au Club des Affaires"
 msgstr "Bienvenue au Club des Affaires"
 
+#| msgid "Ton accès au Club des Affaires"
+msgid "Ton accès invité au Club des Affaires"
+msgstr "Ton accès invité au Club des Affaires"
+
 msgid "Un nouveau visage au Club !"
 msgstr "Un nouveau visage au Club !"
 
@@ -635,6 +671,44 @@ msgstr "Ta réponse pour : %(title)s"
 
 msgid "Photo invalide : JPEG, PNG ou WebP non animé, 2 Mio et 4096 × 4096 pixels maximum."
 msgstr "Photo invalide : JPEG, PNG ou WebP non animé, 2 Mio et 4096 × 4096 pixels maximum."
+
+msgid "Les réponses sont fermées pour cet événement."
+msgstr "Les réponses sont fermées pour cet événement."
+
+msgid "Annule le remplacement validé avant de le modifier."
+msgstr "Annule le remplacement validé avant de le modifier."
+
+msgid "Le titulaire doit être un membre actif."
+msgstr "Le titulaire doit être un membre actif."
+
+msgid "Le profil invité a été supprimé. Crée une nouvelle demande."
+msgstr "Le profil invité a été supprimé. Crée une nouvelle demande."
+
+#| msgid "Cette page s'est perdue en montagne"
+msgid "Cette demande n'est plus en attente."
+msgstr "Cette demande n'est plus en attente."
+
+msgid "Confirme que la personne représente la même entreprise."
+msgstr "Confirme que la personne représente la même entreprise."
+
+#| msgid "Demande déjà acceptée sans compte lié : rapprochement manuel nécessaire."
+msgid "Identité ambiguë : rapprochement manuel nécessaire."
+msgstr "Identité ambiguë : rapprochement manuel nécessaire."
+
+msgid "Cette adresse appartient à un membre ou au staff. Aucun compte ne sera converti."
+msgstr "Cette adresse appartient à un membre ou au staff. Aucun compte ne sera converti."
+
+msgid "Les noms diffèrent du compte invité existant. Vérifie l'identité avant validation."
+msgstr "Les noms diffèrent du compte invité existant. Vérifie l'identité avant validation."
+
+msgid "Cet invité représente déjà un autre membre à cet événement."
+msgstr "Cet invité représente déjà un autre membre à cet événement."
+
+msgid "Conflit de validation : vérifie la demande et réessaie."
+msgstr "Conflit de validation : vérifie la demande et réessaie."
+
+msgid "Cet événement est déjà passé."
+msgstr "Cet événement est déjà passé."
 
 #. Translators: a percentage; French and German put a space before the % sign, English does not.
 #, python-format
@@ -663,9 +737,6 @@ msgstr "Membre fondateur"
 msgid "Pilier du Club"
 msgstr "Pilier du Club"
 
-msgid "Membre"
-msgstr "Membre"
-
 msgid "Nouvelle recrue"
 msgstr "Nouvelle recrue"
 
@@ -688,17 +759,17 @@ msgstr "Demande-lui comment a commencé son aventure au Club."
 msgid "Service %(number)s"
 msgstr "Service %(number)s"
 
-msgid "Cet événement est déjà passé."
-msgstr "Cet événement est déjà passé."
-
-msgid "Les réponses sont fermées pour cet événement."
-msgstr "Les réponses sont fermées pour cet événement."
+msgid "Annule ton remplacement avant de répondre que tu viens."
+msgstr "Annule ton remplacement avant de répondre que tu viens."
 
 msgid "C'est noté, à bientôt ! 🥂"
 msgstr "C'est noté, à bientôt ! 🥂"
 
 msgid "C'est noté. On pensera à toi !"
 msgstr "C'est noté. On pensera à toi !"
+
+msgid "Remplacement demandé. L'équipe vérifiera l'identité avant d'envoyer l'accès."
+msgstr "Remplacement demandé. L'équipe vérifiera l'identité avant d'envoyer l'accès."
 
 msgid "Toutes les cartes"
 msgstr "Toutes les cartes"
@@ -789,6 +860,13 @@ msgid "Déconnexion"
 msgstr "Déconnexion"
 
 #, python-format
+msgid "Représente %(company)s"
+msgstr "Représente %(company)s"
+
+msgid "Invité, accès terminé"
+msgstr "Invité, accès terminé"
+
+#, python-format
 msgid "Membre depuis %(year)s · %(years)s an"
 msgid_plural "Membre depuis %(year)s · %(years)s ans"
 msgstr[0] "Membre depuis %(year)s · %(years)s an"
@@ -822,6 +900,10 @@ msgstr "L'album du Club"
 #, python-format
 msgid "%(done)s / %(total)s cartes"
 msgstr "%(done)s / %(total)s cartes"
+
+#, python-format
+msgid "Invités rencontrés : %(guest_collected)s."
+msgstr "Invités rencontrés : %(guest_collected)s."
 
 msgid "Rechercher"
 msgstr "Rechercher"
@@ -888,6 +970,17 @@ msgstr "Tu as répondu que tu ne viens pas."
 
 msgid "Tu n'as pas encore répondu."
 msgstr "Tu n'as pas encore répondu."
+
+#| msgid "Ton placement"
+msgid "Ton remplacement"
+msgstr "Ton remplacement"
+
+#| msgid "Ton placement"
+msgid "Annuler mon remplacement"
+msgstr "Annuler mon remplacement"
+
+msgid "Proposer un remplaçant"
+msgstr "Proposer un remplaçant"
 
 msgid "Ton placement"
 msgstr "Ton placement"
@@ -1137,6 +1230,16 @@ msgstr "Ajoute cette carte à ton album : vous pourrez alors échanger vos coord
 msgid "Ajouter %(name)s à mon album"
 msgstr "Ajouter %(name)s à mon album"
 
+msgid "Propose un collègue de ton entreprise. Il aura son propre profil et ses rencontres resteront les siennes. L'équipe doit valider son accès temporaire."
+msgstr "Propose un collègue de ton entreprise. Il aura son propre profil et ses rencontres resteront les siennes. L'équipe doit valider son accès temporaire."
+
+msgid "Envoyer ma demande"
+msgstr "Envoyer ma demande"
+
+#| msgid "Voir l'événement"
+msgid "Retour à l'événement"
+msgstr "Retour à l'événement"
+
 msgid "Découvre les nouveaux profils et fais connaissance avant le prochain événement."
 msgstr "Découvre les nouveaux profils et fais connaissance avant le prochain événement."
 
@@ -1147,7 +1250,6 @@ msgstr "Découvrir le profil"
 msgid "Découvre d'autres profils dans l'album (%(remaining)s)."
 msgstr "Découvre d'autres profils dans l'album (%(remaining)s)."
 
-#| msgid "Accroche pour le récapitulatif"
 msgid "Me désabonner du récapitulatif"
 msgstr "Me désabonner du récapitulatif"
 
@@ -1158,8 +1260,9 @@ msgstr "Salut %(name)s,"
 msgid "Découvre cet événement et indique ta réponse sur le site."
 msgstr "Découvre cet événement et indique ta réponse sur le site."
 
-msgid "Ton compte est prêt. Complète ton profil pour préparer tes rencontres."
-msgstr "Ton compte est prêt. Complète ton profil pour préparer tes rencontres."
+#, python-format
+msgid "Ton accès temporaire est ouvert jusqu'au %(until)s. Complète ton propre profil ; tes rencontres restent les tiennes."
+msgstr "Ton accès temporaire est ouvert jusqu'au %(until)s. Complète ton propre profil ; tes rencontres restent les tiennes."
 
 msgid "Se connecter"
 msgstr "Se connecter"
@@ -1168,19 +1271,18 @@ msgstr "Se connecter"
 msgid "Ce lien est valable %(minutes)s minutes et utilisable une seule fois."
 msgstr "Ce lien est valable %(minutes)s minutes et utilisable une seule fois."
 
-#| msgid "Mes préférences email"
+msgid "Ton compte est prêt. Complète ton profil pour préparer tes rencontres."
+msgstr "Ton compte est prêt. Complète ton profil pour préparer tes rencontres."
+
 msgid "Préférences email"
 msgstr "Préférences email"
 
-#| msgid "Récapitulatif mensuel des nouveaux membres"
 msgid "Récapitulatif mensuel"
 msgstr "Récapitulatif mensuel"
 
-#| msgid "Accroche pour le récapitulatif"
 msgid "Tu ne recevras plus le récapitulatif mensuel."
 msgstr "Tu ne recevras plus le récapitulatif mensuel."
 
-#| msgid "Récapitulatif mensuel des nouveaux membres"
 msgid "Confirme pour arrêter uniquement le récapitulatif mensuel des nouveaux membres."
 msgstr "Confirme pour arrêter uniquement le récapitulatif mensuel des nouveaux membres."
 
@@ -1206,9 +1308,6 @@ msgstr "Paiement sur facture, géré par l'équipe du Club."
 
 msgid "Envoyer une demande d'invitation ne déclenche aucun paiement."
 msgstr "Envoyer une demande d'invitation ne déclenche aucun paiement."
-
-msgid "Envoyer ma demande"
-msgstr "Envoyer ma demande"
 
 msgid "Déjà membre ?"
 msgstr "Déjà membre ?"
@@ -1439,6 +1538,17 @@ msgstr "Ouvrir l'administration"
 
 msgid "Publication et emails"
 msgstr "Publication et emails"
+
+#| msgid "Ton placement"
+msgid "Remplacements"
+msgstr "Remplacements"
+
+msgid "Aucune demande de remplacement."
+msgstr "Aucune demande de remplacement."
+
+#| msgid "Traiter dans l'administration"
+msgid "Vérifier les demandes dans l'administration"
+msgstr "Vérifier les demandes dans l'administration"
 
 msgid "Un badge par inscrit à imprimer sur feuilles A4 : prénom, entreprise, sujet de conversation et QR code."
 msgstr "Un badge par inscrit à imprimer sur feuilles A4 : prénom, entreprise, sujet de conversation et QR code."

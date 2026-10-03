@@ -9,6 +9,7 @@
     <p class="text-sm text-stone-600">{% translate "Ajoute cette carte à ton album : vous pourrez alors échanger vos coordonnées." %}</p>
     <form method="post">
       {% csrf_token %}
+      {% if scan_event %}<input type="hidden" name="event" value="{{ scan_event.pk }}">{% endif %}
       <button type="submit" class="btn btn-primary w-full">{% blocktranslate with name=target.first_name %}Ajouter {{ name }} à mon album{% endblocktranslate %}</button>
     </form>
   </section>

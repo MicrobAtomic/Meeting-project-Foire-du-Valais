@@ -4,7 +4,7 @@ from django.db.models.fields.files import FieldFile
 from django.contrib.auth.forms import AuthenticationForm
 from django.utils.translation import gettext_lazy as _
 
-from club.models import EmailPreferences, InvitationRequest, Member
+from club.models import EmailPreferences, InvitationRequest, Member, Substitute
 from club.services.photos import normalize_member_photo, save_profile_photo
 
 
@@ -147,6 +147,27 @@ class InvitationRequestForm(forms.ModelForm):
     @property
     def is_bot(self):
         return bool(self.cleaned_data.get("website"))
+
+
+class SubstituteForm(forms.ModelForm):
+    class Meta:
+        model = Substitute
+        fields = ["first_name", "last_name", "email", "job_title", "speaks_fr", "speaks_de", "speaks_en", "preferred_language"]
+        labels = {"first_name": _("Prénom"), "last_name": _("Nom"), "email": _("E-mail"), "job_title": _("Fonction")}
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs["class"] = "h-5 w-5 rounded border-stone-300 text-red-700" if isinstance(field.widget, forms.CheckboxInput) else "input"
+
+    def clean_email(self):
+        return self.cleaned_data["email"].strip().lower()
+
+    def clean(self):
+        data = super().clean()
+        if not any(data.get(key) for key in ("speaks_fr", "speaks_de", "speaks_en")):
+            raise forms.ValidationError(_("Choisis au moins une langue parlée."))
+        return data
 
 
 class PersonalNoteForm(forms.Form):

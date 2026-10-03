@@ -1,0 +1,12 @@
+{% extends "base.html" %}{% load i18n %}
+{% block title %}{% translate "Proposer un remplaçant" %} · {{ SITE_NAME }}{% endblock %}
+{% block content %}<section class="card mx-auto max-w-xl space-y-4">
+<h1 class="text-xl font-semibold">{% translate "Proposer un remplaçant" %}</h1>
+<p>{{ event.localized_title }} · {{ request.member.company }}</p>
+<p class="text-sm text-stone-600">{% translate "Propose un collègue de ton entreprise. Il aura son propre profil et ses rencontres resteront les siennes. L'équipe doit valider son accès temporaire." %}</p>
+<form method="post" class="space-y-4">{% csrf_token %}
+{% if form.non_field_errors %}<p role="alert" class="text-red-800">{{ form.non_field_errors.0 }}</p>{% endif %}
+{% for field in form %}{% include "club/_field.html" with field=field %}{% endfor %}
+<button type="submit" class="btn btn-primary">{% translate "Envoyer ma demande" %}</button>
+</form><a href="{% url 'club:event_detail' event.pk %}" class="text-red-700 underline">{% translate "Retour à l'événement" %}</a>
+</section>{% endblock %}
