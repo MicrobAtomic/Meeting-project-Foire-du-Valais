@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Club des Affaires\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 14:37+0200\n"
+"POT-Creation-Date: 2026-10-03 17:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Club des Affaires\n"
 "Language-Team: Club des Affaires\n"
@@ -26,8 +26,6 @@ msgid "Envoyer un lien de connexion"
 msgstr "Send a login link"
 
 #, python-format
-#| msgid "%(count)s rencontre générée."
-#| msgid_plural "%(count)s rencontres générées."
 msgid "%(count)s lien envoyé."
 msgid_plural "%(count)s liens envoyés."
 msgstr[0] "%(count)s link sent."
@@ -168,6 +166,10 @@ msgstr "Transport & logistics"
 msgid "Communication & médias"
 msgstr "Communication & media"
 
+#| msgid "secteur"
+msgid "Autre secteur"
+msgstr "Other sector"
+
 msgid "prénom"
 msgstr "first name"
 
@@ -198,8 +200,18 @@ msgstr "speaks English"
 msgid "membre depuis (année)"
 msgstr "member since (year)"
 
+msgid ""
+"Année d'entrée au Club. Elle donne le rang : nouvelle recrue la première "
+"année, pilier après 5 ans."
+msgstr ""
+"Year the member joined the Club. It sets the rank: newcomer in the first "
+"year, Club pillar after 5 years."
+
 msgid "membre fondateur"
 msgstr "founding member"
+
+msgid "Membre depuis la création du Club : bordure dorée sur sa carte."
+msgstr "Member since the Club was founded: gold border on their card."
 
 msgid "anecdote"
 msgstr "fun fact"
@@ -216,6 +228,19 @@ msgstr "LinkedIn"
 msgid "visible dans l'album"
 msgstr "visible in the album"
 
+#| msgid ""
+#| "Si tu décoches, seuls les membres que tu as déjà rencontrés pourront voir ta"
+#| " carte."
+msgid "Décoché : seuls les membres déjà rencontrés voient sa carte."
+msgstr "Unticked: only members they have already met can see their card."
+
+#| msgid "Profil complété 🎉"
+msgid "profil complété"
+msgstr "profile completed"
+
+msgid "Coché automatiquement quand le membre a choisi ses affinités."
+msgstr "Ticked automatically once the member has picked their tastes."
+
 msgid "membre"
 msgstr "member"
 
@@ -231,6 +256,10 @@ msgstr "Culture & curiosities"
 msgid "Vie de bureau"
 msgstr "Office life"
 
+#| msgid "Swipe tes affinités"
+msgid "affinité"
+msgstr "taste"
+
 msgid "J'adore"
 msgstr "Love it"
 
@@ -239,6 +268,12 @@ msgstr "Meh"
 
 msgid "Je déteste"
 msgstr "Hate it"
+
+msgid "affinité du membre"
+msgstr "member's taste"
+
+msgid "affinités du membre"
+msgstr "member's tastes"
 
 msgid "Apéro"
 msgstr "Apéro"
@@ -267,8 +302,33 @@ msgstr "place"
 msgid "description"
 msgstr "description"
 
+msgid ""
+"Visible par les membres sur la page de l'événement. Astuce : le texte en "
+"français, puis en allemand après « · »."
+msgstr ""
+"Shown to members on the event page. Tip: the French text first, then the "
+"German one after “·”."
+
 msgid "repas assis (tables tournantes)"
 msgstr "seated meal (rotating tables)"
+
+msgid ""
+"Pour un dîner assis : l'équipe génère un plan où chacun change de table à "
+"chaque service (Tableau de bord → Préparer)."
+msgstr ""
+"For a seated dinner: the team generates a plan where everyone changes table "
+"at every course (Dashboard → Prepare)."
+
+#| msgid "Tes rencontres"
+msgid "bingo des rencontres"
+msgstr "people bingo"
+
+msgid ""
+"Pour un apéro debout : chaque inscrit reçoit une grille « Trouve quelqu'un "
+"qui… » qu'il remplit en scannant des QR codes. Rien à préparer."
+msgstr ""
+"For standing drinks: every attendee gets a “Find someone who…” grid to fill "
+"in by scanning QR codes. Nothing to prepare."
 
 msgid "événement"
 msgstr "event"
@@ -279,6 +339,14 @@ msgstr "I'm coming"
 msgid "Je ne viens pas"
 msgstr "I'm not coming"
 
+#| msgid "Ta réponse"
+msgid "réponse"
+msgstr "answer"
+
+#| msgid "description"
+msgid "inscription"
+msgstr "registration"
+
 msgid "Scan QR"
 msgstr "QR scan"
 
@@ -287,6 +355,26 @@ msgstr "Added by admin"
 
 msgid "Données de démo"
 msgstr "Demo data"
+
+#| msgid "rencontres"
+msgid "rencontre"
+msgstr "connection"
+
+#| msgid "Rencontres proposées"
+msgid "rencontre proposée"
+msgstr "suggested introduction"
+
+#| msgid "Rencontres proposées"
+msgid "rencontres proposées"
+msgstr "suggested introductions"
+
+#| msgid "Plan de tables"
+msgid "plan de tables"
+msgstr "seating plan"
+
+#| msgid "Plan de tables"
+msgid "plans de tables"
+msgstr "seating plans"
 
 msgid "Nouvelle"
 msgstr "New"
@@ -306,7 +394,71 @@ msgstr "e-mail"
 msgid "message"
 msgstr "message"
 
-#| msgid "Club des Affaires"
+#| msgid "Langue"
+msgid "langue"
+msgstr "language"
+
+msgid "parrain ou marraine"
+msgstr "sponsor"
+
+#| msgid "Statut"
+msgid "statut"
+msgstr "status"
+
+msgid ""
+"« Acceptée » crée le compte du nouveau membre et lui envoie l'e-mail de "
+"bienvenue pour choisir son mot de passe."
+msgstr ""
+"“Accepted” creates the new member's account and sends them the welcome email"
+" to choose a password."
+
+msgid "compte créé"
+msgstr "account created"
+
+msgid "e-mail de bienvenue envoyé le"
+msgstr "welcome email sent on"
+
+msgid "reçue le"
+msgstr "received on"
+
+#| msgid "Demandes d'invitation"
+msgid "demande d'invitation"
+msgstr "invitation request"
+
+#| msgid "Demandes d'invitation"
+msgid "demandes d'invitation"
+msgstr "invitation requests"
+
+#| msgid "J'adore"
+msgid "adore"
+msgstr "loves"
+
+#| msgid "Je déteste"
+msgid "déteste"
+msgstr "hates"
+
+msgid "parle"
+msgstr "speaks"
+
+msgid "joker"
+msgstr "wildcard"
+
+msgid "case de bingo"
+msgstr "bingo square"
+
+msgid "cases de bingo"
+msgstr "bingo squares"
+
+#| msgid "membre depuis (année)"
+msgid "membre remplacé"
+msgstr "member replaced"
+
+msgid "remplaçant·e"
+msgstr "substitute"
+
+msgid "remplaçant·e·s"
+msgstr "substitutes"
+
 msgid "Ton accès au Club des Affaires"
 msgstr "Your access to the Club des Affaires"
 
@@ -333,6 +485,45 @@ msgstr ""
 "\n"
 "See you soon!\n"
 "The Club team"
+
+msgid "Les premiers liens"
+msgstr "First connections"
+
+msgid "Le Club fait connaissance."
+msgstr "The Club gets acquainted."
+
+#| msgid "L'album du Club"
+msgid "La tournée du Club"
+msgstr "A round on the Club"
+
+msgid "Une tournée de Petite Arvine offerte au prochain apéro."
+msgstr "A round of Petite Arvine on the house at the next drinks."
+
+msgid "La raclette des membres"
+msgstr "The members' raclette"
+
+msgid "Une raclette au feu de bois offerte à tout le Club."
+msgstr "A wood-fire raclette on the house for the whole Club."
+
+#| msgid "L'album du Club"
+msgid "La cuvée du Club"
+msgstr "The Club cuvée"
+
+msgid "Une cuvée spéciale, avec le nom de chaque membre sur l'étiquette."
+msgstr "A special cuvée with every member's name on the label."
+
+msgid "La sortie au sommet"
+msgstr "The summit outing"
+
+msgid "Une sortie surprise en montagne pour tout le Club."
+msgstr "A surprise mountain outing for the whole Club."
+
+#| msgid "Plus jamais d'inconnus au Club."
+msgid "Plus jamais d'inconnus"
+msgstr "No more strangers"
+
+msgid "Tout le monde se connaît : la grande fête du Club."
+msgstr "Everybody knows everybody: the Club's big party."
 
 #. Translators: a percentage; French and German put a space before the % sign,
 #. English does not.
@@ -509,6 +700,9 @@ msgstr "Complementary industries"
 msgid "Accueille une nouvelle recrue"
 msgstr "Welcomes a newcomer"
 
+msgid "atteint"
+msgstr "reached"
+
 msgid "L'album du Club"
 msgstr "The Club album"
 
@@ -644,12 +838,52 @@ msgstr "Complete your profile in 2 minutes"
 msgid "Swipe tes affinités : on te présentera les bonnes personnes."
 msgstr "Swipe your tastes: we'll introduce you to the right people."
 
+#| msgid "Données de démo"
+msgid "Mode démo"
+msgstr "Demo mode"
+
+#, python-format
+#| msgid "rencontres"
+msgid "Rencontre %(name)s"
+msgstr "Meet %(name)s"
+
+#| msgid ""
+#| "Scanne le code d'un membre rencontré : sa carte rejoint ton album et ses "
+#| "coordonnées se débloquent."
+msgid ""
+"Scanne ce QR code avec ton téléphone, ou ouvre son lien : sa carte rejoint "
+"ton album, ses coordonnées se débloquent et le Club progresse."
+msgstr ""
+"Scan this QR code with your phone or open its link: the card joins your "
+"album, the contact details unlock and the Club moves forward."
+
+msgid "Ouvrir le lien du QR code"
+msgstr "Open the QR code link"
+
 msgid "Ton album"
 msgstr "Your album"
 
 #, python-format
 msgid "%(collected)s / %(total)s cartes"
 msgstr "%(collected)s / %(total)s cards"
+
+#, python-format
+msgid "Prochain objectif : %(emoji)s l'album complet, encore %(n)s rencontre."
+msgid_plural ""
+"Prochain objectif : %(emoji)s l'album complet, encore %(n)s rencontres."
+msgstr[0] "Next goal: %(emoji)s the full album, %(n)s more connection."
+msgstr[1] "Next goal: %(emoji)s the full album, %(n)s more connections."
+
+#, python-format
+msgid ""
+"Prochain objectif : %(emoji)s %(target)s cartes, encore %(n)s rencontre."
+msgid_plural ""
+"Prochain objectif : %(emoji)s %(target)s cartes, encore %(n)s rencontres."
+msgstr[0] "Next goal: %(emoji)s %(target)s cards, %(n)s more connection."
+msgstr[1] "Next goal: %(emoji)s %(target)s cards, %(n)s more connections."
+
+msgid "Album complet : tu connais tout le Club !"
+msgstr "Album complete: you know the whole Club!"
 
 msgid "Montrer mon QR"
 msgstr "Show my QR"
@@ -664,8 +898,18 @@ msgstr "Invite someone"
 msgid "Le Club est connecté à %(pct)s"
 msgstr "The Club is %(pct)s connected"
 
-msgid "Chaque rencontre compte."
-msgstr "Every connection counts."
+#, python-format
+msgid "Prochain palier : %(emoji)s %(title)s à %(pct)s"
+msgstr "Next milestone: %(emoji)s %(title)s at %(pct)s"
+
+#, python-format
+msgid "Encore %(n)s rencontre : chaque QR code scanné compte."
+msgid_plural "Encore %(n)s rencontres : chaque QR code scanné compte."
+msgstr[0] "%(n)s more connection to go: every QR code scanned counts."
+msgstr[1] "%(n)s more connections to go: every QR code scanned counts."
+
+msgid "Tous les paliers sont atteints : bravo au Club !"
+msgstr "Every milestone reached: well done, Club!"
 
 msgid "Prochain événement"
 msgstr "Next event"
@@ -870,22 +1114,30 @@ msgstr "A club that lives all year round"
 msgid "Avant : se rencontrer"
 msgstr "Before: get to know each other"
 
+#| msgid ""
+#| "Chaque membre a sa carte : son entreprise, ses passions, ce qu'il adore… et "
+#| "ce qu'il déteste. Tu sais déjà avec qui trinquer."
 msgid ""
 "Chaque membre a sa carte : son entreprise, ses passions, ce qu'il adore… et "
-"ce qu'il déteste. Tu sais déjà avec qui trinquer."
+"ce qu'il déteste. Avant chaque soirée, tu sais déjà avec qui trinquer."
 msgstr ""
 "Every member has a card: their company, their passions, what they love… and "
-"what they hate. You already know who to raise a glass with."
+"what they hate. Before every evening, you already know who to raise a glass "
+"with."
 
 msgid "Pendant : se mélanger"
 msgstr "During: mingle"
 
+#| msgid ""
+#| "Tes trois rencontres de la soirée, des tables qui tournent à chaque service,"
+#| " un QR code pour garder le contact. Fini les petits groupes."
 msgid ""
-"Tes trois rencontres de la soirée, des tables qui tournent à chaque service,"
-" un QR code pour garder le contact. Fini les petits groupes."
+"Chaque soirée a son jeu pour briser la glace : le bingo des rencontres à "
+"l'apéro, des tables qui tournent au dîner, et un QR code pour garder le "
+"contact. Fini les petits groupes."
 msgstr ""
-"Your three introductions for the evening, tables that rotate at every "
-"course, a QR code to keep in touch. No more little cliques."
+"Every evening has its own icebreaker: people bingo over drinks, rotating "
+"tables at dinner, and a QR code to keep in touch. No more little cliques."
 
 msgid "Après : grandir ensemble"
 msgstr "After: grow together"
@@ -897,28 +1149,35 @@ msgstr ""
 "Your album fills up evening after evening and the Club gets closer. No "
 "forced business: just a good time among peers."
 
-msgid "Comment ça marche"
-msgstr "How it works"
+msgid "Comment rejoindre le Club"
+msgstr "How to join the Club"
 
-msgid "Découvre les cartes des membres et ce que vous avez en commun."
-msgstr "Discover the members' cards and what you have in common."
+#| msgid "Demander une invitation"
+msgid "Demande une invitation"
+msgstr "Request an invitation"
 
-msgid "Ton QR code"
-msgstr "Your QR code"
+msgid "Deux minutes en ligne, avec ou sans parrain."
+msgstr "Two minutes online, with or without a sponsor."
+
+msgid "Crée ton accès"
+msgstr "Set up your access"
 
 msgid ""
-"Scanne le code d'un membre rencontré : sa carte rejoint ton album et ses "
-"coordonnées se débloquent."
+"Un e-mail de bienvenue, ton mot de passe, et ta carte de membre à compléter "
+"en deux minutes."
 msgstr ""
-"Scan the code of a member you've met: their card joins your album and their "
-"contact details unlock."
+"A welcome email, your password, and your member card to fill in within two "
+"minutes."
 
-msgid "Tes tables"
-msgstr "Your tables"
+msgid "Ta première soirée"
+msgstr "Your first evening"
 
 msgid ""
-"À chaque service tu changes de table : l'équipe s'occupe de tout mélanger."
-msgstr "At every course you change tables: the team takes care of the mixing."
+"On te présente trois membres qui partagent tes passions : la glace est déjà "
+"brisée."
+msgstr ""
+"We introduce you to three members who share your passions: the ice is "
+"already broken."
 
 msgid "Envie de nous rejoindre ?"
 msgstr "Want to join us?"
@@ -930,7 +1189,6 @@ msgstr ""
 "The Club is joined by invitation. Tell us who you are and we'll get back to "
 "you."
 
-#| msgid "Déconnexion"
 msgid "Lien de connexion"
 msgstr "Login link"
 
@@ -941,11 +1199,9 @@ msgstr ""
 "No password to remember: enter your e-mail and get a login link, valid for "
 "15 minutes."
 
-#| msgid "Copier le lien"
 msgid "Envoyer le lien"
 msgstr "Send the link"
 
-#| msgid "Vérifie ton e-mail et ton mot de passe."
 msgid "Se connecter avec un mot de passe"
 msgstr "Log in with a password"
 
@@ -1023,6 +1279,29 @@ msgstr "of which %(n)s in the last 30 days"
 
 msgid "Nouvelles recrues de l'année"
 msgstr "This year's newcomers"
+
+#| msgid "Pilier du Club"
+msgid "Paliers du Club"
+msgstr "Club milestones"
+
+msgid ""
+"Un objectif commun donne envie de se rencontrer : quand un palier est "
+"atteint, sa récompense s'annonce au prochain événement."
+msgstr ""
+"A shared goal makes people want to meet: when a milestone is reached, its "
+"reward is announced at the next event."
+
+#, python-format
+#| msgid "%(n)s rencontre"
+#| msgid_plural "%(n)s rencontres"
+msgid "encore %(n)s rencontre"
+msgid_plural "encore %(n)s rencontres"
+msgstr[0] "%(n)s more connection"
+msgstr[1] "%(n)s more connections"
+
+#| msgid "À venir"
+msgid "à venir"
+msgstr "upcoming"
 
 msgid "Demandes d'invitation"
 msgstr "Invitation requests"

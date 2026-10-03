@@ -11,11 +11,28 @@
 </a>
 {% endif %}
 
+{% if demo %}
+<section class="card mt-5 flex flex-col items-center gap-4 bg-amber-50 ring-2 ring-amber-300 sm:flex-row">
+  <div class="shrink-0 rounded-xl bg-white p-2 [&>svg]:h-32 [&>svg]:w-32">{{ demo.qr_svg|scalable_svg }}</div>
+  <div class="space-y-2 text-center sm:text-left">
+    <p class="text-xs font-semibold uppercase tracking-widest text-amber-800">🎬 {% translate "Mode démo" %}</p>
+    <h2 class="font-semibold">{% blocktranslate with name=demo.member.full_name %}Rencontre {{ name }}{% endblocktranslate %}</h2>
+    <p class="text-sm text-stone-600">{% translate "Scanne ce QR code avec ton téléphone, ou ouvre son lien : sa carte rejoint ton album, ses coordonnées se débloquent et le Club progresse." %}</p>
+    <a href="{{ demo.url }}" class="btn btn-secondary">🔳 {% translate "Ouvrir le lien du QR code" %}</a>
+  </div>
+</section>
+{% endif %}
+
 <div class="mt-6 grid gap-4 md:grid-cols-2">
   <section class="card space-y-3">
     <h2 class="font-semibold">🃏 {% translate "Ton album" %}</h2>
     <p class="text-sm text-stone-600">{% blocktranslate %}{{ collected }} / {{ total }} cartes{% endblocktranslate %}</p>
     <progress class="bar" value="{{ collected }}" max="{{ total|default:1 }}"></progress>
+    {% if album_goal %}
+    <p class="text-sm">{% if album_goal.full_album %}{% blocktranslate with emoji=album_goal.emoji count n=album_goal.remaining %}Prochain objectif : {{ emoji }} l'album complet, encore {{ n }} rencontre.{% plural %}Prochain objectif : {{ emoji }} l'album complet, encore {{ n }} rencontres.{% endblocktranslate %}{% else %}{% blocktranslate with emoji=album_goal.emoji target=album_goal.target count n=album_goal.remaining %}Prochain objectif : {{ emoji }} {{ target }} cartes, encore {{ n }} rencontre.{% plural %}Prochain objectif : {{ emoji }} {{ target }} cartes, encore {{ n }} rencontres.{% endblocktranslate %}{% endif %}</p>
+    {% elif total %}
+    <p class="text-sm font-medium text-emerald-700">💎 {% translate "Album complet : tu connais tout le Club !" %}</p>
+    {% endif %}
     <div class="flex flex-wrap gap-2 pt-1">
       <a href="{% url 'club:my_qr' %}" class="btn btn-primary">🔳 {% translate "Montrer mon QR" %}</a>
       <a href="{% url 'club:album' %}" class="btn btn-secondary">🃏 {% translate "Voir l'album" %}</a>
@@ -25,8 +42,18 @@
 
   <section class="card space-y-3">
     <h2 class="font-semibold">🤝 {% blocktranslate with pct=stats.index|percent %}Le Club est connecté à {{ pct }}{% endblocktranslate %}</h2>
-    <progress class="bar" value="{{ stats.index|stringformat:'f' }}" max="1"></progress>
-    <p class="text-sm text-stone-600">{% translate "Chaque rencontre compte." %}</p>
+    {% include "club/_milestones.html" with progress=club_progress %}
+    {% with next=club_progress.next %}
+    {% if next %}
+    <div class="rounded-xl bg-stone-50 p-3 text-sm">
+      <p class="font-medium">🎯 {% blocktranslate with emoji=next.emoji title=next.title pct=next.ratio|percent %}Prochain palier : {{ emoji }} {{ title }} à {{ pct }}{% endblocktranslate %}</p>
+      <p class="mt-1 text-stone-600">{{ next.reward }}</p>
+      <p class="mt-1 text-stone-600">{% blocktranslate count n=club_progress.remaining %}Encore {{ n }} rencontre : chaque QR code scanné compte.{% plural %}Encore {{ n }} rencontres : chaque QR code scanné compte.{% endblocktranslate %}</p>
+    </div>
+    {% else %}
+    <p class="text-sm font-medium text-emerald-700">🎉 {% translate "Tous les paliers sont atteints : bravo au Club !" %}</p>
+    {% endif %}
+    {% endwith %}
   </section>
 
   <section class="card space-y-4 md:col-span-2">

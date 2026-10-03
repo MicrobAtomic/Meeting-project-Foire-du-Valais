@@ -21,6 +21,7 @@ from club.services.federation import (
     degrees,
     isolated_members,
 )
+from club.services.milestones import club_progress
 from club.services.qr import qr_svg
 from club.ui import round_label
 
@@ -33,8 +34,10 @@ def dashboard(request):
     counts = degrees()
     isolated = sorted(isolated_members(), key=lambda m: (counts[m.pk], m.last_name, m.first_name))
     new_requests = InvitationRequest.objects.filter(status=InvitationRequest.Status.NEW).order_by("-created_at")
+    stats = club_stats()
     context = {
-        "stats": club_stats(),
+        "stats": stats,
+        "club_progress": club_progress(stats),
         "recent_connections": active_connections().filter(created_at__gte=now - timedelta(days=30)).count(),
         "new_recruits": active_members().filter(member_since=timezone.localdate().year).count(),
         "isolated": [(m, counts[m.pk]) for m in isolated[:ISOLATED_SHOWN]],

@@ -1,0 +1,14 @@
+{% comment %}Paliers du Club : un segment de barre par palier (pas de style inline : CSP stricte). Usage : {% include "club/_milestones.html" with progress=club_progress %}{% endcomment %}{% load i18n club_ui %}
+<div class="space-y-1.5">
+  <div class="flex gap-1" aria-hidden="true">
+    {% for segment in progress.segments %}<progress class="bar flex-1" value="{{ segment.fill|stringformat:'f' }}" max="1"></progress>{% endfor %}
+  </div>
+  <ol class="flex gap-1 text-center text-[11px] leading-tight">
+    {% for segment in progress.segments %}
+    <li class="flex-1 {% if segment.reached %}font-semibold text-red-700{% elif segment.is_next %}font-semibold text-stone-800{% else %}text-stone-400{% endif %}" title="{{ segment.milestone.title }}">
+      <span aria-hidden="true">{{ segment.milestone.emoji }}</span><span class="block">{{ segment.milestone.ratio|percent }}</span>
+      <span class="sr-only">{{ segment.milestone.title }}{% if segment.reached %} · {% translate "atteint" %}{% endif %}</span>
+    </li>
+    {% endfor %}
+  </ol>
+</div>

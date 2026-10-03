@@ -17,6 +17,7 @@ from club.models import RSVP, Connection, Event, Member, MemberTag, Sector, Tag
 from club.services.events import current_event
 from club.services.federation import club_stats, collected_ids, collection_progress
 from club.services.intros import intros_for
+from club.services.milestones import album_goal, club_progress
 from club.services.profile import common_tags, save_tag_answers
 from club.services.qr import qr_svg
 from club.services.vcard import build_vcard
@@ -30,9 +31,28 @@ STATUS_CHOICES = [
 ]
 
 
+def demo_contact(request, me, intros):
+    """Demo mode only: someone to "meet" on stage, with their QR code. The first introduction not yet in the album,
+    else any card still to collect."""
+    collected = collected_ids(me)
+    other = next((intro["other"] for intro in intros if intro["other"].pk not in collected), None)
+    if other is None:
+        other = (
+            Member.objects.filter(user__is_active=True, visible_in_directory=True)
+            .exclude(pk__in=collected | {me.pk})
+            .order_by("pk")
+            .first()
+        )
+    if other is None:
+        return None
+    url = request.build_absolute_uri(reverse("club:scan", args=[other.qr_token]))
+    return {"member": other, "url": url, "qr_svg": qr_svg(url)}
+
+
 @member_required
 def home(request):
     collected, total = collection_progress(request.member)
+    stats = club_stats()
     next_event = Event.objects.filter(starts_at__gte=timezone.now()).order_by("starts_at").first()
     answer = None
     next_intros = []
@@ -43,10 +63,13 @@ def home(request):
     context = {
         "collected": collected,
         "total": total,
-        "stats": club_stats(),
+        "album_goal": album_goal(collected, total),
+        "stats": stats,
+        "club_progress": club_progress(stats),
         "next_event": next_event,
         "next_status": answer,
         "next_intros": next_intros,
+        "demo": demo_contact(request, request.member, next_intros) if settings.DEMO_MODE else None,
     }
     return render(request, "club/home.html", context)
 
