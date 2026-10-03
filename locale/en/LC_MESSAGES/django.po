@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Club des Affaires\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 17:26+0200\n"
+"POT-Creation-Date: 2026-10-03 17:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Club des Affaires\n"
 "Language-Team: Club des Affaires\n"
@@ -284,6 +284,17 @@ msgstr "Visit"
 msgid "titre"
 msgstr "title"
 
+#| msgid "parle allemand"
+msgid "titre (allemand)"
+msgstr "title (German)"
+
+msgid "Facultatif : vide, le texte français s'affiche."
+msgstr "Optional: if empty, the French text is shown."
+
+#| msgid "parle anglais"
+msgid "titre (anglais)"
+msgstr "title (English)"
+
 msgid "type"
 msgstr "type"
 
@@ -293,15 +304,28 @@ msgstr "start"
 msgid "lieu"
 msgstr "place"
 
+#| msgid "parle allemand"
+msgid "lieu (allemand)"
+msgstr "place (German)"
+
+#| msgid "parle anglais"
+msgid "lieu (anglais)"
+msgstr "place (English)"
+
 msgid "description"
 msgstr "description"
 
-msgid ""
-"Visible par les membres sur la page de l'événement. Astuce : le texte en "
-"français, puis en allemand après « · »."
-msgstr ""
-"Shown to members on the event page. Tip: the French text first, then the "
-"German one after “·”."
+#| msgid "Visible uniquement par les membres que tu as rencontrés."
+msgid "Visible par les membres sur la page de l'événement."
+msgstr "Shown to members on the event page."
+
+#| msgid "description"
+msgid "description (allemand)"
+msgstr "description (German)"
+
+#| msgid "description"
+msgid "description (anglais)"
+msgstr "description (English)"
 
 msgid "repas assis (tables tournantes)"
 msgstr "seated meal (rotating tables)"
@@ -1227,25 +1251,6 @@ msgstr "of which %(n)s in the last 30 days"
 msgid "Nouvelles recrues de l'année"
 msgstr "This year's newcomers"
 
-msgid "Paliers du Club"
-msgstr "Club milestones"
-
-msgid ""
-"Un objectif commun donne envie de se rencontrer : quand un palier est "
-"atteint, sa récompense s'annonce au prochain événement."
-msgstr ""
-"A shared goal makes people want to meet: when a milestone is reached, its "
-"reward is announced at the next event."
-
-#, python-format
-msgid "encore %(n)s rencontre"
-msgid_plural "encore %(n)s rencontres"
-msgstr[0] "%(n)s more connection"
-msgstr[1] "%(n)s more connections"
-
-msgid "à venir"
-msgstr "upcoming"
-
 msgid "Demandes d'invitation"
 msgstr "Invitation requests"
 
@@ -1272,6 +1277,25 @@ msgstr "Connections per past event"
 
 msgid "Aucun événement passé."
 msgstr "No past events."
+
+msgid "Paliers du Club"
+msgstr "Club milestones"
+
+msgid ""
+"Un objectif commun donne envie de se rencontrer : quand un palier est "
+"atteint, sa récompense s'annonce au prochain événement."
+msgstr ""
+"A shared goal makes people want to meet: when a milestone is reached, its "
+"reward is announced at the next event."
+
+#, python-format
+msgid "encore %(n)s rencontre"
+msgid_plural "encore %(n)s rencontres"
+msgstr[0] "%(n)s more connection"
+msgstr[1] "%(n)s more connections"
+
+msgid "à venir"
+msgstr "upcoming"
 
 msgid "Membres isolés"
 msgstr "Members who need connecting"

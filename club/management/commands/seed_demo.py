@@ -153,34 +153,51 @@ class Command(BaseCommand):
 
         # Fixed primary keys on purpose: generate_matches() seeds its randomness with event.pk, so the
         # introductions of the demo storyline stay identical after every --reset.
+        # Texts in French, German and English: "Soirée Wow" is a brand name and keeps no translation (the French shows).
         past = [
-            Event.objects.create(pk=1, title="Conférence de presse de la Foire", kind=Event.Kind.CONFERENCE,
+            Event.objects.create(pk=1, title="Conférence de presse de la Foire", title_de="Medienkonferenz der Foire",
+                                 title_en="Foire press conference", kind=Event.Kind.CONFERENCE,
                                  starts_at=at(-120, 10, 0), location="CERM, Martigny"),
-            Event.objects.create(pk=2, title="Apéro des membres", kind=Event.Kind.APERO,
-                                 starts_at=at(-60), location="Caveau du Club, Martigny"),
+            Event.objects.create(pk=2, title="Apéro des membres", title_de="Mitglieder-Apéro", title_en="Members' drinks",
+                                 kind=Event.Kind.APERO, starts_at=at(-60), location="Caveau du Club, Martigny"),
             Event.objects.create(pk=3, title="Soirée Wow", kind=Event.Kind.DINNER,
                                  starts_at=at(-3, 19, 0), location="CERM, Martigny"),
         ]
         upcoming = Event.objects.create(
-            pk=4, title="Dîner d'automne", kind=Event.Kind.DINNER, starts_at=at(12, 19, 0),
+            pk=4, title="Dîner d'automne", title_de="Herbstdinner", title_en="Autumn dinner",
+            kind=Event.Kind.DINNER, starts_at=at(12, 19, 0),
             location="Salle des Bisses, Martigny", has_seating=True, has_bingo=True,
-            description=(
-                "Apéritif debout avec le bingo des rencontres, puis trois services à trois tables différentes : "
-                "on se mélange ! · Stehapéro mit Begegnungs-Bingo, dann drei Gänge an drei verschiedenen Tischen: "
-                "wir mischen uns!"
-            ),
+            description="Apéritif debout avec le bingo des rencontres, puis trois services à trois tables différentes : "
+                        "on se mélange !",
+            description_de="Stehapéro mit Begegnungs-Bingo, dann drei Gänge an drei verschiedenen Tischen: Wir mischen uns!",
+            description_en="Standing drinks with people bingo, then three courses at three different tables: let's mingle!",
         )
         later = Event.objects.create(
-            pk=5, title="Apéro de Noël", kind=Event.Kind.APERO, starts_at=at(75), has_bingo=True,
+            pk=5, title="Apéro de Noël", title_de="Weihnachtsapéro", title_en="Christmas drinks",
+            kind=Event.Kind.APERO, starts_at=at(75), has_bingo=True,
             location="Lieu surprise (navette depuis la gare de Martigny)",
+            location_de="Überraschungsort (Shuttle ab Bahnhof Martigny)",
+            location_en="Secret venue (shuttle from Martigny station)",
             description=(
                 "🤫 Le lieu reste secret jusqu'à la veille. Seul indice : on monte, et il y aura de la neige. "
                 "Navette depuis la gare de Martigny à 18 h 15. Au programme : dégustation de vins des glaciers "
                 "avec une œnologue, raclette au feu de bois, cors des Alpes sous les étoiles… et un spectacle final "
                 "dont on ne dira rien. Bingo des rencontres pendant l'apéro : une ligne complète, un verre de "
-                "Petite Arvine. Tenue chaude conseillée, bonne humeur obligatoire 🎄 · Geheimer Ort, Shuttle ab "
-                "Bahnhof Martigny: Gletscherwein-Degustation, Raclette am Holzfeuer, Alphörner unter dem "
-                "Sternenhimmel und eine Überraschungsshow. Warme Kleidung empfohlen!"
+                "Petite Arvine. Tenue chaude conseillée, bonne humeur obligatoire 🎄"
+            ),
+            description_de=(
+                "🤫 Der Ort bleibt bis am Vorabend geheim. Einziger Hinweis: Es geht bergauf, und es wird Schnee liegen. "
+                "Shuttle ab Bahnhof Martigny um 18.15 Uhr. Auf dem Programm: Gletscherwein-Degustation mit einer "
+                "Önologin, Raclette am Holzfeuer, Alphörner unter dem Sternenhimmel … und eine Schlussshow, über die "
+                "wir nichts verraten. Begegnungs-Bingo während des Apéros: eine volle Reihe, ein Glas Petite Arvine. "
+                "Warme Kleidung empfohlen, gute Laune Pflicht 🎄"
+            ),
+            description_en=(
+                "🤫 The venue stays secret until the day before. Only clue: we're heading up, and there will be snow. "
+                "Shuttle from Martigny station at 6:15 pm. On the menu: a glacier wine tasting with an oenologist, "
+                "wood-fire raclette, alphorns under the stars… and a grand finale we won't say a word about. People "
+                "bingo during drinks: complete a line, win a glass of Petite Arvine. Dress warmly, good mood "
+                "mandatory 🎄"
             ),
         )
         self.realign_event_sequence()

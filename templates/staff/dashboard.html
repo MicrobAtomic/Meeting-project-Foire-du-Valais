@@ -52,7 +52,7 @@
     {% for e in upcoming %}
     <div class="flex flex-wrap items-center justify-between gap-3 border-t border-stone-100 pt-3 first:border-0 first:pt-0">
       <div>
-        <p class="font-medium">{{ e|kind_emoji }} {{ e.title }}</p>
+        <p class="font-medium">{{ e|kind_emoji }} {{ e.localized_title }}</p>
         <p class="text-sm text-stone-600">{{ e.starts_at|datetime_short }} · {% blocktranslate count n=e.yes_count %}{{ n }} inscrit{% plural %}{{ n }} inscrits{% endblocktranslate %}</p>
       </div>
       <a href="{% url 'club:staff_event' e.pk %}" class="btn btn-primary">{% translate "Préparer" %}</a>
@@ -67,7 +67,7 @@
     {% for e in past %}
     <div class="flex items-center justify-between gap-3 border-t border-stone-100 pt-3 first:border-0 first:pt-0">
       <div>
-        <p class="font-medium">{{ e|kind_emoji }} {{ e.title }}</p>
+        <p class="font-medium">{{ e|kind_emoji }} {{ e.localized_title }}</p>
         <p class="text-sm text-stone-600">{{ e.starts_at|date_long }}</p>
       </div>
       <p class="text-sm"><span class="text-2xl font-bold">{{ e.meetings }}</span> {% translate "rencontres" %}</p>

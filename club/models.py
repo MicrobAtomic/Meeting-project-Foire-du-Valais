@@ -166,15 +166,18 @@ class Event(models.Model):
         CONFERENCE = "conference", _("Conférence")
         VISIT = "visit", _("Visite")
 
+    # Texts in French (the reference) + optional German and English versions: an empty translation shows the French.
     title = models.CharField(_("titre"), max_length=150)
+    title_de = models.CharField(_("titre (allemand)"), max_length=150, blank=True, help_text=_("Facultatif : vide, le texte français s'affiche."))
+    title_en = models.CharField(_("titre (anglais)"), max_length=150, blank=True, help_text=_("Facultatif : vide, le texte français s'affiche."))
     kind = models.CharField(_("type"), max_length=12, choices=Kind.choices)
     starts_at = models.DateTimeField(_("début"))
     location = models.CharField(_("lieu"), max_length=150)
-    description = models.TextField(
-        _("description"),
-        blank=True,
-        help_text=_("Visible par les membres sur la page de l'événement. Astuce : le texte en français, puis en allemand après « · »."),
-    )
+    location_de = models.CharField(_("lieu (allemand)"), max_length=150, blank=True, help_text=_("Facultatif : vide, le texte français s'affiche."))
+    location_en = models.CharField(_("lieu (anglais)"), max_length=150, blank=True, help_text=_("Facultatif : vide, le texte français s'affiche."))
+    description = models.TextField(_("description"), blank=True, help_text=_("Visible par les membres sur la page de l'événement."))
+    description_de = models.TextField(_("description (allemand)"), blank=True, help_text=_("Facultatif : vide, le texte français s'affiche."))
+    description_en = models.TextField(_("description (anglais)"), blank=True, help_text=_("Facultatif : vide, le texte français s'affiche."))
     has_seating = models.BooleanField(
         _("repas assis (tables tournantes)"),
         default=False,
@@ -191,7 +194,24 @@ class Event(models.Model):
         verbose_name = _("événement")
 
     def __str__(self):
-        return self.title
+        return self.localized_title
+
+    def _localized(self, field):
+        """The text in the active language (de / en) when it was typed in, else the French one."""
+        language = (get_language() or "fr")[:2]
+        return (language != "fr" and getattr(self, f"{field}_{language}", "")) or getattr(self, field)
+
+    @property
+    def localized_title(self):
+        return self._localized("title")
+
+    @property
+    def localized_location(self):
+        return self._localized("location")
+
+    @property
+    def localized_description(self):
+        return self._localized("description")
 
     @property
     def is_past(self):

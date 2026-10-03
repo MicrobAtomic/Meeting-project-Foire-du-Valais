@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Club des Affaires\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 17:26+0200\n"
+"POT-Creation-Date: 2026-10-03 17:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Club des Affaires\n"
 "Language-Team: Club des Affaires\n"
@@ -285,6 +285,17 @@ msgstr "Visite"
 msgid "titre"
 msgstr "titre"
 
+#| msgid "parle allemand"
+msgid "titre (allemand)"
+msgstr "titre (allemand)"
+
+msgid "Facultatif : vide, le texte français s'affiche."
+msgstr "Facultatif : vide, le texte français s'affiche."
+
+#| msgid "parle anglais"
+msgid "titre (anglais)"
+msgstr "titre (anglais)"
+
 msgid "type"
 msgstr "type"
 
@@ -294,15 +305,28 @@ msgstr "début"
 msgid "lieu"
 msgstr "lieu"
 
+#| msgid "parle allemand"
+msgid "lieu (allemand)"
+msgstr "lieu (allemand)"
+
+#| msgid "parle anglais"
+msgid "lieu (anglais)"
+msgstr "lieu (anglais)"
+
 msgid "description"
 msgstr "description"
 
-msgid ""
-"Visible par les membres sur la page de l'événement. Astuce : le texte en "
-"français, puis en allemand après « · »."
-msgstr ""
-"Visible par les membres sur la page de l'événement. Astuce : le texte en "
-"français, puis en allemand après « · »."
+#| msgid "Visible uniquement par les membres que tu as rencontrés."
+msgid "Visible par les membres sur la page de l'événement."
+msgstr "Visible par les membres sur la page de l'événement."
+
+#| msgid "description"
+msgid "description (allemand)"
+msgstr "description (allemand)"
+
+#| msgid "description"
+msgid "description (anglais)"
+msgstr "description (anglais)"
 
 msgid "repas assis (tables tournantes)"
 msgstr "repas assis (tables tournantes)"
@@ -1241,25 +1265,6 @@ msgstr "dont %(n)s ces 30 derniers jours"
 msgid "Nouvelles recrues de l'année"
 msgstr "Nouvelles recrues de l'année"
 
-msgid "Paliers du Club"
-msgstr "Paliers du Club"
-
-msgid ""
-"Un objectif commun donne envie de se rencontrer : quand un palier est "
-"atteint, sa récompense s'annonce au prochain événement."
-msgstr ""
-"Un objectif commun donne envie de se rencontrer : quand un palier est "
-"atteint, sa récompense s'annonce au prochain événement."
-
-#, python-format
-msgid "encore %(n)s rencontre"
-msgid_plural "encore %(n)s rencontres"
-msgstr[0] "encore %(n)s rencontre"
-msgstr[1] "encore %(n)s rencontres"
-
-msgid "à venir"
-msgstr "à venir"
-
 msgid "Demandes d'invitation"
 msgstr "Demandes d'invitation"
 
@@ -1286,6 +1291,25 @@ msgstr "Rencontres par événement passé"
 
 msgid "Aucun événement passé."
 msgstr "Aucun événement passé."
+
+msgid "Paliers du Club"
+msgstr "Paliers du Club"
+
+msgid ""
+"Un objectif commun donne envie de se rencontrer : quand un palier est "
+"atteint, sa récompense s'annonce au prochain événement."
+msgstr ""
+"Un objectif commun donne envie de se rencontrer : quand un palier est "
+"atteint, sa récompense s'annonce au prochain événement."
+
+#, python-format
+msgid "encore %(n)s rencontre"
+msgid_plural "encore %(n)s rencontres"
+msgstr[0] "encore %(n)s rencontre"
+msgstr[1] "encore %(n)s rencontres"
+
+msgid "à venir"
+msgstr "à venir"
 
 msgid "Membres isolés"
 msgstr "Membres isolés"

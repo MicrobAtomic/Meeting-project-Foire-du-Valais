@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Club des Affaires\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 17:26+0200\n"
+"POT-Creation-Date: 2026-10-03 17:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Club des Affaires\n"
 "Language-Team: Club des Affaires\n"
@@ -287,6 +287,17 @@ msgstr "Besuch"
 msgid "titre"
 msgstr "Titel"
 
+#| msgid "parle allemand"
+msgid "titre (allemand)"
+msgstr "Titel (Deutsch)"
+
+msgid "Facultatif : vide, le texte français s'affiche."
+msgstr "Freiwillig: Bleibt das Feld leer, erscheint der französische Text."
+
+#| msgid "parle anglais"
+msgid "titre (anglais)"
+msgstr "Titel (Englisch)"
+
 msgid "type"
 msgstr "Art"
 
@@ -296,15 +307,28 @@ msgstr "Beginn"
 msgid "lieu"
 msgstr "Ort"
 
+#| msgid "parle allemand"
+msgid "lieu (allemand)"
+msgstr "Ort (Deutsch)"
+
+#| msgid "parle anglais"
+msgid "lieu (anglais)"
+msgstr "Ort (Englisch)"
+
 msgid "description"
 msgstr "Beschreibung"
 
-msgid ""
-"Visible par les membres sur la page de l'événement. Astuce : le texte en "
-"français, puis en allemand après « · »."
-msgstr ""
-"Für die Mitglieder auf der Seite des Anlasses sichtbar. Tipp: zuerst der "
-"französische Text, dann nach «·» der deutsche."
+#| msgid "Visible uniquement par les membres que tu as rencontrés."
+msgid "Visible par les membres sur la page de l'événement."
+msgstr "Für die Mitglieder auf der Seite des Anlasses sichtbar."
+
+#| msgid "description"
+msgid "description (allemand)"
+msgstr "Beschreibung (Deutsch)"
+
+#| msgid "description"
+msgid "description (anglais)"
+msgstr "Beschreibung (Englisch)"
 
 msgid "repas assis (tables tournantes)"
 msgstr "Sitzessen (Wechseltische)"
@@ -1239,25 +1263,6 @@ msgstr "davon %(n)s in den letzten 30 Tagen"
 msgid "Nouvelles recrues de l'année"
 msgstr "Neumitglieder dieses Jahres"
 
-msgid "Paliers du Club"
-msgstr "Stufen des Clubs"
-
-msgid ""
-"Un objectif commun donne envie de se rencontrer : quand un palier est "
-"atteint, sa récompense s'annonce au prochain événement."
-msgstr ""
-"Ein gemeinsames Ziel macht Lust aufs Kennenlernen: Ist eine Stufe erreicht, "
-"wird ihre Belohnung am nächsten Anlass angekündigt."
-
-#, python-format
-msgid "encore %(n)s rencontre"
-msgid_plural "encore %(n)s rencontres"
-msgstr[0] "noch %(n)s Begegnung"
-msgstr[1] "noch %(n)s Begegnungen"
-
-msgid "à venir"
-msgstr "noch offen"
-
 msgid "Demandes d'invitation"
 msgstr "Einladungsanfragen"
 
@@ -1284,6 +1289,25 @@ msgstr "Begegnungen pro vergangenem Anlass"
 
 msgid "Aucun événement passé."
 msgstr "Keine vergangenen Anlässe."
+
+msgid "Paliers du Club"
+msgstr "Stufen des Clubs"
+
+msgid ""
+"Un objectif commun donne envie de se rencontrer : quand un palier est "
+"atteint, sa récompense s'annonce au prochain événement."
+msgstr ""
+"Ein gemeinsames Ziel macht Lust aufs Kennenlernen: Ist eine Stufe erreicht, "
+"wird ihre Belohnung am nächsten Anlass angekündigt."
+
+#, python-format
+msgid "encore %(n)s rencontre"
+msgid_plural "encore %(n)s rencontres"
+msgstr[0] "noch %(n)s Begegnung"
+msgstr[1] "noch %(n)s Begegnungen"
+
+msgid "à venir"
+msgstr "noch offen"
 
 msgid "Membres isolés"
 msgstr "Wenig vernetzte Mitglieder"
