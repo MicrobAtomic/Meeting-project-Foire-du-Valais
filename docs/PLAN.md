@@ -120,7 +120,7 @@ Ton : détendu, premium, valaisan (rouge valaisan et or, vins, montagne, apéro)
 | `club:event_detail` | `/evenements/<pk>/` | `events.event_detail` | membre | phase 4 |
 | `club:event_rsvp` | `/evenements/<pk>/rsvp/` | `events.event_rsvp` (POST) | membre | phase 4 |
 | `club:staff_dashboard` | `/staff/` | `staff.dashboard` | staff | ✅ (à enrichir) |
-| `club:staff_event` | `/staff/evenements/<pk>/` | `staff.event_tools` | staff | phase 5 |
+| `club:staff_event` | `/staff/evenements/<pk>/` | `staff.event_tools` | staff | ✅ |
 | `club:staff_badges` | `/staff/evenements/<pk>/badges/` | `staff.badges` | staff | phase 9 |
 
 Les routes se déclarent dans `club/urls.py`, et les nouvelles vues d'événements vont dans `club/views/events.py` (à créer).
@@ -395,7 +395,7 @@ Pour éviter les requêtes N+1, toute liste de cartes charge les membres avec
 
 ### Phase 5 — Outils staff (1 h 30)
 
-- [ ] **5.1** Enrichir `staff.dashboard` et `templates/staff/dashboard.html` :
+- [x] **5.1** Enrichir `staff.dashboard` et `templates/staff/dashboard.html` :
   - **Tuiles** :
     - membres ;
     - indice de fédération, en grand ;
@@ -405,7 +405,7 @@ Pour éviter les requêtes N+1, toute liste de cartes charge les membres avec
     (`{% url 'admin:club_member_change' m.pk %}`) et la phrase « À présenter lors du prochain événement ».
   - **« Événements à venir »** : le nombre d'inscrits et un bouton « Préparer » vers `club:staff_event`.
   - **« Rencontres par événement passé »** : `Count("connections")` par événement.
-- [ ] **5.2** La vue `staff.event_tools`, route `club:staff_event`, `/staff/evenements/<pk>/`, avec `@staff_required` :
+- [x] **5.2** La vue `staff.event_tools`, route `club:staff_event`, `/staff/evenements/<pk>/`, avec `@staff_required` :
   - **POST `action=matches`** : `generate_matches(event)`, puis le message « N rencontres générées ».
   - **POST `action=seating`** :
     - un petit `forms.Form` valide `rounds` (de 1 à 4, 3 par défaut) et `table_size` (de 4 à 10, **6 par défaut**) ;
@@ -417,7 +417,7 @@ Pour éviter les requêtes N+1, toute liste de cartes charge les membres avec
        avec les noms et l'emoji du secteur, et les statistiques du plan.
     - Plus un bouton « Imprimer » (`no-print` sur le reste de la page ; JavaScript `static/js/print.js` qui appelle
       `window.print()` sur un clic `[data-print]`).
-- [ ] **5.3** Ajouter `club/tests/test_staff.py` :
+- [x] **5.3** Ajouter `club/tests/test_staff.py` :
   - un membre reçoit une erreur 403 sur les pages staff ;
   - un POST `matches` du staff crée des `Match` ;
   - un POST `seating` crée `nb_inscrits × rounds` `SeatAssignment` ;

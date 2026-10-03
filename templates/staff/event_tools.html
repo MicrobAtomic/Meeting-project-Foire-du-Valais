@@ -1,0 +1,85 @@
+{% extends "base.html" %}{% load i18n static club_ui %}
+{% block title %}{{ event.title }} · {% translate "Préparer" %} · {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<div class="space-y-5">
+  <p class="no-print"><a href="{% url 'club:staff_dashboard' %}" class="text-sm text-stone-600 hover:text-red-700">← {% translate "Tableau de bord" %}</a></p>
+
+  <section class="card">
+    <h1 class="text-2xl font-semibold">{{ event|kind_emoji }} {{ event.title }}</h1>
+    <p class="text-stone-600">{{ event.starts_at|date:"l j F Y, H:i" }} · 📍 {{ event.location }}</p>
+    <p class="mt-1 text-sm">👥 {% blocktranslate count n=attendee_count %}{{ n }} inscrit{% plural %}{{ n }} inscrits{% endblocktranslate %}</p>
+  </section>
+
+  <div class="no-print grid gap-4 md:grid-cols-2">
+    <section class="card space-y-3">
+      <h2 class="font-semibold">🤝 {% translate "Rencontres proposées" %}</h2>
+      <p class="text-sm text-stone-600">{% translate "Chaque inscrit reçoit jusqu'à 3 personnes qu'il ne connaît pas encore, avec leurs points communs. À relancer après chaque changement d'inscrits." %}</p>
+      <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="matches">
+        <button type="submit" class="btn btn-primary">{% translate "Générer les rencontres" %}</button>
+      </form>
+    </section>
+
+    <section class="card space-y-3">
+      <h2 class="font-semibold">🪑 {% translate "Tables tournantes" %}</h2>
+      <form method="post" class="space-y-3">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="seating">
+        <div class="grid grid-cols-2 gap-3">
+          {% include "club/_field.html" with field=seating_form.rounds %}
+          {% include "club/_field.html" with field=seating_form.table_size %}
+        </div>
+        <button type="submit" class="btn btn-primary">{% translate "Générer le plan de tables" %}</button>
+      </form>
+    </section>
+  </div>
+
+  <div class="grid gap-6 lg:grid-cols-2">
+    <section class="no-print space-y-3">
+      <h2 class="text-lg font-semibold">🤝 {% blocktranslate with n=matches|length %}Rencontres proposées ({{ n }}){% endblocktranslate %}</h2>
+      {% if matches %}
+      <ul class="card divide-y divide-stone-100 p-0 text-sm lg:max-h-[40rem] lg:overflow-y-auto">
+        {% for m in matches %}
+        <li class="space-y-1 px-4 py-3">
+          <p class="flex items-center justify-between gap-3"><span class="font-medium">{{ m.a.full_name }} ↔ {{ m.b.full_name }}</span><span class="chip">{{ m.score }}</span></p>
+          <p class="flex flex-wrap gap-1.5">
+            {% for tag in m.likes %}<span class="chip">❤️ {{ tag.emoji }} {{ tag.label }}</span>{% endfor %}
+            {% for tag in m.dislikes %}<span class="chip">💀 {{ tag.emoji }} {{ tag.label }}</span>{% endfor %}
+          </p>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p class="card text-sm text-stone-600">{% translate "Aucune rencontre générée pour l'instant." %}</p>
+      {% endif %}
+    </section>
+
+    <section class="space-y-3">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <h2 class="text-lg font-semibold">🪑 {% translate "Plan de tables" %}</h2>
+        {% if plan %}<button type="button" data-print class="btn btn-secondary no-print">🖨️ {% translate "Imprimer" %}</button>{% endif %}
+      </div>
+      {% if plan %}
+      <p class="text-sm text-stone-600">{% blocktranslate with new=plan.new_pairs repeated=plan.repeated_pairs rounds=plan.rounds size=plan.table_size %}{{ new }} nouvelles paires · {{ repeated }} répétition(s) · {{ rounds }} services · tables de {{ size }}{% endblocktranslate %}</p>
+      {% for round in rounds %}
+      <section class="break-inside-avoid space-y-2">
+        <h3 class="text-sm font-semibold uppercase tracking-wide text-stone-500">{{ round.label }}</h3>
+        <div class="grid gap-3 sm:grid-cols-2">
+          {% for table in round.tables %}
+          <div class="card break-inside-avoid space-y-1 p-3">
+            <p class="text-sm font-semibold">{% blocktranslate with number=table.number %}Table {{ number }}{% endblocktranslate %}</p>
+            <ul class="text-sm text-stone-700">{% for m in table.members %}<li>{{ m|sector_emoji }} {{ m.full_name }}</li>{% endfor %}</ul>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+      {% endfor %}
+      {% else %}
+      <p class="card text-sm text-stone-600">{% translate "Aucun plan généré pour l'instant." %}</p>
+      {% endif %}
+    </section>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}<script src="{% static 'js/print.js' %}" defer></script>{% endblock %}

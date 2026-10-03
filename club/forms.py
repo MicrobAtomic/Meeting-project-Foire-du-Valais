@@ -99,3 +99,15 @@ class InvitationRequestForm(forms.ModelForm):
     @property
     def is_bot(self):
         return bool(self.cleaned_data.get("website"))
+
+
+class SeatingForm(forms.Form):
+    """Settings of the rotating tables (staff). Tables of 6 over 3 services is the tested sweet spot."""
+
+    rounds = forms.IntegerField(label=_("Nombre de services"), min_value=1, max_value=4, initial=3)
+    table_size = forms.IntegerField(label=_("Places par table"), min_value=4, max_value=10, initial=6)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs["class"] = "input"

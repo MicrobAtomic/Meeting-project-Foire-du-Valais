@@ -4,7 +4,13 @@
 <h1 class="text-2xl font-semibold">⚙️ {% translate "Tableau de bord" %}</h1>
 <p class="mt-1 text-stone-600">{% translate "Espace réservé à l'équipe événements." %}</p>
 
-<div class="mt-6 grid gap-4 sm:grid-cols-3">
+<div class="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
+  <section class="card">
+    <p class="text-sm text-stone-600">{% translate "Indice de fédération" %}</p>
+    <p class="mt-1 text-4xl font-bold text-red-700">{{ stats.index|percent }}</p>
+    <progress class="bar mt-2" value="{{ stats.index|stringformat:'f' }}" max="1"></progress>
+    <p class="mt-2 text-xs text-stone-500">{% translate "des paires de membres se connaissent déjà" %}</p>
+  </section>
   <section class="card">
     <p class="text-sm text-stone-600">{% translate "Membres" %}</p>
     <p class="mt-1 text-4xl font-bold">{{ stats.members }}</p>
@@ -12,12 +18,85 @@
   <section class="card">
     <p class="text-sm text-stone-600">{% translate "Rencontres enregistrées" %}</p>
     <p class="mt-1 text-4xl font-bold">{{ stats.connections }}</p>
+    <p class="mt-2 text-xs text-stone-500">{% blocktranslate with n=recent_connections %}dont {{ n }} ces 30 derniers jours{% endblocktranslate %}</p>
   </section>
   <section class="card">
-    <p class="text-sm text-stone-600">{% translate "Indice de fédération" %}</p>
-    <p class="mt-1 text-4xl font-bold text-red-700">{{ stats.index|percent }}</p>
+    <p class="text-sm text-stone-600">{% translate "Nouvelles recrues de l'année" %}</p>
+    <p class="mt-1 text-4xl font-bold text-emerald-700">{{ new_recruits }}</p>
   </section>
 </div>
+
+<section class="card mt-6 space-y-3">
+  <div class="flex flex-wrap items-center justify-between gap-3">
+    <div>
+      <h2 class="font-semibold">💌 {% translate "Demandes d'invitation" %}</h2>
+      <p class="text-sm text-stone-600">{% blocktranslate count n=new_request_count %}{{ n }} nouvelle demande à traiter{% plural %}{{ n }} nouvelles demandes à traiter{% endblocktranslate %}</p>
+    </div>
+    <a href="{% url 'admin:club_invitationrequest_changelist' %}" class="btn btn-secondary">{% translate "Traiter dans l'administration" %}</a>
+  </div>
+  {% if new_requests %}
+  <ul class="divide-y divide-stone-100 text-sm">
+    {% for r in new_requests %}
+    <li class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 py-2">
+      <span><span class="font-medium">{{ r.first_name }} {{ r.last_name }}</span> · {{ r.job_title }}, {{ r.company }}</span>
+      <span class="text-stone-500"><a href="mailto:{{ r.email }}" class="underline">{{ r.email }}</a> · {{ r.created_at|date:"j F" }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</section>
+
+<div class="mt-6 grid gap-6 lg:grid-cols-2">
+  <section class="card space-y-3">
+    <h2 class="font-semibold">📅 {% translate "Événements à venir" %}</h2>
+    {% for e in upcoming %}
+    <div class="flex flex-wrap items-center justify-between gap-3 border-t border-stone-100 pt-3 first:border-0 first:pt-0">
+      <div>
+        <p class="font-medium">{{ e|kind_emoji }} {{ e.title }}</p>
+        <p class="text-sm text-stone-600">{{ e.starts_at|date:"l j F, H:i" }} · {% blocktranslate count n=e.yes_count %}{{ n }} inscrit{% plural %}{{ n }} inscrits{% endblocktranslate %}</p>
+      </div>
+      <a href="{% url 'club:staff_event' e.pk %}" class="btn btn-primary">{% translate "Préparer" %}</a>
+    </div>
+    {% empty %}
+    <p class="text-sm text-stone-600">{% translate "Aucun événement à venir. Crée-en un depuis l'administration." %}</p>
+    {% endfor %}
+  </section>
+
+  <section class="card space-y-3">
+    <h2 class="font-semibold">🤝 {% translate "Rencontres par événement passé" %}</h2>
+    {% for e in past %}
+    <div class="flex items-center justify-between gap-3 border-t border-stone-100 pt-3 first:border-0 first:pt-0">
+      <div>
+        <p class="font-medium">{{ e|kind_emoji }} {{ e.title }}</p>
+        <p class="text-sm text-stone-600">{{ e.starts_at|date:"j F Y" }}</p>
+      </div>
+      <p class="text-sm"><span class="text-2xl font-bold">{{ e.meetings }}</span> {% translate "rencontres" %}</p>
+    </div>
+    {% empty %}
+    <p class="text-sm text-stone-600">{% translate "Aucun événement passé." %}</p>
+    {% endfor %}
+  </section>
+</div>
+
+<section class="card mt-6 space-y-3">
+  <div>
+    <h2 class="font-semibold">🧭 {% translate "Membres isolés" %}</h2>
+    <p class="text-sm text-stone-600">{% translate "Deux rencontres ou moins : à présenter lors du prochain événement." %}</p>
+  </div>
+  {% if isolated %}
+  <ul class="divide-y divide-stone-100 text-sm">
+    {% for m, n in isolated %}
+    <li class="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 py-2">
+      <span><a href="{% url 'admin:club_member_change' m.pk %}" class="font-medium text-red-700 underline">{{ m.full_name }}</a> · {{ m.company }}</span>
+      <span class="text-stone-500">{% blocktranslate count n=n %}{{ n }} rencontre{% plural %}{{ n }} rencontres{% endblocktranslate %} · {{ m|rank_label }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% if isolated_more %}<p class="text-xs text-stone-500">{% blocktranslate with n=isolated_more %}… et {{ n }} autres.{% endblocktranslate %}</p>{% endif %}
+  {% else %}
+  <p class="text-sm text-stone-600">{% translate "Tout le monde est bien connecté 🎉" %}</p>
+  {% endif %}
+</section>
 
 <p class="mt-6"><a href="{% url 'admin:index' %}" class="btn btn-secondary">🛠️ {% translate "Ouvrir l'administration" %}</a></p>
 {% endblock %}

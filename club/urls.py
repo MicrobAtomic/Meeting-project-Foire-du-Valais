@@ -18,4 +18,5 @@ urlpatterns = [
     path("evenements/<int:pk>/rsvp/", events.event_rsvp, name="event_rsvp"),
     path("m/<str:token>/", member.scan, name="scan"),
     path("staff/", staff.dashboard, name="staff_dashboard"),
+    path("staff/evenements/<int:pk>/", staff.event_tools, name="staff_event"),
 ]
