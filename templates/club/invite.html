@@ -1,0 +1,48 @@
+{% extends "base.html" %}{% load i18n static club_ui %}
+{% block title %}{% translate "Inviter quelqu'un" %} · {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<div class="mx-auto max-w-2xl space-y-5">
+  <div>
+    <h1 class="text-2xl font-semibold">💌 {% translate "Inviter quelqu'un" %}</h1>
+    <p class="mt-1 text-stone-600">{% translate "Une dirigeante ou un dirigeant de ton entourage aurait sa place au Club ? Partage ton lien personnel : tu l'accompagnes pour sa première soirée." %}</p>
+  </div>
+
+  <section class="card space-y-2 bg-amber-50 ring-amber-300">
+    <h2 class="font-semibold">🎁 {% translate "L'offre de parrainage" %}</h2>
+    <ul class="space-y-1 text-sm">
+      <li>🤝 {% blocktranslate with new=new_member_price full=membership_price %}Ton invité·e : 1ʳᵉ année à {{ new }} CHF au lieu de {{ full }} CHF.{% endblocktranslate %}</li>
+      <li>🍷 {% blocktranslate with discount=sponsor_discount %}Toi : −{{ discount }} CHF sur ta cotisation.{% endblocktranslate %}</li>
+    </ul>
+    <p class="text-xs text-stone-500">{% translate "Montants indicatifs, à confirmer par le Club." %}</p>
+  </section>
+
+  <section class="card space-y-4">
+    <h2 class="font-semibold">🔗 {% translate "Ton lien personnel" %}</h2>
+    <label for="invite-link" class="sr-only">{% translate "Ton lien personnel" %}</label>
+    <input id="invite-link" type="text" readonly value="{{ invite_link }}" class="input text-sm">
+    <div class="flex flex-wrap gap-2">
+      <button type="button" data-copy="#invite-link" data-copied="{% translate 'Copié ✅' %}" class="btn btn-primary">{% translate "Copier le lien" %}</button>
+      <button type="button" data-share="#invite-link" data-share-title="{{ SITE_NAME }}" hidden class="btn btn-secondary">{% translate "Partager" %}</button>
+    </div>
+    <div class="flex justify-center rounded-2xl bg-white p-3 ring-1 ring-stone-200 [&>svg]:h-48 [&>svg]:w-48">{{ qr_svg|scalable_svg }}</div>
+    <p class="text-center text-xs text-stone-500">{% translate "Ce QR code ouvre ton lien : pratique à montrer pendant une soirée." %}</p>
+  </section>
+
+  <section class="card space-y-3">
+    <h2 class="font-semibold">👥 {% translate "Tes invité·e·s" %}</h2>
+    {% if referrals %}
+    <ul class="divide-y divide-stone-100 text-sm">
+      {% for r in referrals %}
+      <li class="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 py-2">
+        <span><span class="font-medium">{{ r.first_name }} {{ r.last_name }}</span> · {{ r.company }}</span>
+        <span class="chip">{{ r.get_status_display }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="text-sm text-stone-600">{% translate "Personne pour l'instant. Partage ton lien !" %}</p>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}
+{% block scripts %}<script src="{% static 'js/copy.js' %}" defer></script>{% endblock %}

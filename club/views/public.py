@@ -11,7 +11,13 @@ from club.models import InvitationRequest, Member
 
 @login_not_required
 def landing(request):
-    return render(request, "public/landing.html")
+    """Public showcase: only aggregate numbers, never a name."""
+    members = Member.objects.filter(user__is_active=True)
+    context = {
+        "member_count": members.count(),
+        "sector_count": members.values("sector").distinct().count(),
+    }
+    return render(request, "public/landing.html", context)
 
 
 def referrer_from(request):

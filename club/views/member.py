@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
@@ -190,3 +191,19 @@ def onboarding(request):
     answers = {link.tag.slug: link.sentiment for link in member.tag_links.select_related("tag")}
     items = [(tag, answers.get(tag.slug, MemberTag.Sentiment.NEUTRAL)) for tag in Tag.objects.all()]
     return render(request, "club/onboarding.html", {"items": items})
+
+
+@member_required
+def invite(request):
+    """My personal referral link (?ref=CODE), its QR code, the offer, and the people I invited."""
+    me = request.member
+    link = request.build_absolute_uri(reverse("club:join")) + "?ref=" + me.referral_code
+    context = {
+        "invite_link": link,
+        "qr_svg": qr_svg(link),
+        "referrals": me.referrals.order_by("-created_at"),
+        "membership_price": settings.MEMBERSHIP_PRICE,
+        "new_member_price": settings.REFERRAL_NEW_MEMBER_PRICE,
+        "sponsor_discount": settings.REFERRAL_SPONSOR_DISCOUNT,
+    }
+    return render(request, "club/invite.html", context)

@@ -9,6 +9,7 @@ from club.tests.helpers import assert_csp_clean, make_member
 # Pages with arguments: call assert_csp_clean(self, response) in their own tests.
 PAGES_TO_CHECK = [
     "club:home", "club:my_qr", "club:album", "club:profile_edit", "club:event_list", "club:onboarding",
+    "club:invite",
 ]
 
 

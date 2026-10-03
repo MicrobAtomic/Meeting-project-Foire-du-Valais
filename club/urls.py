@@ -12,6 +12,7 @@ urlpatterns = [
     path("album/", member.album, name="album"),
     path("moi/", member.profile_edit, name="profile_edit"),
     path("moi/qr/", member.my_qr, name="my_qr"),
+    path("moi/inviter/", member.invite, name="invite"),
     path("membres/<int:pk>/", member.member_detail, name="member_detail"),
     path("membres/<int:pk>/vcard/", member.member_vcard, name="member_vcard"),
     path("evenements/", events.event_list, name="event_list"),

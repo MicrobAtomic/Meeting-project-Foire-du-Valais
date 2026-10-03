@@ -1,9 +1,67 @@
 {% extends "base.html" %}{% load i18n %}
+{% block title %}{{ SITE_NAME }} · {% translate "Foire du Valais" %}{% endblock %}
 {% block content %}
-<section class="py-10 text-center">
-  <div class="text-6xl" aria-hidden="true">🍷</div>
-  <h1 class="mt-4 text-4xl font-bold">{% translate "Le Club des Affaires de la Foire du Valais" %}</h1>
-  <p class="mt-3 text-lg text-stone-600">{% translate "Plus jamais d'inconnus au Club." %}</p>
-  <a href="{% url 'club:home' %}" class="btn btn-primary mt-6">{% translate "Espace membres" %}</a>
+<section class="rounded-3xl bg-gradient-to-b from-red-50 to-white px-6 py-12 text-center ring-1 ring-red-100">
+  <p class="text-sm font-semibold uppercase tracking-widest text-red-700">{% translate "Foire du Valais" %}</p>
+  <div class="mt-4 text-6xl" aria-hidden="true">🍷</div>
+  <h1 class="mx-auto mt-4 max-w-2xl text-4xl font-bold leading-tight sm:text-5xl">{% translate "Le Club des Affaires de la Foire du Valais" %}</h1>
+  <p class="mt-4 text-2xl font-semibold text-red-700">{% translate "Plus jamais d'inconnus au Club." %}</p>
+  <p class="mx-auto mt-4 max-w-xl text-stone-600">{% translate "Un cercle de dirigeantes et dirigeants qui se retrouvent quelques fois par an, dans la bonne humeur. Ici, on se connaît avant, on se mélange pendant, on se retrouve après." %}</p>
+  <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+    <a href="{% url 'club:join' %}" class="btn btn-primary">💌 {% translate "Demander une invitation" %}</a>
+    <a href="{% url 'club:home' %}" class="btn btn-secondary">{% translate "Espace membres" %}</a>
+  </div>
+</section>
+
+<section class="mt-8 grid grid-cols-3 gap-3 text-center">
+  <div class="card px-2"><p class="text-3xl font-bold text-red-700">{{ member_count }}</p><p class="mt-1 text-xs text-stone-600 sm:text-sm">{% translate "membres" %}</p></div>
+  <div class="card px-2"><p class="text-3xl font-bold text-red-700">{{ sector_count }}</p><p class="mt-1 text-xs text-stone-600 sm:text-sm">{% translate "secteurs d'activité" %}</p></div>
+  <div class="card px-2"><p class="text-3xl font-bold text-red-700">4–5</p><p class="mt-1 text-xs text-stone-600 sm:text-sm">{% translate "soirées par an" %}</p></div>
+</section>
+
+<section class="mt-10">
+  <h2 class="text-center text-2xl font-semibold">{% translate "Un club qui vit toute l'année" %}</h2>
+  <div class="mt-6 grid gap-4 md:grid-cols-3">
+    <article class="card space-y-2">
+      <p class="text-3xl" aria-hidden="true">🃏</p>
+      <h3 class="font-semibold">{% translate "Avant : se rencontrer" %}</h3>
+      <p class="text-sm text-stone-600">{% translate "Chaque membre a sa carte : son entreprise, ses passions, ce qu'il adore… et ce qu'il déteste. Tu sais déjà avec qui trinquer." %}</p>
+    </article>
+    <article class="card space-y-2">
+      <p class="text-3xl" aria-hidden="true">🔀</p>
+      <h3 class="font-semibold">{% translate "Pendant : se mélanger" %}</h3>
+      <p class="text-sm text-stone-600">{% translate "Tes trois rencontres de la soirée, des tables qui tournent à chaque service, un QR code pour garder le contact. Fini les petits groupes." %}</p>
+    </article>
+    <article class="card space-y-2">
+      <p class="text-3xl" aria-hidden="true">🌱</p>
+      <h3 class="font-semibold">{% translate "Après : grandir ensemble" %}</h3>
+      <p class="text-sm text-stone-600">{% translate "Ton album se remplit au fil des soirées et le Club se resserre. Ce n'est pas du business forcé : c'est du bon temps entre pairs." %}</p>
+    </article>
+  </div>
+</section>
+
+<section class="mt-10">
+  <h2 class="text-center text-2xl font-semibold">{% translate "Comment ça marche" %}</h2>
+  <ol class="mt-6 grid gap-4 md:grid-cols-3">
+    <li class="card flex gap-4">
+      <span class="text-4xl" aria-hidden="true">🃏</span>
+      <div><p class="font-semibold">1 · {% translate "Ton album" %}</p><p class="mt-1 text-sm text-stone-600">{% translate "Découvre les cartes des membres et ce que vous avez en commun." %}</p></div>
+    </li>
+    <li class="card flex gap-4">
+      <span class="text-4xl" aria-hidden="true">🔳</span>
+      <div><p class="font-semibold">2 · {% translate "Ton QR code" %}</p><p class="mt-1 text-sm text-stone-600">{% translate "Scanne le code d'un membre rencontré : sa carte rejoint ton album et ses coordonnées se débloquent." %}</p></div>
+    </li>
+    <li class="card flex gap-4">
+      <span class="text-4xl" aria-hidden="true">🪑</span>
+      <div><p class="font-semibold">3 · {% translate "Tes tables" %}</p><p class="mt-1 text-sm text-stone-600">{% translate "À chaque service tu changes de table : l'équipe s'occupe de tout mélanger." %}</p></div>
+    </li>
+  </ol>
+</section>
+
+<section class="mt-10 rounded-3xl bg-red-700 px-6 py-10 text-center text-white">
+  <h2 class="text-2xl font-semibold">{% translate "Envie de nous rejoindre ?" %}</h2>
+  <p class="mx-auto mt-2 max-w-md text-red-100">{% translate "Le Club se rejoint sur invitation. Dis-nous qui tu es, nous revenons vers toi." %}</p>
+  <a href="{% url 'club:join' %}" class="btn mt-6 bg-white text-red-700 hover:bg-red-50">💌 {% translate "Demander une invitation" %}</a>
+  <p class="mt-4 text-sm text-red-100">{% translate "Déjà membre ?" %} <a href="{% url 'login' %}" class="font-semibold text-white underline">{% translate "Se connecter" %}</a></p>
 </section>
 {% endblock %}

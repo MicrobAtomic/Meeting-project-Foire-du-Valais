@@ -65,6 +65,7 @@ class Command(BaseCommand):
         past, upcoming, later = self.create_events()
         self.create_rsvps(rng, members, past, upcoming, later, camille, lukas)
         self.create_connections(rng, members, past, camille, lukas)
+        self.create_invitation_requests(lukas)
         intros = generate_matches(upcoming)
 
         self.check_storyline(upcoming, camille, lukas)
@@ -222,6 +223,18 @@ class Command(BaseCommand):
             )
             for a, b, event in links
         )
+
+    def create_invitation_requests(self, lukas):
+        """A few fictitious applicants: two referred by Lukas (his invitation page), one coming from the public form."""
+        InvitationRequest.objects.bulk_create([
+            InvitationRequest(first_name="Julie", last_name="Perrin", company="Perrin Menuiserie SA", job_title="Directrice",
+                              email="julie.perrin@example.com", referred_by=lukas),
+            InvitationRequest(first_name="Markus", last_name="Zenhäusern", company="Zenhäusern Bergbahnen AG",
+                              job_title="Geschäftsführer", email="markus.zenhaeusern@example.com", referred_by=lukas,
+                              status=InvitationRequest.Status.CONTACTED),
+            InvitationRequest(first_name="Anne-Laure", last_name="Dubuis", company="Dubuis Vins Sàrl", job_title="Gérante",
+                              email="anne-laure.dubuis@example.com"),
+        ])
 
     def check_storyline(self, upcoming, camille, lukas):
         pair = sorted((camille.pk, lukas.pk))

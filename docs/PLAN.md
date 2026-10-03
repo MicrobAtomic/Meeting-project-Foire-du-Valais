@@ -99,7 +99,7 @@ Ton : détendu, premium, valaisan (rouge valaisan et or, vins, montagne, apéro)
 
 | Nom | Chemin | Vue | Accès | État |
 |---|---|---|---|---|
-| `club:landing` | `/` | `public.landing` | public | ✅ existe (à embellir en phase 7) |
+| `club:landing` | `/` | `public.landing` | public | ✅ |
 | `login` | `/connexion/` | `LoginView` + `EmailAuthenticationForm` | public | ✅ |
 | `magic_login` | `/connexion/lien/` | django-sesame | public | ✅ |
 | `club:magic_link_request` | `/connexion/recevoir-un-lien/` | `public.magic_link_request` | public | phase 9 |
@@ -113,7 +113,7 @@ Ton : détendu, premium, valaisan (rouge valaisan et or, vins, montagne, apéro)
 | `club:member_vcard` | `/membres/<pk>/vcard/` | `member.member_vcard` | membre déjà rencontré | ✅ |
 | `club:my_qr` | `/moi/qr/` | `member.my_qr` | membre | ✅ (template à refaire) |
 | `club:profile_edit` | `/moi/` | `member.profile_edit` | membre | phase 3 |
-| `club:invite` | `/moi/inviter/` | `member.invite` | membre | phase 7 |
+| `club:invite` | `/moi/inviter/` | `member.invite` | membre | ✅ |
 | `club:onboarding` | `/bienvenue/` | `member.onboarding` | membre | ✅ |
 | `club:scan` | `/m/<token>/` | `member.scan` | membre | ✅ (template à refaire) |
 | `club:event_list` | `/evenements/` | `events.event_list` | membre | phase 4 |
@@ -476,7 +476,7 @@ Pour éviter les requêtes N+1, toute liste de cartes charge les membres avec
 
 ### Phase 7 — Vitrine publique, demande d'invitation, parrainage (1 h)
 
-- [ ] **7.1** Refaire `templates/public/landing.html` (page publique, **aucun nom de membre**) :
+- [x] **7.1** Refaire `templates/public/landing.html` (page publique, **aucun nom de membre**) :
   - **Hero** : « Le Club des Affaires de la Foire du Valais », le slogan « Plus jamais d'inconnus au Club. »,
     un bouton `btn-primary` « Demander une invitation » (vers `club:join`) et un bouton `btn-secondary`
     « Espace membres » (vers `club:home`).
@@ -491,7 +491,7 @@ Pour éviter les requêtes N+1, toute liste de cartes charge les membres avec
     on n'enregistre rien mais on redirige quand même vers « merci ».
   - `?ref=CODE` : on cherche le `Member` qui a ce `referral_code`. S'il existe, on affiche « Invité·e par
     Prénom N. » et on remplit `referred_by`. Un code invalide est ignoré **sans message**, pour ne rien révéler.
-- [ ] **7.3** La vue `member.invite`, `/moi/inviter/` :
+- [x] **7.3** La vue `member.invite`, `/moi/inviter/` :
   - le lien personnel
     `request.build_absolute_uri(reverse("club:join")) + "?ref=" + request.member.referral_code`,
     son QR (`qr_svg`) et un bouton « Copier ». JavaScript `static/js/copy.js` : au clic sur `[data-copy]`,
@@ -501,7 +501,7 @@ Pour éviter les requêtes N+1, toute liste de cartes charge les membres avec
     toi : −{{ REFERRAL_SPONSOR_DISCOUNT }} CHF sur ta cotisation ». Montants à valider avec le client ;
   - la liste de mes filleuls (`request.member.referrals`) avec leur statut.
   - Ajoute un lien « Inviter quelqu'un » sur l'accueil et sur le profil.
-- [ ] **7.4** Les tests :
+- [x] **7.4** Les tests :
   - un visiteur anonyme peut afficher la page et envoyer le formulaire ;
   - le champ piège bloque l'enregistrement ;
   - `?ref=` remplit `referred_by` ;
