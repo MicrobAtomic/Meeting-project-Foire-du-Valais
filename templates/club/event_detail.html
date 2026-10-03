@@ -9,7 +9,7 @@
       <div class="text-4xl" aria-hidden="true">{{ event|kind_emoji }}</div>
       <div class="min-w-0">
         <h1 class="text-2xl font-semibold">{{ event.title }}</h1>
-        <p class="text-stone-600">{{ event.starts_at|date:"l j F Y, H:i" }}</p>
+        <p class="text-stone-600">{{ event.starts_at|datetime_long }}</p>
         <p class="text-stone-600">📍 {{ event.location }}</p>
       </div>
     </div>

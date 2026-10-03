@@ -163,7 +163,7 @@ class Command(BaseCommand):
         upcoming = Event.objects.create(
             pk=4, title="Dîner d'automne", kind=Event.Kind.DINNER, starts_at=at(12, 19, 0),
             location="Salle des Bisses, Martigny", has_seating=True,
-            description="Trois services, trois tables différentes : on se mélange !",
+            description="Trois services, trois tables différentes : on se mélange ! · Drei Gänge, drei verschiedene Tische: wir mischen uns!",
         )
         later = Event.objects.create(pk=5, title="Apéro de Noël", kind=Event.Kind.APERO,
                                      starts_at=at(75), location="Caveau du Club, Martigny")

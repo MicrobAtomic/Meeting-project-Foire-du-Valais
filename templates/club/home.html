@@ -35,7 +35,7 @@
     <div class="flex flex-wrap items-start justify-between gap-3">
       <div>
         <a href="{% url 'club:event_detail' next_event.pk %}" class="text-lg font-semibold text-red-700 hover:underline">{{ next_event|kind_emoji }} {{ next_event.title }}</a>
-        <p class="text-sm text-stone-600">{{ next_event.starts_at|date:"l j F, H:i" }} · {{ next_event.location }}</p>
+        <p class="text-sm text-stone-600">{{ next_event.starts_at|datetime_short }} · {{ next_event.location }}</p>
         <p class="mt-1 text-sm">
           {% if next_status == "yes" %}<span class="font-medium text-emerald-700">✅ {% translate "Tu viens" %}</span>
           {% elif next_status == "no" %}<span class="text-stone-500">❌ {% translate "Tu ne viens pas" %}</span>

@@ -57,6 +57,11 @@ python manage.py seed_demo --reset               # données de démo (mot de pas
 ./tailwindcss -i assets/css/input.css -o static/css/app.css --watch    # pendant le développement
 ./tailwindcss -i assets/css/input.css -o static/css/app.css --minify   # avant chaque commit
 python manage.py makemigrations && python manage.py migrate
+# Traductions (gettext de Homebrew : hors du PATH par défaut)
+export PATH="$(brew --prefix gettext)/bin:$PATH"
+python manage.py makemessages -l fr -l de -l en --no-wrap --no-location --ignore=.venv --ignore=staticfiles --ignore="club/tests/*"
+# … traduire les msgstr vides dans locale/*/LC_MESSAGES/django.po (de : orthographe suisse « ss », tutoiement), puis :
+python manage.py compilemessages --ignore=.venv   # les .mo sont commités (Render n'a pas gettext)
 ```
 
 Comptes de démo : `camille.rey@example.com` (nouvelle membre), `lukas.imboden@example.com` (pilier du Club),

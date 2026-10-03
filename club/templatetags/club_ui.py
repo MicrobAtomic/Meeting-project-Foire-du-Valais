@@ -1,7 +1,9 @@
 import re
 
 from django import template
+from django.utils.formats import date_format
 from django.utils.safestring import mark_safe
+from django.utils.translation import gettext
 
 from club.models import MemberTag
 from club.ui import EVENT_KIND_EMOJI, RANK_STYLE, SECTOR_STYLE
@@ -50,7 +52,34 @@ def kind_emoji(event):
 
 @register.filter
 def percent(value):
-    return f"{round(value * 100)} %"
+    # Translators: a percentage; French and German put a space before the % sign, English does not.
+    return gettext("%(value)s %%") % {"value": round(value * 100)}
+
+
+# The date filters below read their Django date format from the translation catalog, so the order of
+# weekday / day / month follows each language (de: "Donnerstag, 15. Oktober", en: "Thursday, October 15").
+@register.filter(expects_localtime=True)
+def datetime_short(value):
+    # Translators: Django date format, e.g. "jeudi 15 octobre, 19:00"
+    return date_format(value, gettext("l j F, H:i"))
+
+
+@register.filter(expects_localtime=True)
+def datetime_long(value):
+    # Translators: Django date format, e.g. "jeudi 15 octobre 2026, 19:00"
+    return date_format(value, gettext("l j F Y, H:i"))
+
+
+@register.filter(expects_localtime=True)
+def date_long(value):
+    # Translators: Django date format, e.g. "15 octobre 2026"
+    return date_format(value, gettext("j F Y"))
+
+
+@register.filter(expects_localtime=True)
+def date_short(value):
+    # Translators: Django date format, e.g. "15 octobre"
+    return date_format(value, gettext("j F"))
 
 
 

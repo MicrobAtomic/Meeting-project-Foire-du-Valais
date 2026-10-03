@@ -6,7 +6,7 @@
 
   <section class="card">
     <h1 class="text-2xl font-semibold">{{ event|kind_emoji }} {{ event.title }}</h1>
-    <p class="text-stone-600">{{ event.starts_at|date:"l j F Y, H:i" }} · 📍 {{ event.location }}</p>
+    <p class="text-stone-600">{{ event.starts_at|datetime_long }} · 📍 {{ event.location }}</p>
     <p class="mt-1 text-sm">👥 {% blocktranslate count n=attendee_count %}{{ n }} inscrit{% plural %}{{ n }} inscrits{% endblocktranslate %}</p>
   </section>
 

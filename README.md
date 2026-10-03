@@ -77,6 +77,20 @@ photo du téléphone, connecté en Camille.
 python manage.py test club    # 31 tests : algorithmes, contrôle d'accès, QR, vCard, CSP, admin…
 ```
 
+## Traductions (FR · DE · EN)
+
+L'interface suit la langue du navigateur (ou le choix FR / DE / EN en haut de page, mémorisé). Les catalogues sont dans
+`locale/<langue>/LC_MESSAGES/django.po`, les fichiers compilés `.mo` sont commités (l'hébergeur n'a pas gettext).
+Après avoir ajouté ou modifié un texte (`{% translate %}` dans un template, `gettext` en Python) :
+
+```bash
+export PATH="$(brew --prefix gettext)/bin:$PATH"
+python manage.py makemessages -l fr -l de -l en --no-wrap --no-location --ignore=.venv --ignore=staticfiles --ignore="club/tests/*"
+# traduire les msgstr vides de locale/de/... et locale/en/... (allemand suisse : « ss », tutoiement), copier la source dans locale/fr/...
+python manage.py compilemessages --ignore=.venv
+python manage.py test club.tests.test_i18n     # aucun texte non traduit, aucune phrase française sur les pages DE/EN
+```
+
 ## Structure
 
 ```

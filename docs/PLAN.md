@@ -511,14 +511,14 @@ Pour éviter les requêtes N+1, toute liste de cartes charge les membres avec
 
 ### Phase 8 — Trilingue FR/DE/EN (1 h)
 
-- [ ] **8.1** Vérifie que tous les textes d'interface passent par `{% translate %}` ou `{% blocktranslate %}`
+- [x] **8.1** *(fait : 303 textes extraits ; les formats de date et le pourcentage passent aussi par les catalogues via les filtres `datetime_short`, `datetime_long`, `date_long`, `date_short` et `percent` de `club_ui` ; un catalogue **français** identique à la source apporte la bonne règle de pluriel, « 0 inscrit » ; 13 tests dans `club/tests/test_i18n.py`, dont un qui parcourt toutes les pages en allemand et en anglais pour vérifier qu'aucune phrase française d'interface ne reste)* Vérifie que tous les textes d'interface passent par `{% translate %}` ou `{% blocktranslate %}`
   (templates) et par `gettext` ou `gettext_lazy` (Python).
-- [ ] **8.2** `python manage.py makemessages -l de -l en --ignore=.venv` crée `locale/de/LC_MESSAGES/django.po`
+- [x] **8.2** `python manage.py makemessages -l de -l en --ignore=.venv` crée `locale/de/LC_MESSAGES/django.po`
   et `locale/en/…`.
-- [ ] **8.3** Traduire tous les `msgstr`, puis supprimer les marques `#, fuzzy`.
+- [x] **8.3** Traduire tous les `msgstr`, puis supprimer les marques `#, fuzzy`.
   - Allemand : **suisse** (« ss », jamais « ß ») et tutoiement (« du »), comme en français.
   - Anglais : simple et chaleureux.
-- [ ] **8.4** `python manage.py compilemessages --ignore=.venv`, puis **commiter les `.po` et les `.mo`**
+- [x] **8.4** `python manage.py compilemessages --ignore=.venv`, puis **commiter les `.po` et les `.mo`**
   (Render n'a pas gettext).
 - ✅ **Fin de phase** : FR → DE sur l'accueil, l'album, une fiche et un événement. L'interface, les affinités et les
   phrases d'accroche passent en allemand. Celles-ci sont déjà en base grâce à `Tag.label` et `Tag.icebreaker`.
