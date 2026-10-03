@@ -17,7 +17,7 @@ Les règles qui ont guidé la liste :
 
 | Événement | Format | Animations conseillées |
 |---|---|---|
-| Apéro des membres, Apéro de Noël | debout | 🤝 Tes 3 rencontres ; 🎯 bingo envisagé, parcours à développer |
+| Apéro des membres, Apéro de Noël | debout | 🎯 Bingo des rencontres · 🤝 Tes 3 rencontres |
 | Dîner, Soirée Wow | assis (apéritif debout) | 🎯 Bingo à l'apéritif · 🪑 Tables tournantes au repas · 🤝 Tes 3 rencontres |
 | Conférence de presse | assis puis apéro | 🤝 Tes 3 rencontres · ❓ La question de la soirée |
 | Visite d'entreprise | en petits groupes | 🔄 Trios express pendant la visite |
@@ -28,18 +28,24 @@ Les règles qui ont guidé la liste :
 | | Animation | Format | Principe | Travail de l'équipe |
 |---|---|---|---|---|
 | 🤝 | **Tes 3 rencontres** | toutes les soirées | Avant l'événement, chaque inscrit reçoit trois personnes qu'il ne connaît pas encore, avec leurs points communs et une phrase pour lancer la conversation. Un nouveau membre se voit présenter en priorité un pilier du Club. | Un clic : « Générer les rencontres » |
-| 🎯 | **Bingo des rencontres — modèle préparé, parcours à réaliser** | debout | Modèles de grille et indicateur d'événement présents en base. La génération, l'affichage et la validation des cases au scan restent à développer. | Pas encore activable pour les participants |
+| 🎯 | **Bingo des rencontres** | debout | Chaque inscrit reçoit une grille 3 × 3 « Trouve quelqu'un qui… » : adore le ski de rando, parle allemand, est membre fondateur, déteste les réunions du lundi matin… On trouve la personne, on discute, on scanne son QR code : la case se coche. Une personne = une case. Une ligne = un verre au bar, carton plein = tirage au sort. | Cocher « bingo des rencontres » ; donner la liste des gagnants au bar |
 | 🪑 | **Tables tournantes** | dîner assis | À chaque service, chacun change de table pour rencontrer de nouvelles personnes (38 invités, 3 services : environ 250 nouvelles paires et une seule répétition). | Cocher « repas assis », un clic, imprimer le plan |
 | 🏔️ | **Paliers du Club** | toute l'année | Un objectif commun : à 20 % de membres qui se connaissent, une tournée de Petite Arvine ; à 35 %, une raclette ; à 50 %, une cuvée aux noms des membres… Chaque membre voit le prochain palier et combien de rencontres il manque. | Annoncer la récompense quand un palier tombe |
 | 🃏 | **Album** | toute l'année | Chaque rencontre ajoute une carte ; objectifs personnels à 5, 15 et 30 cartes, puis l'album complet. | Aucun |
 
-La conception prévue du bingo vise une grille **calculée pour son joueur** (ces règles ne sont pas encore implémentées) :
+Le bingo n'est pas une grille tirée au hasard. Chaque grille est **calculée pour son joueur**
+(`club/services/bingo.py`, 49 tests) :
 
 - les cases ne décrivent que des personnes inscrites à la soirée (au moins deux par case quand c'est possible) ;
-- elles favorisent les gens que le joueur n'a pas encore rencontrés ;
-- au moins une case pousse vers chacune de ses « 3 rencontres » ;
+- elles favorisent les gens que le joueur n'a pas encore rencontrés, et pas son propre secteur ni sa région ;
+- au moins une case pousse vers chacune de ses « 3 rencontres », de préférence une passion qu'ils partagent ;
 - un carton plein reste toujours possible avec des personnes toutes différentes (vérifié par un algorithme
-  de couplage).
+  de couplage biparti) ;
+- au scan, c'est la case la plus rare que la personne peut remplir qui se coche ; le joker du centre ne vaut
+  que pour une vraie nouvelle rencontre.
+
+La grille se crée toute seule à la première ouverture, toujours la même pour un même joueur : l'équipe n'a rien
+à préparer.
 
 ## Idées pour la suite
 
@@ -58,9 +64,8 @@ Effort de développement estimé pour une personne qui connaît le projet.
 
 ## Recommandation
 
-1. **Déjà livré, à garder** : les 3 rencontres à chaque soirée, les tables tournantes
-   aux dîners assis, les paliers du Club toute l'année.
-   **À réaliser séparément** : le parcours du bingo aux apéros.
+1. **Déjà livré, à garder** : les 3 rencontres à chaque soirée, le bingo des rencontres aux apéros, les tables
+   tournantes aux dîners assis, les paliers du Club toute l'année.
 2. **Prochaine étape** : les parrains d'un soir et l'anecdote mystère. Ils réutilisent ce qui existe
    (matching, anecdotes, QR code) et visent le problème n°1 : les nouveaux qui restent seuls.
 3. **Avec un partenaire** : la dégustation à l'aveugle, idéalement avec un vigneron exposant à la Foire.

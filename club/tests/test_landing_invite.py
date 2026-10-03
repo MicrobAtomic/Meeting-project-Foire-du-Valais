@@ -118,3 +118,18 @@ class DemoReferralTests(TestCase):
         dashboard = self.client.get(reverse("club:staff_dashboard"))
         self.assertContains(dashboard, "2 nouvelles demandes")
         self.assertContains(dashboard, "Anne-Laure Dubuis")
+
+
+class LandingFiguresTests(TestCase):
+    def test_members_are_shown_as_a_round_figure_that_stays_true(self):
+        for i in range(12):
+            make_member(f"m{i}@example.com", sector="tech" if i % 2 else "finance")
+        make_member("new@example.com", sector="other")  # a new account that has not picked its sector yet
+        response = self.client.get(reverse("club:landing"))
+        self.assertContains(response, ">10+</p>")
+        self.assertEqual(response.context["sector_count"], 2)  # "Autre secteur" is not a sector of the Club
+
+    def test_a_small_club_shows_its_exact_count(self):
+        for i in range(3):
+            make_member(f"m{i}@example.com")
+        self.assertContains(self.client.get(reverse("club:landing")), ">3</p>")

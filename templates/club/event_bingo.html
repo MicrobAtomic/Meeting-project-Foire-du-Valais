@@ -1,0 +1,67 @@
+{% extends "base.html" %}{% load i18n club_ui %}
+{% block title %}{% translate "Bingo des rencontres" %} · {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<div class="mx-auto max-w-xl space-y-5">
+  <p><a href="{% url 'club:event_detail' event.pk %}" class="text-sm text-stone-600 hover:text-red-700">← {{ event.localized_title }}</a></p>
+
+  <header class="space-y-1">
+    <h1 class="text-2xl font-semibold">🎯 {% translate "Bingo des rencontres" %}</h1>
+    <p class="text-sm text-stone-600">{{ event.starts_at|datetime_short }} · 📍 {{ event.localized_location }}</p>
+  </header>
+
+  {% if is_over %}
+  <p class="card text-sm text-stone-600">{% translate "Cet événement est déjà passé." %}</p>
+  {% endif %}
+
+  {% if not registered %}
+    {% if not is_over %}
+    <section class="card space-y-3">
+      <h2 class="font-semibold">{% translate "Ta grille t'attend" %}</h2>
+      <p class="text-sm text-stone-600">{% translate "Réponds « Je viens » à l'événement pour recevoir ta grille et jouer pendant la soirée." %}</p>
+      <a href="{% url 'club:event_detail' event.pk %}" class="btn btn-primary">{% translate "Voir l'événement" %}</a>
+    </section>
+    {% endif %}
+  {% elif cells %}
+    {% if full_card %}
+    <p class="card bg-amber-50 text-center font-semibold text-amber-900 ring-amber-300" role="status">{% translate "Carton plein ! 🏆 Tu participes au tirage au sort de la soirée." %}</p>
+    {% endif %}
+    {% if has_line %}
+    <p class="card bg-emerald-50 text-center font-semibold text-emerald-900 ring-emerald-300" role="status">{% translate "BINGO ! Montre ton écran au bar 🥂" %}</p>
+    {% endif %}
+
+    <section class="card space-y-3">
+      <div class="flex items-baseline justify-between gap-3">
+        <p class="text-3xl font-semibold">{{ found }} / {{ total }}</p>
+        <p class="text-sm text-stone-600">{% translate "cases cochées" %}</p>
+      </div>
+      <progress class="bar" value="{{ found }}" max="{{ total }}"></progress>
+    </section>
+
+    <section class="space-y-3">
+      <h2 class="text-sm font-semibold uppercase tracking-wide text-stone-500">{% translate "Trouve quelqu'un qui…" %}</h2>
+      <ol class="grid grid-cols-3 gap-2">
+        {% for cell in cells %}
+        <li class="flex min-h-28 flex-col items-center justify-center gap-1.5 break-words rounded-2xl p-2 text-center text-xs leading-snug hyphens-auto sm:min-h-32 sm:text-sm {% if cell.found and cell.in_line %}bg-amber-50 text-amber-900 ring-2 ring-amber-400{% elif cell.found %}bg-emerald-50 text-emerald-900 ring-1 ring-emerald-300{% elif cell.square.kind == 'joker' %}bg-amber-50 text-amber-900 ring-1 ring-amber-300{% else %}bg-white text-stone-800 shadow-sm ring-1 ring-stone-200{% endif %}">
+          <span {% if cell.found %}class="opacity-70"{% endif %}>{{ cell.label }}</span>
+          {% if cell.found %}<a href="{% url 'club:member_detail' cell.found.pk %}" class="font-semibold underline decoration-dotted underline-offset-2"><span aria-hidden="true">✅</span> {{ cell.found.first_name }}</a>{% endif %}
+        </li>
+        {% endfor %}
+      </ol>
+      {% if not is_over %}
+      <p><a href="{% url 'club:my_qr' %}" class="btn btn-primary w-full sm:w-auto">🔳 {% translate "Montrer mon QR" %}</a></p>
+      {% endif %}
+    </section>
+  {% endif %}
+
+  <section class="card space-y-3">
+    <h2 class="font-semibold">{% translate "Les règles du jeu" %}</h2>
+    <ul class="space-y-2 text-sm text-stone-700">
+      <li><span aria-hidden="true">👋</span> {% translate "Trouve quelqu'un qui correspond à une case, discutez un moment, puis scanne son QR code (badge ou téléphone) : la case se coche avec son prénom." %}</li>
+      <li><span aria-hidden="true">☝️</span> {% translate "Une personne ne remplit qu'une seule case." %}</li>
+      <li><span aria-hidden="true">🃏</span> {% translate "La case du milieu est un joker : quelqu'un que tu n'avais jamais rencontré." %}</li>
+      <li><span aria-hidden="true">🥂</span> {% translate "Une ligne complète (horizontale, verticale ou diagonale) = BINGO : montre ton écran au bar." %}</li>
+      <li><span aria-hidden="true">🍾</span> {% translate "Carton plein = tirage au sort de la soirée." %}</li>
+    </ul>
+  </section>
+</div>
+{% endblock %}

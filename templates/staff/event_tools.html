@@ -1,12 +1,12 @@
 {% extends "base.html" %}{% load i18n static club_ui %}
-{% block title %}{{ event.title }} · {% translate "Préparer" %} · {{ SITE_NAME }}{% endblock %}
+{% block title %}{{ event.localized_title }} · {% translate "Préparer" %} · {{ SITE_NAME }}{% endblock %}
 {% block content %}
 <div class="space-y-5">
   <p class="no-print"><a href="{% url 'club:staff_dashboard' %}" class="text-sm text-stone-600 hover:text-red-700">← {% translate "Tableau de bord" %}</a></p>
 
   <section class="card">
-    <h1 class="text-2xl font-semibold">{{ event|kind_emoji }} {{ event.title }}</h1>
-    <p class="text-stone-600">{{ event.starts_at|datetime_long }} · 📍 {{ event.location }}</p>
+    <h1 class="text-2xl font-semibold">{{ event|kind_emoji }} {{ event.localized_title }}</h1>
+    <p class="text-stone-600">{{ event.starts_at|datetime_long }} · 📍 {{ event.localized_location }}</p>
     <p class="mt-1 text-sm">👥 {% blocktranslate count n=attendee_count %}{{ n }} inscrit{% plural %}{{ n }} inscrits{% endblocktranslate %}</p>
   </section>
 
@@ -41,6 +41,7 @@
 
     <section class="card space-y-3">
       <h2 class="font-semibold">🪑 {% translate "Tables tournantes" %}</h2>
+      {% if event.has_seating %}
       <form method="post" class="space-y-3">
         {% csrf_token %}
         <input type="hidden" name="action" value="seating">
@@ -50,7 +51,30 @@
         </div>
         <button type="submit" class="btn btn-primary">{% translate "Générer le plan de tables" %}</button>
       </form>
+      {% else %}
+      <p class="text-sm text-stone-600">{% translate "Pas de repas assis pour cet événement. Pour un dîner, coche « repas assis (tables tournantes) » dans l'administration : le plan de tables se prépare ensuite ici." %}</p>
+      <a href="{% url 'admin:club_event_change' event.pk %}" class="btn btn-secondary">{% translate "Ouvrir l'événement dans l'administration" %}</a>
+      {% endif %}
     </section>
+
+    {% if bingo %}
+    <section class="card space-y-3 md:col-span-2">
+      <h2 class="font-semibold">🎯 {% translate "Bingo des rencontres" %}</h2>
+      <p class="text-sm text-stone-600">{% translate "Rien à préparer : chaque inscrit reçoit sa grille en ouvrant la page de l'événement. Ici, la liste des gagnants à donner au bar." %}</p>
+      <p class="flex flex-wrap gap-x-6 gap-y-1 text-sm">
+        <span>{% blocktranslate count n=bingo.grids %}{{ n }} grille ouverte{% plural %}{{ n }} grilles ouvertes{% endblocktranslate %}</span>
+        <span>{% blocktranslate count n=bingo.ticked %}{{ n }} case cochée{% plural %}{{ n }} cases cochées{% endblocktranslate %}</span>
+        <span class="font-medium">{% blocktranslate count n=bingo.bingos %}{{ n }} bingo{% plural %}{{ n }} bingos{% endblocktranslate %}</span>
+      </p>
+      {% if bingo.winners %}
+      <ol class="divide-y divide-stone-100 text-sm">
+        {% for winner in bingo.winners %}
+        <li class="flex flex-wrap items-baseline justify-between gap-x-4 py-1.5"><span class="font-medium">{{ winner.member.full_name }}</span><span class="text-stone-600">{% blocktranslate count n=winner.lines with squares=winner.squares total=bingo.total %}{{ n }} ligne · {{ squares }} / {{ total }}{% plural %}{{ n }} lignes · {{ squares }} / {{ total }}{% endblocktranslate %}</span></li>
+        {% endfor %}
+      </ol>
+      {% endif %}
+    </section>
+    {% endif %}
   </div>
 
   <div class="grid gap-6 lg:grid-cols-2">
@@ -73,6 +97,7 @@
       {% endif %}
     </section>
 
+    {% if event.has_seating or plan %}
     <section class="space-y-3">
       <div class="flex flex-wrap items-center justify-between gap-3">
         <h2 class="text-lg font-semibold">🪑 {% translate "Plan de tables" %}</h2>
@@ -97,6 +122,7 @@
       <p class="card text-sm text-stone-600">{% translate "Aucun plan généré pour l'instant." %}</p>
       {% endif %}
     </section>
+    {% endif %}
   </div>
 </div>
 {% endblock %}

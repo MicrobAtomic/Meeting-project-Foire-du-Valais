@@ -6,7 +6,6 @@ from django.core.management import call_command
 from django.core.management.base import CommandError
 from django.test import TestCase
 from django.urls import reverse
-from django.utils import timezone
 
 from club.models import BingoSquare, Connection, Event, Member, new_qr_token
 
@@ -30,8 +29,7 @@ class DemoToolsTests(TestCase):
         self.client.post("/m/demo-lukas/")
         self.assertEqual(Connection.involving(self.camille).count(), 3)
         dinner = Event.objects.get(title="Dîner d'automne")
-        square = BingoSquare.objects.create(event=dinner, player=self.camille, position=0, kind="joker",
-                                            found=self.lukas, found_at=timezone.now())
+        square = BingoSquare.objects.get(event=dinner, player=self.camille, found=self.lukas)  # the scan ticked her bingo
         self.lukas.qr_token = new_qr_token()  # someone regenerated Lukas's QR code in the admin
         self.lukas.save()
 

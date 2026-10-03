@@ -2,15 +2,20 @@
 {% block title %}{{ target.full_name }} · {{ SITE_NAME }}{% endblock %}
 {% block content %}
 <div class="mx-auto max-w-md space-y-4">
-  {% include "club/_card.html" with member=target collected=False size="compact" %}
+  {% include "club/_card.html" with member=target collected=already_met size="compact" %}
 
   <section class="card space-y-4 text-center">
+    {% if already_met %}
+    <h1 class="text-lg font-semibold">🎯 {% blocktranslate with name=target.first_name square=bingo_square %}{{ name }} peut valider la case « {{ square }} » de ton bingo.{% endblocktranslate %}</h1>
+    {% else %}
     <h1 class="text-lg font-semibold">{% translate "Vous venez de vous rencontrer ?" %}</h1>
     <p class="text-sm text-stone-600">{% translate "Ajoute cette carte à ton album : vous pourrez alors échanger vos coordonnées." %}</p>
+    {% if bingo_square %}<p class="rounded-xl bg-amber-50 p-3 text-sm text-amber-900">🎯 {% blocktranslate with name=target.first_name square=bingo_square %}{{ name }} peut valider la case « {{ square }} » de ton bingo.{% endblocktranslate %}</p>{% endif %}
+    {% endif %}
     <form method="post">
       {% csrf_token %}
       {% if scan_event %}<input type="hidden" name="event" value="{{ scan_event.pk }}">{% endif %}
-      <button type="submit" class="btn btn-primary w-full">{% blocktranslate with name=target.first_name %}Ajouter {{ name }} à mon album{% endblocktranslate %}</button>
+      <button type="submit" class="btn btn-primary w-full">{% if already_met %}{% translate "Valider ma case de bingo" %}{% else %}{% blocktranslate with name=target.first_name %}Ajouter {{ name }} à mon album{% endblocktranslate %}{% endif %}</button>
     </form>
   </section>
 </div>

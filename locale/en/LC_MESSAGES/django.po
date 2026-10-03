@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Club des Affaires\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 22:19+0200\n"
+"POT-Creation-Date: 2026-10-03 22:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Club des Affaires\n"
 "Language-Team: Club des Affaires\n"
@@ -19,7 +19,6 @@ msgstr "Club des Affaires"
 msgid "rang"
 msgstr "rank"
 
-#| msgid "Langue des emails"
 msgid "Langue des communications"
 msgstr "Communication language"
 
@@ -42,6 +41,29 @@ msgstr "Regenerate the QR code (the old one will stop working)"
 msgid "%(count)s QR code(s) régénéré(s)."
 msgstr "%(count)s QR code(s) regenerated."
 
+msgid "L'événement"
+msgstr "The event"
+
+msgid ""
+"La version de référence, obligatoire : elle s'affiche aussi quand une "
+"traduction manque."
+msgstr ""
+"The reference version, required: it is also shown when a translation is "
+"missing."
+
+msgid "Animations"
+msgstr "Activities"
+
+msgid ""
+"Tables tournantes pour un dîner assis, bingo des rencontres pour un apéro "
+"debout. Le reste se prépare depuis Tableau de bord → Préparer."
+msgstr ""
+"Rotating tables for a seated dinner, people bingo for standing drinks. "
+"Everything else is prepared from Dashboard → Prepare."
+
+msgid "Publication"
+msgstr "Publication"
+
 msgid "Publier et préparer l'annonce"
 msgstr "Publish and prepare announcement"
 
@@ -51,7 +73,9 @@ msgstr "Announcement prepared. Sending is handled by the scheduled command."
 msgid "Annuler l'événement"
 msgstr "Cancel event"
 
-msgid "Événement annulé. Contacte les inscrits via le processus habituel de l'équipe."
+msgid ""
+"Événement annulé. Contacte les inscrits via le processus habituel de "
+"l'équipe."
 msgstr "Event cancelled. Contact attendees through the team’s usual process."
 
 msgid "inscrits"
@@ -66,6 +90,10 @@ msgstr "%(event)s: %(count)s introductions generated."
 
 msgid "Générer le plan de tables (3 services, tables de 6)"
 msgstr "Generate the seating plan (3 courses, tables of 6)"
+
+#, python-format
+msgid "%(event)s : pas de repas assis, pas de plan de tables."
+msgstr "%(event)s: no seated meal, no seating plan."
 
 #, python-format
 msgid "%(event)s : %(new)s nouvelles paires, %(repeated)s répétition(s)."
@@ -110,8 +138,11 @@ msgstr "Delivery statuses"
 msgid "Réessayer les échecs confirmés uniquement"
 msgstr "Retry confirmed failures only"
 
-msgid "Échecs confirmés replanifiés. Les résultats incertains nécessitent une revue manuelle."
-msgstr "Confirmed failures rescheduled. Uncertain outcomes require manual review."
+msgid ""
+"Échecs confirmés replanifiés. Les résultats incertains nécessitent une revue"
+" manuelle."
+msgstr ""
+"Confirmed failures rescheduled. Uncertain outcomes require manual review."
 
 msgid "E-mail ou mot de passe incorrect."
 msgstr "Wrong e-mail or password."
@@ -179,10 +210,12 @@ msgstr "A topic you love to talk about."
 msgid "Visible uniquement par les membres que tu as rencontrés."
 msgstr "Only visible to members you have met."
 
-msgid "Si tu décoches, seuls les membres que tu as déjà rencontrés pourront voir ta carte."
-msgstr "If you untick this, only members you have already met will see your card."
+msgid ""
+"Si tu décoches, seuls les membres que tu as déjà rencontrés pourront voir ta"
+" carte."
+msgstr ""
+"If you untick this, only members you have already met will see your card."
 
-#| msgid "Langues parlées"
 msgid "Selon mes langues parlées"
 msgstr "Based on the languages I speak"
 
@@ -276,8 +309,12 @@ msgstr "speaks English"
 msgid "membre depuis (année)"
 msgstr "member since (year)"
 
-msgid "Année d'entrée au Club. Elle donne le rang : nouvelle recrue la première année, pilier après 5 ans."
-msgstr "Year the member joined the Club. It sets the rank: newcomer in the first year, Club pillar after 5 years."
+msgid ""
+"Année d'entrée au Club. Elle donne le rang : nouvelle recrue la première "
+"année, pilier après 5 ans."
+msgstr ""
+"Year the member joined the Club. It sets the rank: newcomer in the first "
+"year, Club pillar after 5 years."
 
 msgid "membre fondateur"
 msgstr "founding member"
@@ -417,14 +454,22 @@ msgstr "description (English)"
 msgid "repas assis (tables tournantes)"
 msgstr "seated meal (rotating tables)"
 
-msgid "Pour un dîner assis : l'équipe génère un plan où chacun change de table à chaque service (Tableau de bord → Préparer)."
-msgstr "For a seated dinner: the team generates a plan where everyone changes table at every course (Dashboard → Prepare)."
+msgid ""
+"Pour un dîner assis : l'équipe génère un plan où chacun change de table à "
+"chaque service (Tableau de bord → Préparer)."
+msgstr ""
+"For a seated dinner: the team generates a plan where everyone changes table "
+"at every course (Dashboard → Prepare)."
 
 msgid "bingo des rencontres"
 msgstr "people bingo"
 
-msgid "Préparation du bingo : le modèle est disponible, le jeu n'est pas encore activé dans l'application."
-msgstr "Bingo preparation: the data model is available, but the game is not yet enabled in the app."
+msgid ""
+"Préparation du bingo : le modèle est disponible, le jeu n'est pas encore "
+"activé dans l'application."
+msgstr ""
+"Bingo preparation: the data model is available, but the game is not yet "
+"enabled in the app."
 
 msgid "événement"
 msgstr "event"
@@ -492,8 +537,12 @@ msgstr "sponsor"
 msgid "statut"
 msgstr "status"
 
-msgid "L'action d'acceptation crée le compte. L'accès est envoyé par lien de connexion, sans choix de mot de passe."
-msgstr "The acceptance action creates the account. Access uses a login link, with no password selection."
+msgid ""
+"L'action d'acceptation crée le compte. L'accès est envoyé par lien de "
+"connexion, sans choix de mot de passe."
+msgstr ""
+"The acceptance action creates the account. Access uses a login link, with no"
+" password selection."
 
 msgid "compte créé"
 msgstr "account created"
@@ -603,13 +652,46 @@ msgstr ""
 "See you soon!\n"
 "The Club team"
 
-msgid "Demande déjà acceptée sans compte lié : rapprochement manuel nécessaire."
-msgstr "Request already accepted without a linked account: manual reconciliation required."
+#| msgid "membre fondateur"
+msgid "est membre fondateur"
+msgstr "is a founding member"
+
+msgid "est au Club depuis plus de 5 ans"
+msgstr "has been in the Club for over 5 years"
+
+msgid "vient d'entrer au Club"
+msgstr "has just joined the Club"
+
+#, python-format
+msgid "adore %(tag)s"
+msgstr "loves %(tag)s"
+
+#, python-format
+msgid "déteste %(tag)s"
+msgstr "hates %(tag)s"
+
+#, python-format
+msgid "travaille dans %(sector)s"
+msgstr "works in %(sector)s"
+
+#, python-format
+msgid "vient de %(region)s"
+msgstr "comes from %(region)s"
+
+msgid "🃏 Joker : quelqu'un que tu n'avais jamais rencontré"
+msgstr "🃏 Wildcard: someone you had never met"
+
+msgid ""
+"Demande déjà acceptée sans compte lié : rapprochement manuel nécessaire."
+msgstr ""
+"Request already accepted without a linked account: manual reconciliation "
+"required."
 
 msgid "Cette demande possède déjà un compte lié."
 msgstr "This request already has a linked account."
 
-msgid "Un compte utilise déjà cette adresse : rapprochement manuel nécessaire."
+msgid ""
+"Un compte utilise déjà cette adresse : rapprochement manuel nécessaire."
 msgstr "An account already uses this address: manual reconciliation required."
 
 msgid "Les premiers liens"
@@ -648,8 +730,11 @@ msgstr "No more strangers"
 msgid "Tout le monde se connaît : la grande fête du Club."
 msgstr "Everybody knows everybody: the Club's big party."
 
-msgid "Vérifie le titre, le lieu, la date future et la fin des réponses avant publication."
-msgstr "Check the title, venue, future date and response deadline before publishing."
+msgid ""
+"Vérifie le titre, le lieu, la date future et la fin des réponses avant "
+"publication."
+msgstr ""
+"Check the title, venue, future date and response deadline before publishing."
 
 msgid "Bienvenue au Club des Affaires"
 msgstr "Welcome to the Club des Affaires"
@@ -671,8 +756,12 @@ msgstr "New event: %(title)s"
 msgid "Ta réponse pour : %(title)s"
 msgstr "Your response for: %(title)s"
 
-msgid "Photo invalide : JPEG, PNG, WebP, HEIC/HEIF ou AVIF non animé, 20 Mio, 50 mégapixels et 10 000 pixels par côté maximum."
-msgstr "Invalid photo: non-animated JPEG, PNG, WebP, HEIC/HEIF or AVIF, up to 20 MiB, 50 megapixels and 10,000 pixels per side."
+msgid ""
+"Photo invalide : JPEG, PNG, WebP, HEIC/HEIF ou AVIF non animé, 20 Mio, 50 "
+"mégapixels et 10 000 pixels par côté maximum."
+msgstr ""
+"Invalid photo: non-animated JPEG, PNG, WebP, HEIC/HEIF or AVIF, up to 20 "
+"MiB, 50 megapixels and 10,000 pixels per side."
 
 msgid "Les réponses sont fermées pour cet événement."
 msgstr "Responses are closed for this event."
@@ -695,11 +784,18 @@ msgstr "Confirm that the person represents the same company."
 msgid "Identité ambiguë : rapprochement manuel nécessaire."
 msgstr "Ambiguous identity: manual review required."
 
-msgid "Cette adresse appartient à un membre ou au staff. Aucun compte ne sera converti."
-msgstr "This address belongs to a member or staff. No account will be converted."
+msgid ""
+"Cette adresse appartient à un membre ou au staff. Aucun compte ne sera "
+"converti."
+msgstr ""
+"This address belongs to a member or staff. No account will be converted."
 
-msgid "Les noms diffèrent du compte invité existant. Vérifie l'identité avant validation."
-msgstr "The names differ from the existing guest account. Check the identity before approval."
+msgid ""
+"Les noms diffèrent du compte invité existant. Vérifie l'identité avant "
+"validation."
+msgstr ""
+"The names differ from the existing guest account. Check the identity before "
+"approval."
 
 msgid "Cet invité représente déjà un autre membre à cet événement."
 msgstr "This guest already represents another member at this event."
@@ -710,7 +806,8 @@ msgstr "Approval conflict: check the request and try again."
 msgid "Cet événement est déjà passé."
 msgstr "This event has already taken place."
 
-#. Translators: a percentage; French and German put a space before the % sign, English does not.
+#. Translators: a percentage; French and German put a space before the % sign,
+#. English does not.
 #, python-format
 msgid "%(value)s %%"
 msgstr "%(value)s%%"
@@ -768,8 +865,11 @@ msgstr "Noted, see you soon! 🥂"
 msgid "C'est noté. On pensera à toi !"
 msgstr "Noted. We'll be thinking of you!"
 
-msgid "Remplacement demandé. L'équipe vérifiera l'identité avant d'envoyer l'accès."
-msgstr "Substitution requested. The team will check the identity before sending access."
+msgid ""
+"Remplacement demandé. L'équipe vérifiera l'identité avant d'envoyer l'accès."
+msgstr ""
+"Substitution requested. The team will check the identity before sending "
+"access."
 
 msgid "Toutes les cartes"
 msgstr "All cards"
@@ -792,6 +892,16 @@ msgstr "That's your own card 😉"
 msgid "Carte ajoutée à ton album ! 🎉"
 msgstr "Card added to your album! 🎉"
 
+#, python-format
+msgid "🎯 Bingo : case « %(square)s » cochée grâce à %(name)s !"
+msgstr "🎯 Bingo: square “%(square)s” ticked thanks to %(name)s!"
+
+msgid "BINGO ! Montre ton écran au bar 🥂"
+msgstr "BINGO! Show your screen at the bar 🥂"
+
+msgid "Carton plein ! 🏆 Tu participes au tirage au sort de la soirée."
+msgstr "Full card! 🏆 You're in the evening's prize draw."
+
 msgid "Profil enregistré ✅"
 msgstr "Profile saved ✅"
 
@@ -806,6 +916,9 @@ msgid "%(count)s rencontre générée."
 msgid_plural "%(count)s rencontres générées."
 msgstr[0] "%(count)s introduction generated."
 msgstr[1] "%(count)s introductions generated."
+
+msgid "Pas de repas assis pour cet événement : pas de plan de tables."
+msgstr "No seated meal at this event: no seating plan."
 
 #, python-format
 msgid "Plan généré : %(new)s nouvelles paires, %(repeated)s répétition(s)."
@@ -953,14 +1066,82 @@ msgstr "Nobody matches your search."
 msgid "Essaie avec d'autres filtres."
 msgstr "Try other filters."
 
+msgid "Bingo des rencontres"
+msgstr "People bingo"
+
+msgid "Ta grille t'attend"
+msgstr "Your grid is waiting"
+
+msgid ""
+"Réponds « Je viens » à l'événement pour recevoir ta grille et jouer pendant "
+"la soirée."
+msgstr ""
+"Answer “I'm coming” to the event to get your grid and play during the "
+"evening."
+
+msgid "Voir l'événement"
+msgstr "View the event"
+
+msgid "cases cochées"
+msgstr "squares ticked"
+
+msgid "Trouve quelqu'un qui…"
+msgstr "Find someone who…"
+
+msgid "Montrer mon QR"
+msgstr "Show my QR"
+
+msgid "Les règles du jeu"
+msgstr "How to play"
+
+msgid ""
+"Trouve quelqu'un qui correspond à une case, discutez un moment, puis scanne "
+"son QR code (badge ou téléphone) : la case se coche avec son prénom."
+msgstr ""
+"Find someone who matches a square, chat for a moment, then scan their QR "
+"code (badge or phone): the square is ticked with their first name."
+
+msgid "Une personne ne remplit qu'une seule case."
+msgstr "One person fills one square only."
+
+msgid ""
+"La case du milieu est un joker : quelqu'un que tu n'avais jamais rencontré."
+msgstr "The middle square is a wildcard: someone you had never met."
+
+msgid ""
+"Une ligne complète (horizontale, verticale ou diagonale) = BINGO : montre "
+"ton écran au bar."
+msgstr ""
+"A full line (across, down or diagonal) = BINGO: show your screen at the bar."
+
+msgid "Carton plein = tirage au sort de la soirée."
+msgstr "Full card = the evening's prize draw."
+
 msgid "Tous les événements"
 msgstr "All events"
 
 msgid "Événement annulé"
 msgstr "Event cancelled"
 
-msgid "Tables tournantes : à chaque service, tu changes de table pour rencontrer de nouvelles personnes."
-msgstr "Rotating tables: at every course you change tables to meet new people."
+msgid "Animations de la soirée"
+msgstr "Tonight's activities"
+
+msgid ""
+"Trouve les personnes qui correspondent à ta grille et scanne leur QR code. "
+"Une ligne complète : BINGO !"
+msgstr ""
+"Find the people who match your grid and scan their QR code. A full line: "
+"BINGO!"
+
+#, python-format
+msgid "Voir ma grille · %(found)s / %(total)s"
+msgstr "See my grid · %(found)s / %(total)s"
+
+msgid ""
+"Tables tournantes : à chaque service, tu changes de table pour rencontrer de"
+" nouvelles personnes."
+msgstr ""
+"Rotating tables: at every course you change tables to meet new people."
 
 msgid "Ta réponse"
 msgstr "Your answer"
@@ -1014,6 +1195,9 @@ msgstr "Club events"
 msgid "À venir"
 msgstr "Upcoming"
 
+msgid "Tables tournantes"
+msgstr "Rotating tables"
+
 msgid "Tu viens"
 msgstr "You're coming"
 
@@ -1054,21 +1238,21 @@ msgstr "%(collected)s / %(total)s cards"
 
 #, python-format
 msgid "Prochain objectif : %(emoji)s l'album complet, encore %(n)s rencontre."
-msgid_plural "Prochain objectif : %(emoji)s l'album complet, encore %(n)s rencontres."
+msgid_plural ""
+"Prochain objectif : %(emoji)s l'album complet, encore %(n)s rencontres."
 msgstr[0] "Next goal: %(emoji)s the full album, %(n)s more connection."
 msgstr[1] "Next goal: %(emoji)s the full album, %(n)s more connections."
 
 #, python-format
-msgid "Prochain objectif : %(emoji)s %(target)s cartes, encore %(n)s rencontre."
-msgid_plural "Prochain objectif : %(emoji)s %(target)s cartes, encore %(n)s rencontres."
+msgid ""
+"Prochain objectif : %(emoji)s %(target)s cartes, encore %(n)s rencontre."
+msgid_plural ""
+"Prochain objectif : %(emoji)s %(target)s cartes, encore %(n)s rencontres."
 msgstr[0] "Next goal: %(emoji)s %(target)s cards, %(n)s more connection."
 msgstr[1] "Next goal: %(emoji)s %(target)s cards, %(n)s more connections."
 
 msgid "Album complet : tu connais tout le Club !"
 msgstr "Album complete: you know the whole Club!"
-
-msgid "Montrer mon QR"
-msgstr "Show my QR"
 
 msgid "Voir l'album"
 msgstr "View the album"
@@ -1096,14 +1280,15 @@ msgstr "Every milestone reached: well done, Club!"
 msgid "Prochain événement"
 msgstr "Next event"
 
-msgid "Voir l'événement"
-msgstr "View the event"
-
 msgid "Répondre"
 msgstr "Reply"
 
-msgid "Une dirigeante ou un dirigeant de ton entourage aurait sa place au Club ? Partage ton lien personnel : tu l'accompagnes pour sa première soirée."
-msgstr "Do you know a business leader who would fit in at the Club? Share your personal link: you'll look after them on their first evening."
+msgid ""
+"Une dirigeante ou un dirigeant de ton entourage aurait sa place au Club ? "
+"Partage ton lien personnel : tu l'accompagnes pour sa première soirée."
+msgstr ""
+"Do you know a business leader who would fit in at the Club? Share your "
+"personal link: you'll look after them on their first evening."
 
 msgid "L'offre de parrainage"
 msgstr "The referral offer"
@@ -1164,7 +1349,8 @@ msgstr "Edit my profile"
 msgid "Mon QR code"
 msgstr "My QR code"
 
-msgid "Visible uniquement par toi dans l'application. Un texte vide efface la note."
+msgid ""
+"Visible uniquement par toi dans l'application. Un texte vide efface la note."
 msgstr "Visible only to you in the app. Empty text deletes the note."
 
 msgid "Enregistrer"
@@ -1179,8 +1365,12 @@ msgstr "Take a screenshot to have it even without a connection."
 msgid "Swipe tes affinités"
 msgstr "Swipe your tastes"
 
-msgid "Glisse la carte à droite si tu adores, à gauche si tu détestes, vers le bas si bof. Ou utilise les boutons."
-msgstr "Swipe the card right if you love it, left if you hate it, down if it's meh. Or use the buttons."
+msgid ""
+"Glisse la carte à droite si tu adores, à gauche si tu détestes, vers le bas "
+"si bof. Ou utilise les boutons."
+msgstr ""
+"Swipe the card right if you love it, left if you hate it, down if it's meh. "
+"Or use the buttons."
 
 msgid "Mon profil"
 msgstr "My profile"
@@ -1194,10 +1384,13 @@ msgstr "Who are you?"
 msgid "Préparation de ton aperçu…"
 msgstr "Preparing your preview…"
 
-msgid "Voici le résultat après recadrage. Enregistre ton profil pour appliquer cette photo."
+msgid ""
+"Voici le résultat après recadrage. Enregistre ton profil pour appliquer "
+"cette photo."
 msgstr "This is your cropped photo. Save your profile to apply it."
 
-msgid "Aperçu indisponible. Tu peux enregistrer ton profil pour traiter la photo."
+msgid ""
+"Aperçu indisponible. Tu peux enregistrer ton profil pour traiter la photo."
 msgstr "Preview unavailable. You can save your profile to process the photo."
 
 msgid "Ta photo sera retirée à l’enregistrement."
@@ -1209,8 +1402,14 @@ msgstr "The photo exceeds 20 MiB. Choose a smaller file."
 msgid "Aperçu de ta photo de profil"
 msgstr "Preview of your profile photo"
 
-msgid "JPEG, PNG, WebP, HEIC/HEIF ou AVIF, 20 Mio maximum. Orientation, recadrage et compression automatiques. Ta photo suit les droits de visibilité de ta fiche."
-msgstr "JPEG, PNG, WebP, HEIC/HEIF or AVIF, up to 20 MiB. Automatic orientation, cropping and compression. Your photo follows your profile’s visibility settings."
+msgid ""
+"JPEG, PNG, WebP, HEIC/HEIF ou AVIF, 20 Mio maximum. Orientation, recadrage "
+"et compression automatiques. Ta photo suit les droits de visibilité de ta "
+"fiche."
+msgstr ""
+"JPEG, PNG, WebP, HEIC/HEIF or AVIF, up to 20 MiB. Automatic orientation, "
+"cropping and compression. Your photo follows your profile’s visibility "
+"settings."
 
 msgid "Langues parlées"
 msgstr "Spoken languages"
@@ -1224,8 +1423,12 @@ msgstr "Contact and privacy"
 msgid "Options email"
 msgstr "Email options"
 
-msgid "La présentation mensuelle utilise uniquement ton nom, ton entreprise, ton secteur et cette accroche, si tu l'autorises."
-msgstr "With your permission, the monthly introduction uses only your name, company, sector and this introduction."
+msgid ""
+"La présentation mensuelle utilise uniquement ton nom, ton entreprise, ton "
+"secteur et cette accroche, si tu l'autorises."
+msgstr ""
+"With your permission, the monthly introduction uses only your name, company,"
+" sector and this introduction."
 
 msgid "Ce que tu aimes, ce que tu détestes"
 msgstr "What you like, what you hate"
@@ -1239,18 +1442,33 @@ msgstr "Redo the swipe"
 msgid "Annuler"
 msgstr "Cancel"
 
+#, python-format
+msgid "%(name)s peut valider la case « %(square)s » de ton bingo."
+msgstr "%(name)s can tick the square “%(square)s” of your bingo."
+
 msgid "Vous venez de vous rencontrer ?"
 msgstr "Did you just meet?"
 
-msgid "Ajoute cette carte à ton album : vous pourrez alors échanger vos coordonnées."
-msgstr "Add this card to your album: you'll then be able to swap contact details."
+msgid ""
+"Ajoute cette carte à ton album : vous pourrez alors échanger vos "
+"coordonnées."
+msgstr ""
+"Add this card to your album: you'll then be able to swap contact details."
+
+msgid "Valider ma case de bingo"
+msgstr "Tick my bingo square"
 
 #, python-format
 msgid "Ajouter %(name)s à mon album"
 msgstr "Add %(name)s to my album"
 
-msgid "Propose un collègue de ton entreprise. Il aura son propre profil et ses rencontres resteront les siennes. L'équipe doit valider son accès temporaire."
-msgstr "Propose a colleague from your company. They will have their own profile and keep their own meetings. The team must approve their temporary access."
+msgid ""
+"Propose un collègue de ton entreprise. Il aura son propre profil et ses "
+"rencontres resteront les siennes. L'équipe doit valider son accès "
+"temporaire."
+msgstr ""
+"Propose a colleague from your company. They will have their own profile and "
+"keep their own meetings. The team must approve their temporary access."
 
 msgid "Envoyer ma demande"
 msgstr "Send my request"
@@ -1258,7 +1476,9 @@ msgstr "Send my request"
 msgid "Retour à l'événement"
 msgstr "Back to the event"
 
-msgid "Découvre les nouveaux profils et fais connaissance avant le prochain événement."
+msgid ""
+"Découvre les nouveaux profils et fais connaissance avant le prochain "
+"événement."
 msgstr "Discover the new profiles and get acquainted before the next event."
 
 msgid "Découvrir le profil"
@@ -1282,8 +1502,12 @@ msgid "Découvre cet événement et indique ta réponse sur le site."
 msgstr "Discover this event and submit your response on the website."
 
 #, python-format
-msgid "Ton accès temporaire est ouvert jusqu'au %(until)s. Complète ton propre profil ; tes rencontres restent les tiennes."
-msgstr "Your temporary access is open until %(until)s. Complete your own profile; your meetings remain yours."
+msgid ""
+"Ton accès temporaire est ouvert jusqu'au %(until)s. Complète ton propre "
+"profil ; tes rencontres restent les tiennes."
+msgstr ""
+"Your temporary access is open until %(until)s. Complete your own profile; "
+"your meetings remain yours."
 
 msgid "Se connecter"
 msgstr "Log in"
@@ -1293,7 +1517,8 @@ msgid "Ce lien est valable %(minutes)s minutes et utilisable une seule fois."
 msgstr "This link is valid for %(minutes)s minutes and can be used only once."
 
 msgid "Ton compte est prêt. Complète ton profil pour préparer tes rencontres."
-msgstr "Your account is ready. Complete your profile to prepare for your meetings."
+msgstr ""
+"Your account is ready. Complete your profile to prepare for your meetings."
 
 msgid "Préférences email"
 msgstr "Email preferences"
@@ -1304,7 +1529,9 @@ msgstr "Monthly digest"
 msgid "Tu ne recevras plus le récapitulatif mensuel."
 msgstr "You will no longer receive the monthly digest."
 
-msgid "Confirme pour arrêter uniquement le récapitulatif mensuel des nouveaux membres."
+msgid ""
+"Confirme pour arrêter uniquement le récapitulatif mensuel des nouveaux "
+"membres."
 msgstr "Confirm to unsubscribe only from the monthly new member digest."
 
 msgid "Ce lien est invalide ou expiré. Utilise tes préférences sur le site."
@@ -1313,8 +1540,12 @@ msgstr "This link is invalid or expired. Use your preferences on the website."
 msgid "Demander une invitation"
 msgstr "Request an invitation"
 
-msgid "Le Club des Affaires de la Foire du Valais se rejoint sur invitation. Dis-nous qui tu es, nous revenons vers toi."
-msgstr "The Club des Affaires of the Foire du Valais is joined by invitation. Tell us who you are and we'll get back to you."
+msgid ""
+"Le Club des Affaires de la Foire du Valais se rejoint sur invitation. Dis-"
+"nous qui tu es, nous revenons vers toi."
+msgstr ""
+"The Club des Affaires of the Foire du Valais is joined by invitation. Tell "
+"us who you are and we'll get back to you."
 
 #, python-format
 msgid "Invité·e par %(name)s %(initial)s."
@@ -1339,7 +1570,9 @@ msgstr "Thank you!"
 msgid "Merci pour ta demande !"
 msgstr "Thanks for your request!"
 
-msgid "L'équipe du Club l'a bien reçue et te répondra par e-mail très prochainement."
+msgid ""
+"L'équipe du Club l'a bien reçue et te répondra par e-mail très "
+"prochainement."
 msgstr "The Club team has received it and will reply by e-mail very soon."
 
 msgid "Foire du Valais"
@@ -1348,8 +1581,13 @@ msgstr "Foire du Valais"
 msgid "Le Club des Affaires de la Foire du Valais"
 msgstr "The Club des Affaires of the Foire du Valais"
 
-msgid "Un cercle de dirigeantes et dirigeants qui se retrouvent quelques fois par an, dans la bonne humeur. Ici, on se connaît avant, on se mélange pendant, on se retrouve après."
-msgstr "A circle of business leaders who meet a few times a year in good spirits. Here you get to know each other before, mingle during, and meet again after."
+msgid ""
+"Un cercle de dirigeantes et dirigeants qui se retrouvent quelques fois par "
+"an, dans la bonne humeur. Ici, on se connaît avant, on se mélange pendant, "
+"on se retrouve après."
+msgstr ""
+"A circle of business leaders who meet a few times a year in good spirits. "
+"Here you get to know each other before, mingle during, and meet again after."
 
 msgid "Espace membres"
 msgstr "Members' area"
@@ -1369,20 +1607,34 @@ msgstr "A club that lives all year round"
 msgid "Avant : se rencontrer"
 msgstr "Before: get to know each other"
 
-msgid "Chaque membre a sa carte : son entreprise, ses passions, ce qu'il adore… et ce qu'il déteste. Avant chaque soirée, tu sais déjà avec qui trinquer."
-msgstr "Every member has a card: their company, their passions, what they love… and what they hate. Before every evening, you already know who to raise a glass with."
+msgid ""
+"Chaque membre a sa carte : son entreprise, ses passions, ce qu'il adore… et "
+"ce qu'il déteste. Avant chaque soirée, tu sais déjà avec qui trinquer."
+msgstr ""
+"Every member has a card: their company, their passions, what they love… and "
+"what they hate. Before every evening, you already know who to raise a glass "
+"with."
 
 msgid "Pendant : se mélanger"
 msgstr "During: mingle"
 
-msgid "Chaque soirée a son jeu pour briser la glace : le bingo des rencontres à l'apéro, des tables qui tournent au dîner, et un QR code pour garder le contact. Fini les petits groupes."
-msgstr "Every evening has its own icebreaker: people bingo over drinks, rotating tables at dinner, and a QR code to keep in touch. No more little cliques."
+msgid ""
+"Chaque soirée a son jeu pour briser la glace : le bingo des rencontres à "
+"l'apéro, des tables qui tournent au dîner, et un QR code pour garder le "
+"contact. Fini les petits groupes."
+msgstr ""
+"Every evening has its own icebreaker: people bingo over drinks, rotating "
+"tables at dinner, and a QR code to keep in touch. No more little cliques."
 
 msgid "Après : grandir ensemble"
 msgstr "After: grow together"
 
-msgid "Ton album se remplit au fil des soirées et le Club se resserre. Ce n'est pas du business forcé : c'est du bon temps entre pairs."
-msgstr "Your album fills up evening after evening and the Club gets closer. No forced business: just a good time among peers."
+msgid ""
+"Ton album se remplit au fil des soirées et le Club se resserre. Ce n'est pas"
+" du business forcé : c'est du bon temps entre pairs."
+msgstr ""
+"Your album fills up evening after evening and the Club gets closer. No "
+"forced business: just a good time among peers."
 
 msgid "Comment rejoindre le Club"
 msgstr "How to join the Club"
@@ -1396,26 +1648,42 @@ msgstr "Two minutes online, with or without a sponsor."
 msgid "Crée ton accès"
 msgstr "Set up your access"
 
-msgid "Un e-mail de bienvenue, ton mot de passe, et ta carte de membre à compléter en deux minutes."
-msgstr "A welcome email, your password, and your member card to fill in within two minutes."
+msgid ""
+"Un e-mail de bienvenue, ton mot de passe, et ta carte de membre à compléter "
+"en deux minutes."
+msgstr ""
+"A welcome email, your password, and your member card to fill in within two "
+"minutes."
 
 msgid "Ta première soirée"
 msgstr "Your first evening"
 
-msgid "On te présente trois membres qui partagent tes passions : la glace est déjà brisée."
-msgstr "We introduce you to three members who share your passions: the ice is already broken."
+msgid ""
+"On te présente trois membres qui partagent tes passions : la glace est déjà "
+"brisée."
+msgstr ""
+"We introduce you to three members who share your passions: the ice is "
+"already broken."
 
 msgid "Envie de nous rejoindre ?"
 msgstr "Want to join us?"
 
-msgid "Le Club se rejoint sur invitation. Dis-nous qui tu es, nous revenons vers toi."
-msgstr "The Club is joined by invitation. Tell us who you are and we'll get back to you."
+msgid ""
+"Le Club se rejoint sur invitation. Dis-nous qui tu es, nous revenons vers "
+"toi."
+msgstr ""
+"The Club is joined by invitation. Tell us who you are and we'll get back to "
+"you."
 
 msgid "Lien de connexion"
 msgstr "Login link"
 
-msgid "Pas de mot de passe à retenir : entre ton e-mail et reçois un lien de connexion, valable 15 minutes."
-msgstr "No password to remember: enter your e-mail and get a login link, valid for 15 minutes."
+msgid ""
+"Pas de mot de passe à retenir : entre ton e-mail et reçois un lien de "
+"connexion, valable 15 minutes."
+msgstr ""
+"No password to remember: enter your e-mail and get a login link, valid for "
+"15 minutes."
 
 msgid "Envoyer le lien"
 msgstr "Send the link"
@@ -1447,8 +1715,11 @@ msgstr "Link expired"
 msgid "Ce lien n'est plus valable"
 msgstr "This link is no longer valid"
 
-msgid "Un lien de connexion ne fonctionne qu'une seule fois et pendant 15 minutes. Demande-en simplement un nouveau."
-msgstr "A login link works only once and for 15 minutes. Just ask for a new one."
+msgid ""
+"Un lien de connexion ne fonctionne qu'une seule fois et pendant 15 minutes. "
+"Demande-en simplement un nouveau."
+msgstr ""
+"A login link works only once and for 15 minutes. Just ask for a new one."
 
 msgid "Recevoir un nouveau lien"
 msgstr "Get a new link"
@@ -1465,7 +1736,9 @@ msgstr[1] "%(n)s badges, to print on A4 sheets (8 per page)"
 msgid "Imprimer"
 msgstr "Print"
 
-msgid "Aucun inscrit pour l'instant : les badges apparaissent dès que des membres s'inscrivent."
+msgid ""
+"Aucun inscrit pour l'instant : les badges apparaissent dès que des membres "
+"s'inscrivent."
 msgstr "Nobody has signed up yet: badges appear as soon as members register."
 
 msgid "Tableau de bord"
@@ -1523,8 +1796,12 @@ msgstr "No past events."
 msgid "Paliers du Club"
 msgstr "Club milestones"
 
-msgid "Un objectif commun donne envie de se rencontrer : quand un palier est atteint, sa récompense s'annonce au prochain événement."
-msgstr "A shared goal makes people want to meet: when a milestone is reached, its reward is announced at the next event."
+msgid ""
+"Un objectif commun donne envie de se rencontrer : quand un palier est "
+"atteint, sa récompense s'annonce au prochain événement."
+msgstr ""
+"A shared goal makes people want to meet: when a milestone is reached, its "
+"reward is announced at the next event."
 
 #, python-format
 msgid "encore %(n)s rencontre"
@@ -1569,8 +1846,12 @@ msgstr "No substitution requests."
 msgid "Vérifier les demandes dans l'administration"
 msgstr "Review requests in administration"
 
-msgid "Un badge par inscrit à imprimer sur feuilles A4 : prénom, entreprise, sujet de conversation et QR code."
-msgstr "One badge per attendee to print on A4 sheets: first name, company, conversation topic and QR code."
+msgid ""
+"Un badge par inscrit à imprimer sur feuilles A4 : prénom, entreprise, sujet "
+"de conversation et QR code."
+msgstr ""
+"One badge per attendee to print on A4 sheets: first name, company, "
+"conversation topic and QR code."
 
 msgid "Ouvrir les badges"
 msgstr "Open the badges"
@@ -1578,17 +1859,60 @@ msgstr "Open the badges"
 msgid "Rencontres proposées"
 msgstr "Suggested introductions"
 
-msgid "Chaque inscrit reçoit jusqu'à 3 personnes qu'il ne connaît pas encore, avec leurs points communs. À relancer après chaque changement d'inscrits."
-msgstr "Each attendee gets up to 3 people they don't know yet, with what they have in common. Run again after any change in attendees."
+msgid ""
+"Chaque inscrit reçoit jusqu'à 3 personnes qu'il ne connaît pas encore, avec "
+"leurs points communs. À relancer après chaque changement d'inscrits."
+msgstr ""
+"Each attendee gets up to 3 people they don't know yet, with what they have "
+"in common. Run again after any change in attendees."
 
 msgid "Générer les rencontres"
 msgstr "Generate introductions"
 
-msgid "Tables tournantes"
-msgstr "Rotating tables"
-
 msgid "Générer le plan de tables"
 msgstr "Generate the seating plan"
+
+msgid ""
+"Pas de repas assis pour cet événement. Pour un dîner, coche « repas assis "
+"(tables tournantes) » dans l'administration : le plan de tables se prépare "
+"ensuite ici."
+msgstr ""
+"No seated meal at this event. For a dinner, tick “seated meal (rotating "
+"tables)” in the admin: the seating plan is then prepared here."
+
+msgid "Ouvrir l'événement dans l'administration"
+msgstr "Open the event in the admin"
+
+msgid ""
+"Rien à préparer : chaque inscrit reçoit sa grille en ouvrant la page de "
+"l'événement. Ici, la liste des gagnants à donner au bar."
+msgstr ""
+"Nothing to prepare: every attendee gets their grid by opening the event "
+"page. Here is the list of winners to give to the bar."
+
+#, python-format
+msgid "%(n)s grille ouverte"
+msgid_plural "%(n)s grilles ouvertes"
+msgstr[0] "%(n)s grid opened"
+msgstr[1] "%(n)s grids opened"
+
+#, python-format
+msgid "%(n)s case cochée"
+msgid_plural "%(n)s cases cochées"
+msgstr[0] "%(n)s square ticked"
+msgstr[1] "%(n)s squares ticked"
+
+#, python-format
+msgid "%(n)s bingo"
+msgid_plural "%(n)s bingos"
+msgstr[0] "%(n)s bingo"
+msgstr[1] "%(n)s bingos"
+
+#, python-format
+msgid "%(n)s ligne · %(squares)s / %(total)s"
+msgid_plural "%(n)s lignes · %(squares)s / %(total)s"
+msgstr[0] "%(n)s line · %(squares)s / %(total)s"
+msgstr[1] "%(n)s lines · %(squares)s / %(total)s"
 
 #, python-format
 msgid "Rencontres proposées (%(n)s)"
@@ -1601,8 +1925,12 @@ msgid "Plan de tables"
 msgstr "Seating plan"
 
 #, python-format
-msgid "%(new)s nouvelles paires · %(repeated)s répétition(s) · %(rounds)s services · tables de %(size)s"
-msgstr "%(new)s new pairs · %(repeated)s repeat(s) · %(rounds)s courses · tables of %(size)s"
+msgid ""
+"%(new)s nouvelles paires · %(repeated)s répétition(s) · %(rounds)s services "
+"· tables de %(size)s"
+msgstr ""
+"%(new)s new pairs · %(repeated)s repeat(s) · %(rounds)s courses · tables of "
+"%(size)s"
 
 #, python-format
 msgid "Table %(number)s"

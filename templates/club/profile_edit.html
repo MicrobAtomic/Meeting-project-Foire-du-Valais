@@ -11,7 +11,7 @@
     {% if form.non_field_errors %}<p class="rounded-xl bg-red-50 p-3 text-sm text-red-900" role="alert">{{ form.non_field_errors.0 }}</p>{% endif %}
 
     <section class="card space-y-4">
-      <h2 class="font-semibold">🧑 {% translate "Qui es-tu ?" %}</h2>
+      <h2 class="font-semibold">{% translate "Qui es-tu ?" %}</h2>
       {% if form.photo %}
       <div data-photo-preview data-preview-url="{% url 'club:profile_photo_preview' %}"
            data-fallback-src="{{ request.member|demo_photo }}"
@@ -20,16 +20,18 @@
            data-failed="{% translate 'Aperçu indisponible. Tu peux enregistrer ton profil pour traiter la photo.' %}"
            data-removed="{% translate 'Ta photo sera retirée à l’enregistrement.' %}"
            data-too-large="{% translate 'La photo dépasse 20 Mio. Choisis un fichier plus léger.' %}"
-           class="space-y-2">
+           class="flex flex-col items-center gap-4 sm:flex-row sm:items-start">
         {% with portrait=request.member|member_portrait %}
-        <img data-photo-image {% if portrait %}src="{{ portrait }}"{% else %}hidden{% endif %} alt="{% translate 'Aperçu de ta photo de profil' %}" width="112" height="112" class="h-28 w-28 rounded-full object-cover">
-        <div data-photo-placeholder {% if portrait %}hidden{% endif %} class="flex h-28 w-28 items-center justify-center rounded-full text-2xl font-semibold {{ request.member|sector_classes }}" aria-hidden="true">{{ request.member.initials }}</div>
+        <img data-photo-image {% if portrait %}src="{{ portrait }}"{% else %}hidden{% endif %} alt="{% translate 'Aperçu de ta photo de profil' %}" width="112" height="112" class="h-28 w-28 shrink-0 rounded-full object-cover">
+        <div data-photo-placeholder {% if portrait %}hidden{% endif %} class="flex h-28 w-28 shrink-0 items-center justify-center rounded-full text-2xl font-semibold {{ request.member|sector_classes }}" aria-hidden="true">{{ request.member.initials }}</div>
         {% endwith %}
-        <p data-photo-status role="status" aria-live="polite" class="text-sm text-stone-600"></p>
+        <div class="w-full min-w-0 flex-1 space-y-3">
+          {% include "club/_field.html" with field=form.photo %}
+          <p class="text-sm text-stone-600">{% translate "JPEG, PNG, WebP, HEIC/HEIF ou AVIF, 20 Mio maximum. Orientation, recadrage et compression automatiques. Ta photo suit les droits de visibilité de ta fiche." %}</p>
+          {% include "club/_field.html" with field=form.remove_photo %}
+          <p data-photo-status role="status" aria-live="polite" class="text-sm text-stone-600"></p>
+        </div>
       </div>
-      {% include "club/_field.html" with field=form.photo %}
-      <p class="text-sm text-stone-600">{% translate "JPEG, PNG, WebP, HEIC/HEIF ou AVIF, 20 Mio maximum. Orientation, recadrage et compression automatiques. Ta photo suit les droits de visibilité de ta fiche." %}</p>
-      {% include "club/_field.html" with field=form.remove_photo %}
       {% endif %}
       <div class="grid gap-4 sm:grid-cols-2">
         {% include "club/_field.html" with field=form.first_name %}

@@ -120,7 +120,7 @@ class GuestAccessTests(TestCase):
         arguments = {"member_detail": self.participant, "member_note": self.participant,
                      "member_photo": self.participant, "member_vcard": self.participant,
                      "event_detail": self.event, "event_rsvp": self.event,
-                     "member_substitute": self.event, "member_substitute_cancel": self.event}
+                     "member_substitute": self.event, "member_substitute_cancel": self.event, "event_bingo": self.event}
         with patch("django.utils.timezone.now", return_value=self.event.starts_at + timedelta(hours=49)):
             for qualified in MEMBER:
                 name = qualified.split(":")[1]

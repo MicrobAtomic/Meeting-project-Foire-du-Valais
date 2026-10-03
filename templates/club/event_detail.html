@@ -15,7 +15,18 @@
     </div>
     {% if event.localized_description %}<p class="pt-1 text-sm">{{ event.localized_description }}</p>{% endif %}
     {% if event.cancelled_at %}<p class="chip">{% translate "Événement annulé" %}</p>{% endif %}
-    {% if event.has_seating %}<p class="text-sm text-stone-600">🔀 {% translate "Tables tournantes : à chaque service, tu changes de table pour rencontrer de nouvelles personnes." %}</p>{% endif %}
+    {% if event.has_bingo or event.has_seating %}
+    <div class="space-y-2 border-t border-stone-100 pt-3">
+      <h2 class="text-sm font-semibold">{% translate "Animations de la soirée" %}</h2>
+      {% if event.has_bingo %}
+      <div class="flex flex-wrap items-center justify-between gap-3 rounded-xl bg-amber-50 p-3 text-sm ring-1 ring-amber-200">
+        <p>🎯 <span class="font-medium">{% translate "Bingo des rencontres" %}</span> · {% translate "Trouve les personnes qui correspondent à ta grille et scanne leur QR code. Une ligne complète : BINGO !" %}</p>
+        {% if bingo %}<a href="{% url 'club:event_bingo' event.pk %}" class="btn btn-secondary">{% blocktranslate with found=bingo.found total=bingo.total %}Voir ma grille · {{ found }} / {{ total }}{% endblocktranslate %}</a>{% endif %}
+      </div>
+      {% endif %}
+      {% if event.has_seating %}<p class="text-sm text-stone-600">🔀 {% translate "Tables tournantes : à chaque service, tu changes de table pour rencontrer de nouvelles personnes." %}</p>{% endif %}
+    </div>
+    {% endif %}
   </section>
 
   {% if event.responses_open and request.member.kind == 'member' %}

@@ -107,9 +107,24 @@ class RSVPInline(admin.TabularInline):
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    list_display = ["title", "kind", "starts_at", "location", "has_seating", "is_published", "attendees"]
+    list_display = ["title", "kind", "starts_at", "location", "has_seating", "has_bingo", "is_published", "attendees"]
     readonly_fields = ["is_published", "published_at", "cancelled_at"]
-    list_filter = ["kind", "has_seating"]
+    list_filter = ["kind", "has_seating", "has_bingo"]
+    fieldsets = [  # one box per language: the members read the text of the language they chose
+        (_("L'événement"), {"fields": ["kind", "starts_at", "rsvp_deadline"]}),
+        ("Français (FR)", {
+            "fields": ["title", "location", "description"],
+            "description": _("La version de référence, obligatoire : elle s'affiche aussi quand une traduction manque."),
+        }),
+        ("Deutsch (DE)", {"fields": ["title_de", "location_de", "description_de"]}),
+        ("English (EN)", {"fields": ["title_en", "location_en", "description_en"]}),
+        (_("Animations"), {
+            "fields": ["has_seating", "has_bingo"],
+            "description": _("Tables tournantes pour un dîner assis, bingo des rencontres pour un apéro debout. "
+                             "Le reste se prépare depuis Tableau de bord → Préparer."),
+        }),
+        (_("Publication"), {"fields": ["is_published", "published_at", "cancelled_at"]}),
+    ]
     search_fields = ["title", "location"]
     date_hierarchy = "starts_at"
     inlines = [RSVPInline]
@@ -146,6 +161,9 @@ class EventAdmin(admin.ModelAdmin):
     @admin.action(description=_("Générer le plan de tables (3 services, tables de 6)"))
     def make_seating(self, request, queryset):
         for event in queryset:
+            if not event.has_seating:  # a standing drinks has no tables to rotate
+                self.message_user(request, _("%(event)s : pas de repas assis, pas de plan de tables.") % {"event": event}, level=messages.WARNING)
+                continue
             plan = generate_seating(event)
             self.message_user(
                 request,

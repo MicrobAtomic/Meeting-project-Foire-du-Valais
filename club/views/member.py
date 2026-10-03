@@ -22,6 +22,7 @@ from club.services.access import can_open_profile, scan_event, visible_members, 
 from club.services.substitutions import require_regular
 from club.services.notes import get_personal_note, save_personal_note
 from club.models import RSVP, Connection, EmailPreferences, Event, Member, MemberTag, Sector, Tag
+from club.services.bingo import find_square, square_label, tick
 from club.services.events import visible_events
 from club.services.photos import normalize_member_photo, photo_write_scope
 from club.services.federation import club_stats, collected_guest_count, collected_ids, collection_progress
@@ -177,10 +178,29 @@ def scan(request, token):
         _connection, created = Connection.link(me, target, source=Connection.Source.QR, event=context_event)
         if created:
             messages.success(request, _("Carte ajoutée à ton album ! 🎉"))
+        ticked = tick(me, target, new_meeting=created)  # « Bingo des rencontres » (None when there is nothing to tick)
+        if ticked:
+            messages.success(
+                request,
+                _("🎯 Bingo : case « %(square)s » cochée grâce à %(name)s !")
+                % {"square": square_label(ticked.square), "name": target.first_name},
+            )
+            if ticked.new_bingo:
+                messages.success(request, _("BINGO ! Montre ton écran au bar 🥂"))
+            if ticked.full_card:
+                messages.success(request, _("Carton plein ! 🏆 Tu participes au tirage au sort de la soirée."))
         return redirect("club:member_detail", pk=target.pk)
-    if Connection.exists_between(me, target):
+    already_met = Connection.exists_between(me, target)
+    in_play = find_square(me, target, new_meeting=not already_met)  # ticks nothing: a GET never changes the game
+    if already_met and in_play is None:
         return redirect("club:member_detail", pk=target.pk)
-    return render(request, "club/scan_confirm.html", {"target": target, "scan_event": context_event})
+    context = {
+        "target": target,
+        "scan_event": context_event,
+        "already_met": already_met,
+        "bingo_square": square_label(in_play[1]) if in_play else None,
+    }
+    return render(request, "club/scan_confirm.html", context)
 
 
 @member_required

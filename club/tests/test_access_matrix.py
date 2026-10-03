@@ -19,7 +19,7 @@ PUBLIC = {  # reachable without an account (nothing about members is exposed the
 }
 MEMBER = {  # members only (a Member profile is required)
     "club:home", "club:onboarding", "club:album", "club:profile_edit", "club:profile_photo_preview", "club:my_qr", "club:invite",
-    "club:member_detail", "club:member_note", "club:member_photo", "club:member_vcard", "club:event_list", "club:event_detail", "club:event_rsvp", "club:scan", "club:member_substitute", "club:member_substitute_cancel",
+    "club:member_detail", "club:member_note", "club:member_photo", "club:member_vcard", "club:event_list", "club:event_detail", "club:event_rsvp", "club:event_bingo", "club:scan", "club:member_substitute", "club:member_substitute_cancel",
 }
 STAFF = {"club:staff_dashboard", "club:staff_event", "club:staff_badges"}
 ANY_LOGGED_IN = {"logout"}
@@ -44,7 +44,7 @@ class AccessMatrixTests(TestCase):
     def setUp(self):
         self.alice = make_member("alice@example.com")
         self.bob = make_member("bob@example.com")
-        self.event = Event.objects.create(is_published=True, title="Dîner", kind="dinner", location="Martigny", starts_at="2030-01-01T18:00Z")
+        self.event = Event.objects.create(is_published=True, has_bingo=True, title="Dîner", kind="dinner", location="Martigny", starts_at="2030-01-01T18:00Z")
         directory = tempfile.TemporaryDirectory()
         self.addCleanup(directory.cleanup)
         override = override_settings(MEDIA_ROOT=directory.name)
@@ -58,7 +58,7 @@ class AccessMatrixTests(TestCase):
         self.args = {
             "club:email_unsubscribe": [unsubscribe_token(self.alice)],
             "club:member_detail": [self.bob.pk], "club:member_note": [self.bob.pk], "club:member_photo": [self.bob.pk], "club:member_vcard": [self.bob.pk], "club:event_detail": [self.event.pk],
-            "club:event_rsvp": [self.event.pk], "club:member_substitute": [self.event.pk], "club:member_substitute_cancel": [self.event.pk], "club:scan": [self.bob.qr_token],
+            "club:event_rsvp": [self.event.pk], "club:event_bingo": [self.event.pk], "club:member_substitute": [self.event.pk], "club:member_substitute_cancel": [self.event.pk], "club:scan": [self.bob.qr_token],
             "club:staff_event": [self.event.pk], "club:staff_badges": [self.event.pk],
         }
 

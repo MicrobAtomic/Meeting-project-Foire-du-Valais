@@ -1,6 +1,6 @@
 from django.urls import path
 
-from club.views import events, member, public, staff
+from club.views import bingo, events, member, public, staff
 
 app_name = "club"
 urlpatterns = [
@@ -23,6 +23,7 @@ urlpatterns = [
     path("evenements/", events.event_list, name="event_list"),
     path("evenements/<int:pk>/", events.event_detail, name="event_detail"),
     path("evenements/<int:pk>/rsvp/", events.event_rsvp, name="event_rsvp"),
+    path("evenements/<int:pk>/bingo/", bingo.event_bingo, name="event_bingo"),
     path("evenements/<int:pk>/remplacant/", events.member_substitute, name="member_substitute"),
     path("evenements/<int:pk>/remplacant/annuler/", events.member_substitute_cancel, name="member_substitute_cancel"),
     path("m/<str:token>/", member.scan, name="scan"),

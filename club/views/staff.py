@@ -14,6 +14,7 @@ from django.views.decorators.http import require_http_methods
 from club.decorators import staff_required
 from club.forms import SeatingForm
 from club.models import RSVP, Event, InvitationRequest, Match, SeatingPlan, Substitute, Tag
+from club.services.bingo import event_stats
 from club.services.events import attendees, generate_matches, generate_seating, with_attendee_counts
 from club.services.notifications import cancel_event, publish_event
 from club.services.federation import (
@@ -108,6 +109,9 @@ def event_tools(request, pk):
             return redirect("club:staff_event", pk=event.pk)
         if action != "seating":
             return HttpResponseBadRequest("Unknown action")
+        if not event.has_seating:
+            messages.error(request, _("Pas de repas assis pour cet événement : pas de plan de tables."))
+            return redirect("club:staff_event", pk=event.pk)
         seating_form = SeatingForm(request.POST)
         if seating_form.is_valid():
             plan = generate_seating(event, **seating_form.cleaned_data)
@@ -126,6 +130,7 @@ def event_tools(request, pk):
         "plan": plan,
         "rounds": seating_for_display(plan) if plan else [],
         "substitutions": event.substitutes.select_related("member", "guest"),
+        "bingo": event_stats(event) if event.has_bingo else None,
     }
     return render(request, "staff/event_tools.html", context)
 

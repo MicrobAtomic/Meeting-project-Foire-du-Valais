@@ -16,7 +16,7 @@ from django.contrib.auth import logout
 from club.services.substitutions import member_access_valid
 
 from club.forms import InvitationRequestForm, MagicLinkRequestForm
-from club.models import EmailPreferences, InvitationRequest, Member
+from club.models import EmailPreferences, InvitationRequest, Member, Sector
 from club.services.digests import unsubscribe_member_id
 from club.services.auth_links import send_login_link
 
@@ -27,9 +27,13 @@ logger = logging.getLogger(__name__)
 def landing(request):
     """Public showcase: only aggregate numbers, never a name."""
     members = Member.objects.filter(user__is_active=True, kind=Member.Kind.MEMBER)
+    count = members.count()
     context = {
-        "member_count": members.count(),
-        "sector_count": members.values("sector").distinct().count(),
+        "member_count": count,
+        # "50+" rather than the exact figure: always true (rounded down to the ten: 49 -> "40+", 63 -> "60+") and it
+        # reads as a club that grows. A club under ten members shows its exact count.
+        "member_label": f"{count // 10 * 10}+" if count >= 10 else str(count),
+        "sector_count": members.exclude(sector=Sector.OTHER).values("sector").distinct().count(),
     }
     return render(request, "public/landing.html", context)
 

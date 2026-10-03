@@ -11,6 +11,7 @@ from django.views.decorators.http import require_http_methods
 from club.decorators import member_required
 from club.models import RSVP, Substitute
 from club.forms import SubstituteForm
+from club.services.bingo import GRID_SIZE, found_count
 from club.services.events import attendees, invalidate_event_plans, visible_events, with_attendee_counts
 from club.services.access import can_open_profile, visible_members
 from club.services.substitutions import cancel_substitute, request_substitute, require_open_event, require_regular
@@ -61,6 +62,8 @@ def event_detail(request, pk):
         "seats": seats_for(me, event) if registered else [],
         "substitution": Substitute.objects.filter(event=event, member=me).first() if me.kind == me.Kind.MEMBER else None,
     }
+    if event.has_bingo and attendees(event).filter(pk=me.pk).exists():  # « Voir ma grille · 3 / 9 »
+        context["bingo"] = {"found": found_count(me, event), "total": GRID_SIZE}
     return render(request, "club/event_detail.html", context)
 
 

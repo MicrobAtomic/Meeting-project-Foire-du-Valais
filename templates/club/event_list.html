@@ -13,6 +13,7 @@
         <h3 class="font-semibold">{{ e.localized_title }}</h3>{% if e.cancelled_at %}<p class="chip">{% translate "Événement annulé" %}</p>{% endif %}
         <p class="text-sm text-stone-600">{{ e.starts_at|datetime_short }}</p>
         <p class="text-sm text-stone-600">📍 {{ e.localized_location }}</p>
+        {% if e.has_bingo or e.has_seating %}<p class="flex flex-wrap gap-1.5 pt-1">{% if e.has_bingo %}<span class="chip">🎯 {% translate "Bingo des rencontres" %}</span>{% endif %}{% if e.has_seating %}<span class="chip">🪑 {% translate "Tables tournantes" %}</span>{% endif %}</p>{% endif %}
       </div>
     </div>
     <div class="flex items-center justify-between border-t border-stone-100 pt-2 text-sm">

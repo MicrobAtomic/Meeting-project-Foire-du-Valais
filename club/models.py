@@ -225,7 +225,7 @@ class Event(models.Model):
     has_bingo = models.BooleanField(
         _("bingo des rencontres"),
         default=False,
-        help_text=_("Préparation du bingo : le modèle est disponible, le jeu n'est pas encore activé dans l'application."),
+        help_text=_("Pour un apéro debout : chaque inscrit reçoit une grille « Trouve quelqu'un qui… » qu'il remplit en scannant des QR codes. Rien à préparer."),
     )
 
     class Meta:
