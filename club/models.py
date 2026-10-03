@@ -68,6 +68,7 @@ class Member(models.Model):
     qr_token = models.CharField(max_length=32, unique=True, default=new_qr_token, editable=False)
     referral_code = models.CharField(max_length=12, unique=True, default=new_referral_code, editable=False)
     created_at = models.DateTimeField(auto_now_add=True)
+    demo_photo_key = models.CharField(max_length=32, blank=True, editable=False)
 
     class Meta:
         ordering = ["last_name", "first_name"]

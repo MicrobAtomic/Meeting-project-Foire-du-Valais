@@ -62,6 +62,8 @@ class Command(BaseCommand):
         lukas = self.create_member(tags, password=password, **demo_data.LUKAS)
         others = self.create_other_members(rng, tags, year)
         members = [camille, lukas, *others]
+        for email, key in demo_data.DEMO_PHOTO_KEYS.items():
+            Member.objects.filter(user__email=email).update(demo_photo_key=key)
 
         past, upcoming, later = self.create_events()
         self.create_rsvps(rng, members, past, upcoming, later, camille, lukas)

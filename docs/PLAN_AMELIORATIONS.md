@@ -13,6 +13,7 @@ Les envois réels et les changements d'hébergement restent à configurer sépar
 
 | Phase | État | Vérifications / livraison |
 |---|---|---|
+| 2 | Terminée | 189 tests verts ; 3 JPEG 256 × 256 vérifiés ; collectstatic OK ; licence et sources dans docs/demo/PHOTOS.md |
 | 1 | Terminée | 187 tests verts ; tarif configurable vérifié sur GET/POST et FR/DE/EN ; offre désactivée par défaut |
 | 0 | Terminée | 185 tests SQLite verts ; contrôles Django et migrations verts ; documentation et aides admin corrigées |
 
@@ -225,22 +226,22 @@ Pages sources vérifiées pendant l'étude, candidates à l'import ; les fichier
 Fichiers : `static/img/demo/`, `docs/demo/PHOTOS.md`, `club/models.py`, nouvelle migration, `club/demo_data.py`,
 `club/management/commands/seed_demo.py`, `club/templatetags/club_ui.py`, `templates/club/_card.html`, `templates/base.html`.
 
-- [ ] **2.1** Télécharger uniquement les candidats retenus depuis leur page officielle. Pour chaque fichier,
+- [x] **2.1** Télécharger uniquement les candidats retenus depuis leur page officielle. Pour chaque fichier,
   conserver dans `PHOTOS.md` la page source, l'auteur, la licence, la date d'acquisition et les transformations.
   Vérifier visuellement le portrait et son recadrage. Ne pas importer une image sponsorisée ou d'une autre banque.
-- [ ] **2.2** Préparer des JPEG ou WebP carrés d'environ 256 × 256, avec un objectif de moins de 80 Ko chacun.
+- [x] **2.2** Préparer des JPEG ou WebP carrés d'environ 256 × 256, avec un objectif de moins de 80 Ko chacun.
   Retirer les métadonnées personnelles. Employer un outil local disponible ; si aucun outil approprié n'existe,
   conserver les initiales et noter le blocage au lieu d'ajouter une dépendance implicite.
-- [ ] **2.3** Ajouter `Member.demo_photo_key`, `CharField(max_length=32, blank=True, editable=False)`.
+- [x] **2.3** Ajouter `Member.demo_photo_key`, `CharField(max_length=32, blank=True, editable=False)`.
   Utiliser une liste fermée telle que `camille`, `lukas`, `joelle`, associée à des chemins statiques connus dans
   un filtre de template. Aucun chemin, nom de fichier ou domaine fourni par un formulaire utilisateur.
-- [ ] **2.4** Dans le seed, assigner les clés aux adresses fictives connues ; ne pas utiliser le générateur
+- [x] **2.4** Dans le seed, assigner les clés aux adresses fictives connues ; ne pas utiliser le générateur
   aléatoire existant pour attribuer les photos. Ne changer ni l'ordre des membres ni les identifiants ni les affinités.
   La photo n'est montrée que si `DEMO_MODE` est vrai et la clé connue. Garder les initiales sinon.
-- [ ] **2.5** Dans `_card.html`, afficher l'image carrée recadrée avec dimensions explicites, chargement différé
+- [x] **2.5** Dans `_card.html`, afficher l'image carrée recadrée avec dimensions explicites, chargement différé
   et `alt=""` puisque le nom figure juste à côté. Garder les classes Tailwind complètes et les rangs de carte.
   Mettre à jour le bandeau de démo pour préciser le caractère illustratif des portraits, dans les trois langues.
-- [ ] **2.6** Vérifier : fichiers locaux disponibles via `collectstatic`, aucune requête vers Pexels dans le
+- [x] **2.6** Vérifier : fichiers locaux disponibles via `collectstatic`, aucune requête vers Pexels dans le
   navigateur, CSP inchangée, mode hors ligne utilisable. Contrôler aussi une clé inconnue et `DEMO_MODE=False`.
   Les tests de reproductibilité du seed doivent toujours annoncer 50 membres et les mêmes propositions pour Camille.
 

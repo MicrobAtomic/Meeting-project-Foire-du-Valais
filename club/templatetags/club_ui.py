@@ -1,6 +1,8 @@
 import re
 
 from django import template
+from django.conf import settings
+from django.templatetags.static import static
 from django.utils.formats import date_format
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext
@@ -9,6 +11,13 @@ from club.models import MemberTag
 from club.ui import EVENT_KIND_EMOJI, RANK_STYLE, SECTOR_STYLE
 
 register = template.Library()
+DEMO_PHOTOS = {key: f"img/demo/{key}.jpg" for key in ("camille", "lukas", "joelle")}
+
+
+@register.filter
+def demo_photo(member):
+    path = DEMO_PHOTOS.get(member.demo_photo_key) if settings.DEMO_MODE else None
+    return static(path) if path else ""
 
 LANGUAGE_ORDER = ("fr", "de", "en")
 _SVG_SIZE = re.compile(r'<svg[^>]*?\swidth="(\d+)"[^>]*?\sheight="(\d+)"')

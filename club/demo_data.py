@@ -139,3 +139,8 @@ FUN_FACTS = [
     "A planté sa propre vigne de Cornalin.", "Court Sierre-Zinal chaque année.",
     "Supporte le FC Sion depuis l'enfance.", "Fabrique ses propres skis.",
 ]
+DEMO_PHOTO_KEYS = {
+    "camille.rey@example.com": "camille",
+    "lukas.imboden@example.com": "lukas",
+    "joelle.luisier@example.com": "joelle",
+}
