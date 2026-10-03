@@ -144,7 +144,7 @@ Après avoir ajouté ou modifié un texte (`{% translate %}` dans un template, `
 export PATH="$(brew --prefix gettext)/bin:$PATH"
 python manage.py makemessages -l fr -l de -l en --no-wrap --no-location --ignore=.venv --ignore=staticfiles --ignore="club/tests/*"
 # traduire les msgstr vides de locale/de/... et locale/en/... (allemand suisse : « ss », tutoiement), copier la source dans locale/fr/...
-python manage.py compilemessages --ignore=.venv
+python manage.py compilemessages --ignore=.venv --ignore=.claude
 python manage.py test club.tests.test_i18n     # aucun texte non traduit, aucune phrase française sur les pages DE/EN
 ```
 
