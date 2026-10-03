@@ -11,6 +11,12 @@
   </section>
 
   <div class="no-print grid gap-4 md:grid-cols-2">
+    <section class="card space-y-3 md:col-span-2">
+      <h2 class="font-semibold">🏷️ {% translate "Badges" %}</h2>
+      <p class="text-sm text-stone-600">{% translate "Un badge par inscrit à imprimer sur feuilles A4 : prénom, entreprise, sujet de conversation et QR code." %}</p>
+      <a href="{% url 'club:staff_badges' event.pk %}" class="btn btn-secondary">{% translate "Ouvrir les badges" %}</a>
+    </section>
+
     <section class="card space-y-3">
       <h2 class="font-semibold">🤝 {% translate "Rencontres proposées" %}</h2>
       <p class="text-sm text-stone-600">{% translate "Chaque inscrit reçoit jusqu'à 3 personnes qu'il ne connaît pas encore, avec leurs points communs. À relancer après chaque changement d'inscrits." %}</p>

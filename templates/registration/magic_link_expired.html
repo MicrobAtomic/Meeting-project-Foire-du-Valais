@@ -1,0 +1,13 @@
+{% extends "base.html" %}{% load i18n %}
+{% block title %}{% translate "Lien expiré" %} · {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<div class="mx-auto max-w-sm">
+  <div class="card space-y-4 p-8 text-center">
+    <div class="text-5xl" aria-hidden="true">⏳</div>
+    <h1 class="text-2xl font-semibold">{% translate "Ce lien n'est plus valable" %}</h1>
+    <p class="text-stone-600">{% translate "Un lien de connexion ne fonctionne qu'une seule fois et pendant 15 minutes. Demande-en simplement un nouveau." %}</p>
+    <a href="{% url 'club:magic_link_request' %}" class="btn btn-primary">✉️ {% translate "Recevoir un nouveau lien" %}</a>
+    <p class="text-sm"><a href="{% url 'login' %}" class="font-medium text-red-700 underline">{% translate "Se connecter avec un mot de passe" %}</a></p>
+  </div>
+</div>
+{% endblock %}

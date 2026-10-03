@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Club des Affaires\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 14:23+0200\n"
+"POT-Creation-Date: 2026-10-03 14:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Club des Affaires\n"
 "Language-Team: Club des Affaires\n"
@@ -21,6 +21,17 @@ msgstr "rank"
 
 msgid "rencontres"
 msgstr "connections"
+
+msgid "Envoyer un lien de connexion"
+msgstr "Send a login link"
+
+#, python-format
+#| msgid "%(count)s rencontre générée."
+#| msgid_plural "%(count)s rencontres générées."
+msgid "%(count)s lien envoyé."
+msgid_plural "%(count)s liens envoyés."
+msgstr[0] "%(count)s link sent."
+msgstr[1] "%(count)s links sent."
 
 msgid "Régénérer le QR code (l'ancien ne fonctionnera plus)"
 msgstr "Regenerate the QR code (the old one will stop working)"
@@ -295,6 +306,34 @@ msgstr "e-mail"
 msgid "message"
 msgstr "message"
 
+#| msgid "Club des Affaires"
+msgid "Ton accès au Club des Affaires"
+msgstr "Your access to the Club des Affaires"
+
+#, python-format
+msgid ""
+"Salut %(name)s,\n"
+"\n"
+"Voici ton lien de connexion au Club des Affaires :\n"
+"\n"
+"%(link)s\n"
+"\n"
+"Il est valable %(minutes)s minutes et ne fonctionne qu'une seule fois. Si tu n'as rien demandé, ignore simplement ce message.\n"
+"\n"
+"À bientôt !\n"
+"L'équipe du Club"
+msgstr ""
+"Hi %(name)s,\n"
+"\n"
+"Here is your login link for the Club des Affaires:\n"
+"\n"
+"%(link)s\n"
+"\n"
+"It is valid for %(minutes)s minutes and works only once. If you didn't ask for it, just ignore this message.\n"
+"\n"
+"See you soon!\n"
+"The Club team"
+
 #. Translators: a percentage; French and German put a space before the % sign,
 #. English does not.
 #, python-format
@@ -380,6 +419,9 @@ msgstr "Profile saved ✅"
 
 msgid "Profil complété 🎉"
 msgstr "Profile completed 🎉"
+
+msgid "Si cette adresse est connue, un lien vient d'être envoyé."
+msgstr "If this address is known, a link has just been sent."
 
 #, python-format
 msgid "%(count)s rencontre générée."
@@ -888,6 +930,25 @@ msgstr ""
 "The Club is joined by invitation. Tell us who you are and we'll get back to "
 "you."
 
+#| msgid "Déconnexion"
+msgid "Lien de connexion"
+msgstr "Login link"
+
+msgid ""
+"Pas de mot de passe à retenir : entre ton e-mail et reçois un lien de "
+"connexion, valable 15 minutes."
+msgstr ""
+"No password to remember: enter your e-mail and get a login link, valid for "
+"15 minutes."
+
+#| msgid "Copier le lien"
+msgid "Envoyer le lien"
+msgstr "Send the link"
+
+#| msgid "Vérifie ton e-mail et ton mot de passe."
+msgid "Se connecter avec un mot de passe"
+msgstr "Log in with a password"
+
 msgid "Connexion"
 msgstr "Log in"
 
@@ -900,8 +961,43 @@ msgstr "Check your e-mail and password."
 msgid "Mot de passe"
 msgstr "Password"
 
+msgid "Recevoir un lien de connexion par e-mail"
+msgstr "Get a login link by e-mail"
+
 msgid "Pas encore membre ?"
 msgstr "Not a member yet?"
+
+msgid "Lien expiré"
+msgstr "Link expired"
+
+msgid "Ce lien n'est plus valable"
+msgstr "This link is no longer valid"
+
+msgid ""
+"Un lien de connexion ne fonctionne qu'une seule fois et pendant 15 minutes. "
+"Demande-en simplement un nouveau."
+msgstr ""
+"A login link works only once and for 15 minutes. Just ask for a new one."
+
+msgid "Recevoir un nouveau lien"
+msgstr "Get a new link"
+
+msgid "Badges"
+msgstr "Badges"
+
+#, python-format
+msgid "%(n)s badge, à imprimer sur feuilles A4 (8 par page)"
+msgid_plural "%(n)s badges, à imprimer sur feuilles A4 (8 par page)"
+msgstr[0] "%(n)s badge, to print on A4 sheets (8 per page)"
+msgstr[1] "%(n)s badges, to print on A4 sheets (8 per page)"
+
+msgid "Imprimer"
+msgstr "Print"
+
+msgid ""
+"Aucun inscrit pour l'instant : les badges apparaissent dès que des membres "
+"s'inscrivent."
+msgstr "Nobody has signed up yet: badges appear as soon as members register."
 
 msgid "Tableau de bord"
 msgstr "Dashboard"
@@ -977,6 +1073,16 @@ msgstr "Everybody is well connected 🎉"
 msgid "Ouvrir l'administration"
 msgstr "Open the admin"
 
+msgid ""
+"Un badge par inscrit à imprimer sur feuilles A4 : prénom, entreprise, sujet "
+"de conversation et QR code."
+msgstr ""
+"One badge per attendee to print on A4 sheets: first name, company, "
+"conversation topic and QR code."
+
+msgid "Ouvrir les badges"
+msgstr "Open the badges"
+
 msgid "Rencontres proposées"
 msgstr "Suggested introductions"
 
@@ -1005,9 +1111,6 @@ msgstr "No introductions generated yet."
 
 msgid "Plan de tables"
 msgstr "Seating plan"
-
-msgid "Imprimer"
-msgstr "Print"
 
 #, python-format
 msgid ""

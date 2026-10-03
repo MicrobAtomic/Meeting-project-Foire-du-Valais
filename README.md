@@ -77,6 +77,22 @@ photo du téléphone, connecté en Camille.
 python manage.py test club    # 31 tests : algorithmes, contrôle d'accès, QR, vCard, CSP, admin…
 ```
 
+## E-mails (lien de connexion)
+
+Un membre peut se connecter **sans mot de passe** : « Recevoir un lien de connexion par e-mail » sur la page de connexion, ou
+l'équipe lui envoie un lien (admin → Membres → cocher → action « Envoyer un lien de connexion »). Le lien est valable 15 minutes
+et ne sert qu'une fois ; l'e-mail est rédigé dans la langue du membre.
+
+En local, les e-mails s'**affichent dans la console** du serveur. Pour envoyer de vrais e-mails (compte SMTP Brevo, Mailjet,
+Infomaniak…), définir ces variables d'environnement (sur Render : onglet *Environment*) :
+
+```
+EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+EMAIL_HOST=smtp.exemple.ch   EMAIL_PORT=587   EMAIL_USE_TLS=1
+EMAIL_HOST_USER=…            EMAIL_HOST_PASSWORD=…
+DEFAULT_FROM_EMAIL="Club des Affaires <club@exemple.ch>"
+```
+
 ## Traductions (FR · DE · EN)
 
 L'interface suit la langue du navigateur (ou le choix FR / DE / EN en haut de page, mémorisé). Les catalogues sont dans

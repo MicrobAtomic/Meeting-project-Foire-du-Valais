@@ -198,7 +198,10 @@ class NoFrenchLeftTests(LanguageIsolatedTestCase):
             reverse("club:event_list"), reverse("club:event_detail", args=[self.dinner.pk]),
             reverse("club:scan", args=[self.lukas.qr_token]), "/cette-page-nexiste-pas/",
         ]
-        urls_public = [reverse("club:landing"), reverse("login"), reverse("club:join"), reverse("club:join_thanks")]
+        urls_public = [
+            reverse("club:landing"), reverse("login"), reverse("club:join"), reverse("club:join_thanks"),
+            reverse("club:magic_link_request"), reverse("magic_login") + "?sesame=expired",  # the "link expired" page
+        ]
         for language in ("de", "en"):
             strings = self.french_strings(language)
             self.assertGreater(len(strings), 150)
@@ -213,7 +216,10 @@ class NoFrenchLeftTests(LanguageIsolatedTestCase):
             self.assertEqual(self.leftovers(forbidden, strings), [], f"{language} 403")
 
     def test_staff_pages_are_fully_translated(self):
-        urls = [reverse("club:staff_dashboard"), reverse("club:staff_event", args=[self.dinner.pk])]
+        urls = [
+            reverse("club:staff_dashboard"), reverse("club:staff_event", args=[self.dinner.pk]),
+            reverse("club:staff_badges", args=[self.dinner.pk]),
+        ]
         for language in ("de", "en"):
             strings = self.french_strings(language)
             self.client.cookies[settings.LANGUAGE_COOKIE_NAME] = language

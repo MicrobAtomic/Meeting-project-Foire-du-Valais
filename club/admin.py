@@ -1,8 +1,9 @@
 from django import forms
 from django.conf import settings
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.db.models import Count, Q
 from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ngettext
 
 from club.models import (
     RSVP,
@@ -17,6 +18,7 @@ from club.models import (
     Tag,
     new_qr_token,
 )
+from club.services.auth_links import send_login_link
 from club.services.events import generate_matches, generate_seating
 from club.ui import RANK_STYLE
 
@@ -39,7 +41,7 @@ class MemberAdmin(admin.ModelAdmin):
     readonly_fields = ["qr_token", "referral_code", "created_at"]
     autocomplete_fields = ["user"]
     inlines = [MemberTagInline]
-    actions = ["rotate_qr_token"]
+    actions = ["send_login_links", "rotate_qr_token"]
 
     @admin.display(description=_("rang"))
     def rank_display(self, obj):
@@ -48,6 +50,19 @@ class MemberAdmin(admin.ModelAdmin):
     @admin.display(description=_("rencontres"))
     def connections(self, obj):
         return Connection.involving(obj).count()
+
+    @admin.action(description=_("Envoyer un lien de connexion"))
+    def send_login_links(self, request, queryset):
+        sent = 0
+        for member in queryset.select_related("user"):
+            if not member.user.is_active or not member.user.email:
+                continue
+            try:
+                send_login_link(request, member)
+                sent += 1
+            except Exception as error:  # mail server down, bad SMTP settings…
+                self.message_user(request, f"{member}: {error}", level=messages.ERROR)
+        self.message_user(request, ngettext("%(count)s lien envoyé.", "%(count)s liens envoyés.", sent) % {"count": sent})
 
     @admin.action(description=_("Régénérer le QR code (l'ancien ne fonctionnera plus)"))
     def rotate_qr_token(self, request, queryset):

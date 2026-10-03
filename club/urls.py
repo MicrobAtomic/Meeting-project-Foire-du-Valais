@@ -5,6 +5,7 @@ from club.views import events, member, public, staff
 app_name = "club"
 urlpatterns = [
     path("", public.landing, name="landing"),
+    path("connexion/recevoir-un-lien/", public.magic_link_request, name="magic_link_request"),
     path("rejoindre/", public.join, name="join"),
     path("rejoindre/merci/", public.join_thanks, name="join_thanks"),
     path("accueil/", member.home, name="home"),
@@ -21,4 +22,5 @@ urlpatterns = [
     path("m/<str:token>/", member.scan, name="scan"),
     path("staff/", staff.dashboard, name="staff_dashboard"),
     path("staff/evenements/<int:pk>/", staff.event_tools, name="staff_event"),
+    path("staff/evenements/<int:pk>/badges/", staff.badges, name="staff_badges"),
 ]

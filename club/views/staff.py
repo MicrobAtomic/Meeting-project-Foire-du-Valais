@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.db.models import Count, Q
 from django.http import HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext as _
 from django.utils.translation import ngettext
@@ -20,6 +21,7 @@ from club.services.federation import (
     degrees,
     isolated_members,
 )
+from club.services.qr import qr_svg
 from club.ui import round_label
 
 ISOLATED_SHOWN = 20
@@ -111,3 +113,19 @@ def event_tools(request, pk):
         "rounds": seating_for_display(plan) if plan else [],
     }
     return render(request, "staff/event_tools.html", context)
+
+
+BADGES_PER_PAGE = 8  # 2 columns x 4 rows on an A4 sheet
+
+
+@staff_required
+def badges(request, pk):
+    """Printable name badges (A4, 2 x 4): first name, company, 'Parle-moi de…', and the QR code that opens the card."""
+    event = get_object_or_404(Event, pk=pk)
+    members = attendees(event).select_related("user").order_by("last_name", "first_name")
+    badges = [
+        (member, qr_svg(request.build_absolute_uri(reverse("club:scan", args=[member.qr_token]))))
+        for member in members
+    ]
+    pages = [badges[i : i + BADGES_PER_PAGE] for i in range(0, len(badges), BADGES_PER_PAGE)]
+    return render(request, "staff/badges.html", {"event": event, "pages": pages, "badge_count": len(badges)})

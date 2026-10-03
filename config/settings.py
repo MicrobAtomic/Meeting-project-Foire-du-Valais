@@ -115,6 +115,12 @@ X_FRAME_OPTIONS = "DENY"
 
 EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND", "django.core.mail.backends.console.EmailBackend")
 DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "Club des Affaires <no-reply@example.com>")
+# Real delivery: set EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend and the variables below (see README).
+EMAIL_HOST = os.environ.get("EMAIL_HOST", "localhost")
+EMAIL_PORT = int(os.environ.get("EMAIL_PORT", "25"))
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
+EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS", "0") == "1"
 SITE_NAME = os.environ.get("SITE_NAME", "Club des Affaires")
 DEMO_MODE = os.environ.get("DEMO_MODE", "1") == "1"  # shows the "fictitious data" banner
 

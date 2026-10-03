@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Club des Affaires\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 14:23+0200\n"
+"POT-Creation-Date: 2026-10-03 14:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Club des Affaires\n"
 "Language-Team: Club des Affaires\n"
@@ -21,6 +21,17 @@ msgstr "Rang"
 
 msgid "rencontres"
 msgstr "Begegnungen"
+
+msgid "Envoyer un lien de connexion"
+msgstr "Anmeldelink senden"
+
+#, python-format
+#| msgid "%(count)s rencontre générée."
+#| msgid_plural "%(count)s rencontres générées."
+msgid "%(count)s lien envoyé."
+msgid_plural "%(count)s liens envoyés."
+msgstr[0] "%(count)s Link gesendet."
+msgstr[1] "%(count)s Links gesendet."
 
 msgid "Régénérer le QR code (l'ancien ne fonctionnera plus)"
 msgstr "QR-Code neu erzeugen (der alte funktioniert dann nicht mehr)"
@@ -296,6 +307,34 @@ msgstr "E-Mail"
 msgid "message"
 msgstr "Nachricht"
 
+#| msgid "Club des Affaires"
+msgid "Ton accès au Club des Affaires"
+msgstr "Dein Zugang zum Club des Affaires"
+
+#, python-format
+msgid ""
+"Salut %(name)s,\n"
+"\n"
+"Voici ton lien de connexion au Club des Affaires :\n"
+"\n"
+"%(link)s\n"
+"\n"
+"Il est valable %(minutes)s minutes et ne fonctionne qu'une seule fois. Si tu n'as rien demandé, ignore simplement ce message.\n"
+"\n"
+"À bientôt !\n"
+"L'équipe du Club"
+msgstr ""
+"Hallo %(name)s,\n"
+"\n"
+"Hier ist dein Anmeldelink für den Club des Affaires:\n"
+"\n"
+"%(link)s\n"
+"\n"
+"Er ist %(minutes)s Minuten gültig und funktioniert nur einmal. Falls du nichts angefordert hast, ignoriere diese Nachricht einfach.\n"
+"\n"
+"Bis bald!\n"
+"Das Club-Team"
+
 #. Translators: a percentage; French and German put a space before the % sign,
 #. English does not.
 #, python-format
@@ -381,6 +420,9 @@ msgstr "Profil gespeichert ✅"
 
 msgid "Profil complété 🎉"
 msgstr "Profil vervollständigt 🎉"
+
+msgid "Si cette adresse est connue, un lien vient d'être envoyé."
+msgstr "Falls diese Adresse bekannt ist, wurde soeben ein Link gesendet."
 
 #, python-format
 msgid "%(count)s rencontre générée."
@@ -894,6 +936,25 @@ msgstr ""
 "Dem Club tritt man auf Einladung bei. Sag uns, wer du bist, wir melden uns "
 "bei dir."
 
+#| msgid "Déconnexion"
+msgid "Lien de connexion"
+msgstr "Anmeldelink"
+
+msgid ""
+"Pas de mot de passe à retenir : entre ton e-mail et reçois un lien de "
+"connexion, valable 15 minutes."
+msgstr ""
+"Kein Passwort merken: gib deine E-Mail ein und erhalte einen Anmeldelink, "
+"der 15 Minuten gültig ist."
+
+#| msgid "Copier le lien"
+msgid "Envoyer le lien"
+msgstr "Link senden"
+
+#| msgid "Vérifie ton e-mail et ton mot de passe."
+msgid "Se connecter avec un mot de passe"
+msgstr "Mit Passwort anmelden"
+
 msgid "Connexion"
 msgstr "Anmeldung"
 
@@ -906,8 +967,46 @@ msgstr "Überprüfe deine E-Mail und dein Passwort."
 msgid "Mot de passe"
 msgstr "Passwort"
 
+msgid "Recevoir un lien de connexion par e-mail"
+msgstr "Anmeldelink per E-Mail erhalten"
+
 msgid "Pas encore membre ?"
 msgstr "Noch kein Mitglied?"
+
+msgid "Lien expiré"
+msgstr "Link abgelaufen"
+
+msgid "Ce lien n'est plus valable"
+msgstr "Dieser Link ist nicht mehr gültig"
+
+msgid ""
+"Un lien de connexion ne fonctionne qu'une seule fois et pendant 15 minutes. "
+"Demande-en simplement un nouveau."
+msgstr ""
+"Ein Anmeldelink funktioniert nur einmal und während 15 Minuten. Fordere "
+"einfach einen neuen an."
+
+msgid "Recevoir un nouveau lien"
+msgstr "Neuen Link erhalten"
+
+msgid "Badges"
+msgstr "Namensschilder"
+
+#, python-format
+msgid "%(n)s badge, à imprimer sur feuilles A4 (8 par page)"
+msgid_plural "%(n)s badges, à imprimer sur feuilles A4 (8 par page)"
+msgstr[0] "%(n)s Namensschild, zum Drucken auf A4-Blättern (8 pro Seite)"
+msgstr[1] "%(n)s Namensschilder, zum Drucken auf A4-Blättern (8 pro Seite)"
+
+msgid "Imprimer"
+msgstr "Drucken"
+
+msgid ""
+"Aucun inscrit pour l'instant : les badges apparaissent dès que des membres "
+"s'inscrivent."
+msgstr ""
+"Noch keine Anmeldungen: die Namensschilder erscheinen, sobald sich "
+"Mitglieder anmelden."
 
 msgid "Tableau de bord"
 msgstr "Übersicht"
@@ -983,6 +1082,16 @@ msgstr "Alle sind gut vernetzt 🎉"
 msgid "Ouvrir l'administration"
 msgstr "Administration öffnen"
 
+msgid ""
+"Un badge par inscrit à imprimer sur feuilles A4 : prénom, entreprise, sujet "
+"de conversation et QR code."
+msgstr ""
+"Ein Namensschild pro angemeldeter Person zum Drucken auf A4-Blättern: "
+"Vorname, Unternehmen, Gesprächsthema und QR-Code."
+
+msgid "Ouvrir les badges"
+msgstr "Namensschilder öffnen"
+
 msgid "Rencontres proposées"
 msgstr "Vorgeschlagene Begegnungen"
 
@@ -1011,9 +1120,6 @@ msgstr "Noch keine Begegnungen erzeugt."
 
 msgid "Plan de tables"
 msgstr "Tischplan"
-
-msgid "Imprimer"
-msgstr "Drucken"
 
 #, python-format
 msgid ""

@@ -1,12 +1,20 @@
+import logging
 from datetime import timedelta
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_not_required
+from django.core.cache import cache
 from django.shortcuts import redirect, render
 from django.utils import timezone
+from django.utils.translation import gettext as _
 from django.views.decorators.http import require_http_methods
+from sesame.views import LoginView as SesameLoginView
 
-from club.forms import InvitationRequestForm
+from club.forms import InvitationRequestForm, MagicLinkRequestForm
 from club.models import InvitationRequest, Member
+from club.services.auth_links import send_login_link
+
+logger = logging.getLogger(__name__)
 
 
 @login_not_required
@@ -53,3 +61,34 @@ def join(request):
 @login_not_required
 def join_thanks(request):
     return render(request, "public/join_thanks.html")
+
+
+class MagicLoginView(SesameLoginView):
+    """The page an e-mailed link opens. Same behaviour as django-sesame (log in, then redirect), but an expired or
+    already used link gets a friendly page (still a 403) instead of the bare 'forbidden' one."""
+
+    def login_failed(self):
+        return render(self.request, "registration/magic_link_expired.html", status=403)
+
+
+@login_not_required
+@require_http_methods(["GET", "POST"])
+def magic_link_request(request):
+    """'Recevoir un lien de connexion par e-mail'. The answer is the same whether or not the address is a member's,
+    so nobody can use this page to find out who is in the Club."""
+    if request.method == "POST":
+        form = MagicLinkRequestForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data["email"]
+            member = Member.objects.select_related("user").filter(user__email__iexact=email, user__is_active=True).first()
+            # one e-mail per address and minute: this page cannot be used to flood someone's mailbox
+            if member and cache.add(f"magic-link:{email}", True, timeout=60):
+                try:
+                    send_login_link(request, member)
+                except Exception:  # a failing mail server must not reveal that the address exists
+                    logger.exception("Could not send the login link")
+            messages.info(request, _("Si cette adresse est connue, un lien vient d'être envoyé."))
+            return redirect("club:magic_link_request")
+    else:
+        form = MagicLinkRequestForm()
+    return render(request, "public/magic_link_request.html", {"form": form})

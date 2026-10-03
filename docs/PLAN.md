@@ -102,7 +102,7 @@ Ton : détendu, premium, valaisan (rouge valaisan et or, vins, montagne, apéro)
 | `club:landing` | `/` | `public.landing` | public | ✅ |
 | `login` | `/connexion/` | `LoginView` + `EmailAuthenticationForm` | public | ✅ |
 | `magic_login` | `/connexion/lien/` | django-sesame | public | ✅ |
-| `club:magic_link_request` | `/connexion/recevoir-un-lien/` | `public.magic_link_request` | public | phase 9 |
+| `club:magic_link_request` | `/connexion/recevoir-un-lien/` | `public.magic_link_request` | public | ✅ |
 | `logout` | `/deconnexion/` | `LogoutView` (POST) | connecté | ✅ |
 | `set_language` | `/i18n/setlang/` | `set_language` (POST) | public | ✅ |
 | `club:join` | `/rejoindre/` | `public.join` | public | ✅ fait en avance (lien sous la connexion) |
@@ -121,7 +121,7 @@ Ton : détendu, premium, valaisan (rouge valaisan et or, vins, montagne, apéro)
 | `club:event_rsvp` | `/evenements/<pk>/rsvp/` | `events.event_rsvp` (POST) | membre | phase 4 |
 | `club:staff_dashboard` | `/staff/` | `staff.dashboard` | staff | ✅ (à enrichir) |
 | `club:staff_event` | `/staff/evenements/<pk>/` | `staff.event_tools` | staff | ✅ |
-| `club:staff_badges` | `/staff/evenements/<pk>/badges/` | `staff.badges` | staff | phase 9 |
+| `club:staff_badges` | `/staff/evenements/<pk>/badges/` | `staff.badges` | staff | ✅ |
 
 Les routes se déclarent dans `club/urls.py`, et les nouvelles vues d'événements vont dans `club/views/events.py` (à créer).
 
@@ -526,20 +526,20 @@ Pour éviter les requêtes N+1, toute liste de cartes charge les membres avec
 
 ### Phase 9 — Lien magique et badges imprimables (1 h)
 
-- [ ] **9.1** Ajouter l'action admin « Envoyer un lien de connexion » dans `MemberAdmin` :
+- [x] **9.1** *(fait : service `club/services/auth_links.py`, e-mail rédigé dans la langue du membre, SMTP configurable par variables d'environnement, page claire quand un lien a expiré)* Ajouter l'action admin « Envoyer un lien de connexion » dans `MemberAdmin` :
   - pour chaque membre : `link = request.build_absolute_uri(reverse("magic_login")) + get_query_string(member.user)`
     (`from sesame.utils import get_query_string`) ;
   - `send_mail` avec le sujet « Ton accès au Club des Affaires » et un texte qui précise que le lien est valable 15 minutes
     et ne sert qu'une fois ;
   - message final : « N liens envoyés ».
   - En local, l'e-mail s'affiche dans la console : `EMAIL_BACKEND` vaut `console`.
-- [ ] **9.2** La vue `public.magic_link_request`, `/connexion/recevoir-un-lien/`, avec `@login_not_required` :
+- [x] **9.2** La vue `public.magic_link_request`, `/connexion/recevoir-un-lien/`, avec `@login_not_required` :
   - un formulaire avec un seul champ e-mail ;
   - si un membre actif a cet e-mail, on lui envoie le lien ;
   - **dans tous les cas**, on affiche le même message : « Si cette adresse est connue, un lien vient d'être
     envoyé. » Ainsi personne ne peut tester quelles adresses sont membres.
   - Ajouter un lien vers cette page sur la page de connexion.
-- [ ] **9.3** La vue `staff.badges`, `/staff/evenements/<pk>/badges/`, avec `@staff_required`.
+- [x] **9.3** La vue `staff.badges`, `/staff/evenements/<pk>/badges/`, avec `@staff_required`.
   - Une grille A4 de 2 × 4 badges, un par inscrit. Chaque badge affiche :
     - le prénom en très grand ;
     - le nom et l'entreprise ;
@@ -547,7 +547,7 @@ Pour éviter les requêtes N+1, toute liste de cartes charge les membres avec
     - « Parle-moi de : {{ talk_to_me_about }} » ;
     - le QR (`qr_svg` de l'URL de scan, calculé dans la vue).
   - Un bouton « Imprimer » qui réutilise `print.js`, et `no-print` sur la navigation.
-- [ ] **9.4** Les tests :
+- [x] **9.4** Les tests :
   - un e-mail inconnu donne le même message et `mail.outbox` reste vide ;
   - un e-mail connu envoie exactement 1 e-mail qui contient `/connexion/lien/?sesame=` ;
   - un membre reçoit une erreur 403 sur la page des badges.

@@ -111,3 +111,13 @@ class SeatingForm(forms.Form):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs["class"] = "input"
+
+
+class MagicLinkRequestForm(forms.Form):
+    email = forms.EmailField(
+        label=_("E-mail"),
+        widget=forms.EmailInput(attrs={"class": "input", "autocomplete": "email", "autocapitalize": "none", "autofocus": True}),
+    )
+
+    def clean_email(self):
+        return self.cleaned_data["email"].strip().lower()

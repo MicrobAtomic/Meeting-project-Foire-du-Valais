@@ -27,7 +27,8 @@ progress.bar::-webkit-progress-bar { background: var(--color-stone-200); }
 progress.bar::-webkit-progress-value { background: var(--color-red-700); }
 progress.bar::-moz-progress-bar { background: var(--color-red-700); }
 
-/* Impression (badges, plan de tables) */
+/* Impression (badges, plan de tables) : feuilles A4 */
+@page { size: A4; margin: 8mm; }
 @media print {
   .no-print { display: none !important; }
   body { background: white; }
