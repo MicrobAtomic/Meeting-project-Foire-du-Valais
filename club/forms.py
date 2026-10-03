@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.utils.translation import gettext_lazy as _
 
-from club.models import Member
+from club.models import InvitationRequest, Member
 
 
 class EmailAuthenticationForm(AuthenticationForm):
@@ -64,3 +64,38 @@ class MemberProfileForm(forms.ModelForm):
         self.fields["phone"].widget.input_type = "tel"
         self.fields["phone"].widget.attrs.update({"autocomplete": "tel", "placeholder": "+41 79 000 00 00"})
         self.fields["linkedin_url"].widget.attrs["placeholder"] = "https://www.linkedin.com/in/…"
+
+
+class InvitationRequestForm(forms.ModelForm):
+    """Public mini-form 'Demander une invitation'. `website` is a honeypot: humans never see it, bots fill it."""
+
+    website = forms.CharField(required=False, widget=forms.TextInput(attrs={"tabindex": "-1", "autocomplete": "off"}))
+
+    class Meta:
+        model = InvitationRequest
+        fields = ["first_name", "last_name", "email", "company", "job_title"]
+        labels = {
+            "first_name": _("Prénom"),
+            "last_name": _("Nom"),
+            "email": _("E-mail"),
+            "company": _("Entreprise"),
+            "job_title": _("Poste"),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for name, field in self.fields.items():
+            if name != "website":
+                field.widget.attrs["class"] = "input"
+        self.fields["first_name"].widget.attrs.update({"autocomplete": "given-name", "autofocus": True})
+        self.fields["last_name"].widget.attrs["autocomplete"] = "family-name"
+        self.fields["email"].widget.attrs.update({"autocomplete": "email", "autocapitalize": "none"})
+        self.fields["company"].widget.attrs["autocomplete"] = "organization"
+        self.fields["job_title"].widget.attrs["autocomplete"] = "organization-title"
+
+    def clean_email(self):
+        return self.cleaned_data["email"].strip().lower()
+
+    @property
+    def is_bot(self):
+        return bool(self.cleaned_data.get("website"))

@@ -1,0 +1,32 @@
+{% extends "base.html" %}{% load i18n %}
+{% block title %}{% translate "Demander une invitation" %} · {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<div class="mx-auto max-w-md">
+  <div class="card space-y-5 p-6">
+    <div class="text-center">
+      <div class="text-4xl" aria-hidden="true">💌</div>
+      <h1 class="mt-2 text-2xl font-semibold">{% translate "Demander une invitation" %}</h1>
+      <p class="mt-1 text-sm text-stone-600">{% translate "Le Club des Affaires de la Foire du Valais se rejoint sur invitation. Dis-nous qui tu es, nous revenons vers toi." %}</p>
+      {% if referrer %}<p class="mt-3 chip">🤝 {% blocktranslate with name=referrer.first_name initial=referrer.last_name|first %}Invité·e par {{ name }} {{ initial }}.{% endblocktranslate %}</p>{% endif %}
+    </div>
+
+    <form method="post" class="space-y-4">
+      {% csrf_token %}
+      {% if form.non_field_errors %}<p class="rounded-xl bg-red-50 p-3 text-sm text-red-900" role="alert">{{ form.non_field_errors.0 }}</p>{% endif %}
+      <div class="grid gap-4 sm:grid-cols-2">
+        {% include "club/_field.html" with field=form.first_name %}
+        {% include "club/_field.html" with field=form.last_name %}
+      </div>
+      {% include "club/_field.html" with field=form.email %}
+      <div class="grid gap-4 sm:grid-cols-2">
+        {% include "club/_field.html" with field=form.company %}
+        {% include "club/_field.html" with field=form.job_title %}
+      </div>
+      <div class="hidden" aria-hidden="true"><label>Website {{ form.website }}</label></div>
+      <button type="submit" class="btn btn-primary w-full">{% translate "Envoyer ma demande" %}</button>
+    </form>
+
+    <p class="text-center text-sm text-stone-600">{% translate "Déjà membre ?" %} <a href="{% url 'login' %}" class="font-medium text-red-700 underline">{% translate "Se connecter" %}</a></p>
+  </div>
+</div>
+{% endblock %}

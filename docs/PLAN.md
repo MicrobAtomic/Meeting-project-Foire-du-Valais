@@ -105,8 +105,8 @@ Ton : détendu, premium, valaisan (rouge valaisan et or, vins, montagne, apéro)
 | `club:magic_link_request` | `/connexion/recevoir-un-lien/` | `public.magic_link_request` | public | phase 9 |
 | `logout` | `/deconnexion/` | `LogoutView` (POST) | connecté | ✅ |
 | `set_language` | `/i18n/setlang/` | `set_language` (POST) | public | ✅ |
-| `club:join` | `/rejoindre/` | `public.join` | public | phase 7 |
-| `club:join_thanks` | `/rejoindre/merci/` | `public.join_thanks` | public | phase 7 |
+| `club:join` | `/rejoindre/` | `public.join` | public | ✅ fait en avance (lien sous la connexion) |
+| `club:join_thanks` | `/rejoindre/merci/` | `public.join_thanks` | public | ✅ fait en avance |
 | `club:home` | `/accueil/` | `member.home` | membre | ✅ (à enrichir) |
 | `club:album` | `/album/` | `member.album` | membre | phase 3 |
 | `club:member_detail` | `/membres/<pk>/` | `member.member_detail` | membre | ✅ (template à refaire) |
@@ -484,7 +484,7 @@ Pour éviter les requêtes N+1, toute liste de cartes charge les membres avec
   - **Chiffres** calculés dans la vue : nombre de membres actifs, nombre de secteurs distincts, et « 4 à 5 soirées
     par an ».
   - **« Comment ça marche »** : l'album, le QR, les tables tournantes, en 3 étapes illustrées d'emojis.
-- [ ] **7.2** Les vues `public.join` (`/rejoindre/`) et `public.join_thanks` (`/rejoindre/merci/`), avec
+- [x] **7.2** *(fait en avance à la demande de l'utilisateur : lien « Demander une invitation » sous la page de connexion ; formulaire réduit à prénom, nom, e-mail, entreprise et poste, sans champ message ; une même adresse n'est enregistrée qu'une fois par 24 h ; 15 tests dans `club/tests/test_join.py`)* Les vues `public.join` (`/rejoindre/`) et `public.join_thanks` (`/rejoindre/merci/`), avec
   `@login_not_required` :
   - `InvitationRequestForm(ModelForm)` avec `first_name`, `last_name`, `company`, `job_title`, `email`, `message`.
   - Un **champ piège** `website` (`CharField(required=False)`) caché avec la classe `hidden`. S'il est rempli,

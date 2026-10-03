@@ -107,7 +107,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "club:home"
 LOGOUT_REDIRECT_URL = "club:landing"
-SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
+# Members are busy and not all at ease with tech: stay logged in for 6 months of inactivity
+# (the expiry is pushed back at every visit), instead of a fixed 30 days.
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 180
+SESSION_SAVE_EVERY_REQUEST = True
 X_FRAME_OPTIONS = "DENY"
 
 EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND", "django.core.mail.backends.console.EmailBackend")

@@ -5,6 +5,8 @@ from club.views import events, member, public, staff
 app_name = "club"
 urlpatterns = [
     path("", public.landing, name="landing"),
+    path("rejoindre/", public.join, name="join"),
+    path("rejoindre/merci/", public.join_thanks, name="join_thanks"),
     path("accueil/", member.home, name="home"),
     path("album/", member.album, name="album"),
     path("moi/", member.profile_edit, name="profile_edit"),
