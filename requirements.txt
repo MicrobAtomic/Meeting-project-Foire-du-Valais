@@ -1,0 +1,7 @@
+Django>=5.2,<5.3
+gunicorn>=23
+whitenoise>=6.8,<7
+dj-database-url>=2.2,<4
+psycopg[binary]>=3.2,<4
+segno>=1.6,<2
+django-sesame>=3.2,<4

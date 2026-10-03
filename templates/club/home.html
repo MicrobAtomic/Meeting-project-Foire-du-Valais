@@ -1,0 +1,7 @@
+{# PLACEHOLDER minimal pour les tests — à remplacer par la vraie UI (voir docs/PLAN.md) #}
+{% extends "base.html" %}{% load i18n %}{% block content %}
+<h1>{% translate "Bonjour" %} {{ request.member.first_name }}</h1>
+<p>{% translate "Ton album :" %} {{ collected }} / {{ total }}</p>
+<progress value="{{ collected }}" max="{{ total }}"></progress>
+<p><a href="{% url 'club:my_qr' %}">{% translate "Mon QR code" %}</a> · <a href="{% url 'club:member_detail' request.member.pk %}">{% translate "Ma carte" %}</a></p>
+{% endblock %}

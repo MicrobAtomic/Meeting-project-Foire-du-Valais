@@ -1,0 +1,34 @@
+@import "tailwindcss";
+@source "../../templates";
+@source "../../club";
+
+/* Composants réutilisables : utilise ces classes plutôt que de répéter 15 utilitaires. */
+@layer components {
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition; }
+  .btn-primary { @apply bg-red-700 text-white hover:bg-red-800; }
+  .btn-secondary { @apply bg-white text-stone-900 ring-1 ring-stone-300 hover:bg-stone-100; }
+  .card { @apply rounded-2xl bg-white p-4 shadow-sm ring-1 ring-stone-200; }
+  .chip { @apply inline-flex items-center gap-1 rounded-full bg-stone-100 px-2.5 py-1 text-xs font-medium text-stone-700; }
+  .input { @apply w-full rounded-xl border border-stone-300 bg-white px-3 py-2.5 text-sm focus:border-red-700 focus:outline-none focus:ring-2 focus:ring-red-700/20; }
+}
+
+/* Swipe des affinités — classes posées par static/js/swipe.js (pas de style inline : CSP stricte) */
+.js-swipe .swipe-deck { position: relative; height: 24rem; }
+.js-swipe .swipe-card { position: absolute; inset: 0; touch-action: none; transition: transform 200ms ease; }
+.js-swipe .swipe-card.is-dragging { transition: none; }
+.js-swipe .swipe-card .swipe-choices { display: none; }
+.swipe-out-like { transform: translateX(150%) rotate(20deg); }
+.swipe-out-dislike { transform: translateX(-150%) rotate(-20deg); }
+.swipe-out-neutral { transform: translateY(150%); }
+
+/* Barres de progression : <progress class="bar"> au lieu de style="width:…" */
+progress.bar { appearance: none; height: 0.75rem; width: 100%; border-radius: 9999px; overflow: hidden; background: var(--color-stone-200); }
+progress.bar::-webkit-progress-bar { background: var(--color-stone-200); }
+progress.bar::-webkit-progress-value { background: var(--color-red-700); }
+progress.bar::-moz-progress-bar { background: var(--color-red-700); }
+
+/* Impression (badges, plan de tables) */
+@media print {
+  .no-print { display: none !important; }
+  body { background: white; }
+}

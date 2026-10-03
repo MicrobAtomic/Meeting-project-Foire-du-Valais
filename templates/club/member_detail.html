@@ -1,0 +1,15 @@
+{# PLACEHOLDER minimal pour les tests — à remplacer par la vraie UI (voir docs/PLAN.md) #}
+{% extends "base.html" %}{% load i18n club_ui %}{% block content %}
+<h1>{{ target|sector_emoji }} {{ target.full_name }}</h1>
+<p>{{ target.job_title }} · {{ target.company }} · {{ target|rank_label }} · {% translate "membre depuis" %} {{ target.member_since }}</p>
+{% tags_with target "like" as likes %}{% tags_with target "dislike" as dislikes %}
+<p>❤️ {% for tag in likes %}{{ tag.emoji }} {{ tag.label }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+<p>💀 {% for tag in dislikes %}{{ tag.emoji }} {{ tag.label }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+<p><em>{{ target.fun_fact }}</em></p>
+{% if can_see_contact %}
+<p>{{ target.user.email }} · {{ target.phone }}</p>
+<p><a href="{% url 'club:member_vcard' target.pk %}">{% translate "Ajouter à mes contacts (vCard)" %}</a></p>
+{% else %}
+<p>🔒 {% translate "Rencontre cette personne et scanne son QR code pour débloquer ses coordonnées." %}</p>
+{% endif %}
+{% endblock %}

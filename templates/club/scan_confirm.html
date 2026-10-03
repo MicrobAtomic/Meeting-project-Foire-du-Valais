@@ -1,0 +1,6 @@
+{# PLACEHOLDER minimal pour les tests — à remplacer par la vraie UI (voir docs/PLAN.md) #}
+{% extends "base.html" %}{% load i18n %}{% block content %}
+<h1>{{ target.full_name }}</h1>
+<p>{{ target.job_title }} · {{ target.company }}</p>
+<form method="post">{% csrf_token %}<button type="submit">{% blocktranslate with name=target.first_name %}Ajouter {{ name }} à mon album{% endblocktranslate %}</button></form>
+{% endblock %}

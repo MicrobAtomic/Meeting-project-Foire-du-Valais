@@ -1,0 +1,6 @@
+{# PLACEHOLDER minimal pour les tests — à remplacer par la vraie UI (voir docs/PLAN.md) #}
+{% extends "base.html" %}{% load i18n %}{% block content %}
+<h1>{% translate "Mon QR code" %}</h1>
+{{ qr_svg|safe }}
+<p>{% translate "Lien encodé :" %} <a href="{{ scan_url }}">{{ scan_url }}</a></p>
+{% endblock %}
