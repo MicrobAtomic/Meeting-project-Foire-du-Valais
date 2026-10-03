@@ -27,7 +27,7 @@ Critique du découpage initial : une visite exhaustive des écrans et trois sous
 ## Livraisons
 
 - [x] G1 — Récit, timing, contraintes et plan de reprise enregistrés.
-- [ ] G2 — Quatre GIF de l'application réelle, lents, sur base jetable ; manifestes et reconstruction documentés.
+- [x] G2 — Quatre GIF de l'application réelle, lents, sur base jetable ; manifestes et reconstruction documentés.
 - [ ] G3 — Deck, GIF intégrés au PPTX, PDF avec images fixes, lecture HTML manuelle et notes synchronisées.
 - [ ] G4 — Documents regroupés, anciens plans archivés, liens corrigés, index utile.
 - [ ] G5 — Vérification des exports, cadrages, animations et durée orale ; recette et livraison poussées.
@@ -39,3 +39,7 @@ Chaque étape terminée est cochée, commitée et poussée sur `main`. L'applica
 État initial : `4dde623`, dépôt propre. Chrome, ffmpeg, Node, puppeteer-core et uv disponibles. `DEBUG=release` dans l'environnement : forcer `DEBUG=1` pour Django. python-pptx s'exécute via uv isolé, sans dépendance ajoutée à l'application. Port de capture 8010 ; refuser un port déjà utilisé.
 
 Deux tests existants sont dépendants de l'heure/date : `GuestAccessTests.test_scan_attaches_only_real_people_and_notes_never_reach_the_principal` (scan simulé la veille avant 01 h suisse) et `NoFrenchLeftTests.test_german_pages_really_are_german` (date littérale 15 octobre). La suite précédente passe avec horloge figée au 3 octobre 2026 12:00 UTC : 401 tests, 6 réservés à PostgreSQL ignorés. Diagnostic et commande dans [l'ancien journal](archive/PLAN_PITCH_VIDEO.md#tests-sensibles-au-passage-de-minuit). Ne pas modifier les assertions pour cette tâche de présentation.
+
+### G2 — Captures terminées
+
+Quatre GIF de l’application réelle : web 17 s, rencontre 22 s, parrainage 14 s, équipe 16 s. Boucles lentes, pauses de 2 à 7,5 s, moins de 0,4 Mio chacun. Coordonnées débloquées et case Lukas vérifiées ; offre de remise absente ; aucun email envoyé. Les cadrages tiennent compte de l’en-tête fixe. Reconstruction : `.venv/bin/python docs/pitch/make_gifs.py --assets-only`.
