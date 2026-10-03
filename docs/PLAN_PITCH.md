@@ -10,7 +10,7 @@
 ## Suivi d'exécution
 
 - [x] T1 — Point de départ : 401 tests SQLite en 46,7 s, OK (6 cas réservés à PostgreSQL) ; reconstruction complète réussie sur la base jetable, 11 diapositives et vidéo de 41,7 s.
-- [ ] T2 — Défi : quatre demandes lisibles.
+- [x] T2 — Défi : quatre demandes lisibles ; diapositive 2 inspectée en 1920 × 1080, exports PNG/PDF/PPTX reconstruits.
 - [ ] T3 — Quatre diapositives principales, séparation et huit annexes.
 - [ ] T4 — Vidéo de 70 à 80 s, six scènes téléphone et une scène staff.
 - [ ] T5 — Coûts documentés, retrait de l'ancienne enveloppe.

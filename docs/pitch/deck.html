@@ -37,6 +37,7 @@
   ul.clean li { font-size: 30px; line-height: 1.35; padding: 16px 0 16px 52px; position: relative; border-bottom: 1px solid var(--line); }
   ul.clean li:last-child { border-bottom: 0; }
   ul.clean li::before { content: "—"; position: absolute; left: 0; color: var(--red); font-weight: 800; }
+  ul.clean.in-card li { font-size: 27px; padding: 12px 0 12px 44px; }
   .tag { display: inline-block; font-size: 22px; font-weight: 700; padding: 8px 18px; border-radius: 999px; background: var(--red-soft); color: var(--red); }
   .muted { color: var(--muted); }
   .phone { width: 380px; height: 780px; border-radius: 56px; background: #0c0a09; padding: 14px; box-shadow: 0 30px 60px rgba(28,25,23,.25); }
@@ -102,8 +103,15 @@
     <div><p class="stat">80 %</p><p class="stat-label">attendance… among strangers</p></div>
   </div>
   <div class="grid g2" style="margin-top:56px">
-    <div class="card"><h3>What we observed</h3><p>Members come, but arrive as strangers and stay in small groups. Between two evenings, communication only goes one way: from the Foire to them.</p></div>
-    <div class="card"><h3>What the client asked for</h3><p>No forced selling: business is a door, not the core · a small team with little time · French and German speakers · premium means the people and the evenings · the member list stays private.</p></div>
+    <div class="card"><h3>What we observed</h3><p>Members come, but arrive as strangers and stay in small groups. Between two evenings, the network goes quiet.</p></div>
+    <div class="card"><h3>What the client asked for</h3>
+      <ul class="clean in-card">
+        <li>No forced selling: business is a door, not the core</li>
+        <li>Several languages: French, German, English</li>
+        <li>Help people actually meet</li>
+        <li>A premium feeling</li>
+      </ul>
+    </div>
   </div>
 </section>
 
