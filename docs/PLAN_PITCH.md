@@ -7,6 +7,20 @@
 > MP4 intégrée au deck**, puis 7 minutes de questions. Critères : compréhension du défi, innovation et originalité,
 > faisabilité, impact potentiel, qualité du pitch.
 
+## Suivi d'exécution
+
+- [x] T1 — Point de départ : 401 tests SQLite en 46,7 s, OK (6 cas réservés à PostgreSQL) ; reconstruction complète réussie sur la base jetable, 11 diapositives et vidéo de 41,7 s.
+- [ ] T2 — Défi : quatre demandes lisibles.
+- [ ] T3 — Quatre diapositives principales, séparation et huit annexes.
+- [ ] T4 — Vidéo de 70 à 80 s, six scènes téléphone et une scène staff.
+- [ ] T5 — Coûts documentés, retrait de l'ancienne enveloppe.
+- [ ] T6 — Notes françaises et conducteur de deux minutes.
+- [ ] T7 — Exports, inspection visuelle et suite de tests finale.
+- [ ] T8 — Livraison et push final.
+
+La recette utilise uniquement `docs/pitch/.build/pitch.sqlite3`, sans modifier la base locale ni le code de l'application.
+Chaque étape est cochée dans son commit et poussée sur `main`.
+
 ## 0. Règles et outils
 
 - Ne modifie pas le code de l'application : ce plan ne touche que `docs/` (deck, vidéo, textes). Exception : aucune.
