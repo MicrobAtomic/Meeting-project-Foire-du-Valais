@@ -1,34 +1,34 @@
 {
   "phone": [
     {
-      "kicker": "Before the evening",
+      "kicker": "Find each other",
       "title": "Meet Camille, a new member",
-      "text": "Her album holds 2 of 49 cards. The Club is 15&nbsp;% connected."
+      "text": "The album: every member's card, passions, what they can help with and what they look for."
     },
     {
-      "kicker": "Before the evening",
+      "kicker": "Spot synergies",
       "title": "She already knows who to meet",
       "text": "Lukas shares her love of Petite Arvine, and they can help each other: digital for him, the Swiss German market for her."
     },
     {
-      "kicker": "At the dinner",
-      "title": "She scans Lukas's badge",
-      "text": "One tap adds his card to her album. Her bingo even shows which square he can tick."
+      "kicker": "Meet for real",
+      "title": "At the dinner, she scans his badge",
+      "text": "One tap adds his card to her album. Her bingo shows which square he can tick."
     },
     {
-      "kicker": "At the dinner",
+      "kicker": "Meet for real",
       "title": "Contacts unlock after a real meeting",
       "text": "Phone, LinkedIn and a vCard for her address book. No cold messages."
     },
     {
-      "kicker": "At the dinner",
+      "kicker": "Meet for real",
       "title": "People bingo, computed for each guest",
-      "text": "Find someone who loves trail running, founded the Club, comes from Visp… A full line? Show it at the bar."
+      "text": "Passions, languages, sectors: nine prompts using only tonight's guests. Lukas has already ticked one square. A full line? Show it at the bar."
     },
     {
-      "kicker": "After",
+      "kicker": "Belong",
       "title": "Every real encounter counts",
-      "text": "3 of 49 cards, and the whole Club gets closer to its next milestone."
+      "text": "3 of 49 cards, and the whole Club gets closer to its next milestone: a round of Petite Arvine at 20&nbsp;%."
     }
   ],
   "desk": [

@@ -110,39 +110,44 @@ async function scrollBy(page, y) {
 
 // ---------------------------------------------------------------- phone: Camille
 const phone = await session('camille.rey@example.com', { width: 390, height: 844, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
-await phone.goto(base + '/accueil/', { waitUntil: 'networkidle0' });
+await phone.goto(base + '/album/?aide=marche-alemanique', { waitUntil: 'networkidle0' });
 const rp = await record(phone, 'phone', { w: 780, h: 1688 });
-rp.mark('home');
-await sleep(2600);
-await scrollBy(phone, 330);
-await sleep(2400);
+rp.mark('find');
+await sleep(4500);
+await phone.evaluate(() => {
+  const card = [...document.querySelectorAll('main a[href*="/membres/"]')]
+    .find((el) => el.textContent.includes('Lukas Imboden'));
+  if (!card) throw new Error('Lukas is missing from the filtered album');
+  card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+});
+await sleep(5500);
 
 rp.mark('intros');
 await phone.goto(base + '/evenements/4/', { waitUntil: 'networkidle0' });
-await sleep(900);
-await scrollTo(phone, 'section h2.text-lg', 'start');  // "Your introductions"
-await sleep(4200);
+await sleep(1500);
+await scrollTo(phone, 'section h2.text-lg', 'start');
+await sleep(10000);
 
 rp.mark('scan');
 await phone.goto(base + '/m/demo-lukas/', { waitUntil: 'networkidle0' });
-await sleep(2600);
+await sleep(5500);
 await tap(phone, 'main form button[type=submit]');
 rp.mark('unlocked');
-await sleep(2400);
+await sleep(4000);
 await scrollBy(phone, 520);
-await sleep(2200);
+await sleep(5000);
 
 rp.mark('bingo');
 await phone.goto(base + '/evenements/4/bingo/', { waitUntil: 'networkidle0' });
-await sleep(700);
+await sleep(1200);
 await scrollTo(phone, 'main ol', 'center');
-await sleep(3600);
+await sleep(8000);
 
 rp.mark('counts');
 await phone.goto(base + '/accueil/', { waitUntil: 'networkidle0' });
-await sleep(1200);
+await sleep(2000);
 await scrollBy(phone, 330);
-await sleep(2800);
+await sleep(7000);
 const phoneResult = await rp.stop();
 
 // ---------------------------------------------------------------- desktop: the team
@@ -150,13 +155,13 @@ const desk = await session('equipe@example.com', { width: 1280, height: 800, dev
 await desk.goto(base + '/staff/', { waitUntil: 'networkidle0' });
 const rd = await record(desk, 'desk', { w: 1920, h: 1200 });
 rd.mark('staff');
-await sleep(1600);
+await sleep(3000);
 await tap(desk, 'a.btn', { text: 'Prepare' });
-await sleep(800);
+await sleep(1500);
 await tap(desk, 'button.btn', { text: 'Generate the seating plan' });
-await sleep(900);
+await sleep(2000);
 await scrollTo(desk, 'section.break-inside-avoid', 'start');
-await sleep(3200);
+await sleep(7000);
 const deskResult = await rd.stop();
 
 fs.writeFileSync(path.join(out, 'markers.json'), JSON.stringify({ phone: phoneResult, desk: deskResult }, null, 2));

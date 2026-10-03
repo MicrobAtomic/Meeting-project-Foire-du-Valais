@@ -19,7 +19,7 @@ cd $REPO/docs/pitch/video
 BASE=http://127.0.0.1:8010 node record_demo.mjs $WORK/take
 node video_assets.mjs $WORK/assets captions.json
 python3 compose.py $WORK/take $WORK/assets $REPO/docs/pitch/demo.mp4
-ffmpeg -v error -y -ss 12 -i $REPO/docs/pitch/demo.mp4 -frames:v 1 $REPO/docs/pitch/demo-poster.png
+ffmpeg -v error -y -ss 20 -i $REPO/docs/pitch/demo.mp4 -frames:v 1 $REPO/docs/pitch/demo-poster.png
 python $REPO/manage.py demo_reset | tail -1
 BASE=http://127.0.0.1:8010 node shot_slide1.mjs $REPO/docs/pitch/img/home.png album
 cd $REPO/docs/pitch && node build_deck.mjs --tests $TESTS && uv run --no-project --with python-pptx python build_pptx.py
