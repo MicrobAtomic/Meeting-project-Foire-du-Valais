@@ -16,7 +16,7 @@
 - [x] T5 — Coûts documentés dans le deck, PITCH, ARCHITECTURE et SUBMISSION ; ancienne enveloppe retirée, annexes A3/A8 inspectées. Estimations : ≈ 30 CHF/mois et ≈ 20 CHF de mise en place hors développement ; tarifs publics revérifiés le 4 octobre 2026.
 - [x] T6 — Notes françaises identiques dans le PowerPoint et PITCH, quatre diapositives et repères par scène ; conclusion ajustée à 1:47 pour la vidéo de ≈ 77 s. Contrôle de débit par lecture synthétique locale : textes compatibles avec les créneaux ; répétition personnelle avant scène à effectuer.
 - [x] T7 — Reconstruction complète finale réussie : 13 diapositives/pages, vidéo de 76,7 s intégrée à la diapositive 3 (octets identiques au MP4), notes vérifiées, huit annexes et aucun texte coupé. 401 tests OK avec horloge figée (6 cas PostgreSQL ignorés) ; deux défauts temporels des tests existants relevés avec l’horloge réelle, détaillés ci-dessous.
-- [ ] T8 — Livraison et push final.
+- [x] T8 — PowerPoint, PDF, vidéo et conducteur livrés ; chaque étape commitée et poussée sur `main`. Journal ci-dessous ; démarrage automatique et répétitions à vérifier avant scène.
 
 La recette utilise uniquement `docs/pitch/.build/pitch.sqlite3`, sans modifier la base locale ni le code de l'application.
 Chaque étape est cochée dans son commit et poussée sur `main`.
@@ -341,3 +341,22 @@ PYTEST
 Ces deux fixtures de tests restent à rendre indépendantes de la date dans une tâche séparée ; elles n'ont pas été
 modifiées dans ce plan limité à `docs/`. La lecture automatique de la vidéo dans PowerPoint/Keynote et les cinq
 répétitions au chronomètre restent à effectuer sur l'ordinateur de présentation (liste dans PITCH §4).
+
+
+## Journal de livraison
+
+| Étape | Commit | Livraison |
+|---|---|---|
+| T1 — point de départ | `9aa6f6c` | Poussé sur `main` |
+| T2 — défi simplifié | `cea20b7` | Poussé sur `main` |
+| T3 — structure et annexes | `eda6643` | Poussé sur `main` |
+| T4 — parcours filmé plus lent | `51bff19` | Poussé sur `main` |
+| T5 — coûts actualisés | `951aacd` | Poussé sur `main` |
+| T6 — notes et conducteur | `d90d999` | Poussé sur `main` |
+| T7 — recette et exports finaux | `d265ad4` | Poussé sur `main` |
+| T8 — livraison | Commit contenant ce journal | Push final vérifié à la livraison |
+
+Livrables : [PowerPoint avec vidéo et notes](pitch/Club-des-Affaires-pitch.pptx),
+[PDF de secours](pitch/Club-des-Affaires-pitch.pdf), [vidéo seule](pitch/demo.mp4),
+[conducteur et préparation avant scène](PITCH.md). Avant la présentation, régler la vidéo de la diapositive 3
+en lecture automatique dans PowerPoint ou Keynote et répéter cinq fois au chronomètre.
