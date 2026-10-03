@@ -8,7 +8,7 @@
   <p class="mt-4 text-2xl font-semibold text-red-700">{% translate "Plus jamais d'inconnus au Club." %}</p>
   <p class="mx-auto mt-4 max-w-xl text-stone-600">{% translate "Un cercle de dirigeantes et dirigeants qui se retrouvent quelques fois par an, dans la bonne humeur. Ici, on se connaît avant, on se mélange pendant, on se retrouve après." %}</p>
   <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
-    <a href="{% url 'club:join' %}" class="btn btn-primary">💌 {% translate "Demander une invitation" %}</a>
+    <a href="{% url 'club:join' %}" class="btn btn-primary">{% translate "Demander une invitation" %}</a>
     <a href="{% url 'club:home' %}" class="btn btn-secondary">{% translate "Espace membres" %}</a>
   </div>
 </section>
@@ -61,7 +61,7 @@
 <section class="mt-10 rounded-3xl bg-red-700 px-6 py-10 text-center text-white">
   <h2 class="text-2xl font-semibold">{% translate "Envie de nous rejoindre ?" %}</h2>
   <p class="mx-auto mt-2 max-w-md text-red-100">{% translate "Le Club se rejoint sur invitation. Dis-nous qui tu es, nous revenons vers toi." %}</p>
-  <a href="{% url 'club:join' %}" class="btn mt-6 bg-white text-red-700 hover:bg-red-50">💌 {% translate "Demander une invitation" %}</a>
+  <a href="{% url 'club:join' %}" class="btn mt-6 bg-white text-red-700 hover:bg-red-50">{% translate "Demander une invitation" %}</a>
   <p class="mt-4 text-sm text-red-100">{% translate "Déjà membre ?" %} <a href="{% url 'login' %}" class="font-semibold text-white underline">{% translate "Se connecter" %}</a></p>
 </section>
 {% endblock %}

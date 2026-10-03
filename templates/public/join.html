@@ -4,7 +4,7 @@
 <div class="mx-auto max-w-md">
   <div class="card space-y-5 p-6">
     <div class="text-center">
-      <div class="text-4xl" aria-hidden="true">💌</div>
+      <div class="text-4xl" aria-hidden="true">🎟️</div>
       <h1 class="mt-2 text-2xl font-semibold">{% translate "Demander une invitation" %}</h1>
       <p class="mt-1 text-sm text-stone-600">{% translate "Le Club des Affaires de la Foire du Valais se rejoint sur invitation. Dis-nous qui tu es, nous revenons vers toi." %}</p>
       {% if referrer %}<p class="mt-3 chip">🤝 {% blocktranslate with name=referrer.first_name initial=referrer.last_name|first %}Invité·e par {{ name }} {{ initial }}.{% endblocktranslate %}</p>{% endif %}
