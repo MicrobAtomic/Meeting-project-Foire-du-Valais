@@ -39,7 +39,7 @@ class LandingTests(TestCase):
         self.assertEqual(self.client.get(reverse("club:landing")).status_code, 200)
 
 
-@override_settings(MEMBERSHIP_PRICE=500, REFERRAL_NEW_MEMBER_PRICE=350, REFERRAL_SPONSOR_DISCOUNT=100)
+@override_settings(MEMBERSHIP_PRICE=500, REFERRAL_NEW_MEMBER_PRICE=350, REFERRAL_SPONSOR_DISCOUNT=100, REFERRAL_OFFER_ENABLED=True)
 class InvitePageTests(TestCase):
     def setUp(self):
         self.alice = make_member("alice@example.com", first_name="Alice", last_name="Aubert")

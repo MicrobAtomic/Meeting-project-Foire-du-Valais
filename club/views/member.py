@@ -207,6 +207,7 @@ def invite(request):
         "qr_svg": qr_svg(link),
         "referrals": me.referrals.order_by("-created_at"),
         "membership_price": settings.MEMBERSHIP_PRICE,
+        "referral_offer_enabled": settings.REFERRAL_OFFER_ENABLED,
         "new_member_price": settings.REFERRAL_NEW_MEMBER_PRICE,
         "sponsor_discount": settings.REFERRAL_SPONSOR_DISCOUNT,
     }

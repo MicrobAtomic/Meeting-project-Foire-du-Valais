@@ -7,6 +7,7 @@
     <p class="mt-1 text-stone-600">{% translate "Une dirigeante ou un dirigeant de ton entourage aurait sa place au Club ? Partage ton lien personnel : tu l'accompagnes pour sa première soirée." %}</p>
   </div>
 
+  {% if referral_offer_enabled %}
   <section class="card space-y-2 bg-amber-50 ring-amber-300">
     <h2 class="font-semibold">🎁 {% translate "L'offre de parrainage" %}</h2>
     <ul class="space-y-1 text-sm">
@@ -15,6 +16,7 @@
     </ul>
     <p class="text-xs text-stone-500">{% translate "Montants indicatifs, à confirmer par le Club." %}</p>
   </section>
+  {% endif %}
 
   <section class="card space-y-4">
     <h2 class="font-semibold">🔗 {% translate "Ton lien personnel" %}</h2>

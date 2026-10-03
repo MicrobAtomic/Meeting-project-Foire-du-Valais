@@ -1,6 +1,6 @@
 from datetime import timedelta
 
-from django.test import Client, TestCase
+from django.test import Client, TestCase, override_settings
 from django.urls import reverse
 from django.utils import timezone
 
@@ -115,3 +115,25 @@ class SessionLengthTests(TestCase):
         self.client.force_login(member.user)
         response = self.client.get(reverse("club:home"))
         self.assertEqual(int(response.cookies["sessionid"]["max-age"]), self.SIX_MONTHS)
+
+
+class MembershipPriceTests(TestCase):
+    @override_settings(MEMBERSHIP_PRICE=720)
+    def test_configured_price_on_get_and_invalid_post_in_all_languages(self):
+        for language in ("fr", "de", "en"):
+            self.client.cookies["django_language"] = language
+            for response in (self.client.get(reverse("club:join")),
+                             self.client.post(reverse("club:join"), valid_data(email="invalid"))):
+                self.assertContains(response, "720")
+                self.assertContains(response, "CHF")
+                self.assertContains(response, 'name="email"')
+                assert_csp_clean(self, response)
+
+    @override_settings(REFERRAL_OFFER_ENABLED=False)
+    def test_disabling_offer_keeps_personal_link(self):
+        sponsor = make_member("sponsor@example.com")
+        self.client.force_login(sponsor.user)
+        page = self.client.get(reverse("club:invite"))
+        self.assertContains(page, sponsor.referral_code)
+        self.assertNotContains(page, "350 CHF")
+        self.assertNotContains(page, "−100 CHF")

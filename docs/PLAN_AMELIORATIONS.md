@@ -13,6 +13,7 @@ Les envois réels et les changements d'hébergement restent à configurer sépar
 
 | Phase | État | Vérifications / livraison |
 |---|---|---|
+| 1 | Terminée | 187 tests verts ; tarif configurable vérifié sur GET/POST et FR/DE/EN ; offre désactivée par défaut |
 | 0 | Terminée | 185 tests SQLite verts ; contrôles Django et migrations verts ; documentation et aides admin corrigées |
 
 ## 1. Ce que Claude Code a effectivement livré
@@ -198,14 +199,14 @@ ou tester explicitement le 404 attendu en l'absence de photo ; il ne doit pas di
 Fichiers : `club/views/public.py`, `club/context_processors.py` si nécessaire, `templates/public/join.html`,
 `templates/club/invite.html`, `club/tests/test_join.py`, `club/tests/test_landing_invite.py`, traductions.
 
-- [ ] **1.1** Passer `membership_price` depuis `settings.MEMBERSHIP_PRICE` au template de demande d'invitation.
+- [x] **1.1** Passer `membership_price` depuis `settings.MEMBERSHIP_PRICE` au template de demande d'invitation.
   Employer une seule source pour le tarif ; aucun montant copié dans une chaîne Python ou un template.
-- [ ] **1.2** Afficher le montant annuel et les deux phrases sur la facture et l'absence de paiement au dépôt
+- [x] **1.2** Afficher le montant annuel et les deux phrases sur la facture et l'absence de paiement au dépôt
   de la demande, au-dessus du bouton. Conserver le formulaire, le parrainage, le CSRF et le champ anti-bot.
-- [ ] **1.3** Si les réductions ne sont pas validées, faire dépendre leur affichage d'un réglage
+- [x] **1.3** Si les réductions ne sont pas validées, faire dépendre leur affichage d'un réglage
   `REFERRAL_OFFER_ENABLED` explicitement désactivable ; conserver le lien de parrainage indépendamment de l'offre.
   Ne pas inventer TVA, échéance, conditions de résiliation ou prestations incluses.
-- [ ] **1.4** Vérifier les versions FR/DE/EN. Avec `override_settings(MEMBERSHIP_PRICE=720)`, la page doit afficher
+- [x] **1.4** Vérifier les versions FR/DE/EN. Avec `override_settings(MEMBERSHIP_PRICE=720)`, la page doit afficher
   720 CHF ; elle doit aussi conserver le prix et le formulaire sur un POST invalide. Contrôler le cas `?ref=CODE`.
 
 **Validation :** tests de demande/parrainage et suite complète ; page mobile lisible, aucun formulaire de paiement.

@@ -1,6 +1,7 @@
 import logging
 from datetime import timedelta
 
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_not_required
 from django.core.cache import cache
@@ -55,7 +56,9 @@ def join(request):
             return redirect("club:join_thanks")
     else:
         form = InvitationRequestForm()
-    return render(request, "public/join.html", {"form": form, "referrer": referrer})
+    return render(request, "public/join.html", {
+        "form": form, "referrer": referrer, "membership_price": settings.MEMBERSHIP_PRICE,
+    })
 
 
 @login_not_required

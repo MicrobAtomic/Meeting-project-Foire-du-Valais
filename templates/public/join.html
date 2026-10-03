@@ -23,6 +23,11 @@
         {% include "club/_field.html" with field=form.job_title %}
       </div>
       <div class="hidden" aria-hidden="true"><label>Website {{ form.website }}</label></div>
+      <div class="rounded-xl bg-stone-50 p-3 text-sm text-stone-700">
+        <p class="font-semibold">{% blocktranslate %}Cotisation annuelle : {{ membership_price }} CHF.{% endblocktranslate %}</p>
+        <p>{% translate "Paiement sur facture, géré par l'équipe du Club." %}</p>
+        <p class="mt-1">{% translate "Envoyer une demande d'invitation ne déclenche aucun paiement." %}</p>
+      </div>
       <button type="submit" class="btn btn-primary w-full">{% translate "Envoyer ma demande" %}</button>
     </form>
 

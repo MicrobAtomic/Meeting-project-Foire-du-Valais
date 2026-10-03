@@ -126,6 +126,7 @@ DEMO_MODE = os.environ.get("DEMO_MODE", "1") == "1"  # shows the "fictitious dat
 
 # Membership & referral offer (CHF) — placeholder amounts, to be validated with the client.
 MEMBERSHIP_PRICE = 500
+REFERRAL_OFFER_ENABLED = os.environ.get("REFERRAL_OFFER_ENABLED", "0") == "1"
 REFERRAL_NEW_MEMBER_PRICE = 350
 REFERRAL_SPONSOR_DISCOUNT = 100
 

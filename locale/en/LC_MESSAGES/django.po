@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Club des Affaires\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 18:39+0200\n"
+"POT-Creation-Date: 2026-10-03 18:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Club des Affaires\n"
 "Language-Team: Club des Affaires\n"
@@ -991,6 +991,16 @@ msgstr "The Club des Affaires of the Foire du Valais is joined by invitation. Te
 #, python-format
 msgid "Invité·e par %(name)s %(initial)s."
 msgstr "Invited by %(name)s %(initial)s."
+
+#, python-format
+msgid "Cotisation annuelle : %(membership_price)s CHF."
+msgstr "Annual membership fee: CHF %(membership_price)s."
+
+msgid "Paiement sur facture, géré par l'équipe du Club."
+msgstr "Payment by invoice, managed by the Club team."
+
+msgid "Envoyer une demande d'invitation ne déclenche aucun paiement."
+msgstr "Submitting an invitation request does not trigger any payment."
 
 msgid "Envoyer ma demande"
 msgstr "Send my request"
