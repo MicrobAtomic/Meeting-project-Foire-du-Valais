@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
-from django.http import Http404, HttpResponse
+from django.http import FileResponse, Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils import timezone
@@ -11,6 +11,7 @@ from django.utils.translation import gettext as _
 from django.utils.translation import gettext_lazy
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_GET
 from django.views.decorators.cache import never_cache
 from django.views.decorators.vary import vary_on_cookie
 
@@ -109,6 +110,24 @@ def member_note(request, pk):
 
 
 @member_required
+@require_GET
+@never_cache
+@vary_on_cookie
+def member_photo(request, pk):
+    target = visible_target(request.member, pk)
+    if not target.photo:
+        raise Http404
+    try:
+        stream = target.photo.open("rb")
+    except FileNotFoundError:
+        raise Http404 from None
+    response = FileResponse(stream, content_type="image/jpeg")
+    response["Cache-Control"] = "private, no-store"
+    response["X-Content-Type-Options"] = "nosniff"
+    return response
+
+
+@member_required
 def member_vcard(request, pk):
     target = get_object_or_404(Member.objects.select_related("user"), pk=pk, user__is_active=True)
     if target.pk != request.member.pk and not Connection.exists_between(request.member, target):
@@ -185,7 +204,7 @@ def album(request):
 def profile_edit(request):
     member = request.member  # always MY card, never an id taken from the URL
     if request.method == "POST":
-        form = MemberProfileForm(request.POST, instance=member)
+        form = MemberProfileForm(request.POST, request.FILES, instance=member)
         if form.is_valid():
             form.save()
             save_tag_answers(member, request.POST)

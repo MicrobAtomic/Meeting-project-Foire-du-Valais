@@ -16,6 +16,7 @@ urlpatterns = [
     path("moi/inviter/", member.invite, name="invite"),
     path("membres/<int:pk>/", member.member_detail, name="member_detail"),
     path("membres/<int:pk>/note/", member.member_note, name="member_note"),
+    path("membres/<int:pk>/photo/", member.member_photo, name="member_photo"),
     path("membres/<int:pk>/vcard/", member.member_vcard, name="member_vcard"),
     path("evenements/", events.event_list, name="event_list"),
     path("evenements/<int:pk>/", events.event_detail, name="event_detail"),

@@ -15,7 +15,7 @@ PUBLIC = {  # reachable without an account (nothing about members is exposed the
 }
 MEMBER = {  # members only (a Member profile is required)
     "club:home", "club:onboarding", "club:album", "club:profile_edit", "club:my_qr", "club:invite",
-    "club:member_detail", "club:member_note", "club:member_vcard", "club:event_list", "club:event_detail", "club:event_rsvp", "club:scan",
+    "club:member_detail", "club:member_note", "club:member_photo", "club:member_vcard", "club:event_list", "club:event_detail", "club:event_rsvp", "club:scan",
 }
 STAFF = {"club:staff_dashboard", "club:staff_event", "club:staff_badges"}
 ANY_LOGGED_IN = {"logout"}
@@ -41,9 +41,16 @@ class AccessMatrixTests(TestCase):
         self.alice = make_member("alice@example.com")
         self.bob = make_member("bob@example.com")
         self.event = Event.objects.create(title="Dîner", kind="dinner", location="Martigny", starts_at="2030-01-01T18:00Z")
+        self.bob.photo = "member_photos/matrix.jpg"
+        from unittest.mock import patch
+        from io import BytesIO
+        self.photo_open = patch("django.db.models.fields.files.FieldFile.open", return_value=BytesIO(b"photo"))
+        self.photo_open.start()
+        self.addCleanup(self.photo_open.stop)
+        self.bob.save(update_fields=["photo"])
         self.staff = make_staff()
         self.args = {
-            "club:member_detail": [self.bob.pk], "club:member_note": [self.bob.pk], "club:member_vcard": [self.bob.pk], "club:event_detail": [self.event.pk],
+            "club:member_detail": [self.bob.pk], "club:member_note": [self.bob.pk], "club:member_photo": [self.bob.pk], "club:member_vcard": [self.bob.pk], "club:event_detail": [self.event.pk],
             "club:event_rsvp": [self.event.pk], "club:scan": [self.bob.qr_token],
             "club:staff_event": [self.event.pk], "club:staff_badges": [self.event.pk],
         }

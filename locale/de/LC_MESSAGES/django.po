@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Club des Affaires\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 18:55+0200\n"
+"POT-Creation-Date: 2026-10-03 19:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Club des Affaires\n"
 "Language-Team: Club des Affaires\n"
@@ -64,6 +64,16 @@ msgstr "E-Mail oder Passwort falsch."
 msgid "E-mail"
 msgstr "E-Mail"
 
+#| msgid "Mon profil"
+msgid "Photo de profil"
+msgstr "Profilfoto"
+
+msgid "Retirer ma photo"
+msgstr "Mein Foto entfernen"
+
+msgid "Choisis une nouvelle photo ou son retrait, pas les deux."
+msgstr "Wähle ein neues Foto oder entferne das alte, nicht beides."
+
 msgid "Prénom"
 msgstr "Vorname"
 
@@ -121,7 +131,6 @@ msgstr "Wenn du das Häkchen entfernst, können nur Mitglieder, die du schon get
 msgid "Poste"
 msgstr "Position"
 
-#| msgid "Ton lien personnel"
 msgid "Ma note personnelle"
 msgstr "Meine persönliche Notiz"
 
@@ -502,6 +511,9 @@ msgstr "Nie mehr Fremde"
 
 msgid "Tout le monde se connaît : la grande fête du Club."
 msgstr "Alle kennen sich: das grosse Fest des Clubs."
+
+msgid "Photo invalide : JPEG, PNG ou WebP non animé, 2 Mio et 4096 × 4096 pixels maximum."
+msgstr "Ungültiges Foto: nicht animiertes JPEG, PNG oder WebP, maximal 2 MiB und 4096 × 4096 Pixel."
 
 #. Translators: a percentage; French and German put a space before the % sign, English does not.
 #, python-format
@@ -957,6 +969,9 @@ msgstr "Das ist deine Karte: die anderen Mitglieder sehen sie im Album."
 
 msgid "Qui es-tu ?"
 msgstr "Wer bist du?"
+
+msgid "JPEG, PNG ou WebP, 2 Mio maximum. Ta photo suit les droits de visibilité de ta fiche."
+msgstr "JPEG, PNG oder WebP, maximal 2 MiB. Für dein Foto gelten die Sichtbarkeitsrechte deines Profils."
 
 msgid "Langues parlées"
 msgstr "Gesprochene Sprachen"

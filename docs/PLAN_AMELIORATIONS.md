@@ -13,6 +13,7 @@ Les envois réels et les changements d'hébergement restent à configurer sépar
 
 | Phase | État | Vérifications / livraison |
 |---|---|---|
+| 4 | Livrée ; activation production en attente du volume | 201 tests verts ; normalisation et accès privé vérifiés ; Pillow 12.3 ; upload production désactivé ; procédure dans EXPLOITATION.md |
 | 3 | Terminée | 196 tests verts ; isolation des auteurs, CSRF, CSP, échappement, cache, contraintes et absence de fuite vérifiés |
 | 2 | Terminée | 189 tests verts ; 3 JPEG 256 × 256 vérifiés ; collectstatic OK ; licence et sources dans docs/demo/PHOTOS.md |
 | 1 | Terminée | 187 tests verts ; tarif configurable vérifié sur GET/POST et FR/DE/EN ; offre désactivée par défaut |
@@ -319,40 +320,40 @@ Fichiers à créer : `club/services/photos.py`, `club/tests/test_photos.py`.
 Fichiers à modifier : dépendances après accord, `club/models.py`, migration, `club/forms.py`, `club/admin.py`,
 `club/views/member.py`, `club/urls.py`, `config/settings.py`, `templates/club/profile_edit.html`, `_card.html`, tests d'accès.
 
-- [ ] **4.1** Ajouter `Member.photo`, facultatif. Fixer `MEDIA_ROOT` dans un répertoire privé ignoré par Git.
+- [x] **4.1** Ajouter `Member.photo`, facultatif. Fixer `MEDIA_ROOT` dans un répertoire privé ignoré par Git.
   Stocker avec un nom aléatoire généré par le serveur, sous `member_photos/`, en JPEG normalisé.
   Ne pas placer les uploads dans `static/`, `STATIC_ROOT` ou un répertoire directement servi par le proxy.
   Ne pas ajouter de route publique automatique `/media/`, même en développement.
-- [ ] **4.2** Écrire une fonction `normalize_member_photo(upload)` avec les limites proposées :
+- [x] **4.2** Écrire une fonction `normalize_member_photo(upload)` avec les limites proposées :
   2 Mio, JPEG/PNG/WebP uniquement, image non animée, dimensions au plus 4 096 × 4 096 et 16 millions de pixels.
   Vérifier le format réellement décodé, pas seulement le nom ou `content_type`. Rejeter SVG, GIF, fichiers tronqués,
   faux JPEG et formats non pris en charge avec un message traduisible. Conserver les protections contre les
   bombes de décompression décrites par [Pillow](https://pillow.readthedocs.io/en/stable/reference/Image.html).
-- [ ] **4.3** Après vérification, rouvrir/décoder l'image, appliquer l'orientation EXIF, recadrer au centre
+- [x] **4.3** Après vérification, rouvrir/décoder l'image, appliquer l'orientation EXIF, recadrer au centre
   et redimensionner vers 512 × 512. Recréer une image RGB propre et l'encoder en JPEG ; ne pas recopier EXIF, GPS,
   commentaires ni octets ajoutés au fichier d'origine. Fond blanc pour la transparence. L'original n'est pas conservé.
   Référence pour l'orientation et le recadrage : [ImageOps](https://pillow.readthedocs.io/en/stable/reference/ImageOps.html).
-- [ ] **4.4** Ajouter `photo` et un booléen `remove_photo` au formulaire de profil ; utiliser `request.FILES`
+- [x] **4.4** Ajouter `photo` et un booléen `remove_photo` au formulaire de profil ; utiliser `request.FILES`
   et `enctype="multipart/form-data"`, conformément au
   [parcours d'upload Django](https://docs.djangoproject.com/en/5.2/topics/http/file-uploads/).
   Utiliser un widget fichier qui n'affiche pas `photo.url`. Afficher l'aperçu via la route protégée décrite ci-dessous.
   Rejeter la combinaison upload + suppression ; le service commun est utilisé aussi par le formulaire admin.
-- [ ] **4.5** Écrire le service de remplacement/retrait. Valider avant d'écrire. La nouvelle photo ne remplace
+- [x] **4.5** Écrire le service de remplacement/retrait. Valider avant d'écrire. La nouvelle photo ne remplace
   le champ que si le formulaire entier est valide. Après validation de la transaction, supprimer l'ancien fichier.
   En cas d'échec de sauvegarde, supprimer uniquement le nouveau fichier créé et garder l'ancien.
   Prévoir aussi le nettoyage lors de la suppression d'un profil, sans supprimer un fichier encore référencé.
-- [ ] **4.6** Ajouter `club:member_photo`, `/membres/<pk>/photo/`, GET seulement, avec `@member_required`.
+- [x] **4.6** Ajouter `club:member_photo`, `/membres/<pk>/photo/`, GET seulement, avec `@member_required`.
   Appliquer **le même contrôle d'ouverture que la fiche**, puis servir le fichier normalisé avec `FileResponse`,
   `Content-Type: image/jpeg`, `X-Content-Type-Options: nosniff`, `Cache-Control: private, no-store` et `Vary: Cookie`.
   Le serveur ne lit aucun chemin reçu du navigateur. Sans photo ou sans droit, renvoyer 404.
-- [ ] **4.7** Dans les cartes, privilégier la photo réelle, puis l'illustration de démo si autorisée, puis
+- [x] **4.7** Dans les cartes, privilégier la photo réelle, puis l'illustration de démo si autorisée, puis
   les initiales. Aucune utilisation de `member.photo.url` dans les templates. L'absence physique d'un fichier ne
   doit pas provoquer de 500 ; détecter ce cas côté serveur et revenir aux initiales, avec un diagnostic sans donnée privée.
-- [ ] **4.8** Préparer la configuration du stockage persistant : volume privé sauvegardé sur un serveur suisse,
+- [x] **4.8** Préparer la configuration du stockage persistant : volume privé sauvegardé sur un serveur suisse,
   ou disque persistant si Render est retenu. Documenter le chemin, les droits et la restauration.
   Un passage à un stockage objet privé serait une variante ultérieure avec dépendances et URLs à contrôler.
   Tant que le stockage durable n'est pas disponible, ne pas ouvrir l'upload en ligne à de vrais membres.
-- [ ] **4.9** Tester upload valide, orientation, métadonnées retirées, fichier trop gros, dimensions excessives,
+- [x] **4.9** Tester upload valide, orientation, métadonnées retirées, fichier trop gros, dimensions excessives,
   format interdit, upload malformé, retrait et remplacement. Employer un répertoire temporaire isolé pour les tests.
   Vérifier l'anonyme, le membre autorisé, le profil masqué non rencontré, un utilisateur tentant de modifier B,
   un fichier manquant et l'absence de route publique permettant de contourner le contrôle.

@@ -123,6 +123,9 @@ EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
 EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS", "0") == "1"
 SITE_NAME = os.environ.get("SITE_NAME", "Club des Affaires")
 DEMO_MODE = os.environ.get("DEMO_MODE", "1") == "1"  # shows the "fictitious data" banner
+MEDIA_ROOT = Path(os.environ.get("MEDIA_ROOT", BASE_DIR / "media"))
+# Enable in production only after provisioning a private, durable, backed-up volume.
+PROFILE_PHOTO_UPLOADS_ENABLED = os.environ.get("PROFILE_PHOTO_UPLOADS_ENABLED", "1" if DEBUG else "0") == "1"
 
 # Membership & referral offer (CHF) — placeholder amounts, to be validated with the client.
 MEMBERSHIP_PRICE = 500

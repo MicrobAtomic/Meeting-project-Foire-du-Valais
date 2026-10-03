@@ -19,6 +19,8 @@ from club.models import (
     new_qr_token,
 )
 from club.services.auth_links import send_login_link
+from club.forms import MemberAdminForm
+from club.services.photos import save_profile_photo
 from club.services.events import generate_matches, generate_seating
 from club.ui import RANK_STYLE
 
@@ -35,6 +37,7 @@ class MemberTagInline(admin.TabularInline):
 
 @admin.register(Member)
 class MemberAdmin(admin.ModelAdmin):
+    form = MemberAdminForm
     list_display = ["full_name", "company", "sector", "member_since", "rank_display", "connections", "visible_in_directory"]
     list_filter = ["sector", "member_since", "is_founder", "speaks_de", "speaks_en", "visible_in_directory"]
     search_fields = ["first_name", "last_name", "company", "user__email"]
@@ -42,6 +45,14 @@ class MemberAdmin(admin.ModelAdmin):
     autocomplete_fields = ["user"]
     inlines = [MemberTagInline]
     actions = ["send_login_links", "rotate_qr_token"]
+
+    def get_fields(self, request, obj=None):
+        fields = super().get_fields(request, obj)
+        return fields if settings.PROFILE_PHOTO_UPLOADS_ENABLED else [field for field in fields if field not in ("photo", "remove_photo")]
+
+    def save_model(self, request, obj, form, change):
+        obj.photo = form.old_photo_name
+        save_profile_photo(obj, form.cleaned_data.get("photo"), form.cleaned_data.get("remove_photo", False), form.old_photo_name)
 
     @admin.display(description=_("rang"))
     def rank_display(self, obj):

@@ -1,8 +1,11 @@
 from django import forms
+from django.conf import settings
+from django.db.models.fields.files import FieldFile
 from django.contrib.auth.forms import AuthenticationForm
 from django.utils.translation import gettext_lazy as _
 
 from club.models import InvitationRequest, Member
+from club.services.photos import normalize_member_photo, save_profile_photo
 
 
 class EmailAuthenticationForm(AuthenticationForm):
@@ -18,7 +21,43 @@ class EmailAuthenticationForm(AuthenticationForm):
         return self.cleaned_data["username"].strip().lower()
 
 
-class MemberProfileForm(forms.ModelForm):
+class PhotoForm(forms.ModelForm):
+    photo = forms.FileField(label=_("Photo de profil"), required=False, widget=forms.FileInput(attrs={"accept": "image/jpeg,image/png,image/webp", "class": "input"}))
+    remove_photo = forms.BooleanField(label=_("Retirer ma photo"), required=False)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.old_photo_name = self.instance.photo.name or ""
+        if not settings.PROFILE_PHOTO_UPLOADS_ENABLED:
+            self.fields.pop("photo", None)
+            self.fields.pop("remove_photo", None)
+
+    def clean_photo(self):
+        photo = self.cleaned_data.get("photo")
+        return normalize_member_photo(photo) if photo and not isinstance(photo, FieldFile) else None
+
+    def clean(self):
+        data = super().clean()
+        if data.get("photo") and data.get("remove_photo"):
+            raise forms.ValidationError(_("Choisis une nouvelle photo ou son retrait, pas les deux."))
+        return data
+
+    def save(self, commit=True):
+        member = super().save(commit=False)
+        member.photo = self.old_photo_name
+        if commit:
+            save_profile_photo(member, self.cleaned_data.get("photo"), self.cleaned_data.get("remove_photo", False), self.old_photo_name)
+            self.save_m2m()
+        return member
+
+
+class MemberAdminForm(PhotoForm):
+    class Meta:
+        model = Member
+        fields = "__all__"
+
+
+class MemberProfileForm(PhotoForm):
     """What a member may edit about THEIR card. member_since, is_founder, qr_token, referral_code and user
     are deliberately absent: only the staff manages them (the form ignores them even if posted)."""
 

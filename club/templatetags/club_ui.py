@@ -3,6 +3,8 @@ import re
 from django import template
 from django.conf import settings
 from django.templatetags.static import static
+from django.urls import reverse
+from club.services.photos import available_photo
 from django.utils.formats import date_format
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext
@@ -18,6 +20,13 @@ DEMO_PHOTOS = {key: f"img/demo/{key}.jpg" for key in ("camille", "lukas", "joell
 def demo_photo(member):
     path = DEMO_PHOTOS.get(member.demo_photo_key) if settings.DEMO_MODE else None
     return static(path) if path else ""
+
+
+@register.filter
+def member_portrait(member):
+    if available_photo(member):
+        return reverse("club:member_photo", args=[member.pk])
+    return demo_photo(member) if not member.photo else ""
 
 LANGUAGE_ORDER = ("fr", "de", "en")
 _SVG_SIZE = re.compile(r'<svg[^>]*?\swidth="(\d+)"[^>]*?\sheight="(\d+)"')

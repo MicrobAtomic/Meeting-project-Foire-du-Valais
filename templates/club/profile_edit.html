@@ -6,12 +6,18 @@
   <p class="mt-1 text-sm text-stone-600">{% translate "C'est ta carte : les autres membres la voient dans l'album." %}</p>
   <p class="mt-2 text-sm"><a href="{% url 'club:invite' %}" class="font-medium text-red-700 underline">{% translate "Inviter quelqu'un" %}</a></p>
 
-  <form method="post" class="mt-6 space-y-6">
+  <form method="post" enctype="multipart/form-data" class="mt-6 space-y-6">
     {% csrf_token %}
     {% if form.non_field_errors %}<p class="rounded-xl bg-red-50 p-3 text-sm text-red-900" role="alert">{{ form.non_field_errors.0 }}</p>{% endif %}
 
     <section class="card space-y-4">
       <h2 class="font-semibold">🧑 {% translate "Qui es-tu ?" %}</h2>
+      {% if form.photo %}
+      {% if form.old_photo_name %}<img src="{% url 'club:member_photo' request.member.pk %}" alt="" width="96" height="96" class="h-24 w-24 rounded-full object-cover">{% endif %}
+      {% include "club/_field.html" with field=form.photo %}
+      <p class="text-sm text-stone-600">{% translate "JPEG, PNG ou WebP, 2 Mio maximum. Ta photo suit les droits de visibilité de ta fiche." %}</p>
+      {% include "club/_field.html" with field=form.remove_photo %}
+      {% endif %}
       <div class="grid gap-4 sm:grid-cols-2">
         {% include "club/_field.html" with field=form.first_name %}
         {% include "club/_field.html" with field=form.last_name %}

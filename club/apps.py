@@ -5,3 +5,6 @@ class ClubConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "club"
     verbose_name = "Club des Affaires"
+
+    def ready(self):
+        from club import signals  # noqa: F401
