@@ -6,11 +6,11 @@ Pour éviter les requêtes N+1, charger les membres avec select_related("user").
 {% endcomment %}{% load i18n club_ui %}{% tags_with member "like" as likes %}{% tags_with member "dislike" as dislikes %}
 {% if size != "full" %}<a href="{% url 'club:member_detail' member.pk %}" class="block h-full rounded-2xl transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700">{% endif %}
 <article class="card h-full space-y-3 {{ member|rank_ring }}">
-  <header class="flex items-center gap-3">
+  <header class="flex items-center {% if size == 'full' %}gap-4{% else %}gap-3{% endif %}">
     {% with portrait=member|member_portrait %}{% if portrait %}
-    <img src="{{ portrait }}" alt="" width="48" height="48" loading="lazy" class="h-12 w-12 shrink-0 rounded-full object-cover">
+    <img src="{{ portrait }}" alt="" width="{% if size == 'full' %}112{% else %}48{% endif %}" height="{% if size == 'full' %}112{% else %}48{% endif %}" loading="lazy" class="{% if size == 'full' %}h-24 w-24 sm:h-28 sm:w-28{% else %}h-12 w-12{% endif %} shrink-0 rounded-full object-cover">
     {% else %}
-    <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-base font-semibold {{ member|sector_classes }}" aria-hidden="true">{{ member.initials }}</div>
+    <div class="flex {% if size == 'full' %}h-24 w-24 text-2xl sm:h-28 sm:w-28{% else %}h-12 w-12 text-base{% endif %} shrink-0 items-center justify-center rounded-full font-semibold {{ member|sector_classes }}" aria-hidden="true">{{ member.initials }}</div>
     {% endif %}{% endwith %}
     <div class="min-w-0">
       {% if size == "full" %}<h1 class="truncate font-semibold">{{ member.full_name }}</h1>{% else %}<h3 class="truncate font-semibold">{{ member.full_name }}</h3>{% endif %}

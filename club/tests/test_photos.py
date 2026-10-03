@@ -11,7 +11,7 @@ from PIL import Image
 
 from club.forms import MemberAdminForm, MemberProfileForm
 from club.models import Connection
-from club.services.photos import available_photo, normalize_member_photo, photo_write_scope, save_profile_photo
+from club.services.photos import MAX_BYTES, MAX_EDGE, available_photo, normalize_member_photo, photo_write_scope, save_profile_photo
 from club.tests.helpers import make_member
 from pathlib import Path
 
@@ -48,10 +48,11 @@ class PhotoTests(TestCase):
         self.assertNotIn(b"SECRET-METADATA", raw)
 
     def test_formats_size_dimensions_and_malformed_input(self):
-        for invalid in (upload("GIF"), upload(size=(4097, 1)),
+        # Input limits now allow high-resolution phone photos; rejection still applies beyond the new bounds.
+        for invalid in (upload("GIF"), upload(size=(MAX_EDGE + 1, 1)),
                         SimpleUploadedFile("bad.jpg", b"not a JPEG"),
                         SimpleUploadedFile("bad.svg", b"<svg/>"),
-                        SimpleUploadedFile("huge.jpg", b"x" * (2 * 1024 * 1024 + 1)),
+                        SimpleUploadedFile("huge.jpg", b"x" * (MAX_BYTES + 1)),
                         SimpleUploadedFile("cut.jpg", upload("JPEG").read()[:30])):
             with self.assertRaises(ValidationError):
                 normalize_member_photo(invalid)

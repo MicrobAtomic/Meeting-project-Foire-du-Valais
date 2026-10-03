@@ -6,3 +6,4 @@ psycopg[binary]>=3.2,<4
 segno>=1.6,<2
 django-sesame>=3.2,<4
 Pillow>=12.3,<13
+pillow-heif>=1.8,<2

@@ -22,7 +22,7 @@ class EmailAuthenticationForm(AuthenticationForm):
 
 
 class PhotoForm(forms.ModelForm):
-    photo = forms.FileField(label=_("Photo de profil"), required=False, widget=forms.FileInput(attrs={"accept": "image/jpeg,image/png,image/webp", "class": "input"}))
+    photo = forms.FileField(label=_("Photo de profil"), required=False, widget=forms.FileInput(attrs={"accept": "image/jpeg,image/png,image/webp,image/heic,image/heif,image/avif,.heic,.heif,.hif", "class": "input"}))
     remove_photo = forms.BooleanField(label=_("Retirer ma photo"), required=False)
 
     def __init__(self, *args, **kwargs):

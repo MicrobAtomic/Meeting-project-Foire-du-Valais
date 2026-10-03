@@ -902,3 +902,17 @@ sans que cela fasse partie de la demande en cours.
 | 9 — recette et exploitation | Commit contenant ce journal | Recette locale terminée ; push vérifié à la livraison |
 
 La phase 9 corrige aussi le nettoyage des photos après rollback dans le profil/admin, bloque SMTP pour les liens directs en mode démo et retire les promesses de bingo actif des nouvelles données de démo. La facturation demeure manuelle.
+
+
+## Complément — affichage et aperçu des photos
+
+Demande supplémentaire : agrandir les portraits sur les fiches et faciliter le choix d'une photo avec aperçu et formatage automatique.
+
+- [x] Agrandir les portraits et les initiales sur les fiches complètes : 96 px à 390 px, 112 px à 1 280 px. Les cartes de l'album gardent leur taille compacte.
+- [x] Ajouter un aperçu après sélection, montrant le recadrage réellement appliqué. Gérer la progression, les erreurs, le retrait et les sélections successives ; ne pas enregistrer la photo pendant l'aperçu.
+- [x] Réutiliser Pillow et ajouter pillow-heif 1.8 pour HEIC/HEIF. Accepter aussi AVIF ; convertir automatiquement vers JPEG 512 × 512, orienté et sans métadonnées. Les limites de la phase 4 passent à 20 Mio, 50 MP et 10 000 pixels par côté, avec contrôle avant décodage complet.
+- [x] Protéger la nouvelle route POST par session membre valide et CSRF, sans cache ni écriture de profil/photo. Ajouter la route aux matrices d'accès, y compris l'expiration invité.
+- [x] Traduire FR/DE/EN, recompiler les catalogues et le CSS ; documentation dans EXPLOITATION.md.
+- [x] Recette : 268 tests SQLite OK (6 tests de concurrence réservés à PostgreSQL), tests JPEG/PNG/WebP/HEIC/AVIF, orientation visible et transparence, limite de pixels, aperçu sans sauvegarde, CSRF et upload désactivé. Six parcours Chrome à 390/1 280 px × FR/DE/EN vérifient aperçu HEIC, erreur de fichier invalide, refus local d'un fichier >20 Mio, retrait, priorité de la dernière sélection et enregistrement final. Les réponses 400 des fichiers invalides sont attendues ; aucune erreur JavaScript/CSP ni requête externe.
+
+Validation locale du 3 octobre 2026 ; aucun changement de schéma. L'activation des uploads en production garde les prérequis de stockage privé durable. Livraison par le commit qui contient ce complément, puis push sur `main`.

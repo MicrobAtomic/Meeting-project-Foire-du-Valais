@@ -13,6 +13,7 @@ urlpatterns = [
     path("bienvenue/", member.onboarding, name="onboarding"),
     path("album/", member.album, name="album"),
     path("moi/", member.profile_edit, name="profile_edit"),
+    path("moi/photo/apercu/", member.profile_photo_preview, name="profile_photo_preview"),
     path("moi/qr/", member.my_qr, name="my_qr"),
     path("moi/inviter/", member.invite, name="invite"),
     path("membres/<int:pk>/", member.member_detail, name="member_detail"),

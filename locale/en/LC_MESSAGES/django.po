@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Club des Affaires\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 21:24+0200\n"
+"POT-Creation-Date: 2026-10-03 22:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Club des Affaires\n"
 "Language-Team: Club des Affaires\n"
@@ -666,8 +666,9 @@ msgstr "New event: %(title)s"
 msgid "Ta réponse pour : %(title)s"
 msgstr "Your response for: %(title)s"
 
-msgid "Photo invalide : JPEG, PNG ou WebP non animé, 2 Mio et 4096 × 4096 pixels maximum."
-msgstr "Invalid photo: non-animated JPEG, PNG or WebP, at most 2 MiB and 4096 × 4096 pixels."
+#| msgid "Photo invalide : JPEG, PNG ou WebP non animé, 2 Mio et 4096 × 4096 pixels maximum."
+msgid "Photo invalide : JPEG, PNG, WebP, HEIC/HEIF ou AVIF non animé, 20 Mio, 50 mégapixels et 10 000 pixels par côté maximum."
+msgstr "Invalid photo: non-animated JPEG, PNG, WebP, HEIC/HEIF or AVIF, up to 20 MiB, 50 megapixels and 10,000 pixels per side."
 
 msgid "Les réponses sont fermées pour cet événement."
 msgstr "Responses are closed for this event."
@@ -777,6 +778,9 @@ msgstr "To meet"
 
 msgid "Nouvelles recrues"
 msgstr "Newcomers"
+
+msgid "Choisis une photo à prévisualiser."
+msgstr "Choose a photo to preview."
 
 msgid "C'est ta propre carte 😉"
 msgstr "That's your own card 😉"
@@ -1183,8 +1187,28 @@ msgstr "This is your card: other members see it in the album."
 msgid "Qui es-tu ?"
 msgstr "Who are you?"
 
-msgid "JPEG, PNG ou WebP, 2 Mio maximum. Ta photo suit les droits de visibilité de ta fiche."
-msgstr "JPEG, PNG or WebP, at most 2 MiB. Your photo follows your profile visibility permissions."
+msgid "Préparation de ton aperçu…"
+msgstr "Preparing your preview…"
+
+msgid "Voici le résultat après recadrage. Enregistre ton profil pour appliquer cette photo."
+msgstr "This is your cropped photo. Save your profile to apply it."
+
+msgid "Aperçu indisponible. Tu peux enregistrer ton profil pour traiter la photo."
+msgstr "Preview unavailable. You can save your profile to process the photo."
+
+msgid "Ta photo sera retirée à l’enregistrement."
+msgstr "Your photo will be removed when you save."
+
+msgid "La photo dépasse 20 Mio. Choisis un fichier plus léger."
+msgstr "The photo exceeds 20 MiB. Choose a smaller file."
+
+#| msgid "Photo de profil"
+msgid "Aperçu de ta photo de profil"
+msgstr "Preview of your profile photo"
+
+#| msgid "JPEG, PNG ou WebP, 2 Mio maximum. Ta photo suit les droits de visibilité de ta fiche."
+msgid "JPEG, PNG, WebP, HEIC/HEIF ou AVIF, 20 Mio maximum. Orientation, recadrage et compression automatiques. Ta photo suit les droits de visibilité de ta fiche."
+msgstr "JPEG, PNG, WebP, HEIC/HEIF or AVIF, up to 20 MiB. Automatic orientation, cropping and compression. Your photo follows your profile’s visibility settings."
 
 msgid "Langues parlées"
 msgstr "Spoken languages"

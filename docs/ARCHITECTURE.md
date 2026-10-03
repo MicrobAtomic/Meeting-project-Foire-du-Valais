@@ -118,6 +118,8 @@ absent. Le scan invité exige un contexte commun du jour vérifié. L'indice de 
 Les photos privées sont normalisées par Pillow puis stockées hors du répertoire public. La lecture authentifiée
 est sans cache ; les parcours profil/admin nettoient les nouveaux fichiers après rollback et les anciens après commit.
 Un arrêt brutal peut laisser un fichier orphelin à traiter par l'exploitant. Le volume durable de production reste à provisionner.
+L'aperçu de sélection utilise le même normaliseur que l'enregistrement, via un POST membre/CSRF sans conservation de photo.
+Pillow et pillow-heif traitent JPEG/PNG/WebP/HEIC/HEIF/AVIF jusqu'à 20 Mio et 50 mégapixels ; le résultat est un JPEG 512 × 512 sans métadonnées.
 
 Les notifications sont préparées en transaction, puis traitées par une commande limitée à 50 envois par passage.
 Les préférences, réponses et autorisations sont revérifiées à l'envoi. Une remise incertaine au serveur SMTP ne donne
@@ -235,8 +237,9 @@ puisse les présenter aux autres.
 
 ## 10. Qualité
 
-- **262 tests automatisés** (`env DEBUG=1 python manage.py test club`, environ 70 s).
-  Recette des améliorations sur SQLite (6 cas de concurrence réservés à PostgreSQL) et PostgreSQL dédié :
+- **268 tests automatisés** (`env DEBUG=1 python manage.py test club`, environ 70 s).
+  Dernière recette SQLite : 268 tests, dont 6 cas de concurrence réservés à PostgreSQL.
+  La recette initiale de phase 9 a passé les 262 tests alors présents sur PostgreSQL dédié :
   - les algorithmes (rencontres, tables tournantes) et leurs règles absolues ;
   - la **matrice d'accès** : chaque route est classée (publique, membre, staff) et testée anonyme / membre / staff ; une nouvelle
     route non classée fait échouer la suite ; les actions qui modifient des données refusent le GET ;

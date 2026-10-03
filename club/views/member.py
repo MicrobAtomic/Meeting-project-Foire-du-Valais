@@ -1,9 +1,9 @@
 from django.conf import settings
 from django.contrib import messages
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, ValidationError
 from django.db.models import Q
 from django.db import transaction
-from django.http import FileResponse, Http404, HttpResponse
+from django.http import FileResponse, Http404, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils import timezone
@@ -23,7 +23,7 @@ from club.services.substitutions import require_regular
 from club.services.notes import get_personal_note, save_personal_note
 from club.models import RSVP, Connection, EmailPreferences, Event, Member, MemberTag, Sector, Tag
 from club.services.events import visible_events
-from club.services.photos import photo_write_scope
+from club.services.photos import normalize_member_photo, photo_write_scope
 from club.services.federation import club_stats, collected_guest_count, collected_ids, collection_progress
 from club.services.intros import intros_for
 from club.services.milestones import album_goal, club_progress
@@ -126,6 +126,27 @@ def member_photo(request, pk):
     except FileNotFoundError:
         raise Http404 from None
     response = FileResponse(stream, content_type="image/jpeg")
+    response["Cache-Control"] = "private, no-store"
+    response["X-Content-Type-Options"] = "nosniff"
+    return response
+
+
+@member_required
+@require_POST
+@never_cache
+@vary_on_cookie
+def profile_photo_preview(request):
+    """Render the same normalised portrait as the save path, without a file or database write."""
+    if not settings.PROFILE_PHOTO_UPLOADS_ENABLED:
+        raise PermissionDenied
+    upload = request.FILES.get("photo")
+    if upload is None:
+        return JsonResponse({"error": _("Choisis une photo à prévisualiser.")}, status=400)
+    try:
+        normalized = normalize_member_photo(upload)
+    except ValidationError as error:
+        return JsonResponse({"error": error.messages[0]}, status=400)
+    response = HttpResponse(normalized.read(), content_type="image/jpeg")
     response["Cache-Control"] = "private, no-store"
     response["X-Content-Type-Options"] = "nosniff"
     return response

@@ -1,4 +1,4 @@
-{% extends "base.html" %}{% load i18n club_ui %}
+{% extends "base.html" %}{% load i18n club_ui static %}
 {% block title %}{% translate "Mon profil" %} · {{ SITE_NAME }}{% endblock %}
 {% block content %}
 <div class="mx-auto max-w-2xl">
@@ -13,9 +13,22 @@
     <section class="card space-y-4">
       <h2 class="font-semibold">🧑 {% translate "Qui es-tu ?" %}</h2>
       {% if form.photo %}
-      {% if form.old_photo_name %}<img src="{% url 'club:member_photo' request.member.pk %}" alt="" width="96" height="96" class="h-24 w-24 rounded-full object-cover">{% endif %}
+      <div data-photo-preview data-preview-url="{% url 'club:profile_photo_preview' %}"
+           data-fallback-src="{{ request.member|demo_photo }}"
+           data-loading="{% translate 'Préparation de ton aperçu…' %}"
+           data-ready="{% translate 'Voici le résultat après recadrage. Enregistre ton profil pour appliquer cette photo.' %}"
+           data-failed="{% translate 'Aperçu indisponible. Tu peux enregistrer ton profil pour traiter la photo.' %}"
+           data-removed="{% translate 'Ta photo sera retirée à l’enregistrement.' %}"
+           data-too-large="{% translate 'La photo dépasse 20 Mio. Choisis un fichier plus léger.' %}"
+           class="space-y-2">
+        {% with portrait=request.member|member_portrait %}
+        <img data-photo-image {% if portrait %}src="{{ portrait }}"{% else %}hidden{% endif %} alt="{% translate 'Aperçu de ta photo de profil' %}" width="112" height="112" class="h-28 w-28 rounded-full object-cover">
+        <div data-photo-placeholder {% if portrait %}hidden{% endif %} class="flex h-28 w-28 items-center justify-center rounded-full text-2xl font-semibold {{ request.member|sector_classes }}" aria-hidden="true">{{ request.member.initials }}</div>
+        {% endwith %}
+        <p data-photo-status role="status" aria-live="polite" class="text-sm text-stone-600"></p>
+      </div>
       {% include "club/_field.html" with field=form.photo %}
-      <p class="text-sm text-stone-600">{% translate "JPEG, PNG ou WebP, 2 Mio maximum. Ta photo suit les droits de visibilité de ta fiche." %}</p>
+      <p class="text-sm text-stone-600">{% translate "JPEG, PNG, WebP, HEIC/HEIF ou AVIF, 20 Mio maximum. Orientation, recadrage et compression automatiques. Ta photo suit les droits de visibilité de ta fiche." %}</p>
       {% include "club/_field.html" with field=form.remove_photo %}
       {% endif %}
       <div class="grid gap-4 sm:grid-cols-2">
@@ -82,9 +95,10 @@
       {% for field in preferences_form %}{% include "club/_field.html" with field=field %}{% endfor %}
     </section>
     <div class="flex flex-wrap gap-2">
-      <button type="submit" class="btn btn-primary">{% translate "Enregistrer" %}</button>
+      <button type="submit" data-photo-save class="btn btn-primary disabled:cursor-wait disabled:opacity-60">{% translate "Enregistrer" %}</button>
       <a href="{% url 'club:member_detail' request.member.pk %}" class="btn btn-secondary">{% translate "Annuler" %}</a>
     </div>
   </form>
 </div>
 {% endblock %}
+{% block scripts %}<script src="{% static 'js/profile-photo.js' %}" defer></script>{% endblock %}

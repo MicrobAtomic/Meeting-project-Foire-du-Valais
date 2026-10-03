@@ -18,12 +18,12 @@ PUBLIC = {  # reachable without an account (nothing about members is exposed the
     "login", "magic_login", "set_language", "club:landing", "club:magic_link_request", "club:join", "club:join_thanks", "club:email_unsubscribe",
 }
 MEMBER = {  # members only (a Member profile is required)
-    "club:home", "club:onboarding", "club:album", "club:profile_edit", "club:my_qr", "club:invite",
+    "club:home", "club:onboarding", "club:album", "club:profile_edit", "club:profile_photo_preview", "club:my_qr", "club:invite",
     "club:member_detail", "club:member_note", "club:member_photo", "club:member_vcard", "club:event_list", "club:event_detail", "club:event_rsvp", "club:scan", "club:member_substitute", "club:member_substitute_cancel",
 }
 STAFF = {"club:staff_dashboard", "club:staff_event", "club:staff_badges"}
 ANY_LOGGED_IN = {"logout"}
-POST_ONLY = {"set_language", "logout", "club:event_rsvp", "club:member_note", "club:member_substitute_cancel"}  # state-changing: a GET must never change anything
+POST_ONLY = {"set_language", "logout", "club:event_rsvp", "club:member_note", "club:member_substitute_cancel", "club:profile_photo_preview"}  # state-changing: a GET must never change anything
 
 
 def route_names():

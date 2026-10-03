@@ -11,11 +11,16 @@ from django.core.files.base import ContentFile
 from django.db import transaction
 from django.utils.translation import gettext as _
 from PIL import Image, ImageOps, UnidentifiedImageError
+from pillow_heif import register_heif_opener
 
 from club.models import Member
 
 logger = logging.getLogger(__name__)
-MAX_BYTES = 2 * 1024 * 1024
+MAX_BYTES = 20 * 1024 * 1024
+MAX_EDGE = 10_000
+MAX_PIXELS = 50_000_000
+PHOTO_FORMATS = ("JPEG", "PNG", "WEBP", "HEIF", "AVIF")
+register_heif_opener(thumbnails=False, depth_images=False, aux_images=False, decode_threads=1)
 _photo_writes = ContextVar("club_photo_writes", default=None)
 
 
@@ -36,7 +41,7 @@ def photo_write_scope():
 
 
 def normalize_member_photo(upload):
-    message = _("Photo invalide : JPEG, PNG ou WebP non animé, 2 Mio et 4096 × 4096 pixels maximum.")
+    message = _("Photo invalide : JPEG, PNG, WebP, HEIC/HEIF ou AVIF non animé, 20 Mio, 50 mégapixels et 10 000 pixels par côté maximum.")
     if upload.size > MAX_BYTES:
         raise ValidationError(message)
     upload.seek(0)
@@ -46,15 +51,18 @@ def normalize_member_photo(upload):
     try:
         with warnings.catch_warnings():
             warnings.simplefilter("error", Image.DecompressionBombWarning)
-            with Image.open(BytesIO(raw), formats=["JPEG", "PNG", "WEBP"]) as image:
+            with Image.open(BytesIO(raw), formats=PHOTO_FORMATS) as image:
                 width, height = image.size
-                if max(width, height) > 4096 or width * height > 16_000_000 or getattr(image, "n_frames", 1) != 1:
+                if max(width, height) > MAX_EDGE or width * height > MAX_PIXELS or getattr(image, "n_frames", 1) != 1:
                     raise ValidationError(message)
                 image.verify()
-            with Image.open(BytesIO(raw), formats=["JPEG", "PNG", "WEBP"]) as image:
+            with Image.open(BytesIO(raw), formats=PHOTO_FORMATS) as image:
+                # JPEG can decode at a reduced resolution before loading a large phone picture.
+                image.draft(None, (1024, 1024))
                 image.load()
-                oriented = ImageOps.exif_transpose(image).convert("RGBA")
-                cropped = ImageOps.fit(oriented, (512, 512), method=Image.Resampling.LANCZOS)
+                cropped = ImageOps.fit(image, (512, 512), method=Image.Resampling.LANCZOS)
+                # A centred square crop commutes with the EXIF transform; rotate only the small result.
+                cropped = ImageOps.exif_transpose(cropped).convert("RGBA")
                 clean = Image.new("RGB", (512, 512), "white")
                 clean.paste(cropped, mask=cropped.getchannel("A"))
                 result = BytesIO()
