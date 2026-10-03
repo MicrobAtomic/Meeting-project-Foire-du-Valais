@@ -15,6 +15,7 @@ SECTOR_STYLE = {  # sector -> (emoji, avatar classes)
     "retail": ("🛍️", "bg-pink-600 text-white"),
     "transport": ("🚚", "bg-orange-600 text-white"),
     "media": ("📣", "bg-violet-600 text-white"),
+    "other": ("🧩", "bg-stone-500 text-white"),
 }
 
 RANK_STYLE = {  # rank -> (label, card ring classes, badge classes)

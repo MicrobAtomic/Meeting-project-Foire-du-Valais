@@ -29,6 +29,7 @@ class Sector(models.TextChoices):
     RETAIL = "retail", _("Commerce & distribution")
     TRANSPORT = "transport", _("Transport & logistique")
     MEDIA = "media", _("Communication & médias")
+    OTHER = "other", _("Autre secteur")  # accounts created from an invitation request, until the member picks theirs
 
 
 class Member(models.Model):
@@ -47,14 +48,23 @@ class Member(models.Model):
     speaks_fr = models.BooleanField(_("parle français"), default=True)
     speaks_de = models.BooleanField(_("parle allemand"), default=False)
     speaks_en = models.BooleanField(_("parle anglais"), default=False)
-    member_since = models.PositiveSmallIntegerField(_("membre depuis (année)"))
-    is_founder = models.BooleanField(_("membre fondateur"), default=False)
+    member_since = models.PositiveSmallIntegerField(
+        _("membre depuis (année)"),
+        help_text=_("Année d'entrée au Club. Elle donne le rang : nouvelle recrue la première année, pilier après 5 ans."),
+    )
+    is_founder = models.BooleanField(
+        _("membre fondateur"), default=False, help_text=_("Membre depuis la création du Club : bordure dorée sur sa carte.")
+    )
     fun_fact = models.CharField(_("anecdote"), max_length=200, blank=True)
     talk_to_me_about = models.CharField(_("parle-moi de…"), max_length=120, blank=True)
     phone = models.CharField(_("téléphone"), max_length=30, blank=True)
     linkedin_url = models.URLField(_("LinkedIn"), blank=True)
-    visible_in_directory = models.BooleanField(_("visible dans l'album"), default=True)
-    onboarding_done = models.BooleanField(default=False)
+    visible_in_directory = models.BooleanField(
+        _("visible dans l'album"), default=True, help_text=_("Décoché : seuls les membres déjà rencontrés voient sa carte.")
+    )
+    onboarding_done = models.BooleanField(
+        _("profil complété"), default=False, help_text=_("Coché automatiquement quand le membre a choisi ses affinités.")
+    )
     qr_token = models.CharField(max_length=32, unique=True, default=new_qr_token, editable=False)
     referral_code = models.CharField(max_length=12, unique=True, default=new_referral_code, editable=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -115,6 +125,7 @@ class Tag(models.Model):
 
     class Meta:
         ordering = ["order", "slug"]
+        verbose_name = _("affinité")
 
     def __str__(self):
         return f"{self.emoji} {self.label_fr}"
@@ -143,6 +154,8 @@ class MemberTag(models.Model):
     sentiment = models.CharField(max_length=8, choices=Sentiment.choices)
 
     class Meta:
+        verbose_name = _("affinité du membre")
+        verbose_name_plural = _("affinités du membre")
         constraints = [models.UniqueConstraint(fields=["member", "tag"], name="unique_member_tag")]
 
 
@@ -157,8 +170,21 @@ class Event(models.Model):
     kind = models.CharField(_("type"), max_length=12, choices=Kind.choices)
     starts_at = models.DateTimeField(_("début"))
     location = models.CharField(_("lieu"), max_length=150)
-    description = models.TextField(_("description"), blank=True)
-    has_seating = models.BooleanField(_("repas assis (tables tournantes)"), default=False)
+    description = models.TextField(
+        _("description"),
+        blank=True,
+        help_text=_("Visible par les membres sur la page de l'événement. Astuce : le texte en français, puis en allemand après « · »."),
+    )
+    has_seating = models.BooleanField(
+        _("repas assis (tables tournantes)"),
+        default=False,
+        help_text=_("Pour un dîner assis : l'équipe génère un plan où chacun change de table à chaque service (Tableau de bord → Préparer)."),
+    )
+    has_bingo = models.BooleanField(
+        _("bingo des rencontres"),
+        default=False,
+        help_text=_("Pour un apéro debout : chaque inscrit reçoit une grille « Trouve quelqu'un qui… » qu'il remplit en scannant des QR codes. Rien à préparer."),
+    )
 
     class Meta:
         ordering = ["starts_at"]
@@ -179,10 +205,11 @@ class RSVP(models.Model):
 
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="rsvps")
     member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name="rsvps")
-    status = models.CharField(max_length=3, choices=Status.choices)
+    status = models.CharField(_("réponse"), max_length=3, choices=Status.choices)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
+        verbose_name = _("inscription")
         constraints = [models.UniqueConstraint(fields=["event", "member"], name="unique_rsvp")]
 
 
@@ -201,6 +228,7 @@ class Connection(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
 
     class Meta:
+        verbose_name = _("rencontre")
         constraints = [
             models.UniqueConstraint(fields=["member_a", "member_b"], name="unique_connection"),
             models.CheckConstraint(condition=Q(member_a__lt=F("member_b")), name="connection_ordered_pair"),
@@ -238,6 +266,8 @@ class Match(models.Model):
     welcomes_newcomer = models.BooleanField(default=False)
 
     class Meta:
+        verbose_name = _("rencontre proposée")
+        verbose_name_plural = _("rencontres proposées")
         constraints = [
             models.UniqueConstraint(fields=["event", "member_a", "member_b"], name="unique_match"),
             models.CheckConstraint(condition=Q(member_a__lt=F("member_b")), name="match_ordered_pair"),
@@ -254,6 +284,10 @@ class SeatingPlan(models.Model):
     new_pairs = models.PositiveIntegerField(default=0)
     repeated_pairs = models.PositiveIntegerField(default=0)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = _("plan de tables")
+        verbose_name_plural = _("plans de tables")
 
 
 class SeatAssignment(models.Model):
@@ -282,8 +316,88 @@ class InvitationRequest(models.Model):
     job_title = models.CharField(_("fonction"), max_length=120)
     email = models.EmailField(_("e-mail"))
     message = models.TextField(_("message"), blank=True)
+    language = models.CharField(_("langue"), max_length=2, choices=settings.LANGUAGES, default="fr")
     referred_by = models.ForeignKey(
-        Member, on_delete=models.SET_NULL, null=True, blank=True, related_name="referrals"
+        Member, on_delete=models.SET_NULL, null=True, blank=True, related_name="referrals", verbose_name=_("parrain ou marraine")
     )
-    status = models.CharField(max_length=10, choices=Status.choices, default=Status.NEW)
+    status = models.CharField(
+        _("statut"),
+        max_length=10,
+        choices=Status.choices,
+        default=Status.NEW,
+        help_text=_("« Acceptée » crée le compte du nouveau membre et lui envoie l'e-mail de bienvenue pour choisir son mot de passe."),
+    )
+    member = models.OneToOneField(
+        Member, on_delete=models.SET_NULL, null=True, blank=True, related_name="invitation_request", verbose_name=_("compte créé")
+    )
+    welcome_sent_at = models.DateTimeField(_("e-mail de bienvenue envoyé le"), null=True, blank=True)
+    created_at = models.DateTimeField(_("reçue le"), auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+        verbose_name = _("demande d'invitation")
+        verbose_name_plural = _("demandes d'invitation")
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} ({self.company})"
+
+
+class BingoSquare(models.Model):
+    """One square of a member's 'Bingo des rencontres' grid for an event: « Trouve quelqu'un qui… ».
+    It is ticked with the person whose QR code the player scanned; one person fills one square only."""
+
+    class Kind(models.TextChoices):
+        LIKE = "like", _("adore")
+        DISLIKE = "dislike", _("déteste")
+        LANGUAGE = "language", _("parle")
+        SECTOR = "sector", _("secteur")
+        RANK = "rank", _("rang")
+        REGION = "region", _("région")
+        JOKER = "joker", _("joker")
+
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="bingo_squares")
+    player = models.ForeignKey(Member, on_delete=models.CASCADE, related_name="bingo_squares")
+    position = models.PositiveSmallIntegerField()  # 0-8, row by row
+    kind = models.CharField(max_length=10, choices=Kind.choices)
+    value = models.CharField(max_length=80, blank=True)  # tag slug, language code, sector, rank or region ("" for the joker)
+    found = models.ForeignKey(Member, on_delete=models.SET_NULL, null=True, blank=True, related_name="+")
+    found_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        ordering = ["event", "player", "position"]
+        verbose_name = _("case de bingo")
+        verbose_name_plural = _("cases de bingo")
+        constraints = [
+            models.UniqueConstraint(fields=["event", "player", "position"], name="unique_bingo_square"),
+            models.UniqueConstraint(
+                fields=["event", "player", "found"], condition=Q(found__isnull=False), name="one_bingo_square_per_person"
+            ),
+        ]
+
+
+class Substitute(models.Model):
+    """Someone who represents a member at an event they cannot attend, usually a colleague from the same company."""
+
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="substitutes", verbose_name=_("événement"))
+    member = models.ForeignKey(
+        Member, on_delete=models.CASCADE, related_name="substitutions", verbose_name=_("membre remplacé")
+    )
+    first_name = models.CharField(_("prénom"), max_length=80)
+    last_name = models.CharField(_("nom"), max_length=80)
+    email = models.EmailField(_("e-mail"))
+    company = models.CharField(_("entreprise"), max_length=120)
+    job_title = models.CharField(_("fonction"), max_length=120, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["event", "last_name", "first_name"]
+        verbose_name = _("remplaçant·e")
+        verbose_name_plural = _("remplaçant·e·s")
+        constraints = [models.UniqueConstraint(fields=["event", "member"], name="one_substitute_per_member")]
+
+    def __str__(self):
+        return self.full_name
+
+    @property
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"

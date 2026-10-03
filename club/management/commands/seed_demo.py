@@ -20,6 +20,7 @@ from club.services.federation import club_stats
 
 User = get_user_model()
 DEMO_DOMAIN = "@example.com"
+DEMO_SECTORS = [s for s in Sector.values if s != Sector.OTHER]  # same 12 sectors, same order: the seed stays identical
 
 
 def ascii_slug(text):
@@ -115,7 +116,7 @@ class Command(BaseCommand):
                 if (first, last) not in used_names:
                     used_names.add((first, last))
                     break
-            sector = rng.choice(Sector.values)
+            sector = rng.choice(DEMO_SECTORS)
             likes = rng.sample(fun, rng.randint(3, 6))
             dislikes = rng.sample(work, rng.randint(1, 2))
             members.append(self.create_member(
@@ -162,11 +163,26 @@ class Command(BaseCommand):
         ]
         upcoming = Event.objects.create(
             pk=4, title="Dîner d'automne", kind=Event.Kind.DINNER, starts_at=at(12, 19, 0),
-            location="Salle des Bisses, Martigny", has_seating=True,
-            description="Trois services, trois tables différentes : on se mélange ! · Drei Gänge, drei verschiedene Tische: wir mischen uns!",
+            location="Salle des Bisses, Martigny", has_seating=True, has_bingo=True,
+            description=(
+                "Apéritif debout avec le bingo des rencontres, puis trois services à trois tables différentes : "
+                "on se mélange ! · Stehapéro mit Begegnungs-Bingo, dann drei Gänge an drei verschiedenen Tischen: "
+                "wir mischen uns!"
+            ),
         )
-        later = Event.objects.create(pk=5, title="Apéro de Noël", kind=Event.Kind.APERO,
-                                     starts_at=at(75), location="Caveau du Club, Martigny")
+        later = Event.objects.create(
+            pk=5, title="Apéro de Noël", kind=Event.Kind.APERO, starts_at=at(75), has_bingo=True,
+            location="Lieu surprise (navette depuis la gare de Martigny)",
+            description=(
+                "🤫 Le lieu reste secret jusqu'à la veille. Seul indice : on monte, et il y aura de la neige. "
+                "Navette depuis la gare de Martigny à 18 h 15. Au programme : dégustation de vins des glaciers "
+                "avec une œnologue, raclette au feu de bois, cors des Alpes sous les étoiles… et un spectacle final "
+                "dont on ne dira rien. Bingo des rencontres pendant l'apéro : une ligne complète, un verre de "
+                "Petite Arvine. Tenue chaude conseillée, bonne humeur obligatoire 🎄 · Geheimer Ort, Shuttle ab "
+                "Bahnhof Martigny: Gletscherwein-Degustation, Raclette am Holzfeuer, Alphörner unter dem "
+                "Sternenhimmel und eine Überraschungsshow. Warme Kleidung empfohlen!"
+            ),
+        )
         self.realign_event_sequence()
         return past, upcoming, later
 
