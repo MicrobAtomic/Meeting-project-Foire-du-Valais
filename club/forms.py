@@ -101,6 +101,11 @@ class InvitationRequestForm(forms.ModelForm):
         return bool(self.cleaned_data.get("website"))
 
 
+class PersonalNoteForm(forms.Form):
+    text = forms.CharField(label=_("Ma note personnelle"), required=False, max_length=2000,
+                           widget=forms.Textarea(attrs={"class": "input", "rows": 4, "maxlength": 2000}))
+
+
 class SeatingForm(forms.Form):
     """Settings of the rotating tables (staff). Tables of 6 over 3 services is the tested sweet spot."""
 

@@ -13,6 +13,7 @@ Les envois réels et les changements d'hébergement restent à configurer sépar
 
 | Phase | État | Vérifications / livraison |
 |---|---|---|
+| 3 | Terminée | 196 tests verts ; isolation des auteurs, CSRF, CSP, échappement, cache, contraintes et absence de fuite vérifiés |
 | 2 | Terminée | 189 tests verts ; 3 JPEG 256 × 256 vérifiés ; collectstatic OK ; licence et sources dans docs/demo/PHOTOS.md |
 | 1 | Terminée | 187 tests verts ; tarif configurable vérifié sur GET/POST et FR/DE/EN ; offre désactivée par défaut |
 | 0 | Terminée | 185 tests SQLite verts ; contrôles Django et migrations verts ; documentation et aides admin corrigées |
@@ -265,26 +266,26 @@ Ne pas utiliser le nom `note` sur `Member` : une seule valeur serait partagée p
 Le corps de note est du texte brut échappé par Django. Pas de HTML, Markdown rendu, éditeur riche ou `|safe`.
 Une note est possible sur une fiche que l'auteur est autorisé à ouvrir ; elle ne débloque jamais les coordonnées.
 
-- [ ] **3.1** Ajouter modèle et migration. Tester les contraintes de doublon et d'auto-note.
+- [x] **3.1** Ajouter modèle et migration. Tester les contraintes de doublon et d'auto-note.
   Ne pas enregistrer `PersonalNote` dans l'admin, ni en inline, recherche, export ou tableau de bord.
-- [ ] **3.2** Créer `PersonalNoteForm` avec **seulement** `text`, facultatif, limité à 2 000 caractères.
+- [x] **3.2** Créer `PersonalNoteForm` avec **seulement** `text`, facultatif, limité à 2 000 caractères.
   Créer `get_personal_note(owner, target)` et `save_personal_note(owner, target, text)` dans le service.
   Un texte vide ou fait d'espaces supprime la note ; pas de ligne vide conservée.
-- [ ] **3.3** Extraire au besoin un helper de contrôle d'ouverture de fiche, réutilisé par `member_detail` et
+- [x] **3.3** Extraire au besoin un helper de contrôle d'ouverture de fiche, réutilisé par `member_detail` et
   la vue de sauvegarde. Le helper doit conserver les cas : soi-même, profil visible, profil masqué mais déjà rencontré,
   cible inexistante ou désactivée. Il sera étendu pour les invités en phase 8.
-- [ ] **3.4** Ajouter `club:member_note`, `/membres/<pk>/note/`, avec `@member_required` et `@require_POST`.
+- [x] **3.4** Ajouter `club:member_note`, `/membres/<pk>/note/`, avec `@member_required` et `@require_POST`.
   Déduire `owner` **uniquement** de `request.member` ; `pk` désigne la personne annotée.
   Appliquer le contrôle de visibilité côté serveur avant lecture ou écriture. Ignorer tout `owner`, `note_id`,
   `author` ou `user` envoyé dans le POST. Valider le formulaire avant toute écriture et rediriger vers la fiche.
-- [ ] **3.5** Dans `member_detail`, charger uniquement `PersonalNote.objects.filter(owner=request.member, target=target)`.
+- [x] **3.5** Dans `member_detail`, charger uniquement `PersonalNote.objects.filter(owner=request.member, target=target)`.
   Montrer sur les fiches d'autrui un bloc « Ma note personnelle » et « Visible uniquement par toi dans l'application ».
   Ajouter CSRF et bouton « Enregistrer ». Un texte vide efface le mémo. Sur erreur de formulaire, réafficher la fiche
   avec les données saisies et les erreurs ; ne pas afficher le contenu dans un message flash.
-- [ ] **3.6** Utiliser `never_cache` sur les pages contenant la note et prévoir `Vary: Cookie`.
+- [x] **3.6** Utiliser `never_cache` sur les pages contenant la note et prévoir `Vary: Cookie`.
   Ne pas mettre son texte dans les logs, URL, attributs `data-*`, JS, emails, QR ou vCard.
   Une recherche dans l'album reste limitée aux champs de profil, sans recherche parmi les notes.
-- [ ] **3.7** Classer la route comme membre et POST dans la matrice d'accès ; ajouter les arguments requis.
+- [x] **3.7** Classer la route comme membre et POST dans la matrice d'accès ; ajouter les arguments requis.
   Couvrir le CSRF et la CSP du bloc. Ajouter uniquement les cas nécessaires aux tests existants.
 
 Tests métier obligatoires, avec un texte sentinelle facile à retrouver :

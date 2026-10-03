@@ -106,6 +106,19 @@ class Member(models.Model):
         return self.RANK_MEMBER
 
 
+class PersonalNote(models.Model):
+    owner = models.ForeignKey(Member, on_delete=models.CASCADE, related_name="personal_notes")
+    target = models.ForeignKey(Member, on_delete=models.CASCADE, related_name="notes_about")
+    text = models.TextField(max_length=2000)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=["owner", "target"], name="unique_personal_note"),
+            models.CheckConstraint(condition=~Q(owner=F("target")), name="personal_note_not_self"),
+        ]
+
+
 class Tag(models.Model):
     class Category(models.TextChoices):
         HOBBY = "hobby", _("Loisirs")

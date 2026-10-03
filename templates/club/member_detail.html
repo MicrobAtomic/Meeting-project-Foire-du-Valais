@@ -38,5 +38,17 @@
     <a href="{% url 'club:my_qr' %}" class="btn btn-secondary">🔳 {% translate "Mon QR code" %}</a>
   </div>
   {% endif %}
+  {% if note_form %}
+  <section class="card space-y-3">
+    <h2 class="font-semibold">{% translate "Ma note personnelle" %}</h2>
+    <p class="text-sm text-stone-600">{% translate "Visible uniquement par toi dans l'application. Un texte vide efface la note." %}</p>
+    <form method="post" action="{% url 'club:member_note' target.pk %}" class="space-y-3">
+      {% csrf_token %}
+      {% include "club/_field.html" with field=note_form.text %}
+      <button type="submit" class="btn btn-primary">{% translate "Enregistrer" %}</button>
+    </form>
+  </section>
+  {% endif %}
 </div>
 {% endblock %}
+{% comment %}Private note is rendered only in this member's detail context.{% endcomment %}

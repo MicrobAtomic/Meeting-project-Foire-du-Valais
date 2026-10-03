@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Club des Affaires\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 18:51+0200\n"
+"POT-Creation-Date: 2026-10-03 18:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Club des Affaires\n"
 "Language-Team: Club des Affaires\n"
@@ -120,6 +120,10 @@ msgstr "If you untick this, only members you have already met will see your card
 
 msgid "Poste"
 msgstr "Position"
+
+#| msgid "Ton lien personnel"
+msgid "Ma note personnelle"
+msgstr "My personal note"
 
 msgid "Nombre de services"
 msgstr "Number of courses"
@@ -618,7 +622,6 @@ msgstr "This page got lost in the mountains"
 msgid "Elle n'existe pas, ou elle n'est pas pour toi."
 msgstr "It doesn't exist, or it isn't meant for you."
 
-#| msgid "Démo — toutes les personnes et entreprises sont fictives"
 msgid "Démo — profils et entreprises fictifs, portraits illustratifs"
 msgstr "Demo — fictional profiles and companies, illustrative portraits"
 
@@ -928,6 +931,12 @@ msgstr "Edit my profile"
 msgid "Mon QR code"
 msgstr "My QR code"
 
+msgid "Visible uniquement par toi dans l'application. Un texte vide efface la note."
+msgstr "Visible only to you in the app. Empty text deletes the note."
+
+msgid "Enregistrer"
+msgstr "Save"
+
 msgid "Fais scanner ce code pour échanger vos cartes"
 msgstr "Have this code scanned to swap your cards"
 
@@ -939,9 +948,6 @@ msgstr "Swipe your tastes"
 
 msgid "Glisse la carte à droite si tu adores, à gauche si tu détestes, vers le bas si bof. Ou utilise les boutons."
 msgstr "Swipe the card right if you love it, left if you hate it, down if it's meh. Or use the buttons."
-
-msgid "Enregistrer"
-msgstr "Save"
 
 msgid "Mon profil"
 msgstr "My profile"

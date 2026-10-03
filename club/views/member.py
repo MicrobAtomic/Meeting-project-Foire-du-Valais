@@ -10,9 +10,14 @@ from django.utils.text import slugify
 from django.utils.translation import gettext as _
 from django.utils.translation import gettext_lazy
 from django.views.decorators.http import require_http_methods
+from django.views.decorators.http import require_POST
+from django.views.decorators.cache import never_cache
+from django.views.decorators.vary import vary_on_cookie
 
 from club.decorators import member_required
-from club.forms import MemberProfileForm
+from club.forms import MemberProfileForm, PersonalNoteForm
+from club.services.access import visible_target
+from club.services.notes import get_personal_note, save_personal_note
 from club.models import RSVP, Connection, Event, Member, MemberTag, Sector, Tag
 from club.services.events import current_event
 from club.services.federation import club_stats, collected_ids, collection_progress
@@ -62,10 +67,14 @@ def my_qr(request):
 
 
 @member_required
+@never_cache
+@vary_on_cookie
 def member_detail(request, pk):
-    target = get_object_or_404(
-        Member.objects.select_related("user").prefetch_related("tag_links__tag"), pk=pk, user__is_active=True
-    )
+    target = visible_target(request.member, pk)
+    return render_member_detail(request, target)
+
+
+def render_member_detail(request, target, note_form=None):
     is_me = target.pk == request.member.pk
     connected = Connection.exists_between(request.member, target)
     if not target.visible_in_directory and not (is_me or connected):
@@ -78,7 +87,25 @@ def member_detail(request, pk):
         "card_collected": None if is_me else connected,  # None hides the "À rencontrer" footer on my own card
         "common": None if is_me else common_tags(request.member, target),
     }
+    if not is_me:
+        note = get_personal_note(request.member, target)
+        context["note_form"] = note_form if note_form is not None else PersonalNoteForm(initial={"text": note.text if note else ""})
     return render(request, "club/member_detail.html", context)
+
+
+@member_required
+@require_POST
+@never_cache
+@vary_on_cookie
+def member_note(request, pk):
+    target = visible_target(request.member, pk)
+    if target.pk == request.member.pk:
+        raise Http404
+    form = PersonalNoteForm(request.POST)
+    if form.is_valid():
+        save_personal_note(request.member, target, form.cleaned_data["text"])
+        return redirect("club:member_detail", pk=target.pk)
+    return render_member_detail(request, target, note_form=form)
 
 
 @member_required
