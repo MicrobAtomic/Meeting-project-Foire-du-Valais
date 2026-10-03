@@ -27,24 +27,6 @@
 </div>
 
 <section class="card mt-6 space-y-3">
-  <div>
-    <h2 class="font-semibold">🏔️ {% translate "Paliers du Club" %}</h2>
-    <p class="text-sm text-stone-600">{% translate "Un objectif commun donne envie de se rencontrer : quand un palier est atteint, sa récompense s'annonce au prochain événement." %}</p>
-  </div>
-  {% include "club/_milestones.html" with progress=club_progress %}
-  <ul class="divide-y divide-stone-100 text-sm">
-    {% for segment in club_progress.segments %}
-    <li class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 py-2">
-      <span><span class="font-medium">{{ segment.milestone.emoji }} {{ segment.milestone.ratio|percent }} · {{ segment.milestone.title }}</span> <span class="text-stone-600">— {{ segment.milestone.reward }}</span></span>
-      {% if segment.reached %}<span class="font-medium text-emerald-700">✅ {% translate "atteint" %}</span>
-      {% elif segment.is_next %}<span class="font-medium text-amber-700">🎯 {% blocktranslate count n=club_progress.remaining %}encore {{ n }} rencontre{% plural %}encore {{ n }} rencontres{% endblocktranslate %}</span>
-      {% else %}<span class="text-stone-400">{% translate "à venir" %}</span>{% endif %}
-    </li>
-    {% endfor %}
-  </ul>
-</section>
-
-<section class="card mt-6 space-y-3">
   <div class="flex flex-wrap items-center justify-between gap-3">
     <div>
       <h2 class="font-semibold">🎟️ {% translate "Demandes d'invitation" %}</h2>
@@ -95,6 +77,24 @@
     {% endfor %}
   </section>
 </div>
+
+<section class="card mt-6 space-y-3">
+  <div>
+    <h2 class="font-semibold">🏔️ {% translate "Paliers du Club" %}</h2>
+    <p class="text-sm text-stone-600">{% translate "Un objectif commun donne envie de se rencontrer : quand un palier est atteint, sa récompense s'annonce au prochain événement." %}</p>
+  </div>
+  {% include "club/_milestones.html" with progress=club_progress %}
+  <ul class="divide-y divide-stone-100 text-sm">
+    {% for segment in club_progress.segments %}
+    <li class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 py-2">
+      <span><span class="font-medium">{{ segment.milestone.emoji }} {{ segment.milestone.ratio|percent }} · {{ segment.milestone.title }}</span> <span class="text-stone-600">— {{ segment.milestone.reward }}</span></span>
+      {% if segment.reached %}<span class="font-medium text-emerald-700">✅ {% translate "atteint" %}</span>
+      {% elif segment.is_next %}<span class="font-medium text-amber-700">🎯 {% blocktranslate count n=club_progress.remaining %}encore {{ n }} rencontre{% plural %}encore {{ n }} rencontres{% endblocktranslate %}</span>
+      {% else %}<span class="text-stone-400">{% translate "à venir" %}</span>{% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</section>
 
 <section class="card mt-6 space-y-3">
   <div>
