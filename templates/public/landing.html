@@ -1,2 +1,9 @@
-{# PLACEHOLDER minimal pour les tests — à remplacer par la vraie UI (voir docs/PLAN.md) #}
-{% extends "base.html" %}{% block content %}<h1>Landing</h1>{% endblock %}
+{% extends "base.html" %}{% load i18n %}
+{% block content %}
+<section class="py-10 text-center">
+  <div class="text-6xl" aria-hidden="true">🍷</div>
+  <h1 class="mt-4 text-4xl font-bold">{% translate "Le Club des Affaires de la Foire du Valais" %}</h1>
+  <p class="mt-3 text-lg text-stone-600">{% translate "Plus jamais d'inconnus au Club." %}</p>
+  <a href="{% url 'club:home' %}" class="btn btn-primary mt-6">{% translate "Espace membres" %}</a>
+</section>
+{% endblock %}

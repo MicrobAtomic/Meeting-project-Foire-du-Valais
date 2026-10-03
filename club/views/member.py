@@ -10,7 +10,7 @@ from django.views.decorators.http import require_http_methods
 from club.decorators import member_required
 from club.models import Connection, Member
 from club.services.events import current_event
-from club.services.federation import collection_progress
+from club.services.federation import club_stats, collection_progress
 from club.services.qr import qr_svg
 from club.services.vcard import build_vcard
 
@@ -18,7 +18,8 @@ from club.services.vcard import build_vcard
 @member_required
 def home(request):
     collected, total = collection_progress(request.member)
-    return render(request, "club/home.html", {"collected": collected, "total": total})
+    context = {"collected": collected, "total": total, "stats": club_stats()}
+    return render(request, "club/home.html", context)
 
 
 @member_required

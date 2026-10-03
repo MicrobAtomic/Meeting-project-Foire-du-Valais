@@ -1,2 +1,32 @@
-{# PLACEHOLDER minimal pour les tests — à remplacer par la vraie UI (voir docs/PLAN.md) #}
-{% extends "base.html" %}{% block content %}<form method="post">{% csrf_token %}{{ form.as_p }}<button>OK</button></form>{% endblock %}
+{% extends "base.html" %}{% load i18n %}
+{% block title %}{% translate "Connexion" %} · {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<div class="mx-auto max-w-sm">
+  <div class="card space-y-5 p-6">
+    <div class="text-center">
+      <div class="text-4xl" aria-hidden="true">🍷</div>
+      <h1 class="mt-2 text-2xl font-semibold">{{ SITE_NAME }}</h1>
+      <p class="mt-1 text-sm text-stone-600">{% translate "Espace membres du Club des Affaires" %}</p>
+    </div>
+
+    <form method="post" class="space-y-4">
+      {% csrf_token %}
+      {% if form.errors %}
+      <p class="rounded-xl bg-red-50 p-3 text-sm text-red-900" role="alert">{% if form.non_field_errors %}{{ form.non_field_errors.0 }}{% else %}{% translate "Vérifie ton e-mail et ton mot de passe." %}{% endif %}</p>
+      {% endif %}
+      <div>
+        <label for="id_username" class="mb-1 block text-sm font-medium">{% translate "E-mail" %}</label>
+        <input type="email" name="username" id="id_username" value="{{ form.username.value|default:'' }}" class="input" autocomplete="email" autocapitalize="none" autofocus required>
+      </div>
+      <div>
+        <label for="id_password" class="mb-1 block text-sm font-medium">{% translate "Mot de passe" %}</label>
+        <input type="password" name="password" id="id_password" class="input" autocomplete="current-password" required>
+      </div>
+      <input type="hidden" name="next" value="{{ next }}">
+      <button type="submit" class="btn btn-primary w-full">{% translate "Se connecter" %}</button>
+    </form>
+
+    <p class="text-center text-xs text-stone-600">{% translate "L'accès est réservé aux membres du Club." %}</p>
+  </div>
+</div>
+{% endblock %}

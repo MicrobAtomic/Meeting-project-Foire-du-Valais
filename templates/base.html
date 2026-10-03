@@ -1,10 +1,87 @@
-{# PLACEHOLDER minimal pour les tests — à remplacer par la vraie UI (voir docs/PLAN.md) #}
 {% load static i18n %}<!doctype html>
-<html lang="{{ LANGUAGE_CODE }}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{% block title %}{{ SITE_NAME }}{% endblock %}</title><link rel="stylesheet" href="{% static 'css/app.css' %}"></head>
-<body>
-{% for message in messages %}<p class="message">{{ message }}</p>{% endfor %}
-{% block content %}{% endblock %}
-{% if user.is_authenticated %}<form method="post" action="{% url 'logout' %}">{% csrf_token %}<button>{% translate "Se déconnecter" %}</button></form>{% endif %}
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#b91c1c">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🍷%3C/text%3E%3C/svg%3E">
+  <title>{% block title %}{{ SITE_NAME }}{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+</head>
+<body class="min-h-screen bg-stone-50 text-stone-900 antialiased">
+{% if DEMO_MODE %}
+  <p class="no-print bg-amber-100 py-1 text-center text-xs text-amber-900">{% translate "Démo — toutes les personnes et entreprises sont fictives" %}</p>
+{% endif %}
+
+{% with current=request.resolver_match.view_name %}
+<header class="no-print sticky top-0 z-30 border-b border-stone-200 bg-white">
+  <div class="mx-auto flex max-w-5xl items-center justify-between gap-3 px-4 py-3">
+    <a href="{% if user.is_authenticated %}{% url 'club:home' %}{% else %}{% url 'club:landing' %}{% endif %}" class="shrink-0 text-base font-semibold text-red-700">🍷 {{ SITE_NAME }}</a>
+
+    {% if user.is_authenticated %}
+    <nav class="hidden items-center gap-1 md:flex" aria-label="{% translate 'Navigation principale' %}">
+      {% if user.member %}
+      <a href="{% url 'club:home' %}" class="rounded-lg px-3 py-2 text-sm font-medium {% if current == 'club:home' %}bg-red-50 text-red-700{% else %}text-stone-600 hover:bg-stone-100{% endif %}">🏠 {% translate "Accueil" %}</a>
+      {% comment %}Phase 3 : <a href="{% url 'club:album' %}">🃏 Album</a>{% endcomment %}
+      {% comment %}Phase 4 : <a href="{% url 'club:event_list' %}">📅 Événements</a>{% endcomment %}
+      <a href="{% url 'club:my_qr' %}" class="rounded-lg px-3 py-2 text-sm font-medium {% if current == 'club:my_qr' %}bg-red-50 text-red-700{% else %}text-stone-600 hover:bg-stone-100{% endif %}">🔳 {% translate "Mon QR" %}</a>
+      {% comment %}Phase 3 : <a href="{% url 'club:profile_edit' %}">👤 Profil</a>{% endcomment %}
+      {% endif %}
+      {% if user.is_staff %}
+      <a href="{% url 'club:staff_dashboard' %}" class="rounded-lg px-3 py-2 text-sm font-medium {% if current == 'club:staff_dashboard' %}bg-red-50 text-red-700{% else %}text-stone-600 hover:bg-stone-100{% endif %}">⚙️ {% translate "Staff" %}</a>
+      {% endif %}
+    </nav>
+    {% endif %}
+
+    <div class="flex items-center gap-2">
+      <form method="post" action="{% url 'set_language' %}" class="flex items-center rounded-lg bg-stone-100 p-0.5">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+        <button type="submit" name="language" value="fr" class="rounded-md px-2 py-1 text-xs font-semibold {% if LANGUAGE_CODE == 'fr' %}bg-white text-red-700 shadow-sm{% else %}text-stone-600{% endif %}">FR</button>
+        <button type="submit" name="language" value="de" class="rounded-md px-2 py-1 text-xs font-semibold {% if LANGUAGE_CODE == 'de' %}bg-white text-red-700 shadow-sm{% else %}text-stone-600{% endif %}">DE</button>
+        <button type="submit" name="language" value="en" class="rounded-md px-2 py-1 text-xs font-semibold {% if LANGUAGE_CODE == 'en' %}bg-white text-red-700 shadow-sm{% else %}text-stone-600{% endif %}">EN</button>
+      </form>
+      {% if user.is_authenticated %}
+      <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="rounded-lg px-2 py-1.5 text-xs font-medium text-stone-600 hover:bg-stone-100" title="{% translate 'Se déconnecter' %}"><span aria-hidden="true">🚪</span><span class="sr-only md:not-sr-only md:ml-1">{% translate "Déconnexion" %}</span></button>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+</header>
+
+{% if messages %}
+<div class="no-print mx-auto max-w-5xl space-y-2 px-4 pt-4">
+  {% for message in messages %}
+  <p class="card text-sm {% if message.tags == 'success' %}bg-emerald-50 text-emerald-900 ring-emerald-200{% elif message.tags == 'error' %}bg-red-50 text-red-900 ring-red-200{% else %}bg-sky-50 text-sky-900 ring-sky-200{% endif %}" role="status">{{ message }}</p>
+  {% endfor %}
+</div>
+{% endif %}
+
+<main class="mx-auto max-w-5xl px-4 pt-6 pb-28">
+  {% block content %}{% endblock %}
+</main>
+
+{% if user.is_authenticated and user.member or user.is_staff %}
+<nav class="no-print fixed inset-x-0 bottom-0 z-30 border-t border-stone-200 bg-white md:hidden" aria-label="{% translate 'Navigation principale' %}">
+  <ul class="grid auto-cols-fr grid-flow-col">
+    {% if user.member %}
+    <li><a href="{% url 'club:home' %}" class="flex flex-col items-center gap-0.5 py-2 text-[11px] font-medium {% if current == 'club:home' %}text-red-700{% else %}text-stone-600{% endif %}"><span class="text-xl" aria-hidden="true">🏠</span>{% translate "Accueil" %}</a></li>
+    {% comment %}Phase 3 : <li><a href="{% url 'club:album' %}">🃏 Album</a></li>{% endcomment %}
+    {% comment %}Phase 4 : <li><a href="{% url 'club:event_list' %}">📅 Événements</a></li>{% endcomment %}
+    <li><a href="{% url 'club:my_qr' %}" class="flex flex-col items-center gap-0.5 py-2 text-[11px] font-medium {% if current == 'club:my_qr' %}text-red-700{% else %}text-stone-600{% endif %}"><span class="text-xl" aria-hidden="true">🔳</span>{% translate "Mon QR" %}</a></li>
+    {% comment %}Phase 3 : <li><a href="{% url 'club:profile_edit' %}">👤 Profil</a></li>{% endcomment %}
+    {% endif %}
+    {% if user.is_staff %}
+    <li><a href="{% url 'club:staff_dashboard' %}" class="flex flex-col items-center gap-0.5 py-2 text-[11px] font-medium {% if current == 'club:staff_dashboard' %}text-red-700{% else %}text-stone-600{% endif %}"><span class="text-xl" aria-hidden="true">⚙️</span>{% translate "Staff" %}</a></li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}
+{% endwith %}
+
 <script src="{% static 'js/swipe.js' %}" defer></script>
-</body></html>
+{% block scripts %}{% endblock %}
+</body>
+</html>

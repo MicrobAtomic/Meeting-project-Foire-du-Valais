@@ -1,7 +1,29 @@
-{# PLACEHOLDER minimal pour les tests — à remplacer par la vraie UI (voir docs/PLAN.md) #}
-{% extends "base.html" %}{% load i18n %}{% block content %}
-<h1>{% translate "Bonjour" %} {{ request.member.first_name }}</h1>
-<p>{% translate "Ton album :" %} {{ collected }} / {{ total }}</p>
-<progress value="{{ collected }}" max="{{ total }}"></progress>
-<p><a href="{% url 'club:my_qr' %}">{% translate "Mon QR code" %}</a> · <a href="{% url 'club:member_detail' request.member.pk %}">{% translate "Ma carte" %}</a></p>
+{% extends "base.html" %}{% load i18n club_ui %}
+{% block title %}{% translate "Accueil" %} · {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<h1 class="text-2xl font-semibold">{% blocktranslate with name=request.member.first_name %}Salut {{ name }} 👋{% endblocktranslate %}</h1>
+<p class="mt-1 text-stone-600">{% translate "Plus jamais d'inconnus au Club." %}</p>
+
+<div class="mt-6 grid gap-4 md:grid-cols-2">
+  <section class="card space-y-3">
+    <h2 class="font-semibold">🃏 {% translate "Ton album" %}</h2>
+    <p class="text-sm text-stone-600">{% blocktranslate %}{{ collected }} / {{ total }} cartes{% endblocktranslate %}</p>
+    <progress class="bar" value="{{ collected }}" max="{{ total|default:1 }}"></progress>
+    <div class="flex flex-wrap gap-2 pt-1">
+      <a href="{% url 'club:my_qr' %}" class="btn btn-primary">🔳 {% translate "Montrer mon QR" %}</a>
+      {% comment %}Phase 3 : <a href="{% url 'club:album' %}" class="btn btn-secondary">Voir l'album</a>{% endcomment %}
+    </div>
+  </section>
+
+  <section class="card space-y-3">
+    <h2 class="font-semibold">🤝 {% blocktranslate with pct=stats.index|percent %}Le Club est connecté à {{ pct }}{% endblocktranslate %}</h2>
+    <progress class="bar" value="{{ stats.index|stringformat:'f' }}" max="1"></progress>
+    <p class="text-sm text-stone-600">{% translate "Chaque rencontre compte." %}</p>
+  </section>
+
+  <section class="card space-y-2 md:col-span-2">
+    <h2 class="font-semibold">📅 {% translate "Prochain événement" %}</h2>
+    <p class="text-sm text-stone-600">{% translate "Les prochains événements du Club s'afficheront ici." %}</p>
+  </section>
+</div>
 {% endblock %}

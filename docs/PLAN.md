@@ -211,7 +211,7 @@ Pour éviter les requêtes N+1, toute liste de cartes charge les membres avec
 
 ### Phase 1 — Design de base, connexion, accueil (1 h 15)
 
-- [ ] **1.1** `templates/base.html`, la mise en page commune :
+- [x] **1.1** `templates/base.html`, la mise en page commune :
   - `<html lang="{{ LANGUAGE_CODE }}">`, viewport mobile, `<title>{% block title %}{{ SITE_NAME }}{% endblock %}</title>`,
     `{% static 'css/app.css' %}`, et `<script src="{% static 'js/swipe.js' %}" defer>` (à garder).
   - `<body class="min-h-screen bg-stone-50 text-stone-900 antialiased">`.
@@ -233,20 +233,20 @@ Pour éviter les requêtes N+1, toute liste de cartes charge les membres avec
   - **Messages** Django : une `card` par message (vert pour un succès, bleu pour une info).
   - `<main class="mx-auto max-w-5xl px-4 pt-6 pb-28">{% block content %}{% endblock %}</main>`.
   - ✅ Aucun `style=`, aucun `<script>` sans `src`, aucun `onclick` (le test CSP le vérifie).
-- [ ] **1.2** `templates/registration/login.html` : une `card` centrée qui affiche le titre `{{ SITE_NAME }}`,
+- [x] **1.2** `templates/registration/login.html` : une `card` centrée qui affiche le titre `{{ SITE_NAME }}`,
   un sous-titre « Espace membres du Club des Affaires », les champs (e-mail, mot de passe) en classe `input`,
   les erreurs du formulaire et un bouton `btn btn-primary w-full`.
   Le champ s'appelle `username` mais son libellé est « E-mail » : c'est voulu, la connexion se fait par e-mail.
-- [ ] **1.3** `templates/club/home.html` (accueil membre) :
+- [x] **1.3** `templates/club/home.html` (accueil membre) :
   - « Salut {{ request.member.first_name }} 👋 ».
   - Une `card` « Ton album » : `{{ collected }} / {{ total }} cartes`, `<progress class="bar">`, et des boutons
     « Montrer mon QR » (`club:my_qr`) et « Voir l'album » (à partir de la phase 3).
   - Une `card` « Le Club est connecté à X % ». L'indice vient de `club_stats()["index"]` : ajoute-le au contexte dans
     `member.home` et affiche-le avec `|percent`. Sous l'indice : « Chaque rencontre compte. ».
   - Un emplacement « Prochain événement », rempli en phase 4.
-- [ ] **1.4** `templates/403.html` et `templates/404.html` : une `card` sympathique, par exemple
+- [x] **1.4** `templates/403.html` et `templates/404.html` : une `card` sympathique, par exemple
   « Cette porte est réservée 🍷 » ou « Cette page s'est perdue en montagne 🏔️ », avec un lien vers l'accueil.
-- [ ] **1.5** `templates/staff/dashboard.html` (version simple, enrichie en phase 5) : 3 tuiles (`card`) pour les
+- [x] **1.5** `templates/staff/dashboard.html` (version simple, enrichie en phase 5) : 3 tuiles (`card`) pour les
   membres, les rencontres enregistrées et l'indice de fédération (`stats.index|percent`), plus un lien vers `/admin/`.
 - ✅ **Fin de phase** :
   - `python manage.py test club` est vert.
