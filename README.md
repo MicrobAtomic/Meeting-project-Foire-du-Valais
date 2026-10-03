@@ -26,7 +26,8 @@ Exploitation : [docs/EXPLOITATION.md](docs/EXPLOITATION.md).
 | **Les futurs membres** | vitrine publique sans aucun nom de membre · formulaire « Demander une invitation » (avec ou sans lien de parrainage) |
 
 Les améliorations ajoutent les portraits de démo avec sources/licences, l'upload de photo protégé avec aperçu avant enregistrement,
-les notes privées propres à chaque auteur, les préférences d'emails et l'acceptation d'une invitation avec création du compte.
+les notes privées propres à chaque auteur, la langue des communications et l'acceptation d'une invitation avec création du compte.
+Le choix de langue est visible dans l'admin pour les emails et les courriers papier ; les options email sont repliées dans le profil.
 Les photos JPEG/PNG/WebP/HEIC/HEIF/AVIF sont orientées, recadrées et compressées automatiquement en JPEG ;
 les fichiers de téléphone sont acceptés jusqu’à 20 Mio et 50 mégapixels. Les remplaçants validés ont une identité et un QR distincts : leurs rencontres restent les leurs, leur accès expire
 et ils ne gonflent pas les compteurs de cotisants. La cotisation configurable est affichée sur la demande d'invitation
@@ -131,7 +132,7 @@ Plan B : le tunnel `cloudflared` ci-dessus.
 ## Tests
 
 ```bash
-env DEBUG=1 python manage.py test club    # 268 tests, environ 70 s ; 6 cas de concurrence réservés à PostgreSQL
+env DEBUG=1 python manage.py test club    # 270 tests, environ 70 s ; 6 cas de concurrence réservés à PostgreSQL
 ```
 
 Ils couvrent les algorithmes, la **matrice d'accès** (qui peut ouvrir quelle page : toute nouvelle route doit être

@@ -77,7 +77,7 @@ class Member(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     demo_photo_key = models.CharField(max_length=32, blank=True, editable=False)
     photo = models.ImageField(upload_to="member_photos/", blank=True)
-    preferred_language = models.CharField(_("Langue des emails"), max_length=2, choices=[("fr", _("Français")), ("de", _("Allemand")), ("en", _("Anglais"))], blank=True)
+    preferred_language = models.CharField(_("Langue des communications"), max_length=2, choices=[("fr", _("Français")), ("de", _("Allemand")), ("en", _("Anglais"))], blank=True)
     admitted_at = models.DateTimeField(null=True, blank=True, editable=False)
     digest_teaser = models.CharField(_("Accroche pour le récapitulatif"), max_length=120, blank=True)
 
@@ -499,7 +499,7 @@ class Substitute(models.Model):
     speaks_fr = models.BooleanField(_("parle français"), default=True)
     speaks_de = models.BooleanField(_("parle allemand"), default=False)
     speaks_en = models.BooleanField(_("parle anglais"), default=False)
-    preferred_language = models.CharField(_("Langue des emails"), max_length=2,
+    preferred_language = models.CharField(_("Langue des communications"), max_length=2,
         choices=[("fr", _("Français")), ("de", _("Allemand")), ("en", _("Anglais"))], default="fr")
 
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="substitutes", verbose_name=_("événement"))

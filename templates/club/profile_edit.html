@@ -60,6 +60,17 @@
       {% include "club/_field.html" with field=form.phone %}
       {% include "club/_field.html" with field=form.linkedin_url %}
       {% include "club/_field.html" with field=form.visible_in_directory %}
+      <div id="preferences-email" class="scroll-mt-20 space-y-3 border-t border-stone-100 pt-4">
+        {% include "club/_field.html" with field=form.preferred_language %}
+        <details{% if preferences_form.errors or form.digest_teaser.errors %} open{% endif %}>
+          <summary class="cursor-pointer text-sm text-stone-600">{% translate "Options email" %}</summary>
+          <div class="mt-4 space-y-4">
+            {% for field in preferences_form %}{% include "club/_field.html" with field=field %}{% endfor %}
+            {% include "club/_field.html" with field=form.digest_teaser %}
+            <p class="text-sm text-stone-600">{% translate "La présentation mensuelle utilise uniquement ton nom, ton entreprise, ton secteur et cette accroche, si tu l'autorises." %}</p>
+          </div>
+        </details>
+      </div>
     </section>
 
     <section class="card space-y-4">
@@ -87,13 +98,6 @@
       {% endfor %}
     </section>
 
-    <section id="preferences-email" class="card space-y-4">
-      <h2 class="font-semibold">{% translate "Mes préférences email" %}</h2>
-      {% include "club/_field.html" with field=form.preferred_language %}
-      {% include "club/_field.html" with field=form.digest_teaser %}
-      <p class="text-sm text-stone-600">{% translate "La présentation mensuelle utilise uniquement ton nom, ton entreprise, ton secteur et cette accroche, si tu l'autorises." %}</p>
-      {% for field in preferences_form %}{% include "club/_field.html" with field=field %}{% endfor %}
-    </section>
     <div class="flex flex-wrap gap-2">
       <button type="submit" data-photo-save class="btn btn-primary disabled:cursor-wait disabled:opacity-60">{% translate "Enregistrer" %}</button>
       <a href="{% url 'club:member_detail' request.member.pk %}" class="btn btn-secondary">{% translate "Annuler" %}</a>

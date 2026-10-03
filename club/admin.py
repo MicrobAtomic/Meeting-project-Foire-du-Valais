@@ -21,7 +21,7 @@ from club.models import (
     Tag,
     new_qr_token,
 )
-from club.services.auth_links import send_login_link
+from club.services.auth_links import email_language, send_login_link
 from club.forms import MemberAdminForm
 from club.services.photos import photo_write_scope, save_profile_photo
 from club.services.membership import accept_invitation
@@ -46,7 +46,7 @@ class MemberTagInline(admin.TabularInline):
 @admin.register(Member)
 class MemberAdmin(admin.ModelAdmin):
     form = MemberAdminForm
-    list_display = ["full_name", "company", "sector", "member_since", "rank_display", "connections", "visible_in_directory"]
+    list_display = ["full_name", "company", "communication_language", "sector", "member_since", "rank_display", "connections", "visible_in_directory"]
     list_filter = ["sector", "member_since", "is_founder", "speaks_de", "speaks_en", "visible_in_directory"]
     search_fields = ["first_name", "last_name", "company", "user__email"]
     readonly_fields = ["qr_token", "referral_code", "created_at", "admitted_at", "kind", "guest_access_until"]
@@ -69,6 +69,10 @@ class MemberAdmin(admin.ModelAdmin):
     @admin.display(description=_("rang"))
     def rank_display(self, obj):
         return RANK_STYLE[obj.rank][0]
+
+    @admin.display(description=_("Langue des communications"))
+    def communication_language(self, obj):
+        return dict(Member._meta.get_field("preferred_language").choices)[email_language(obj)]
 
     @admin.display(description=_("rencontres"))
     def connections(self, obj):

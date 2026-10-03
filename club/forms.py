@@ -104,6 +104,10 @@ class MemberProfileForm(PhotoForm):
         self.fields["phone"].widget.input_type = "tel"
         self.fields["phone"].widget.attrs.update({"autocomplete": "tel", "placeholder": "+41 79 000 00 00"})
         self.fields["linkedin_url"].widget.attrs["placeholder"] = "https://www.linkedin.com/in/…"
+        self.fields["preferred_language"].choices = [
+            ("", _("Selon mes langues parlées")),
+            *Member._meta.get_field("preferred_language").choices,
+        ]
 
 
 class EmailPreferencesForm(forms.ModelForm):

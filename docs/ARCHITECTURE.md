@@ -99,13 +99,18 @@ InvitationRequest ──> Member (parrain, optionnel)
 | `SeatingPlan` / `SeatAssignment` | Tables tournantes | Une seule place par membre et par service |
 | `InvitationRequest` | Demande d'adhésion depuis la vitrine, avec parrain éventuel | — |
 | `PersonalNote` | Mémo privé d'un auteur sur une cible accessible | Une note par auteur/cible, auteur différent de la cible ; aucun écran admin |
-| `EmailPreferences` | Langue sur le profil, réception des annonces/relances et consentements mensuels distincts | Un jeu de préférences par profil |
+| `EmailPreferences` | Réception des annonces/relances et consentements mensuels distincts | Un jeu de préférences par profil |
 | `NotificationCampaign` / `NotificationDelivery` | File persistante : bienvenue, annonce, relance, récapitulatif, accès invité | Campagne unique par portée ; destinataire unique par campagne ; réservation atomique |
 | `DigestEntry` | Réservation des profils présentés au récapitulatif | Un profil présenté dans une seule campagne |
 | `Substitute` | Titulaire absent et invité distinct pour un événement, statut contrôlé par service staff | Une demande par titulaire/événement ; un invité approuvé par événement ; invité différent du titulaire |
 
 Le rang d'un membre (Membre fondateur, Pilier du Club, Membre, Nouvelle recrue) est **calculé** à partir de son année
 d'adhésion. Il ne peut donc pas être falsifié par le membre.
+
+`Member.preferred_language` est la langue des communications : elle se choisit dans la partie contact du profil.
+Sans choix explicite, les langues parlées déterminent la langue effective selon `email_language()` ; l'admin affiche
+ce même résultat dans la liste des membres pour préparer aussi des courriers papier. Les consentements email et
+l'accroche mensuelle restent modifiables sous « Options email », replié par défaut et ouvert en cas d'erreur de validation.
 Un profil `kind=guest` affiche « Invité », sans ancienneté d'adhésion. `guest_access_until` est calculé d'après ses
 invitations approuvées (48 h après le début par défaut). Une nouvelle invitation peut réactiver le même compte.
 
@@ -237,8 +242,8 @@ puisse les présenter aux autres.
 
 ## 10. Qualité
 
-- **268 tests automatisés** (`env DEBUG=1 python manage.py test club`, environ 70 s).
-  Dernière recette SQLite : 268 tests, dont 6 cas de concurrence réservés à PostgreSQL.
+- **270 tests automatisés** (`env DEBUG=1 python manage.py test club`, environ 70 s).
+  Dernière recette SQLite : 270 tests, dont 6 cas de concurrence réservés à PostgreSQL.
   La recette initiale de phase 9 a passé les 262 tests alors présents sur PostgreSQL dédié :
   - les algorithmes (rencontres, tables tournantes) et leurs règles absolues ;
   - la **matrice d'accès** : chaque route est classée (publique, membre, staff) et testée anonyme / membre / staff ; une nouvelle

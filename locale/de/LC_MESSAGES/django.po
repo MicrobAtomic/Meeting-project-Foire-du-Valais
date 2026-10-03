@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Club des Affaires\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 22:05+0200\n"
+"POT-Creation-Date: 2026-10-03 22:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Club des Affaires\n"
 "Language-Team: Club des Affaires\n"
@@ -18,6 +18,10 @@ msgstr "Club des Affaires"
 
 msgid "rang"
 msgstr "Rang"
+
+#| msgid "Langue des emails"
+msgid "Langue des communications"
+msgstr "Sprache für Mitteilungen"
 
 msgid "rencontres"
 msgstr "Begegnungen"
@@ -178,6 +182,10 @@ msgstr "Nur für Mitglieder sichtbar, die du getroffen hast."
 msgid "Si tu décoches, seuls les membres que tu as déjà rencontrés pourront voir ta carte."
 msgstr "Wenn du das Häkchen entfernst, können nur Mitglieder, die du schon getroffen hast, deine Karte sehen."
 
+#| msgid "Langues parlées"
+msgid "Selon mes langues parlées"
+msgstr "Gemäss meinen gesprochenen Sprachen"
+
 msgid "Poste"
 msgstr "Position"
 
@@ -300,9 +308,6 @@ msgstr "Profil ausgefüllt"
 
 msgid "Coché automatiquement quand le membre a choisi ses affinités."
 msgstr "Wird automatisch angekreuzt, sobald das Mitglied seine Vorlieben gewählt hat."
-
-msgid "Langue des emails"
-msgstr "Sprache der E-Mails"
 
 msgid "Accroche pour le récapitulatif"
 msgstr "Kurztext für die Zusammenfassung"
@@ -666,7 +671,6 @@ msgstr "Neue Veranstaltung: %(title)s"
 msgid "Ta réponse pour : %(title)s"
 msgstr "Deine Antwort für: %(title)s"
 
-#| msgid "Photo invalide : JPEG, PNG ou WebP non animé, 2 Mio et 4096 × 4096 pixels maximum."
 msgid "Photo invalide : JPEG, PNG, WebP, HEIC/HEIF ou AVIF non animé, 20 Mio, 50 mégapixels et 10 000 pixels par côté maximum."
 msgstr "Ungültiges Foto: JPEG, PNG, WebP, HEIC/HEIF oder AVIF ohne Animation, höchstens 20 MiB, 50 Megapixel und 10 000 Pixel pro Seite."
 
@@ -1202,11 +1206,9 @@ msgstr "Dein Foto wird beim Speichern entfernt."
 msgid "La photo dépasse 20 Mio. Choisis un fichier plus léger."
 msgstr "Das Foto ist grösser als 20 MiB. Wähle eine kleinere Datei."
 
-#| msgid "Photo de profil"
 msgid "Aperçu de ta photo de profil"
 msgstr "Vorschau deines Profilfotos"
 
-#| msgid "JPEG, PNG ou WebP, 2 Mio maximum. Ta photo suit les droits de visibilité de ta fiche."
 msgid "JPEG, PNG, WebP, HEIC/HEIF ou AVIF, 20 Mio maximum. Orientation, recadrage et compression automatiques. Ta photo suit les droits de visibilité de ta fiche."
 msgstr "JPEG, PNG, WebP, HEIC/HEIF oder AVIF, höchstens 20 MiB. Automatische Ausrichtung, Zuschnitt und Komprimierung. Für das Foto gelten die Sichtbarkeitsrechte deines Profils."
 
@@ -1219,6 +1221,12 @@ msgstr "Zum Eisbrechen"
 msgid "Contact et confidentialité"
 msgstr "Kontakt und Datenschutz"
 
+msgid "Options email"
+msgstr "E-Mail-Optionen"
+
+msgid "La présentation mensuelle utilise uniquement ton nom, ton entreprise, ton secteur et cette accroche, si tu l'autorises."
+msgstr "Die monatliche Vorstellung verwendet mit deiner Zustimmung nur deinen Namen, dein Unternehmen, deine Branche und diesen Kurztext."
+
 msgid "Ce que tu aimes, ce que tu détestes"
 msgstr "Was du magst, was du hasst"
 
@@ -1227,12 +1235,6 @@ msgstr "So können wir dir die richtigen Leute vorstellen."
 
 msgid "Refaire le swipe"
 msgstr "Swipe wiederholen"
-
-msgid "Mes préférences email"
-msgstr "Meine E-Mail-Einstellungen"
-
-msgid "La présentation mensuelle utilise uniquement ton nom, ton entreprise, ton secteur et cette accroche, si tu l'autorises."
-msgstr "Die monatliche Vorstellung verwendet mit deiner Zustimmung nur deinen Namen, dein Unternehmen, deine Branche und diesen Kurztext."
 
 msgid "Annuler"
 msgstr "Abbrechen"
@@ -1265,6 +1267,9 @@ msgstr "Profil entdecken"
 #, python-format
 msgid "Découvre d'autres profils dans l'album (%(remaining)s)."
 msgstr "Entdecke weitere Profile im Album (%(remaining)s)."
+
+msgid "Mes préférences email"
+msgstr "Meine E-Mail-Einstellungen"
 
 msgid "Me désabonner du récapitulatif"
 msgstr "Zusammenfassung abbestellen"

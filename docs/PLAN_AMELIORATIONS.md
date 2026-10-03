@@ -916,3 +916,15 @@ Demande supplémentaire : agrandir les portraits sur les fiches et faciliter le 
 - [x] Recette : 268 tests SQLite OK (6 tests de concurrence réservés à PostgreSQL), tests JPEG/PNG/WebP/HEIC/AVIF, orientation visible et transparence, limite de pixels, aperçu sans sauvegarde, CSRF et upload désactivé. Six parcours Chrome à 390/1 280 px × FR/DE/EN vérifient aperçu HEIC, erreur de fichier invalide, refus local d'un fichier >20 Mio, retrait, priorité de la dernière sélection et enregistrement final. Les réponses 400 des fichiers invalides sont attendues ; aucune erreur JavaScript/CSP ni requête externe.
 
 Validation locale du 3 octobre 2026 ; aucun changement de schéma. L'activation des uploads en production garde les prérequis de stockage privé durable. Livraison par le commit qui contient ce complément, puis push sur `main`.
+
+
+## Complément — simplification des préférences de communication
+
+- [x] Supprimer le grand bloc de personnalisation des emails et placer « Langue des communications » dans les coordonnées du profil. Proposer FR/DE/EN ou le choix selon les langues parlées.
+- [x] Replier les consentements et l'accroche sous « Options email », sans perdre leurs valeurs lors de l'enregistrement ; ouvrir automatiquement en cas d'erreur. Conserver les liens `#preferences-email`.
+- [x] Afficher la langue effective dans la liste admin des membres et renommer le champ sur les fiches membre/remplaçant, pour préparer aussi les courriers papier. Migration 0012 appliquée localement : libellés uniquement, valeurs conservées.
+- [x] Traduire FR/DE/EN, compiler les catalogues et le CSS, documenter l'exploitation.
+- [x] Vérifier : 22 tests ciblés OK ; suite complète SQLite, 270 tests OK dont 6 tests de concurrence réservés à PostgreSQL. Contrôle Django, absence de migration manquante et `git diff --check` OK.
+- [x] Recette Chrome à 390/1 280 px × FR/DE/EN : options fermées, langue visible, ouverture possible, aucun débordement ; modification de langue avec conservation des consentements et de l'accroche ; colonne admin présente. Aucune erreur JavaScript inattendue ni requête externe ; deux avertissements existants de politique `unload` dans le script standard de l'admin Django.
+
+Validation locale du 3 octobre 2026. Livraison par le commit contenant ce complément, puis push sur `main`.
