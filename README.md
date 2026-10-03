@@ -5,7 +5,7 @@
 > three introductions before each event with the reason why, a QR scan at the event that adds the card to your album
 > and unlocks contact details, a people bingo computed for each guest and rotating tables at seated dinners, and
 > shared milestones that show the Club growing closer. Django 5.2, FR / DE / EN, secure by default, automated tests.
-> Pitch deck and 42-second demo video: [docs/pitch/](docs/pitch/) · submission texts: [docs/SUBMISSION.md](docs/SUBMISSION.md)
+> Two-minute pitch with four embedded animated GIFs: [docs/pitch/](docs/pitch) · submission texts: [submission texts](docs/PITCH.md#textes-de-soumission)
 > · architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 **Plus jamais d'inconnus au Club.** Une web app réservée aux membres du Club des Affaires, qui vit au rythme des
@@ -19,13 +19,11 @@
   (une récompense valaisanne à chaque palier) pour tout le monde.
 
 Projet réalisé pour le hackathon Foire du Valais (3–4 octobre 2026).
-Pitch et démo : [docs/PITCH.md](docs/PITCH.md) · Choix techniques : [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) ·
-Plan de réalisation : [docs/PLAN.md](docs/PLAN.md)
+[Documentation](docs/README.md) · [Pitch de deux minutes](docs/PITCH.md) ·
+[Architecture](docs/ARCHITECTURE.md) · [Exploitation](docs/EXPLOITATION.md).
 
-Suivi des améliorations livrées (photos, remplaçants, notes privées, emails et cotisation) :
-[docs/PLAN_AMELIORATIONS.md](docs/PLAN_AMELIORATIONS.md).
-Recette : [docs/RECETTE_AMELIORATIONS.md](docs/RECETTE_AMELIORATIONS.md) ·
-Exploitation : [docs/EXPLOITATION.md](docs/EXPLOITATION.md).
+Le [plan de présentation](docs/PLAN_PITCH.md) indique les étapes livrées et leur vérification.
+Les anciens plans et recettes sont conservés dans [les archives](docs/archive/).
 
 ## Ce que fait l'application
 
@@ -210,6 +208,6 @@ club/management/         seed_demo : données de démo fictives et reproductible
 templates/ static/       pages (FR/DE/EN), JS sans dépendance (swipe, copier, imprimer), CSS compilé
 assets/css/input.css     sources Tailwind
 locale/                  traductions fr / de / en (.po et .mo)
-docs/                    PITCH.md · ARCHITECTURE.md · PLAN.md
+docs/                    README.md · PITCH.md · ARCHITECTURE.md · EXPLOITATION.md · MARKETING.md · archive/
 render.yaml build.sh     déploiement Render
 ```

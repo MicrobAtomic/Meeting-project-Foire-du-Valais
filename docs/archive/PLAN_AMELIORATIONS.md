@@ -1,5 +1,7 @@
 # Plan des améliorations — profils, remplaçants, notes et emails
 
+> **Archive du 3 octobre 2026.** Ce document conserve les décisions et les preuves de l’époque ; ce n’est pas une liste de tâches à exécuter automatiquement. Pour l’état actuel : [index de documentation](../README.md) et [exploitation](../EXPLOITATION.md).
+
 > Demande du 3 octobre 2026. Audit du dépôt au commit `b4b0816`.
 > Les cases cochées indiquent le travail livré et vérifié. Les activations externes encore nécessaires sont signalées séparément.
 > Destinataire : une IA qui a besoin de tâches courtes, de décisions explicites et de vérifications précises.

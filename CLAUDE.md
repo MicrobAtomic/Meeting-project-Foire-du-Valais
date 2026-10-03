@@ -6,20 +6,19 @@ espace staff. Projet de hackathon : rendu le **dimanche 4 octobre 2026 à 13 h**
 
 ## Ta mission
 
-Exécuter `docs/PLAN.md` phase par phase, dans l'ordre. Au début de chaque session : lis `docs/PLAN.md`,
-trouve la première case `- [ ]` non cochée, et fais cette tâche.
-
-Si la demande porte explicitement sur les améliorations décrites dans `docs/PLAN_AMELIORATIONS.md`, suivre ce
-nouveau plan et ses vérifications ; ne pas reprendre les tâches de déploiement de l'ancien plan à sa place.
-Une demande d'étude ou de rédaction de plan ne demande pas l'implémentation des fonctionnalités.
+Suivre d’abord la demande actuelle de l’humain. Au début de chaque session, lire `docs/README.md`
+pour trouver le document actif. Pour la présentation, le suivi et la reprise sont dans `docs/PLAN_PITCH.md`.
+Les anciens plans de réalisation et d’amélioration sont conservés dans `docs/archive/` ; leurs cases ouvertes
+sont historiques et ne constituent pas une autorisation de déployer ou d’activer des services.
+Une demande d’étude ou de rédaction de plan ne demande pas l’implémentation des fonctionnalités.
 
 ## Boucle de travail (obligatoire)
 
 1. Lis la tâche en entier, et les fichiers qu'elle cite, avant d'écrire du code.
 2. Fais exactement ce qui est demandé. Pas de fonctionnalité bonus, pas de refactor non demandé.
 3. Vérifie : `python manage.py test club` doit être vert, puis fais la vérification « ✅ » de la tâche.
-4. Coche la case dans `docs/PLAN.md` (`- [x]`).
-5. Fin de phase : recompile le CSS (`--minify`), puis `git add -A && git commit -m "<message donné par la phase>"`.
+4. Coche la case dans le plan actif (`- [x]`) et documente la vérification effectuée.
+5. Fin de phase : si les styles de l’application ont changé, recompile le CSS (`--minify`), puis commite les fichiers de la phase. Une tâche de documentation seule ne demande pas de reconstruire le CSS de l’application.
 6. Même erreur deux fois de suite : arrête-toi, explique le problème à l'humain et propose deux options.
 
 ## Règles intouchables
@@ -75,7 +74,8 @@ Comptes de démo : `camille.rey@example.com` (nouvelle membre), `lukas.imboden@e
 
 ## Où trouver quoi
 
-- `docs/PLAN.md` : les tâches, dans l'ordre.
+- `docs/README.md` : index et état actuel ; `docs/PLAN_PITCH.md` : suivi de la présentation.
+- `docs/archive/` : anciens plans et recettes datées.
 - `docs/ARCHITECTURE.md` : les choix techniques et leurs raisons. Ils sont arrêtés, ne les remets pas en cause.
 - `club/services/` : la logique métier testée (matching, tables tournantes, fédération, vCard, QR, profil, rencontres).
 - `club/ui.py` et `club/templatetags/club_ui.py` : couleurs, emojis et libellés des cartes.

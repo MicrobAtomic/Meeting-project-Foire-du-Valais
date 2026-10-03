@@ -1,5 +1,7 @@
 # Plan de réalisation — Club des Affaires
 
+> **Archive du 3 octobre 2026.** Ce document conserve les décisions et les preuves de l’époque ; ce n’est pas une liste de tâches à exécuter automatiquement. Pour l’état actuel : [index de documentation](../README.md) et [exploitation](../EXPLOITATION.md).
+
 > **Pour qui** : l'agent IA qui code, et l'humain qui le supervise.
 > **Avant tout** : lis `CLAUDE.md` (règles intouchables) puis ce fichier en entier.
 > **Méthode** : prends la première case `- [ ]` non cochée, fais-la, vérifie le « ✅ », coche-la, continue.
@@ -574,7 +576,7 @@ Pour éviter les requêtes N+1, toute liste de cartes charge les membres avec
 ## 6. Scénario de démo (2 minutes, à répéter)
 
 > Ce scénario a été **rejoué automatiquement de bout en bout** (vrais clics dans Chrome, téléphone et ordinateur) : toutes les
-> étapes passent, sans erreur de console ni de sécurité. Le texte à dire est dans [PITCH.md](PITCH.md).
+> étapes passent, sans erreur de console ni de sécurité. Le texte à dire est dans [PITCH.md](../PITCH.md).
 
 1. **Vitrine** : la page publique et « Demander une invitation ». Aucun nom de membre n'est visible de l'extérieur.
 2. **Camille, nouvelle recrue**, sur le téléphone :

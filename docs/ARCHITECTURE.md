@@ -301,7 +301,7 @@ PostgreSQL Hobbyist-2 seul coûte 0,05811 CHF/h hors taxes, soit 41,84 CHF pour 
   de sécurité, cookies `Secure`, CSS et JS en cache immuable, hôte invalide refusé.
 - **Recette navigateur des améliorations** : 90 pages parcourues à 390 px et 1 280 px, en FR/DE/EN, avec membre,
   invité, staff sans profil et anonyme. Aucun débordement, image cassée, erreur JavaScript/CSP ni appel externe détecté.
-  Badges générés en PDF A4. Voir [RECETTE_AMELIORATIONS.md](RECETTE_AMELIORATIONS.md) pour les preuves et limites.
+  Badges générés en PDF A4. Voir [RECETTE_AMELIORATIONS.md](archive/RECETTE_AMELIORATIONS.md) pour les preuves et limites.
 - **Scénario du pitch rejoué automatiquement** de bout en bout (vitrine, rencontres, album, scan du QR, vCard, tableau de bord,
   plan de tables en direct, bascule en allemand).
 - Les données de démo sont reproductibles (graine fixe, identifiants d'événements fixes). La commande `seed_demo` **vérifie

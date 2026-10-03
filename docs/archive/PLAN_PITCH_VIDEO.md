@@ -1,5 +1,7 @@
 # Plan — retouches de la présentation (pitch, deck, vidéo)
 
+> **Archive — remplacée le 4 octobre 2026.** Suivi actuel : [PLAN_PITCH](../PLAN_PITCH.md), conducteur : [PITCH](../PITCH.md). La contrainte « MP4 uniquement » de ce plan n’a pas été confirmée par une source publique ; la nouvelle version suit la demande de GIF.
+
 > Destinataire : une IA qui exécute (ChatGPT / Codex), tâche par tâche, sans rediscuter les décisions.
 > Rédigé le 3 octobre 2026 au soir, après les retours de l'humain sur le deck. État de départ : commit qui ajoute
 > ce fichier ; 401 tests verts.
@@ -356,7 +358,7 @@ répétitions au chronomètre restent à effectuer sur l'ordinateur de présenta
 | T7 — recette et exports finaux | `d265ad4` | Poussé sur `main` |
 | T8 — livraison | Commit contenant ce journal | Push final vérifié à la livraison |
 
-Livrables : [PowerPoint avec vidéo et notes](pitch/Club-des-Affaires-pitch.pptx),
-[PDF de secours](pitch/Club-des-Affaires-pitch.pdf), [vidéo seule](pitch/demo.mp4),
-[conducteur et préparation avant scène](PITCH.md). Avant la présentation, régler la vidéo de la diapositive 3
+Livrables : [PowerPoint avec vidéo et notes](../pitch/Club-des-Affaires-pitch.pptx),
+[PDF de secours](../pitch/Club-des-Affaires-pitch.pdf), [vidéo seule](../pitch/demo.mp4),
+[conducteur et préparation avant scène](../PITCH.md). Avant la présentation, régler la vidéo de la diapositive 3
 en lecture automatique dans PowerPoint ou Keynote et répéter cinq fois au chronomètre.

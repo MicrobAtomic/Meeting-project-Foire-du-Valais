@@ -1,5 +1,7 @@
 # Recette des améliorations — 3 octobre 2026
 
+> **Archive du 3 octobre 2026.** Ce document conserve les décisions et les preuves de l’époque ; ce n’est pas une liste de tâches à exécuter automatiquement. Pour l’état actuel : [index de documentation](../README.md) et [exploitation](../EXPLOITATION.md).
+
 Le code des phases 0 à 8 est livré par commits séparés. Cette recette clôt la préparation technique de la phase 9.
 Les envois réels, le cron et le volume privé durable de production restent à configurer et valider ; ils ne sont pas activés.
 
@@ -96,4 +98,4 @@ Restent à faire avant activation réelle :
 - Confirmer les paramètres métier : tarif, règles de remplacement, délai de 48 h et conservation des invités en veille.
 
 La tâche 9.6 reste ouverte pour l'essai et l'activation externes. La procédure d'exploitation, d'export/suppression et
-de restauration figure dans [EXPLOITATION.md](EXPLOITATION.md). Les paiements restent sur facture manuelle.
+de restauration figure dans [EXPLOITATION.md](../EXPLOITATION.md). Les paiements restent sur facture manuelle.
