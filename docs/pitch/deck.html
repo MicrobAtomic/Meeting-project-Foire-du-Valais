@@ -67,8 +67,12 @@
   th, td { text-align: left; padding: 16px 18px; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.35; }
   th { font-size: 20px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); font-weight: 700; }
   td.n { text-align: right; font-weight: 700; color: var(--red); white-space: nowrap; }
-  .appendix { background: #fff; }
-  .appendix .kicker::after { content: " · Appendix"; color: var(--faint); }
+  .divider { background: var(--ink); color: #fafaf9; justify-content: center; }
+  .divider .kicker { color: #fca5a5; } .divider .lead { color: #d6d3d1; }
+  .appendix { background: #fff; padding-top: 120px; }
+  .appendix::before { content: "APPENDIX — FOR THE Q&A"; position: absolute; top: 0; left: 0; right: 0; height: 56px;
+    background: #f5f5f4; color: #78716c; font-size: 20px; font-weight: 700; letter-spacing: .14em;
+    display: flex; align-items: center; padding-left: 120px; }
 
   .arch { display: grid; grid-template-columns: 1fr 1.4fr 1fr; gap: 28px; margin-top: 48px; align-items: stretch; }
   .arch .box { border: 2px solid var(--line); border-radius: 24px; padding: 28px; background: var(--paper); font-size: 24px; line-height: 1.5; }
@@ -85,7 +89,7 @@
       <p class="kicker">Hack VS · Challenge Foire du Valais</p>
       <h1>Never a stranger at the Club again.</h1>
       <p class="lead">A year-round networking platform for the members of the Club des Affaires de la Foire du Valais.</p>
-      <p class="lead" style="font-size:26px;margin-top:56px">Live demo · public on GitHub · FR / DE / EN</p>
+      <p class="lead" style="font-size:26px;margin-top:56px">Recorded demo · public on GitHub · FR / DE / EN</p>
     </div>
     <div class="phone"><img src="img/home.png" alt=""></div>
   </div>
@@ -115,9 +119,39 @@
   </div>
 </section>
 
-<!-- 3 · The solution -->
-<section class="slide" data-notes="(0:30 – 0:50) Notre réponse : une web app qui suit le rythme du Club, sur les quatre piliers du défi. Se trouver : chaque membre a sa carte, ses passions, ce qu'il peut offrir et ce qu'il cherche. Repérer les synergies : avant chaque soirée, trois personnes à rencontrer, et pourquoi. Le soir même, on scanne un badge, et un jeu brise la glace. Et toute l'année, le Club se resserre.">
-  <p class="kicker">The solution</p>
+<!-- 3 · Demo video -->
+<section class="slide video" data-notes="(0:50 – 1:32, la vidéo tourne) Voici Camille, nouvelle membre. Avant le dîner, elle sait déjà qui rencontrer : Lukas. Ils aiment tous deux la Petite Arvine et le ski de randonnée ; il cherche du digital, son métier à elle, et elle veut s'ouvrir au marché alémanique, le sien. Au dîner, elle scanne son badge : la carte entre dans son album, ses coordonnées se débloquent, une case de son bingo se coche. Et côté équipe : un clic, et 38 invités changent de table à chaque service.">
+  <p class="kicker">Demo · Camille's evening</p>
+  <div class="frame" data-video>demo.mp4</div>
+</section>
+
+<!-- 4 · Impact: roadmap & costs -->
+<section class="slide" data-notes="Impact : la feuille de route et les coûts. Texte du conducteur dans T6.">
+  <p class="kicker">Impact · roadmap &amp; costs</p>
+  <h2>Ready to launch, light to run.</h2>
+  <div class="grid g3" style="margin-top:40px">
+    <div class="card pillar"><small>Now</small><h3>Shown today</h3><p>Cards &amp; album, introductions with synergies, QR meetings, people bingo, rotating tables, Club milestones, guided admin, FR / DE / EN.</p></div>
+    <div class="card pillar"><small>Launch</small><h3>Before the next evening</h3><p>Swiss hosting, import of the current members, e-mail sending switched on.</p></div>
+    <div class="card pillar"><small>Next season</small><h3>If the Club wants more</h3><p>Membership payment (TWINT, QR-bill), an “I'm looking for / I offer” board, event photo albums.</p></div>
+  </div>
+  <div class="grid g3" style="margin-top:28px">
+    <div><p class="stat">≈ 30</p><p class="stat-label">CHF a month to run: Swiss hosting, database, backups, e-mails</p></div>
+    <div><p class="stat">≈ 20</p><p class="stat-label">CHF to set up, excluding development: a .ch domain</p></div>
+    <div><p class="stat" style="font-size:56px;line-height:84px">On request</p><p class="stat-label">development, only if new features are wanted</p></div>
+  </div>
+  <div class="foot"><span><b>__TESTS__ automated tests</b> · secure by default · works today</span><span>“A club that knows itself comes back together.”</span></div>
+</section>
+
+<!-- 5 · Appendix divider -->
+<section class="slide divider" data-notes="Annexes : à n'ouvrir que si une question y mène.">
+  <p class="kicker">Appendix</p>
+  <h1 style="margin-top:24px">For the questions.</h1>
+  <p class="lead">A1 The solution · A2 What is new · A3 Feasibility · A4 Architecture · A5 Algorithms · A6 Security &amp; privacy · A7 Go-to-market · A8 Costs in detail</p>
+</section>
+
+<!-- A1 · The solution -->
+<section class="slide appendix" data-notes="Annexe A1 : Notre réponse : une web app qui suit le rythme du Club, sur les quatre piliers du défi. Se trouver : chaque membre a sa carte, ses passions, ce qu'il peut offrir et ce qu'il cherche. Repérer les synergies : avant chaque soirée, trois personnes à rencontrer, et pourquoi. Le soir même, on scanne un badge, et un jeu brise la glace. Et toute l'année, le Club se resserre.">
+  <p class="kicker">A1 · The solution</p>
   <h2>One app that follows the rhythm of the Club.</h2>
   <div class="grid g4">
     <div class="card pillar"><small>Find</small><span class="emoji">🔍</span><h3>Member cards</h3><p>Sector, passions, pet peeves, what you can help with and what you look for. An album for members only.</p></div>
@@ -127,15 +161,9 @@
   </div>
 </section>
 
-<!-- 4 · Demo video -->
-<section class="slide video" data-notes="(0:50 – 1:32, la vidéo tourne) Voici Camille, nouvelle membre. Avant le dîner, elle sait déjà qui rencontrer : Lukas. Ils aiment tous deux la Petite Arvine et le ski de randonnée ; il cherche du digital, son métier à elle, et elle veut s'ouvrir au marché alémanique, le sien. Au dîner, elle scanne son badge : la carte entre dans son album, ses coordonnées se débloquent, une case de son bingo se coche. Et côté équipe : un clic, et 38 invités changent de table à chaque service.">
-  <p class="kicker">Demo · 40 seconds</p>
-  <div class="frame" data-video>demo.mp4</div>
-</section>
-
-<!-- 5 · Innovation & impact -->
-<section class="slide" data-notes="(1:32 – 1:47) Ce qui est nouveau : chaque vraie rencontre compte, et se compte. Le Club est connecté à 15 % aujourd'hui ; au prochain palier, une tournée de Petite Arvine pour tous. Mesurable pour le comité, motivant pour les membres.">
-  <p class="kicker">What is new</p>
+<!-- A2 · What is new -->
+<section class="slide appendix" data-notes="Annexe A2 : Ce qui est nouveau : chaque vraie rencontre compte, et se compte. Le Club est connecté à 15 % aujourd'hui ; au prochain palier, une tournée de Petite Arvine pour tous. Mesurable pour le comité, motivant pour les membres.">
+  <p class="kicker">A2 · What is new</p>
   <h2>Every real encounter counts — and is counted.</h2>
   <div class="grid g2" style="margin-top:44px">
     <div class="card"><span class="emoji">🃏</span><h3>A collectible album</h3><p>A QR scan is the proof you really met: only then do contact details unlock. No cold messages, no spam.</p></div>
@@ -145,9 +173,9 @@
   </div>
 </section>
 
-<!-- 6 · Feasibility -->
-<section class="slide" data-notes="(1:47 – 2:00) Et c'est faisable : ça tourne aujourd'hui, en trois langues, sécurisé, testé, pour moins de 500 francs par an. Un club qui se connaît se retrouve. Merci !">
-  <p class="kicker">Feasibility & impact</p>
+<!-- A3 · Feasibility -->
+<section class="slide appendix" data-notes="Annexe A3 : Et c'est faisable : ça tourne aujourd'hui, en trois langues, sécurisé, testé, pour moins de 500 francs par an. Un club qui se connaît se retrouve. Merci !">
+  <p class="kicker">A3 · Feasibility</p>
   <h2>It works today.</h2>
   <div class="split" style="gap:72px;margin-top:24px">
     <ul class="clean text">
@@ -164,9 +192,9 @@
   </div>
 </section>
 
-<!-- A1 · Architecture -->
+<!-- A4 · Architecture -->
 <section class="slide appendix" data-notes="Annexe pour les questions : l'architecture.">
-  <p class="kicker">Architecture</p>
+  <p class="kicker">A4 · Architecture</p>
   <h2>Boring technology, on purpose.</h2>
   <div class="arch">
     <div class="box"><h3>Members &amp; staff</h3>Phone or computer browser · nothing to install · a QR code opens the right page · FR / DE / EN</div>
@@ -181,9 +209,9 @@
   </table>
 </section>
 
-<!-- A2 · Algorithms -->
+<!-- A5 · Algorithms -->
 <section class="slide appendix" data-notes="Annexe : les algorithmes.">
-  <p class="kicker">Algorithms</p>
+  <p class="kicker">A5 · Algorithms</p>
   <h2>Three small algorithms, measured.</h2>
   <table>
     <tr><th>What</th><th>How</th><th style="text-align:right">Measured</th></tr>
@@ -194,9 +222,9 @@
   </table>
 </section>
 
-<!-- A3 · Security -->
+<!-- A6 · Security &amp; privacy -->
 <section class="slide appendix" data-notes="Annexe : sécurité et protection des données.">
-  <p class="kicker">Security &amp; privacy</p>
+  <p class="kicker">A6 · Security &amp; privacy</p>
   <h2>Closed by default.</h2>
   <div class="grid g2" style="margin-top:44px">
     <div class="card"><h3>Application security</h3><p>Login required everywhere (middleware) · tested access matrix: a new route must be classified or the suite fails · CSRF on every form · strict CSP, no inline script or style · QR codes carry 128-bit random tokens · single-use login links (15 min) · HTTPS, HSTS, secure cookies.</p></div>
@@ -204,9 +232,9 @@
   </div>
 </section>
 
-<!-- A4 · Go-to-market -->
+<!-- A7 · Go-to-market -->
 <section class="slide appendix" data-notes="Annexe : recruter en douceur, seulement les bonnes personnes.">
-  <p class="kicker">Go-to-market</p>
+  <p class="kicker">A7 · Go-to-market</p>
   <h2>No ads. Invitations.</h2>
   <table>
     <tr><th>Channel</th><th>How</th></tr>
@@ -219,9 +247,9 @@
   <p class="lead" style="font-size:26px;margin-top:28px">Goal: 15–20 new members a year, at most 5 newcomers per evening, more than 60 % via referral.</p>
 </section>
 
-<!-- A5 · Cost & roadmap -->
+<!-- A8 · Costs in detail -->
 <section class="slide appendix" data-notes="Annexe : coûts et feuille de route.">
-  <p class="kicker">Cost &amp; roadmap</p>
+  <p class="kicker">A8 · Costs in detail</p>
   <h2>Within budget, ready to grow.</h2>
   <div class="grid g2" style="margin-top:44px">
     <div class="card"><h3>Cost</h3><p>Swiss hosting, database, e-mails and domain: under CHF 500 a year, less than 2 % of the fees. From this prototype to production: about 6 to 8 days (Swiss hosting, e-mail sending, branding, member import, two-factor login for the staff, privacy policy), within the CHF 10,000 envelope.</p></div>
