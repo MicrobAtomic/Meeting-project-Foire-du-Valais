@@ -260,7 +260,7 @@ Pour éviter les requêtes N+1, toute liste de cartes charge les membres avec
 
 > On met en ligne tôt : ensuite, chaque `git push` redéploie automatiquement.
 
-- [ ] **2.1** 👤 Créer le dépôt GitHub (privé) et pousser : `gh repo create club-des-affaires --private --source . --push`.
+- [x] **2.1** 👤 Créer le dépôt GitHub (privé) et pousser. *Fait : dépôt privé `MicrobAtomic/Meeting-project-Foire-du-Valais`, `origin/main` à jour.*
 - [ ] **2.2** 👤 Sur render.com, créer un compte puis **New → Blueprint** et choisir le dépôt. Render lit
   `render.yaml` : un service web et une base PostgreSQL gratuits, à Frankfurt. Quand Render la demande, saisir une
   valeur pour `DEMO_PASSWORD` (un mot de passe de démo, à noter). Lancer, puis attendre la fin du build (environ 5 min).
@@ -270,6 +270,7 @@ Pour éviter les requêtes N+1, toute liste de cartes charge les membres avec
   - `/admin/` fonctionne avec `equipe@example.com` ;
   - dans les logs de build, on lit `50 members…`.
 - [ ] **2.4** Noter l'URL de production dans `README.md`, section « Démo en ligne ».
+- ✅ **Validation locale déjà faite** (3 octobre) : les 40 tests passent sur PostgreSQL 17, `build.sh` (collectstatic, migrate, seed) tourne en `DEBUG=0` sur PostgreSQL avec les mêmes chiffres qu'en local (50 membres, 180 rencontres, 15 %), et gunicorn répond correctement (redirection HTTPS, en-têtes de sécurité, CSS versionné, hôte invalide refusé, connexion et CSRF OK). Reste uniquement ce qui demande un compte Render (2.2 à 2.4).
 - ⚠️ L'offre gratuite se met en veille après 15 minutes d'inactivité : **ouvrir l'URL 2 minutes avant le pitch**.
 - 🆘 **Plan B** si Render bloque : le site tourne en local, et un tunnel HTTPS public permet d'y accéder depuis un
   téléphone. `ALLOWED_HOSTS` et `CSRF_TRUSTED_ORIGINS` acceptent déjà `*.trycloudflare.com`.
