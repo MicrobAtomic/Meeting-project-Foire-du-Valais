@@ -8,7 +8,8 @@ from itertools import combinations
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand, CommandError
-from django.db import transaction
+from django.core.management.color import no_style
+from django.db import connection, transaction
 from django.db.models import Q
 from django.utils import timezone
 
@@ -148,22 +149,33 @@ class Command(BaseCommand):
         def at(days, hour=18, minute=30):
             return (now + timedelta(days=days)).replace(hour=hour, minute=minute, second=0, microsecond=0)
 
+        # Fixed primary keys on purpose: generate_matches() seeds its randomness with event.pk, so the
+        # introductions of the demo storyline stay identical after every --reset.
         past = [
-            Event.objects.create(title="Conférence de presse de la Foire", kind=Event.Kind.CONFERENCE,
+            Event.objects.create(pk=1, title="Conférence de presse de la Foire", kind=Event.Kind.CONFERENCE,
                                  starts_at=at(-120, 10, 0), location="CERM, Martigny"),
-            Event.objects.create(title="Apéro des membres", kind=Event.Kind.APERO,
+            Event.objects.create(pk=2, title="Apéro des membres", kind=Event.Kind.APERO,
                                  starts_at=at(-60), location="Caveau du Club, Martigny"),
-            Event.objects.create(title="Soirée Wow", kind=Event.Kind.DINNER,
+            Event.objects.create(pk=3, title="Soirée Wow", kind=Event.Kind.DINNER,
                                  starts_at=at(-3, 19, 0), location="CERM, Martigny"),
         ]
         upcoming = Event.objects.create(
-            title="Dîner d'automne", kind=Event.Kind.DINNER, starts_at=at(12, 19, 0),
+            pk=4, title="Dîner d'automne", kind=Event.Kind.DINNER, starts_at=at(12, 19, 0),
             location="Salle des Bisses, Martigny", has_seating=True,
             description="Trois services, trois tables différentes : on se mélange !",
         )
-        later = Event.objects.create(title="Apéro de Noël", kind=Event.Kind.APERO,
+        later = Event.objects.create(pk=5, title="Apéro de Noël", kind=Event.Kind.APERO,
                                      starts_at=at(75), location="Caveau du Club, Martigny")
+        self.realign_event_sequence()
         return past, upcoming, later
+
+    @staticmethod
+    def realign_event_sequence():
+        """PostgreSQL does not advance its sequence on explicit pks: realign it so events created later
+        (from the admin) do not collide with ours. No-op on SQLite."""
+        with connection.cursor() as cursor:
+            for statement in connection.ops.sequence_reset_sql(no_style(), [Event]):
+                cursor.execute(statement)
 
     def create_rsvps(self, rng, members, past, upcoming, later, camille, lukas):
         rsvps = []
