@@ -61,7 +61,7 @@ membres, coûts et feuille de route. Ne les montre que si une question y mène.
 | **15 %** : indice de fédération des données de démo (180 paires sur 1 225) ; prochain palier à 20 % | `seed_demo` |
 | **49 ms** pour les rencontres de 200 inscrits · **0,8 s** pour le plan de tables de 200 invités | mesuré ([ARCHITECTURE §7](ARCHITECTURE.md)) |
 | **251 nouvelles paires, 1 répétition** : dîner de démo, 38 inscrits, tables de 6, 3 services | la vidéo, en direct |
-| **__TESTS__ tests automatisés**, SQLite et PostgreSQL | `python manage.py test club` |
+| **400 tests automatisés**, SQLite et PostgreSQL | `python manage.py test club` |
 | **< 500 CHF par an** de fonctionnement, **6 à 8 jours** de mise en production | estimation ([ARCHITECTURE §9](ARCHITECTURE.md)) |
 
 ## 6. Les 7 minutes de questions

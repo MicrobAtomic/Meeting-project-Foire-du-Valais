@@ -103,6 +103,7 @@ InvitationRequest ──> Member (parrain, optionnel)
 | `NotificationCampaign` / `NotificationDelivery` | File persistante : bienvenue, annonce, relance, récapitulatif, accès invité | Campagne unique par portée ; destinataire unique par campagne ; réservation atomique |
 | `DigestEntry` | Réservation des profils présentés au récapitulatif | Un profil présenté dans une seule campagne |
 | `Substitute` | Titulaire absent et invité distinct pour un événement, statut contrôlé par service staff | Une demande par titulaire/événement ; un invité approuvé par événement ; invité différent du titulaire |
+| `Expertise` / `MemberExpertise` | Thèmes d'entraide (FR, DE, EN) et, pour chaque membre, ce qu'il peut offrir et ce qu'il cherche ; `Match.synergies` garde la raison | Un thème par sens et par membre ; 3 au plus par sens (formulaire et service) |
 | `BingoSquare` | Case d'une grille de « bingo des rencontres » : joueur, événement, position 0-8, ce qu'elle demande, la personne qui l'a remplie | Une case par position ; **une personne ne remplit qu'une case par grille** (contrainte unique conditionnelle) |
 
 Un événement porte ses textes en français (référence) et, facultativement, en allemand et en anglais (`title_de`,
@@ -178,6 +179,7 @@ Chaque paire d'inscrits reçoit un score :
 | Agacement commun (« je déteste » des deux côtés) | +2 par agacement |
 | Secteurs différents (complémentarité, pas de concurrents face à face) | +2 |
 | Une nouvelle recrue avec un pilier (intégration) | +3 |
+| **Synergie** : l'un peut aider sur un thème que l'autre cherche (deux synergies au plus : les affinités restent le cœur) | +4 |
 
 Deux règles sont absolues : jamais deux personnes **qui se connaissent déjà**, ni deux personnes **sans langue
 commune**. L'attribution est gloutonne et équitable : tout le monde reçoit une 1ʳᵉ rencontre avant que quiconque en
@@ -268,8 +270,8 @@ le choix des cases, les lignes et les cas de concurrence.
 
 ## 10. Qualité
 
-- **270 tests automatisés** (`env DEBUG=1 python manage.py test club`, environ 70 s).
-  Dernière recette SQLite : 270 tests, dont 6 cas de concurrence réservés à PostgreSQL.
+- **400 tests automatisés** (`env DEBUG=1 python manage.py test club`, environ 50 s), verts sur SQLite (6 cas de
+  concurrence y sont réservés à PostgreSQL) et sur PostgreSQL, sans test ignoré (3 octobre 2026, au soir).
   La recette initiale de phase 9 a passé les 262 tests alors présents sur PostgreSQL dédié :
   - les algorithmes (rencontres, tables tournantes) et leurs règles absolues ;
   - la **matrice d'accès** : chaque route est classée (publique, membre, staff) et testée anonyme / membre / staff ; une nouvelle

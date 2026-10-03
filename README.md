@@ -31,7 +31,7 @@ Exploitation : [docs/EXPLOITATION.md](docs/EXPLOITATION.md).
 
 | Pour… | Fonctionnalités |
 |---|---|
-| **Les membres** | album de cartes avec recherche et filtres · fiche de chaque membre, points communs · coordonnées et vCard débloquées après une vraie rencontre (scan du QR) · profil et affinités, swipe façon « cartes » · événements : réponse en un clic, **tes rencontres**, ton placement à table, **ta grille de bingo**, qui vient · **paliers du Club** et objectifs d'album · parrainage : lien personnel, QR, offre · connexion par mot de passe **ou par lien reçu par e-mail** · interface en français, allemand et anglais |
+| **Les membres** | album de cartes avec recherche et filtres (dont « Peut m'aider sur… ») · fiche de chaque membre, points communs · coordonnées et vCard débloquées après une vraie rencontre (scan du QR) · profil et affinités, swipe façon « cartes », **ce que tu peux offrir et ce que tu cherches** (la synergie compte dans tes rencontres) · événements : réponse en un clic, **tes rencontres**, ton placement à table, **ta grille de bingo**, qui vient · **paliers du Club** et objectifs d'album · parrainage : lien personnel, QR, offre · connexion par mot de passe **ou par lien reçu par e-mail** · interface en français, allemand et anglais |
 | **L'équipe événements** | tableau de bord (indice de fédération, membres isolés, demandes d'invitation) · préparation d'un événement : génération des rencontres, **plan de tables tournantes** (repas assis), gagnants du **bingo** (apéros), badges A4 avec QR code · back-office Django complet avec un **mode d'emploi en six gestes** et un encart par langue (FR / DE / EN) pour chaque événement |
 | **Les futurs membres** | vitrine publique sans aucun nom de membre · formulaire « Demander une invitation » (avec ou sans lien de parrainage) |
 
@@ -147,7 +147,7 @@ Plan B : le tunnel `cloudflared` ci-dessus.
 ## Tests
 
 ```bash
-env DEBUG=1 python manage.py test club    # 270 tests, environ 70 s ; 6 cas de concurrence réservés à PostgreSQL
+env DEBUG=1 python manage.py test club    # 400 tests, environ 50 s ; 6 cas de concurrence réservés à PostgreSQL
 ```
 
 Ils couvrent les algorithmes, la **matrice d'accès** (qui peut ouvrir quelle page : toute nouvelle route doit être
