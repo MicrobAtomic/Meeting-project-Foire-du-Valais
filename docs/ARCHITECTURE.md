@@ -103,6 +103,11 @@ InvitationRequest ──> Member (parrain, optionnel)
 | `NotificationCampaign` / `NotificationDelivery` | File persistante : bienvenue, annonce, relance, récapitulatif, accès invité | Campagne unique par portée ; destinataire unique par campagne ; réservation atomique |
 | `DigestEntry` | Réservation des profils présentés au récapitulatif | Un profil présenté dans une seule campagne |
 | `Substitute` | Titulaire absent et invité distinct pour un événement, statut contrôlé par service staff | Une demande par titulaire/événement ; un invité approuvé par événement ; invité différent du titulaire |
+| `BingoSquare` | Case d'une grille de « bingo des rencontres » : joueur, événement, position 0-8, ce qu'elle demande, la personne qui l'a remplie | Une case par position ; **une personne ne remplit qu'une case par grille** (contrainte unique conditionnelle) |
+
+Un événement porte ses textes en français (référence) et, facultativement, en allemand et en anglais (`title_de`,
+`description_en`…) : la page affiche la langue de la personne, ou le français si la traduction manque. Il choisit aussi
+ses animations : `has_seating` (tables tournantes, repas assis) et `has_bingo` (bingo des rencontres, apéro debout).
 
 Le rang d'un membre (Membre fondateur, Pilier du Club, Membre, Nouvelle recrue) est **calculé** à partir de son année
 d'adhésion. Il ne peut donc pas être falsifié par le membre.
@@ -212,6 +217,27 @@ C'est la part des paires de membres qui se sont déjà rencontrées (densité du
 de démo partent de **15 %**. C'est l'indicateur de succès proposé au comité : il passe chaque fois que deux membres
 scannent leur QR. Le tableau de bord staff liste aussi les **membres isolés** (2 rencontres ou moins) pour que l'équipe
 puisse les présenter aux autres.
+
+**Paliers** (`club/services/milestones.py`) : 10, 20, 35, 50, 75 et 100 %, chacun avec une récompense collective
+(une tournée de Petite Arvine à 20 %, une raclette à 35 %…, à valider par le comité). Le nombre de rencontres qui
+manquent se calcule en arithmétique entière (20 % de 1 225 paires = 245, pas 246). L'accueil montre aussi des objectifs
+personnels d'album : 5, 15, 30 cartes, puis l'album complet.
+
+### Bingo des rencontres (`club/services/bingo.py`)
+
+Une grille 3 × 3 « Trouve quelqu'un qui… » par invité, créée à sa première ouverture puis figée, déterministe
+(graine : événement et joueur). Les cases candidates viennent des **autres personnes attendues ce soir-là** : passions et
+agacements, langues, secteur, rang, région. Elles sont choisies dans cet ordre :
+
+1. pour chacune des « 3 rencontres » du joueur, une case que ce partenaire remplit, de préférence une passion commune ;
+2. les cases que remplissent des gens que le joueur n'a pas encore rencontrés, plutôt que son propre secteur ou sa région ;
+3. de la variété (au plus 3 passions, 2 agacements, 2 secteurs…), et au moins deux personnes par case quand c'est possible.
+
+Puis un **couplage biparti** (chemins augmentants) vérifie qu'un carton plein reste possible avec des personnes toutes
+différentes ; sinon la case la moins fournie est remplacée. La case du milieu est un joker : « quelqu'un que tu n'avais
+jamais rencontré ». Au scan d'un QR code, c'est la **case la plus rare** que la personne peut remplir qui se coche ; un
+double envoi ne coche qu'une fois (contrainte de base et mise à jour conditionnelle). 49 tests couvrent la génération,
+le choix des cases, les lignes et les cas de concurrence.
 
 ## 8. Scalabilité
 
