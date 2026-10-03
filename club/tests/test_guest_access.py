@@ -190,7 +190,11 @@ class GuestAccessTests(TestCase):
         self.assertEqual(self.request.first_name, "")
 
     def test_two_same_day_events_require_a_validated_context_for_guest_scans(self):
-        self.unrelated.starts_at = self.event.starts_at + timedelta(minutes=30)
+        # Same calendar day whatever the time the suite runs (from 23:30, "start + 30 min" fell on the next day)
+        noon = timezone.localtime(self.event.starts_at).replace(hour=12, minute=0, second=0, microsecond=0)
+        self.event.starts_at = noon
+        self.event.save(update_fields=["starts_at"])
+        self.unrelated.starts_at = noon + timedelta(minutes=30)
         self.unrelated.save(update_fields=["starts_at"])
         second = request_substitute(self.unrelated.pk, self.main, substitute_data())
         approve_substitute(second.pk, self.staff)
