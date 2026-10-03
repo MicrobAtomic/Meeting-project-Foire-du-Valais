@@ -71,3 +71,21 @@ class BasePagesTests(TestCase):
         self.assertContains(response, "Rencontres enregistrées")
         self.assertContains(response, "Indice de fédération")
         self.assertContains(response, reverse("admin:index"))
+
+
+class HeadingTests(TestCase):
+    def test_member_page_has_exactly_one_h1_with_the_name(self):
+        alice = make_member("alice@example.com", first_name="Alice", last_name="Aubert")
+        bob = make_member("bob@example.com", first_name="Bob", last_name="Bonvin")
+        self.client.force_login(alice.user)
+        html = self.client.get(reverse("club:member_detail", args=[bob.pk])).content.decode()
+        self.assertEqual(html.count("<h1"), 1)
+        self.assertIn(">Bob Bonvin</h1>", html)
+
+    def test_list_cards_keep_a_small_heading(self):
+        alice = make_member("alice@example.com")
+        make_member("bob@example.com", first_name="Bob", last_name="Bonvin")
+        self.client.force_login(alice.user)
+        html = self.client.get(reverse("club:album")).content.decode()
+        self.assertEqual(html.count("<h1"), 1)  # the page title only
+        self.assertIn(">Bob Bonvin</h3>", html)
