@@ -413,6 +413,11 @@ class NotificationCampaign(models.Model):
     cancelled_at = models.DateTimeField(null=True, blank=True)
 
 
+class DigestEntry(models.Model):
+    member = models.OneToOneField(Member, on_delete=models.CASCADE, related_name="digest_entry")
+    campaign = models.ForeignKey(NotificationCampaign, on_delete=models.PROTECT, related_name="digest_entries")
+
+
 class NotificationDelivery(models.Model):
     class Status(models.TextChoices):
         PENDING = "pending", _("En attente")

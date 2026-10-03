@@ -31,9 +31,10 @@ def private_url(name, *args):
     return settings.PUBLIC_BASE_URL + reverse(name, args=args)
 
 
-def queue_recipients(campaign, recipients):
+def queue_recipients(campaign, recipients, now=None):
+    now = now or timezone.now()
     NotificationDelivery.objects.bulk_create(
-        [NotificationDelivery(campaign=campaign, recipient=member, next_attempt_at=timezone.now()) for member in recipients], ignore_conflicts=True,
+        [NotificationDelivery(campaign=campaign, recipient=member, next_attempt_at=now) for member in recipients], ignore_conflicts=True,
     )
 
 
@@ -108,7 +109,7 @@ def prepare_reminders(now=None, dry_run=False):
                 campaign, _created = NotificationCampaign.objects.get_or_create(
                     scope_key=scope, defaults={"kind": Kind.REMINDER, "event": event},
                 )
-                queue_recipients(campaign, members)
+                queue_recipients(campaign, members, now=now)
     return due
 
 
@@ -119,6 +120,9 @@ def eligible(delivery, now):
     if campaign.kind == Kind.WELCOME:
         return bool(campaign.invitation_id and campaign.invitation.member_id == member.pk
                     and campaign.invitation.status == InvitationRequest.Status.ACCEPTED)
+    if campaign.kind == Kind.DIGEST:
+        from club.services.digests import digest_members
+        return preferences(member).monthly_digest and bool(digest_members(campaign, member))
     if campaign.kind in (Kind.ANNOUNCEMENT, Kind.REMINDER):
         event = campaign.event
         if not event or not event.is_published or event.cancelled_at or min(event.starts_at, event.rsvp_deadline or event.starts_at) <= now:
@@ -141,6 +145,18 @@ def build_message(delivery, connection):
         if campaign.kind == Kind.WELCOME:
             context.update(link=private_url("magic_login") + get_query_string(member.user), minutes=settings.SESAME_MAX_AGE // 60)
             subject, template = _("Bienvenue au Club des Affaires"), "welcome"
+        elif campaign.kind == Kind.DIGEST:
+            from club.services.digests import digest_members, unsubscribe_token
+            members = digest_members(campaign, member)
+            context.update(previews=[{"name": candidate.full_name, "company": candidate.company,
+                "sector": candidate.get_sector_display(),
+                "teaser": candidate.digest_teaser if len(candidate.digest_teaser) <= 80 else candidate.digest_teaser[:79] + "…",
+                "url": private_url("club:member_detail", candidate.pk)} for candidate in members[:4]],
+                remaining=max(len(members) - 4, 0), album_url=private_url("club:album"),
+                unsubscribe_url=private_url("club:email_unsubscribe", unsubscribe_token(member)))
+            subject = _("Un nouveau visage au Club !") if len(members) == 1 else _("De nouveaux visages au Club !")
+            context["subject"] = subject
+            template = "digest"
         else:
             event = campaign.event
             context.update(event=event, link=private_url("club:event_detail", event.pk),
@@ -171,7 +187,9 @@ def process_notifications(limit=50, dry_run=False, now=None):
     pending = NotificationDelivery.objects.filter(status__in=[Status.PENDING, Status.FAILED],
                                                    attempts__lt=3, next_attempt_at__lte=now)
     if dry_run:
-        return {"queued": pending.count(), "reminders_due": prepare_reminders(now, dry_run=True), "sent": 0}
+        from club.services.digests import prepare_digest
+        return {"queued": pending.count(), "reminders_due": prepare_reminders(now, dry_run=True),
+                "digest_due": prepare_digest(now, dry_run=True), "sent": 0}
     if not settings.NOTIFICATIONS_ENABLED:
         raise ValidationError("NOTIFICATIONS_ENABLED=0")
     if settings.DEMO_MODE and settings.EMAIL_BACKEND not in (
@@ -182,6 +200,8 @@ def process_notifications(limit=50, dry_run=False, now=None):
     NotificationDelivery.objects.filter(status=Status.SENDING, claimed_at__lt=now - timedelta(minutes=15)).update(
         status=Status.UNCERTAIN, last_error_code="abandoned_claim")
     prepare_reminders(now)
+    from club.services.digests import prepare_digest
+    prepare_digest(now)
     results = {"sent": 0, "skipped": 0, "failed": 0, "uncertain": 0}
     connection = get_connection(fail_silently=False)
     try:

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Club des Affaires\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 19:18+0200\n"
+"POT-Creation-Date: 2026-10-03 19:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Club des Affaires\n"
 "Language-Team: Club des Affaires\n"
@@ -44,7 +44,6 @@ msgstr "Publish and prepare announcement"
 msgid "Annonce préparée. L'envoi est traité par la commande périodique."
 msgstr "Announcement prepared. Sending is handled by the scheduled command."
 
-#| msgid "Voir l'événement"
 msgid "Annuler l'événement"
 msgstr "Cancel event"
 
@@ -83,7 +82,6 @@ msgstr "Mark as contacted"
 msgid "Marquer comme refusée"
 msgstr "Mark as declined"
 
-#| msgid "Envoyer l'accès au compte accepté"
 msgid "Préparer l'accès au compte accepté"
 msgstr "Prepare access to the accepted account"
 
@@ -366,7 +364,6 @@ msgstr "start"
 msgid "Publié"
 msgstr "Published"
 
-#| msgid "bingo des rencontres"
 msgid "Fin des réponses"
 msgstr "Response deadline"
 
@@ -496,18 +493,15 @@ msgstr "Announcement"
 msgid "Relance"
 msgstr "Reminder"
 
-#| msgid "membres"
 msgid "Nouveaux membres"
 msgstr "New members"
 
-#| msgid "atteint"
 msgid "En attente"
 msgstr "Pending"
 
 msgid "En cours d'envoi"
 msgstr "Sending"
 
-#| msgid "Acceptée"
 msgid "Accepté par SMTP"
 msgstr "Accepted by SMTP"
 
@@ -622,12 +616,16 @@ msgstr "Everybody knows everybody: the Club's big party."
 msgid "Vérifie le titre, le lieu, la date future et la fin des réponses avant publication."
 msgstr "Check the title, venue, future date and response deadline before publishing."
 
-#| msgid "Club des Affaires"
 msgid "Bienvenue au Club des Affaires"
 msgstr "Welcome to the Club des Affaires"
 
+msgid "Un nouveau visage au Club !"
+msgstr "A new face at the Club!"
+
+msgid "De nouveaux visages au Club !"
+msgstr "New faces at the Club!"
+
 #, python-format
-#| msgid "Tous les événements"
 msgid "Nouvel événement : %(title)s"
 msgstr "New event: %(title)s"
 
@@ -873,7 +871,6 @@ msgstr "Try other filters."
 msgid "Tous les événements"
 msgstr "All events"
 
-#| msgid "Événements"
 msgid "Événement annulé"
 msgstr "Event cancelled"
 
@@ -1140,8 +1137,21 @@ msgstr "Add this card to your album: you'll then be able to swap contact details
 msgid "Ajouter %(name)s à mon album"
 msgstr "Add %(name)s to my album"
 
+msgid "Découvre les nouveaux profils et fais connaissance avant le prochain événement."
+msgstr "Discover the new profiles and get acquainted before the next event."
+
+msgid "Découvrir le profil"
+msgstr "Discover the profile"
+
 #, python-format
-#| msgid "Salut %(name)s 👋"
+msgid "Découvre d'autres profils dans l'album (%(remaining)s)."
+msgstr "Discover more profiles in the album (%(remaining)s)."
+
+#| msgid "Accroche pour le récapitulatif"
+msgid "Me désabonner du récapitulatif"
+msgstr "Unsubscribe from the digest"
+
+#, python-format
 msgid "Salut %(name)s,"
 msgstr "Hi %(name)s,"
 
@@ -1157,6 +1167,25 @@ msgstr "Log in"
 #, python-format
 msgid "Ce lien est valable %(minutes)s minutes et utilisable une seule fois."
 msgstr "This link is valid for %(minutes)s minutes and can be used only once."
+
+#| msgid "Mes préférences email"
+msgid "Préférences email"
+msgstr "Email preferences"
+
+#| msgid "Récapitulatif mensuel des nouveaux membres"
+msgid "Récapitulatif mensuel"
+msgstr "Monthly digest"
+
+#| msgid "Accroche pour le récapitulatif"
+msgid "Tu ne recevras plus le récapitulatif mensuel."
+msgstr "You will no longer receive the monthly digest."
+
+#| msgid "Récapitulatif mensuel des nouveaux membres"
+msgid "Confirme pour arrêter uniquement le récapitulatif mensuel des nouveaux membres."
+msgstr "Confirm to unsubscribe only from the monthly new member digest."
+
+msgid "Ce lien est invalide ou expiré. Utilise tes préférences sur le site."
+msgstr "This link is invalid or expired. Use your preferences on the website."
 
 msgid "Demander une invitation"
 msgstr "Request an invitation"

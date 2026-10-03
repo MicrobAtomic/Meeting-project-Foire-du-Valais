@@ -1,0 +1,15 @@
+{% autoescape off %}{% load i18n %}{{ subject }}
+
+{% translate "Découvre les nouveaux profils et fais connaissance avant le prochain événement." %}
+{% for profile in previews %}
+{{ profile.name }} · {{ profile.company }} · {{ profile.sector }}
+{% if profile.teaser %}{{ profile.teaser }}{% endif %}
+{{ profile.url }}
+{% endfor %}
+{% if remaining %}{% blocktranslate %}Découvre d'autres profils dans l'album ({{ remaining }}).{% endblocktranslate %}
+{{ album_url }}{% endif %}
+
+{% translate "Mes préférences email" %} : {{ preferences_url }}
+{% translate "Me désabonner du récapitulatif" %} : {{ unsubscribe_url }}
+{{ site_name }}
+{% endautoescape %}

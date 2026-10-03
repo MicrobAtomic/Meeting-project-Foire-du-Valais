@@ -1,7 +1,8 @@
-{% load i18n %}{% translate "Bienvenue au Club des Affaires" %}
+{% autoescape off %}{% load i18n %}{% translate "Bienvenue au Club des Affaires" %}
 
 {% blocktranslate %}Salut {{ name }},{% endblocktranslate %}
 {% translate "Ton compte est prêt. Complète ton profil pour préparer tes rencontres." %}
 {{ link }}
 {% blocktranslate %}Ce lien est valable {{ minutes }} minutes et utilisable une seule fois.{% endblocktranslate %}
 {{ site_name }}
+{% endautoescape %}

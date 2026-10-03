@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Club des Affaires\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 19:18+0200\n"
+"POT-Creation-Date: 2026-10-03 19:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Club des Affaires\n"
 "Language-Team: Club des Affaires\n"
@@ -44,7 +44,6 @@ msgstr "Veröffentlichen und Ankündigung vorbereiten"
 msgid "Annonce préparée. L'envoi est traité par la commande périodique."
 msgstr "Ankündigung vorbereitet. Der Versand erfolgt durch den regelmässigen Auftrag."
 
-#| msgid "Voir l'événement"
 msgid "Annuler l'événement"
 msgstr "Veranstaltung absagen"
 
@@ -83,7 +82,6 @@ msgstr "Als kontaktiert markieren"
 msgid "Marquer comme refusée"
 msgstr "Als abgelehnt markieren"
 
-#| msgid "Envoyer l'accès au compte accepté"
 msgid "Préparer l'accès au compte accepté"
 msgstr "Zugang zum angenommenen Konto vorbereiten"
 
@@ -366,7 +364,6 @@ msgstr "Beginn"
 msgid "Publié"
 msgstr "Veröffentlicht"
 
-#| msgid "bingo des rencontres"
 msgid "Fin des réponses"
 msgstr "Antwortfrist"
 
@@ -496,18 +493,15 @@ msgstr "Ankündigung"
 msgid "Relance"
 msgstr "Erinnerung"
 
-#| msgid "membres"
 msgid "Nouveaux membres"
 msgstr "Neue Mitglieder"
 
-#| msgid "atteint"
 msgid "En attente"
 msgstr "Ausstehend"
 
 msgid "En cours d'envoi"
 msgstr "Wird gesendet"
 
-#| msgid "Acceptée"
 msgid "Accepté par SMTP"
 msgstr "Von SMTP angenommen"
 
@@ -622,12 +616,16 @@ msgstr "Alle kennen sich: das grosse Fest des Clubs."
 msgid "Vérifie le titre, le lieu, la date future et la fin des réponses avant publication."
 msgstr "Prüfe Titel, Ort, zukünftiges Datum und Antwortfrist vor der Veröffentlichung."
 
-#| msgid "Club des Affaires"
 msgid "Bienvenue au Club des Affaires"
 msgstr "Willkommen im Club des Affaires"
 
+msgid "Un nouveau visage au Club !"
+msgstr "Ein neues Gesicht im Club!"
+
+msgid "De nouveaux visages au Club !"
+msgstr "Neue Gesichter im Club!"
+
 #, python-format
-#| msgid "Tous les événements"
 msgid "Nouvel événement : %(title)s"
 msgstr "Neue Veranstaltung: %(title)s"
 
@@ -873,7 +871,6 @@ msgstr "Probiere andere Filter."
 msgid "Tous les événements"
 msgstr "Alle Anlässe"
 
-#| msgid "Événements"
 msgid "Événement annulé"
 msgstr "Veranstaltung abgesagt"
 
@@ -1140,8 +1137,21 @@ msgstr "Füge diese Karte deinem Album hinzu: dann könnt ihr eure Kontaktdaten 
 msgid "Ajouter %(name)s à mon album"
 msgstr "%(name)s zu meinem Album hinzufügen"
 
+msgid "Découvre les nouveaux profils et fais connaissance avant le prochain événement."
+msgstr "Entdecke die neuen Profile und lerne die Personen vor der nächsten Veranstaltung kennen."
+
+msgid "Découvrir le profil"
+msgstr "Profil entdecken"
+
 #, python-format
-#| msgid "Salut %(name)s 👋"
+msgid "Découvre d'autres profils dans l'album (%(remaining)s)."
+msgstr "Entdecke weitere Profile im Album (%(remaining)s)."
+
+#| msgid "Accroche pour le récapitulatif"
+msgid "Me désabonner du récapitulatif"
+msgstr "Zusammenfassung abbestellen"
+
+#, python-format
 msgid "Salut %(name)s,"
 msgstr "Hallo %(name)s,"
 
@@ -1157,6 +1167,25 @@ msgstr "Anmelden"
 #, python-format
 msgid "Ce lien est valable %(minutes)s minutes et utilisable une seule fois."
 msgstr "Dieser Link ist %(minutes)s Minuten gültig und kann nur einmal verwendet werden."
+
+#| msgid "Mes préférences email"
+msgid "Préférences email"
+msgstr "E-Mail-Einstellungen"
+
+#| msgid "Récapitulatif mensuel des nouveaux membres"
+msgid "Récapitulatif mensuel"
+msgstr "Monatliche Zusammenfassung"
+
+#| msgid "Accroche pour le récapitulatif"
+msgid "Tu ne recevras plus le récapitulatif mensuel."
+msgstr "Du erhältst die monatliche Zusammenfassung nicht mehr."
+
+#| msgid "Récapitulatif mensuel des nouveaux membres"
+msgid "Confirme pour arrêter uniquement le récapitulatif mensuel des nouveaux membres."
+msgstr "Bestätige, um nur die monatliche Zusammenfassung neuer Mitglieder abzubestellen."
+
+msgid "Ce lien est invalide ou expiré. Utilise tes préférences sur le site."
+msgstr "Dieser Link ist ungültig oder abgelaufen. Nutze deine Einstellungen auf der Website."
 
 msgid "Demander une invitation"
 msgstr "Einladung anfragen"

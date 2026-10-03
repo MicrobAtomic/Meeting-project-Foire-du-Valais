@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% load i18n %}
+{% block title %}{% translate "Préférences email" %} · {{ SITE_NAME }}{% endblock %}
+{% block content %}<section class="card mx-auto max-w-md space-y-4">
+<h1 class="text-xl font-semibold">{% translate "Récapitulatif mensuel" %}</h1>
+{% if done %}<p>{% translate "Tu ne recevras plus le récapitulatif mensuel." %}</p>
+{% elif valid %}<p>{% translate "Confirme pour arrêter uniquement le récapitulatif mensuel des nouveaux membres." %}</p>
+<form method="post">{% csrf_token %}<button type="submit" class="btn btn-primary">{% translate "Me désabonner du récapitulatif" %}</button></form>
+{% else %}<p>{% translate "Ce lien est invalide ou expiré. Utilise tes préférences sur le site." %}</p>{% endif %}
+<a href="{% url 'club:profile_edit' %}#preferences-email" class="text-red-700 underline">{% translate "Mes préférences email" %}</a>
+</section>{% endblock %}

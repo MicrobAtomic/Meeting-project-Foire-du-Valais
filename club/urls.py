@@ -8,6 +8,7 @@ urlpatterns = [
     path("connexion/recevoir-un-lien/", public.magic_link_request, name="magic_link_request"),
     path("rejoindre/", public.join, name="join"),
     path("rejoindre/merci/", public.join_thanks, name="join_thanks"),
+    path("emails/desabonnement/<str:token>/", public.email_unsubscribe, name="email_unsubscribe"),
     path("accueil/", member.home, name="home"),
     path("bienvenue/", member.onboarding, name="onboarding"),
     path("album/", member.album, name="album"),

@@ -10,10 +10,12 @@ from django.utils import timezone
 from django.utils.translation import gettext as _
 from django.utils.translation import get_language
 from django.views.decorators.http import require_http_methods
+from django.views.decorators.cache import never_cache
 from sesame.views import LoginView as SesameLoginView
 
 from club.forms import InvitationRequestForm, MagicLinkRequestForm
-from club.models import InvitationRequest, Member
+from club.models import EmailPreferences, InvitationRequest, Member
+from club.services.digests import unsubscribe_member_id
 from club.services.auth_links import send_login_link
 
 logger = logging.getLogger(__name__)
@@ -66,6 +68,18 @@ def join(request):
 @login_not_required
 def join_thanks(request):
     return render(request, "public/join_thanks.html")
+
+
+@login_not_required
+@require_http_methods(["GET", "POST"])
+@never_cache
+def email_unsubscribe(request, token):
+    member_id = unsubscribe_member_id(token)
+    done = False
+    if member_id and request.method == "POST":
+        EmailPreferences.objects.filter(member_id=member_id).update(monthly_digest=False)
+        done = True
+    return render(request, "public/email_unsubscribe.html", {"valid": bool(member_id), "done": done}, status=200 if member_id else 400)
 
 
 class MagicLoginView(SesameLoginView):

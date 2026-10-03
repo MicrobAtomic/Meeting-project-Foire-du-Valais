@@ -13,6 +13,7 @@ Les envois réels et les changements d'hébergement restent à configurer sépar
 
 | Phase | État | Vérifications / livraison |
 |---|---|---|
+| 7 | Terminée | 231 tests SQLite verts (2 cas PostgreSQL seuls) ; limite de 4 aperçus, consentements, 09 h suisse, désabonnement signé/CSRF et absence de données privées vérifiés |
 | 6 | Terminée ; SMTP/cron non activés | 222 tests SQLite (2 cas PostgreSQL seuls) ; 219 tests PostgreSQL verts, dont publications et réservations concurrentes ; backend mémoire uniquement |
 | 5 | Terminée | 206 tests verts ; acceptation idempotente et rollback vérifiés ; préférences et langue enregistrées uniquement pour soi |
 | 4 | Livrée ; activation production en attente du volume | 201 tests verts ; normalisation et accès privé vérifiés ; Pillow 12.3 ; upload production désactivé ; procédure dans EXPLOITATION.md |
@@ -541,32 +542,32 @@ Une personne présentée doit avoir `admitted_at` renseigné, compte actif, `onb
 Les destinataires sont les membres actifs avec `monthly_digest=True` ; ne pas envoyer à une personne un récapitulatif
 qui ne présenterait qu'elle-même. Sans profil présentable ou sans destinataire, ne pas créer de campagne vide.
 
-- [ ] **7.1** Ajouter `DigestEntry`, lien unique du membre présenté vers sa campagne mensuelle.
+- [x] **7.1** Ajouter `DigestEntry`, lien unique du membre présenté vers sa campagne mensuelle.
   Une FK campagne protégée contre une suppression accidentelle évite de représenter les mêmes profils par erreur.
   Ne pas utiliser uniquement `created_at`, `member_since` ou « inscrits dans les 30 derniers jours ».
-- [ ] **7.2** Préparer atomiquement une campagne `new-members:<YYYY-MM>` et réserver les profils retenus avec
+- [x] **7.2** Préparer atomiquement une campagne `new-members:<YYYY-MM>` et réserver les profils retenus avec
   `DigestEntry`. Cette association signifie « réservé pour cette présentation », pas « lu par tous les membres ».
   Réexécuter la commande pendant le même mois ne crée aucune seconde campagne, même si d'autres personnes arrivent.
   Les personnes admises pendant M attendent la présentation de M+1.
-- [ ] **7.3** Rendre pour chaque destinataire au plus **quatre aperçus** : prénom, nom, entreprise, secteur,
+- [x] **7.3** Rendre pour chaque destinataire au plus **quatre aperçus** : prénom, nom, entreprise, secteur,
   accroche volontaire raccourcie à 80 caractères et lien protégé vers la fiche.
   S'il y en a davantage, donner le nombre restant et un lien vers l'album. Ne pas réutiliser `_card.html` : il contient
   davantage de données et pourrait évoluer sans contrôle du périmètre email.
-- [ ] **7.4** Recontrôler à l'envoi la visibilité, l'activité et l'accord de présentation de chaque profil.
+- [x] **7.4** Recontrôler à l'envoi la visibilité, l'activité et l'accord de présentation de chaque profil.
   Retirer ceux qui ont changé d'avis entre préparation et envoi. S'il ne reste personne pour un destinataire,
   passer sa livraison `skipped`. Pas de coordonnées, affinités détaillées, anecdotes non choisies ni notes privées.
   Une personne cachée après envoi n'est plus accessible sur le site ; un email déjà reçu ne peut pas être rappelé.
-- [ ] **7.5** Ajouter un lien « Mes préférences email » vers une page authentifiée, modifiable par POST.
+- [x] **7.5** Ajouter un lien « Mes préférences email » vers une page authentifiée, modifiable par POST.
   Pour permettre aussi un désabonnement sans connexion, ajouter une route publique avec un jeton signé dédié
   à l'objet `monthly_digest`, une page GET de confirmation et un POST qui désactive cette préférence.
   Le GET ne modifie rien et ne connecte personne. Ne pas réutiliser un lien magique de connexion pour cet usage.
   Utiliser une signature dédiée incluant identifiant du membre et objet du désabonnement ; proposer une validité
   de 90 jours, puis renvoyer vers les préférences authentifiées. Les liens invalides ne révèlent ni nom ni adresse ;
   classer cette route et tester le CSRF, la signature, la portée et l'expiration.
-- [ ] **7.6** Prévoir sujet au singulier/pluriel et contenu dans la langue du destinataire.
+- [x] **7.6** Prévoir sujet au singulier/pluriel et contenu dans la langue du destinataire.
   Aucun pixel, script, pièce jointe de contact ou chargement d'image privée dans l'email.
   Tester texte et HTML, pas seulement le sujet.
-- [ ] **7.7** Couvrir : zéro/un/dix nouveaux profils, absence d'accord, profil incomplet complété tardivement,
+- [x] **7.7** Couvrir : zéro/un/dix nouveaux profils, absence d'accord, profil incomplet complété tardivement,
   profil masqué ou désactivé entre préparation et envoi, compte historique avec `admitted_at=NULL`, inscrit ce mois,
   membre déjà présenté, destinataire retirant son accord et deux exécutions le même mois.
   Vérifier par sentinelles qu'email/phone/LinkedIn/notes/QR de la personne présentée n'apparaissent jamais dans le message.

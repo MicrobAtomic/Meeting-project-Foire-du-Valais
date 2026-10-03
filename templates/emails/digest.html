@@ -1,0 +1,8 @@
+{% load i18n %}<html><body><h1>{{ subject }}</h1>
+<p>{% translate "Découvre les nouveaux profils et fais connaissance avant le prochain événement." %}</p>
+{% for profile in previews %}<section><h2>{{ profile.name }}</h2><p>{{ profile.company }} · {{ profile.sector }}</p>
+{% if profile.teaser %}<p>{{ profile.teaser }}</p>{% endif %}<p><a href="{{ profile.url }}">{% translate "Découvrir le profil" %}</a></p></section>{% endfor %}
+{% if remaining %}<p><a href="{{ album_url }}">{% blocktranslate %}Découvre d'autres profils dans l'album ({{ remaining }}).{% endblocktranslate %}</a></p>{% endif %}
+<p><a href="{{ preferences_url }}">{% translate "Mes préférences email" %}</a></p>
+<p><a href="{{ unsubscribe_url }}">{% translate "Me désabonner du récapitulatif" %}</a></p>
+<p>{{ site_name }}</p></body></html>

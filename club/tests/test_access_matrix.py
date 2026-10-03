@@ -11,7 +11,7 @@ from club.models import Event
 from club.tests.helpers import make_member, make_staff
 
 PUBLIC = {  # reachable without an account (nothing about members is exposed there)
-    "login", "magic_login", "set_language", "club:landing", "club:magic_link_request", "club:join", "club:join_thanks",
+    "login", "magic_login", "set_language", "club:landing", "club:magic_link_request", "club:join", "club:join_thanks", "club:email_unsubscribe",
 }
 MEMBER = {  # members only (a Member profile is required)
     "club:home", "club:onboarding", "club:album", "club:profile_edit", "club:my_qr", "club:invite",
@@ -49,7 +49,9 @@ class AccessMatrixTests(TestCase):
         self.addCleanup(self.photo_open.stop)
         self.bob.save(update_fields=["photo"])
         self.staff = make_staff()
+        from club.services.digests import unsubscribe_token
         self.args = {
+            "club:email_unsubscribe": [unsubscribe_token(self.alice)],
             "club:member_detail": [self.bob.pk], "club:member_note": [self.bob.pk], "club:member_photo": [self.bob.pk], "club:member_vcard": [self.bob.pk], "club:event_detail": [self.event.pk],
             "club:event_rsvp": [self.event.pk], "club:scan": [self.bob.qr_token],
             "club:staff_event": [self.event.pk], "club:staff_badges": [self.event.pk],
