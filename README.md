@@ -1,12 +1,22 @@
 # Club des Affaires — Foire du Valais
 
+> **In English.** *Never a stranger at the Club again.* A members-only web app that keeps the business club of the
+> Foire du Valais alive between its evenings: member cards (passions, what you can help with, what you look for),
+> three introductions before each event with the reason why, a QR scan at the event that adds the card to your album
+> and unlocks contact details, a people bingo computed for each guest and rotating tables at seated dinners, and
+> shared milestones that show the Club growing closer. Django 5.2, FR / DE / EN, secure by default, automated tests.
+> Pitch deck and 42-second demo video: [docs/pitch/](docs/pitch/) · submission texts: [docs/SUBMISSION.md](docs/SUBMISSION.md)
+> · architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+
 **Plus jamais d'inconnus au Club.** Une web app réservée aux membres du Club des Affaires, qui vit au rythme des
 événements :
 
 - **Avant** : l'album de cartes des membres, les affinités (swipe), « tes 3 rencontres » pour la prochaine soirée.
-- **Pendant** : on scanne le QR code de quelqu'un pour ajouter sa carte et ses coordonnées ; on change de table à
-  chaque service ; les badges sont imprimés par l'équipe.
-- **Après** : « ton album 18 / 49 » pour le membre, l'indice de fédération pour le comité.
+- **Pendant** : on scanne le QR code de quelqu'un pour ajouter sa carte et ses coordonnées ; chaque soirée a son jeu
+  pour briser la glace (**bingo des rencontres** à l'apéro, **tables tournantes** au dîner assis) ; les badges sont
+  imprimés par l'équipe.
+- **Après** : « ton album 18 / 49 » et ses objectifs pour le membre ; l'indice de fédération et les **paliers du Club**
+  (une récompense valaisanne à chaque palier) pour tout le monde.
 
 Projet réalisé pour le hackathon Foire du Valais (3–4 octobre 2026).
 Pitch et démo : [docs/PITCH.md](docs/PITCH.md) · Choix techniques : [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) ·
@@ -21,8 +31,8 @@ Exploitation : [docs/EXPLOITATION.md](docs/EXPLOITATION.md).
 
 | Pour… | Fonctionnalités |
 |---|---|
-| **Les membres** | album de cartes avec recherche et filtres · fiche de chaque membre, points communs · coordonnées et vCard débloquées après une vraie rencontre (scan du QR) · profil et affinités, swipe façon « cartes » · événements : réponse en un clic, **tes rencontres**, ton placement à table, qui vient · parrainage : lien personnel, QR, offre · connexion par mot de passe **ou par lien reçu par e-mail** · interface en français, allemand et anglais |
-| **L'équipe événements** | tableau de bord (indice de fédération, membres isolés, demandes d'invitation) · préparation d'un événement : génération des rencontres, **plan de tables tournantes**, badges A4 avec QR code · back-office Django complet (membres, événements, inscriptions, demandes) |
+| **Les membres** | album de cartes avec recherche et filtres · fiche de chaque membre, points communs · coordonnées et vCard débloquées après une vraie rencontre (scan du QR) · profil et affinités, swipe façon « cartes » · événements : réponse en un clic, **tes rencontres**, ton placement à table, **ta grille de bingo**, qui vient · **paliers du Club** et objectifs d'album · parrainage : lien personnel, QR, offre · connexion par mot de passe **ou par lien reçu par e-mail** · interface en français, allemand et anglais |
+| **L'équipe événements** | tableau de bord (indice de fédération, membres isolés, demandes d'invitation) · préparation d'un événement : génération des rencontres, **plan de tables tournantes** (repas assis), gagnants du **bingo** (apéros), badges A4 avec QR code · back-office Django complet avec un **mode d'emploi en six gestes** et un encart par langue (FR / DE / EN) pour chaque événement |
 | **Les futurs membres** | vitrine publique sans aucun nom de membre · formulaire « Demander une invitation » (avec ou sans lien de parrainage) |
 
 Les améliorations ajoutent les portraits de démo avec sources/licences, l'upload de photo protégé avec aperçu avant enregistrement,
@@ -82,11 +92,16 @@ Le CSS est déjà compilé (`static/css/app.css`) : le binaire Tailwind n'est ut
 2. **Camille** (téléphone) : l'accueil montre « 2 / 49 cartes » et le prochain dîner, avec **ses 3 rencontres**, dont
    Lukas (Petite Arvine, ski de rando, trail, et les réunions du lundi matin en commun).
 3. **L'album** : rangs (fondateur doré, nouvelle recrue verte), filtre « Germanophones ».
-4. **La rencontre** : connectée en Camille, ouvre le QR code de Lukas (ci-dessous) → « Ajouter Lukas à mon album » →
-   ses coordonnées et sa vCard se débloquent, l'album passe à 3 / 49 et le Club se rapproche de son prochain palier.
-5. **Le staff** (`equipe@example.com`) : tableau de bord (rencontres +1, membres isolés, demande d'invitation) →
+4. **La rencontre** : connectée en Camille, ouvre le QR code de Lukas (ci-dessous) : la page annonce la case de son
+   bingo que Lukas peut cocher → « Ajouter Lukas à mon album » → ses coordonnées et sa vCard se débloquent, une case du
+   bingo se coche, l'album passe à 3 / 49 et le Club se rapproche de son prochain palier.
+5. **Le bingo** : « Dîner d'automne » → « Voir ma grille » : 9 cases « Trouve quelqu'un qui… », la case de Lukas cochée.
+6. **Le staff** (`equipe@example.com`) : tableau de bord (paliers, membres isolés, demandes d'invitation) →
    « Dîner d'automne » → « Préparer » → **plan de tables généré en direct** (38 invités, 3 services, environ 1 répétition).
-6. **Bascule en allemand** (FR · DE · EN en haut de page) : interface, dates, affinités et phrases d'accroche.
+   L'Apéro de Noël (debout) n'a pas de plan de tables, mais la liste des gagnants du bingo. L'accueil de
+   l'administration (`/admin/`) explique les six gestes de l'équipe.
+7. **Bascule en allemand** (FR · DE · EN en haut de page) : interface, dates, affinités, événements et phrases
+   d'accroche.
 
 Le déroulé complet, avec le texte à dire, est dans [docs/PITCH.md](docs/PITCH.md).
 
@@ -121,7 +136,7 @@ Pour le QR code de Lukas du README : `python manage.py demo_qr https://….trycl
 
 URL : *à renseigner une fois le déploiement fait (tâche 2.4 du plan).*
 
-1. Sur https://dashboard.render.com : **New → Blueprint**, autoriser le dépôt GitHub (privé) et le sélectionner.
+1. Sur https://dashboard.render.com : **New → Blueprint**, autoriser le dépôt GitHub et le sélectionner.
 2. Render lit `render.yaml` (un service web et une base PostgreSQL gratuits, à Frankfurt). Saisir une valeur pour
    `DEMO_PASSWORD` (le mot de passe de démo), puis **Apply**. Premier build : environ 5 minutes.
 3. Chaque `git push` sur `main` redéploie automatiquement. Les données de démo ne sont créées que si la base est vide.

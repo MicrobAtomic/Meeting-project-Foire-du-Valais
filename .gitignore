@@ -17,4 +17,4 @@ media/
 .claude/worktrees/
 
 # Outils du deck (npm install dans docs/pitch)
-docs/pitch/node_modules/
+docs/pitch/node_modules
