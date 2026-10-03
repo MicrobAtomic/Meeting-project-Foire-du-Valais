@@ -1,72 +1,147 @@
 [
   {
     "image": "slides/slide-01.png",
-    "notes": "(0:00 – 0:12) Bonjour ! Le Club des Affaires de la Foire du Valais, c'est une cinquantaine de dirigeantes et de dirigeants qui se retrouvent quatre à cinq fois par an. Notre promesse : plus jamais d'inconnus au Club.",
-    "video": null
+    "id": "intro",
+    "seconds": 8,
+    "notes": "(0:00–0:08) Bonjour. Notre promesse au Club des Affaires : plus jamais d’inconnus, même pour une nouvelle membre.",
+    "animations": []
   },
   {
     "image": "slides/slide-02.png",
-    "notes": "(0:12 – 0:30) Aujourd'hui, ils viennent, mais arrivent en inconnus, restent entre habitués, et entre deux soirées, le réseau n'existe pas. Le client a quatre exigences : pas de business forcé, plusieurs langues, aider les gens à se rencontrer, et garder un esprit premium.",
-    "video": null
+    "id": "problem",
+    "seconds": 16,
+    "notes": "(0:08–0:24) Cinquante dirigeants se retrouvent quatre à cinq fois par an, mais restent entre habitués. Notre réponse suit quatre étapes : se trouver, repérer les synergies, se rencontrer et garder le lien.",
+    "animations": []
   },
   {
     "image": "slides/slide-03.png",
-    "notes": "(0:30 – 1:47, la vidéo tourne) Voici Camille, nouvelle membre. Dans l'album, elle découvre les cartes des membres : leur métier, leurs passions, ce qu'ils peuvent offrir et ce qu'ils cherchent. — Avant le dîner, l'application lui présente trois personnes, et pourquoi. Lukas : ils aiment tous deux la Petite Arvine ; il cherche du digital, son métier à elle, et elle veut s'ouvrir au marché alémanique, le sien. — Le soir même, elle scanne son badge : sa carte rejoint son album, ses coordonnées se débloquent, une case de son bingo des rencontres se coche. — Chaque rencontre fait avancer tout le Club : il est connecté à 15 %, et au prochain palier, une tournée de Petite Arvine. — Et pour l'équipe, un clic : trente-huit invités changent de table à chaque service.",
-    "video": {
-      "x": 120,
-      "y": 128,
-      "w": 1680,
-      "h": 945
-    }
+    "id": "web",
+    "seconds": 22,
+    "notes": "(0:24–0:46) Voici Camille. Rien à installer : elle se connecte et découvre l’album des membres. Avant le dîner, trois rencontres lui sont proposées, avec une raison. Lukas cherche du digital, son métier à elle ; il peut l’aider à découvrir le marché alémanique. Leurs passions donnent un premier sujet de conversation.",
+    "animations": [
+      {
+        "source": "gifs/web.gif",
+        "poster": "gifs/web.png",
+        "x": 1340,
+        "y": 94,
+        "w": 416,
+        "h": 900,
+        "radius": 38
+      }
+    ]
   },
   {
     "image": "slides/slide-04.png",
-    "notes": "(1:47 – 2:00) C'est prêt à lancer : une trentaine de francs par mois d'hébergement en Suisse, du développement seulement si vous voulez aller plus loin. Un club qui se connaît se retrouve. Merci !",
-    "video": null
+    "id": "event",
+    "seconds": 28,
+    "notes": "(0:46–1:14) Le soir même, Lukas lui montre son QR code. Camille confirme leur rencontre : sa carte rejoint son album et ses coordonnées se débloquent. Son bingo coche une case : le jeu pousse à parler à de nouvelles personnes. Chaque rencontre fait aussi avancer le Club vers un palier collectif, avec une récompense valaisanne.",
+    "animations": [
+      {
+        "source": "gifs/event.gif",
+        "poster": "gifs/event.png",
+        "x": 1340,
+        "y": 94,
+        "w": 416,
+        "h": 900,
+        "radius": 38
+      }
+    ]
   },
   {
     "image": "slides/slide-05.png",
-    "notes": "Annexes : à n'ouvrir que si une question y mène.",
-    "video": null
+    "id": "referral",
+    "seconds": 12,
+    "notes": "(1:14–1:26) Entre les soirées : annonces et relances ciblées, puis un récapitulatif mensuel des nouveaux membres. Le parrainage permet d’inviter une personne de confiance.",
+    "animations": [
+      {
+        "source": "gifs/referral.gif",
+        "poster": "gifs/referral.png",
+        "x": 1340,
+        "y": 94,
+        "w": 416,
+        "h": 900,
+        "radius": 38
+      }
+    ]
   },
   {
     "image": "slides/slide-06.png",
-    "notes": "Annexe A1 : Notre réponse : une web app qui suit le rythme du Club, sur les quatre piliers du défi. Se trouver : chaque membre a sa carte, ses passions, ce qu'il peut offrir et ce qu'il cherche. Repérer les synergies : avant chaque soirée, trois personnes à rencontrer, et pourquoi. Le soir même, on scanne un badge, et un jeu brise la glace. Et toute l'année, le Club se resserre.",
-    "video": null
+    "id": "admin",
+    "seconds": 18,
+    "notes": "(1:26–1:44) Pour l’équipe, ce tableau de bord montre les membres et les rencontres. Elle prépare les soirées, génère les badges et les tables tournantes. Ici, trente-huit invités sont mélangés sur trois services. Elle peut aussi repérer les membres isolés.",
+    "animations": [
+      {
+        "source": "gifs/admin.gif",
+        "poster": "gifs/admin.png",
+        "x": 132,
+        "y": 300,
+        "w": 1120,
+        "h": 700,
+        "radius": 14
+      }
+    ]
   },
   {
     "image": "slides/slide-07.png",
-    "notes": "Annexe A2 : Ce qui est nouveau : chaque vraie rencontre compte, et se compte. Le Club est connecté à 15 % aujourd'hui ; au prochain palier, une tournée de Petite Arvine pour tous. Mesurable pour le comité, motivant pour les membres.",
-    "video": null
+    "id": "closing",
+    "seconds": 14,
+    "notes": "(1:44–1:58) Pour lancer : hébergement suisse, import des membres, activation des emails. Environ trente francs par mois, hors développement. Un club qui se connaît se retrouve. Merci.",
+    "animations": []
   },
   {
     "image": "slides/slide-08.png",
-    "notes": "Annexe A3 : la faisabilité. L’application tourne aujourd’hui, en trois langues, avec une matrice d’accès testée et une administration guidée pour l’équipe.",
-    "video": null
+    "id": null,
+    "seconds": null,
+    "notes": "Fin du pitch. Les sept annexes suivantes servent seulement aux questions, et ne font pas partie des deux minutes.",
+    "animations": []
   },
   {
     "image": "slides/slide-09.png",
-    "notes": "Annexe pour les questions : l'architecture.",
-    "video": null
+    "id": null,
+    "seconds": null,
+    "notes": "Annexe A1 : Ce qui est nouveau : chaque vraie rencontre compte, et se compte. Le Club est connecté à 15 % aujourd'hui ; au prochain palier, une tournée de Petite Arvine pour tous. Mesurable pour le comité, motivant pour les membres.",
+    "animations": []
   },
   {
     "image": "slides/slide-10.png",
-    "notes": "Annexe : les algorithmes.",
-    "video": null
+    "id": null,
+    "seconds": null,
+    "notes": "Annexe A2 : la faisabilité. L’application tourne aujourd’hui, en trois langues, avec une matrice d’accès testée et une administration guidée pour l’équipe.",
+    "animations": []
   },
   {
     "image": "slides/slide-11.png",
-    "notes": "Annexe : sécurité et protection des données.",
-    "video": null
+    "id": null,
+    "seconds": null,
+    "notes": "Annexe pour les questions : l'architecture.",
+    "animations": []
   },
   {
     "image": "slides/slide-12.png",
-    "notes": "Annexe : recruter en douceur, seulement les bonnes personnes.",
-    "video": null
+    "id": null,
+    "seconds": null,
+    "notes": "Annexe : les algorithmes.",
+    "animations": []
   },
   {
     "image": "slides/slide-13.png",
+    "id": null,
+    "seconds": null,
+    "notes": "Annexe : sécurité et protection des données.",
+    "animations": []
+  },
+  {
+    "image": "slides/slide-14.png",
+    "id": null,
+    "seconds": null,
+    "notes": "Annexe : recruter en douceur, seulement les bonnes personnes.",
+    "animations": []
+  },
+  {
+    "image": "slides/slide-15.png",
+    "id": null,
+    "seconds": null,
     "notes": "Annexe : coûts et feuille de route.",
-    "video": null
+    "animations": []
   }
 ]

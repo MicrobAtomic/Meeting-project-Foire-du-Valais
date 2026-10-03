@@ -28,7 +28,7 @@ Critique du découpage initial : une visite exhaustive des écrans et trois sous
 
 - [x] G1 — Récit, timing, contraintes et plan de reprise enregistrés.
 - [x] G2 — Quatre GIF de l'application réelle, lents, sur base jetable ; manifestes et reconstruction documentés.
-- [ ] G3 — Deck, GIF intégrés au PPTX, PDF avec images fixes, lecture HTML manuelle et notes synchronisées.
+- [x] G3 — Deck, GIF intégrés au PPTX, PDF avec images fixes, lecture HTML manuelle et notes synchronisées.
 - [ ] G4 — Documents regroupés, anciens plans archivés, liens corrigés, index utile.
 - [ ] G5 — Vérification des exports, cadrages, animations et durée orale ; recette et livraison poussées.
 
@@ -43,3 +43,11 @@ Deux tests existants sont dépendants de l'heure/date : `GuestAccessTests.test_s
 ### G2 — Captures terminées
 
 Quatre GIF de l’application réelle : web 17 s, rencontre 22 s, parrainage 14 s, équipe 16 s. Boucles lentes, pauses de 2 à 7,5 s, moins de 0,4 Mio chacun. Coordonnées débloquées et case Lukas vérifiées ; offre de remise absente ; aucun email envoyé. Les cadrages tiennent compte de l’en-tête fixe. Reconstruction : `.venv/bin/python docs/pitch/make_gifs.py --assets-only`.
+
+### G3 — Deck et lecteur terminés
+
+Sept diapositives principales, séparation et sept annexes (15 pages). A1 intégrée à la diapo 2 ; les anciennes annexes A2–A8 deviennent A1–A7. Quatre GIF originaux intégrés au PPTX, notes françaises identiques au conducteur, avance manuelle explicite. Le PDF utilise des posters fixes choisis pour chaque preuve. Lecteur HTML sans connexion : clavier, notes, plein écran, reprise du GIF, accès séparé aux questions.
+
+Pauses finales ajustées pour éviter une reprise prématurée : web **22 s**, rencontre **28 s**, parrainage **12 s**, équipe **18 s**. Moins de 0,4 Mio chacun. Vérifications : aucun texte coupé ou superposé aux captures ; GIF animé et reprise effective dans Chrome local ; notes, 15 pages et octets GIF identiques dans le PPTX. PowerPoint installé n’a pas été piloté : son affichage réel doit être vérifié sur l’ordinateur de scène.
+
+Le texte français compte 241 mots. Lecture synthétique locale Thomas à 150 mots/min : 6,99 / 12,32 / 20,15 / 21,29 / 10,20 / 15,19 / 11,78 secondes, soit **97,92 s** de parole pour un conducteur de **118 s**. Environ 20 s restent pour respirer, changer de diapositive et regarder les écrans ; ce contrôle ne remplace pas la répétition personnelle.

@@ -64,7 +64,7 @@ try {
   await shot(camille,'web','Lukas in the filtered album',5);
   await go(camille,'/evenements/4/');
   await scrollTo(camille,'section h2.text-lg');
-  await shot(camille,'web','Suggested introductions and synergies',7.5);
+  await shot(camille,'web','Suggested introductions and synergies',12.5);
 
   const lukas = await session('lukas.imboden@example.com');
   await go(lukas,'/moi/qr/');
@@ -78,14 +78,14 @@ try {
   await shot(camille,'event','Contact details unlock',4);
   await go(camille,'/evenements/4/bingo/');
   await scrollTo(camille,'main ol','center');
-  await shot(camille,'event','One real encounter ticks one square',7);
+  await shot(camille,'event','One real encounter ticks one square',13);
   const bingoText = await camille.$eval('main',el => el.innerText);
   if (!bingoText.includes('Lukas')) throw new Error('Bingo did not register Lukas');
 
   await go(camille,'/moi/inviter/');
-  await shot(camille,'referral','A personal invitation link',5);
+  await shot(camille,'referral','A personal invitation link',4);
   await scrollTo(camille,'#invite-link');
-  await shot(camille,'referral','A QR to invite a future member',5);
+  await shot(camille,'referral','A QR to invite a future member',4);
   const link = await camille.$eval('#invite-link',el => el.value);
   const guest = await session();
   await go(guest,new URL(link).pathname + new URL(link).search);
@@ -106,7 +106,7 @@ try {
     firstRound.parentElement.scrollIntoView({block:'start'});
     window.scrollBy(0,-84);
   });
-  await shot(staff,'admin','Rotating tables for 38 guests',7);
+  await shot(staff,'admin','Rotating tables for 38 guests',9);
   fs.writeFileSync(path.join(out,'manifest.json'),JSON.stringify({scenes:manifest,errors},null,2));
   if (errors.length) throw new Error(errors.join('\n'));
 } finally {await browser.close();}

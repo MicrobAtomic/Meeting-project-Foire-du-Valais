@@ -2,8 +2,8 @@
   "web": {
     "gif": "gifs/web.gif",
     "poster": "gifs/web.png",
-    "planned_duration": 17.0,
-    "bytes": 322511,
+    "planned_duration": 22.0,
+    "bytes": 323511,
     "states": [
       {
         "file": "000.png",
@@ -23,15 +23,15 @@
       {
         "file": "003.png",
         "label": "Suggested introductions and synergies",
-        "duration": 7.5
+        "duration": 12.5
       }
     ]
   },
   "event": {
     "gif": "gifs/event.gif",
     "poster": "gifs/event.png",
-    "planned_duration": 22,
-    "bytes": 349579,
+    "planned_duration": 28,
+    "bytes": 350779,
     "states": [
       {
         "file": "000.png",
@@ -56,25 +56,25 @@
       {
         "file": "004.png",
         "label": "One real encounter ticks one square",
-        "duration": 7
+        "duration": 13
       }
     ]
   },
   "referral": {
     "gif": "gifs/referral.gif",
     "poster": "gifs/referral.png",
-    "planned_duration": 14,
-    "bytes": 148286,
+    "planned_duration": 12,
+    "bytes": 147886,
     "states": [
       {
         "file": "000.png",
         "label": "A personal invitation link",
-        "duration": 5
+        "duration": 4
       },
       {
         "file": "001.png",
         "label": "A QR to invite a future member",
-        "duration": 5
+        "duration": 4
       },
       {
         "file": "002.png",
@@ -86,8 +86,8 @@
   "admin": {
     "gif": "gifs/admin.gif",
     "poster": "gifs/admin.png",
-    "planned_duration": 16,
-    "bytes": 265886,
+    "planned_duration": 18,
+    "bytes": 266286,
     "states": [
       {
         "file": "000.png",
@@ -102,7 +102,7 @@
       {
         "file": "002.png",
         "label": "Rotating tables for 38 guests",
-        "duration": 7
+        "duration": 9
       }
     ]
   }

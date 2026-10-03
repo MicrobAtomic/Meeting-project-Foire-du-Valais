@@ -1,84 +1,66 @@
-# Pitch — Club des Affaires (2 minutes + 7 minutes de questions)
+# Présenter le Club des Affaires en deux minutes
 
-> **Pour qui** : toi, qui présentes seul.
-> **Format officiel** : deck **en anglais** (le jury doit comprendre la solution), pitch oral **en français**, démo en
-> **vidéo MP4 intégrée** au deck, puis 7 minutes de questions.
-> **Critères** : compréhension du défi · innovation et originalité · faisabilité · impact potentiel · qualité du pitch.
-> **Fichiers** : [pitch/Club-des-Affaires-pitch.pptx](pitch/Club-des-Affaires-pitch.pptx) (vidéo intégrée, texte dans les
-> notes de l'orateur) · [pitch/Club-des-Affaires-pitch.pdf](pitch/Club-des-Affaires-pitch.pdf) (secours) ·
-> [pitch/demo.mp4](pitch/demo.mp4) (environ 77 s, cible 70 à 80 s) · description courte : [SUBMISSION.md](SUBMISSION.md).
+Le pitch suit Camille : découvrir le Club, rencontrer Lukas, garder le lien. **Sept diapositives principales**, puis une séparation et sept annexes pour les questions. Les quatre piliers de l’ancienne A1 font partie de la diapositive 2.
 
-## 1. Le message en une phrase
+- [PowerPoint avec quatre GIF intégrés et notes françaises](pitch/Club-des-Affaires-pitch.pptx).
+- [Présentation HTML locale](pitch/deck.html) : fonctionne sans connexion ; conserver le dossier `pitch/` complet.
+- [PDF de secours](pitch/Club-des-Affaires-pitch.pdf) : images fixes choisies pour montrer chaque preuve.
+- [Ancienne vidéo autonome](pitch/demo.mp4), environ 77 s : alternative disponible, absente du nouveau PowerPoint.
 
-> « Le Club se retrouve quatre à cinq fois par an, mais ses membres ne se connaissent pas. On leur donne de quoi se
-> trouver, se rencontrer pour de vrai et se retrouver, sans demander d'effort à une équipe qui a peu de temps. »
+Les diapositives sont en anglais ; le texte parlé est en français. Le conducteur vise **1 min 58 s**, avec avance manuelle. Les 241 mots ont été mesurés par lecture synthétique française : environ 98 s de parole, laissant 20 s de pauses et de transitions. Une répétition personnelle reste nécessaire. Les GIF bouclent et ne changent jamais la diapositive. Il n’est pas nécessaire d’attendre la fin d’une boucle.
 
-Slogan : **« Plus jamais d'inconnus au Club. »** · *Never a stranger at the Club again.*
+## Conducteur et texte à dire
 
-## 2. Le texte, diapositive par diapositive (2 minutes)
+Le texte est également dans les notes de l’orateur du PowerPoint. `pitch/story.json` contient le conducteur vérifié avec les exports.
 
-Environ 238 mots. Le même texte est dans les notes de l'orateur du `.pptx`. La vidéo dure environ 77 s :
-on passe à l'impact vers **1:47**, pour finir avant **2:00**. Les treize dernières secondes sont réservées à la conclusion.
-
-| Temps | Diapo | À dire |
+| Temps | Diapo | Texte français |
 |---|---|---|
-| 0:00 – 0:12 | 1 · Titre | « Bonjour ! Le Club des Affaires de la Foire du Valais, c'est une cinquantaine de dirigeantes et de dirigeants qui se retrouvent quatre à cinq fois par an. Notre promesse : plus jamais d'inconnus au Club. » |
-| 0:12 – 0:30 | 2 · Le défi | « Aujourd'hui, ils viennent, mais arrivent en inconnus, restent entre habitués, et entre deux soirées, le réseau n'existe pas. Le client a quatre exigences : pas de business forcé, plusieurs langues, aider les gens à se rencontrer, et garder un esprit premium. » |
-| 0:30 – 1:47 | 3 · **Vidéo** (lecture automatique) | « Voici Camille, nouvelle membre. Dans l'album, elle découvre les cartes des membres : leur métier, leurs passions, ce qu'ils peuvent offrir et ce qu'ils cherchent. — Avant le dîner, l'application lui présente trois personnes, et pourquoi. Lukas : ils aiment tous deux la Petite Arvine ; il cherche du digital, son métier à elle, et elle veut s'ouvrir au marché alémanique, le sien. — Le soir même, elle scanne son badge : sa carte rejoint son album, ses coordonnées se débloquent, une case de son bingo des rencontres se coche. — Chaque rencontre fait avancer tout le Club : il est connecté à 15 %, et au prochain palier, une tournée de Petite Arvine. — Et pour l'équipe, un clic : trente-huit invités changent de table à chaque service. » |
-| 1:47 – 2:00 | 4 · Impact | « C'est prêt à lancer : une trentaine de francs par mois d'hébergement en Suisse, du développement seulement si vous voulez aller plus loin. Un club qui se connaît se retrouve. Merci ! » |
+| 0:00–0:08 | 1 · Promesse | « Bonjour. Notre promesse au Club des Affaires : plus jamais d’inconnus, même pour une nouvelle membre. » |
+| 0:08–0:24 | 2 · Défi → quatre piliers | « Cinquante dirigeants se retrouvent quatre à cinq fois par an, mais restent entre habitués. Notre réponse suit quatre étapes : se trouver, repérer les synergies, se rencontrer et garder le lien. » |
+| 0:24–0:46 | 3 · Avant · web | « Voici Camille. Rien à installer : elle se connecte et découvre l’album des membres. Avant le dîner, trois rencontres lui sont proposées, avec une raison. Lukas cherche du digital, son métier à elle ; il peut l’aider à découvrir le marché alémanique. Leurs passions donnent un premier sujet de conversation. » |
+| 0:46–1:14 | 4 · Pendant · rencontres | « Le soir même, Lukas lui montre son QR code. Camille confirme leur rencontre : sa carte rejoint son album et ses coordonnées se débloquent. Son bingo coche une case : le jeu pousse à parler à de nouvelles personnes. Chaque rencontre fait aussi avancer le Club vers un palier collectif, avec une récompense valaisanne. » |
+| 1:14–1:26 | 5 · Entre · fidélisation | « Entre les soirées : annonces et relances ciblées, puis un récapitulatif mensuel des nouveaux membres. Le parrainage permet d’inviter une personne de confiance. » |
+| 1:26–1:44 | 6 · Équipe · tableau de bord | « Pour l’équipe, ce tableau de bord montre les membres et les rencontres. Elle prépare les soirées, génère les badges et les tables tournantes. Ici, trente-huit invités sont mélangés sur trois services. Elle peut aussi repérer les membres isolés. » |
+| 1:44–1:58 | 7 · Coût et lancement | « Pour lancer : hébergement suisse, import des membres, activation des emails. Environ trente francs par mois, hors développement. Un club qui se connaît se retrouve. Merci. » |
 
-La diapositive **5** sépare les annexes **A1 à A8** (diapositives 6 à 13) : solution, nouveautés, faisabilité,
-architecture, algorithmes, sécurité, recrutement et coûts. Ne les montre que si une question y mène.
+## Pourquoi ce découpage
 
-Repères pendant la vidéo, pour placer les phrases et laisser le jury lire :
+La connexion ne mérite que deux secondes d’image : ce qui distingue la solution, ce sont les synergies, le scan après une vraie rencontre et le jeu qui mélange les invités. Les annonces, relances et nouveaux membres forment une seule idée : garder le lien. Le tableau de bord explique comment une petite équipe fait vivre ce parcours. La conclusion conserve le coût et trois étapes de lancement ; les autres fonctionnalités restent dans les annexes.
 
-| Temps dans la vidéo | Temps dans le pitch | À l'écran |
+| GIF | Boucle | Ce qui apparaît |
 |---|---|---|
-| 0–10 s | 0:30–0:40 | Album filtré, carte de Lukas |
-| 10–22 s | 0:40–0:52 | Rencontres proposées et les deux synergies avec Lukas |
-| 22–30 s | 0:52–1:00 | Son badge, puis ajout de sa carte |
-| 30–40 s | 1:00–1:10 | Coordonnées débloquées |
-| 40–50 s | 1:10–1:20 | Bingo, case cochée grâce à Lukas |
-| 50–59 s | 1:20–1:29 | Album à 3 / 49 cartes, Club à 15 %, prochain palier à 20 % |
-| 59–77 s | 1:29–1:47 | Équipe : génération des tables pour 38 invités |
+| Web | 22 s | Vitrine 2,5 s → connexion 2 s → album 5 s → synergies 12,5 s |
+| Rencontre | 28 s | QR 4 s → confirmation 4 s → carte 3 s → coordonnées 4 s → bingo 13 s |
+| Parrainage | 12 s | Invitation personnelle 4 s → QR 4 s → demande parrainée 4 s |
+| Équipe | 18 s | Tableau de bord 5 s → préparation 4 s → tables 9 s |
 
-Contrôle de débit avec une lecture synthétique française locale (Thomas, sans ajouter d'audio à la vidéo) :
-11,2 s pour le titre à 180 mots/min, 17,9 s pour le défi à 150 mots/min, 50,1 s de narration pendant la vidéo
-à 140 mots/min, 11,0 s pour la conclusion à 150 mots/min. Les pauses de la vidéo servent à regarder les écrans.
-La répétition personnelle au chronomètre reste dans la liste avant scène ci-dessous.
+Les emails sont préparés mais **SMTP et cron restent à activer**. Le récapitulatif mensuel requiert le consentement. Aucune remise de parrainage n’est activée. Les factures de cotisation restent manuelles. L’hébergement suisse est une étape de lancement.
 
-## 3. Ce que le jury note, et où il le trouve
+## Utilisation avant scène
 
-| Critère | Où | La preuve |
-|---|---|---|
-| Compréhension du défi | diapo 2 et vidéo par piliers | le problème du brief, les quatre demandes du client et leur traduction dans le parcours |
-| Innovation et originalité | vidéo et annexe A2 | l'album rempli en se rencontrant, les synergies, le bingo personnalisé et les paliers collectifs |
-| Faisabilité | vidéo, diapo 4 et annexes A3 à A6 | application réelle filmée, tests, architecture, algorithmes et contrôle d'accès |
-| Impact potentiel | diapo 4 et annexe A7 | lancement concret, intégration des nouveaux et recrutement par invitation |
-| Qualité du pitch | les quatre diapositives principales | une histoire (Camille), une vidéo de 70 à 80 s, un conducteur de deux minutes |
+- PowerPoint **installé** sur Mac ou Windows : lancer le diaporama pour voir les GIF ; ils restent fixes dans le mode d’édition. [Microsoft indique que PowerPoint web ne les anime pas en diaporama](https://support.microsoft.com/en-gb/powerpoint/add-an-animated-gif-to-a-slide?nochrome=true).
+- HTML : ouvrir `pitch/deck.html` dans Chrome. **← / → ou Espace** pour avancer ; **F** plein écran ; **N** notes ; **R** rejouer le GIF ; **A** annexes / retour à la conclusion. L’avance s’arrête après la diapo 7, avant les annexes. Les commandes s’effacent quand la souris reste immobile.
+- PDF : toutes les images sont fixes. Copier aussi le dossier `pitch/` complet pour utiliser le lecteur HTML hors ligne.
+- Répéter au chronomètre sur l’ordinateur de présentation. Viser 1:55–1:58 ; le conducteur n’impose aucun compte à rebours.
 
-## 4. Avant de monter sur scène
+La [page publique du hackathon](https://ai-weeks.ch/events/hack-vs) ne précise pas de contrainte sur les médias. L’exigence « MP4 uniquement » citée dans l’ancien plan n’a pas de source publique retrouvée ; la vidéo existante reste disponible comme alternative. La limite de deux minutes et le choix des GIF viennent de la demande actuelle.
 
-- [ ] Ouvrir le `.pptx` sur l'ordinateur de présentation et **vérifier que la vidéo démarre** (diapo 3). Dans
-      PowerPoint : onglet *Lecture* → *Démarrer : automatiquement*. Dans Keynote : clic sur la vidéo → *Lecture
-      automatique*.
-- [ ] Mode présentateur : les notes (ton texte) à l'écran de l'ordinateur, les diapositives au projecteur.
-- [ ] Répéter **cinq fois avec un chronomètre**, viser 1 min 55 à 2 min. Apprendre par cœur la première et la dernière phrase.
-- [ ] Le PDF et la vidéo seule sur une clé USB, au cas où.
-- [ ] Pour les questions : la démo en ligne ouverte dans un onglet (l'offre gratuite de Render se met en veille après
-      15 minutes : l'ouvrir 2 minutes avant), connecté en Camille, et un onglet en staff.
-- [ ] Données fraîches en ligne : `seed_demo --reset` (voir le README), ou en local `python manage.py demo_reset`.
+## Reconstruction et preuves
 
-## 5. Chiffres à citer
+Depuis la racine, avec Chrome, ffmpeg, Node, uv et `npm install` dans `docs/pitch/` :
 
-| Chiffre | Source |
-|---|---|
-| ~50 membres, 500 CHF par an, 80 % de présence, 4 à 5 soirées par an, objectif 100 à 200+ | le client |
-| **15 %** : indice de fédération des données de démo (180 paires sur 1 225) ; prochain palier à 20 % | `seed_demo` |
-| **49 ms** pour les rencontres de 200 inscrits · **0,8 s** pour le plan de tables de 200 invités | mesuré ([ARCHITECTURE §7](ARCHITECTURE.md)) |
-| **251 nouvelles paires, 1 répétition** : dîner de démo, 38 inscrits, tables de 6, 3 services | parcours enregistré dans la vidéo |
-| **401 tests automatisés** : recette SQLite OK avec horloge figée (6 cas PostgreSQL ignorés, deux fixtures sensibles à la date documentées dans [PLAN_PITCH](PLAN_PITCH.md)) ; recette précédente de 400 tests OK sur PostgreSQL | `python manage.py test club`, [ARCHITECTURE §10](ARCHITECTURE.md) |
-| **≈ 30 CHF par mois** de fonctionnement, **≈ 20 CHF** de mise en place hors développement | estimation ([ARCHITECTURE §9](ARCHITECTURE.md)) |
+```bash
+.venv/bin/python docs/pitch/make_gifs.py
+# Réexporter rapidement en conservant les captures :
+.venv/bin/python docs/pitch/make_gifs.py --reuse-captures
+cd docs/pitch
+node verify_browser.mjs
+UV_CACHE_DIR=/tmp/club-pitch-uv uv run --no-project --with python-pptx python verify_pitch.py
+```
+
+Le script crée uniquement `pitch/.build/gifs.sqlite3`, refuse un port 8010 déjà occupé et arrête son propre serveur en cas d’erreur. Le code métier, la base locale, le serveur 8000 et les réglages d’envoi ne sont pas modifiés. Les GIF originaux sont intégrés au PowerPoint ; le PDF utilise des posters explicites. Le journal de vérification et les limites connues sont dans [PLAN_PITCH](PLAN_PITCH.md).
+
+Chiffres du client : environ 50 membres, cotisation de 500 CHF/an, 4–5 soirées/an. Démo : 15 % de paires connectées, prochain palier à 20 %, dîner de 38 invités sur trois services. Coût de fonctionnement **estimé** à ≈ 30 CHF/mois (300–450 CHF/an), mise en place ≈ 20 CHF hors développement ; détails et sources dans [ARCHITECTURE](ARCHITECTURE.md).
 
 ## 6. Les 7 minutes de questions
 
