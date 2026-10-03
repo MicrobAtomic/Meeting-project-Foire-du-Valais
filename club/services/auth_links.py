@@ -10,6 +10,8 @@ from sesame.utils import get_query_string
 
 def email_language(member) -> str:
     """The language the member reads: French by default, German/English only when that is all they speak."""
+    if member.preferred_language in ("fr", "de", "en"):
+        return member.preferred_language
     languages = member.languages
     if "fr" in languages or not languages:
         return "fr"

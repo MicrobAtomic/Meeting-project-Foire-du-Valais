@@ -21,6 +21,8 @@ from club.models import (
 from club.services.auth_links import send_login_link
 from club.forms import MemberAdminForm
 from club.services.photos import save_profile_photo
+from club.services.membership import accept_invitation
+from django.core.exceptions import ValidationError
 from club.services.events import generate_matches, generate_seating
 from club.ui import RANK_STYLE
 
@@ -193,7 +195,35 @@ class SeatingPlanAdmin(admin.ModelAdmin):
 @admin.register(InvitationRequest)
 class InvitationRequestAdmin(admin.ModelAdmin):
     list_display = ["first_name", "last_name", "company", "email", "referred_by", "status", "created_at"]
-    list_editable = ["status"]
+    readonly_fields = ["status", "member", "welcome_sent_at", "created_at"]
+    actions = ["accept_requests", "mark_contacted", "mark_declined", "send_access"]
     list_filter = ["status"]
     search_fields = ["first_name", "last_name", "company", "email"]
     autocomplete_fields = ["referred_by"]
+
+    @admin.action(description=_("Accepter et créer le compte"))
+    def accept_requests(self, request, queryset):
+        for invitation in queryset:
+            try:
+                accept_invitation(invitation.pk, request.user)
+                self.message_user(request, _("Compte créé ou déjà lié à la demande."))
+            except ValidationError as error:
+                self.message_user(request, " ".join(error.messages), level=messages.ERROR)
+
+    @admin.action(description=_("Marquer comme contactée"))
+    def mark_contacted(self, request, queryset):
+        queryset.exclude(status=InvitationRequest.Status.ACCEPTED).filter(member__isnull=True).update(status=InvitationRequest.Status.CONTACTED)
+
+    @admin.action(description=_("Marquer comme refusée"))
+    def mark_declined(self, request, queryset):
+        queryset.exclude(status=InvitationRequest.Status.ACCEPTED).filter(member__isnull=True).update(status=InvitationRequest.Status.DECLINED)
+
+    @admin.action(description=_("Envoyer l'accès au compte accepté"))
+    def send_access(self, request, queryset):
+        for invitation in queryset.filter(status=InvitationRequest.Status.ACCEPTED, member__isnull=False).select_related("member__user"):
+            if invitation.member.user.is_active:
+                try:
+                    send_login_link(request, invitation.member)
+                    self.message_user(request, _("Lien de connexion envoyé."))
+                except Exception:
+                    self.message_user(request, _("Envoi impossible. Le compte reste disponible."), level=messages.ERROR)

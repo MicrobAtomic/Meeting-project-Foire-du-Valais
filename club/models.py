@@ -70,6 +70,9 @@ class Member(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     demo_photo_key = models.CharField(max_length=32, blank=True, editable=False)
     photo = models.ImageField(upload_to="member_photos/", blank=True)
+    preferred_language = models.CharField(_("Langue des emails"), max_length=2, choices=[("fr", _("Français")), ("de", _("Allemand")), ("en", _("Anglais"))], blank=True)
+    admitted_at = models.DateTimeField(null=True, blank=True, editable=False)
+    digest_teaser = models.CharField(_("Accroche pour le récapitulatif"), max_length=120, blank=True)
 
     class Meta:
         ordering = ["last_name", "first_name"]
@@ -105,6 +108,14 @@ class Member(models.Model):
         if self.seniority_years == 0:
             return self.RANK_NEWCOMER
         return self.RANK_MEMBER
+
+
+class EmailPreferences(models.Model):
+    member = models.OneToOneField(Member, on_delete=models.CASCADE, related_name="email_preferences")
+    event_announcements = models.BooleanField(_("Annonces des événements"), default=True)
+    event_reminders = models.BooleanField(_("Relances sans réponse"), default=True)
+    monthly_digest = models.BooleanField(_("Récapitulatif mensuel des nouveaux membres"), default=False)
+    allow_member_spotlight = models.BooleanField(_("Autoriser ma présentation dans le récapitulatif"), default=False)
 
 
 class PersonalNote(models.Model):
@@ -360,7 +371,7 @@ class InvitationRequest(models.Model):
         max_length=10,
         choices=Status.choices,
         default=Status.NEW,
-        help_text=_("Suivi de la demande. La création du compte et l'envoi de l'accès sont encore gérés séparément par l'équipe."),
+        help_text=_("L'action d'acceptation crée le compte. L'accès est envoyé par lien de connexion, sans choix de mot de passe."),
     )
     member = models.OneToOneField(
         Member, on_delete=models.SET_NULL, null=True, blank=True, related_name="invitation_request", verbose_name=_("compte créé")

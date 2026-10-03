@@ -74,6 +74,13 @@
       {% endfor %}
     </section>
 
+    <section id="preferences-email" class="card space-y-4">
+      <h2 class="font-semibold">{% translate "Mes préférences email" %}</h2>
+      {% include "club/_field.html" with field=form.preferred_language %}
+      {% include "club/_field.html" with field=form.digest_teaser %}
+      <p class="text-sm text-stone-600">{% translate "La présentation mensuelle utilise uniquement ton nom, ton entreprise, ton secteur et cette accroche, si tu l'autorises." %}</p>
+      {% for field in preferences_form %}{% include "club/_field.html" with field=field %}{% endfor %}
+    </section>
     <div class="flex flex-wrap gap-2">
       <button type="submit" class="btn btn-primary">{% translate "Enregistrer" %}</button>
       <a href="{% url 'club:member_detail' request.member.pk %}" class="btn btn-secondary">{% translate "Annuler" %}</a>

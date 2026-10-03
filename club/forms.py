@@ -4,7 +4,7 @@ from django.db.models.fields.files import FieldFile
 from django.contrib.auth.forms import AuthenticationForm
 from django.utils.translation import gettext_lazy as _
 
-from club.models import InvitationRequest, Member
+from club.models import EmailPreferences, InvitationRequest, Member
 from club.services.photos import normalize_member_photo, save_profile_photo
 
 
@@ -67,6 +67,7 @@ class MemberProfileForm(PhotoForm):
             "first_name", "last_name", "company", "job_title", "sector", "region",
             "speaks_fr", "speaks_de", "speaks_en", "fun_fact", "talk_to_me_about",
             "phone", "linkedin_url", "visible_in_directory",
+            "preferred_language", "digest_teaser",
         ]
         labels = {
             "first_name": _("Prénom"),
@@ -103,6 +104,14 @@ class MemberProfileForm(PhotoForm):
         self.fields["phone"].widget.input_type = "tel"
         self.fields["phone"].widget.attrs.update({"autocomplete": "tel", "placeholder": "+41 79 000 00 00"})
         self.fields["linkedin_url"].widget.attrs["placeholder"] = "https://www.linkedin.com/in/…"
+
+
+class EmailPreferencesForm(forms.ModelForm):
+    class Meta:
+        model = EmailPreferences
+        fields = ["event_announcements", "event_reminders", "monthly_digest", "allow_member_spotlight"]
+        widgets = {field: forms.CheckboxInput(attrs={"class": "h-5 w-5 rounded border-stone-300 text-red-700"})
+                   for field in fields}
 
 
 class InvitationRequestForm(forms.ModelForm):

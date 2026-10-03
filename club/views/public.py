@@ -8,6 +8,7 @@ from django.core.cache import cache
 from django.shortcuts import redirect, render
 from django.utils import timezone
 from django.utils.translation import gettext as _
+from django.utils.translation import get_language
 from django.views.decorators.http import require_http_methods
 from sesame.views import LoginView as SesameLoginView
 
@@ -52,6 +53,7 @@ def join(request):
             if not form.is_bot and not recent.exists():
                 invitation = form.save(commit=False)
                 invitation.referred_by = referrer
+                invitation.language = (get_language() or "fr")[:2]
                 invitation.save()
             return redirect("club:join_thanks")
     else:

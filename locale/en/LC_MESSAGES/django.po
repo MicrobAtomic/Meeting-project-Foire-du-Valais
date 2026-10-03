@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Club des Affaires\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 19:02+0200\n"
+"POT-Creation-Date: 2026-10-03 19:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Club des Affaires\n"
 "Language-Team: Club des Affaires\n"
@@ -58,13 +58,34 @@ msgstr "%(event)s: %(new)s new pairs, %(repeated)s repeat(s)."
 msgid "Choisis deux membres différents."
 msgstr "Pick two different members."
 
+msgid "Accepter et créer le compte"
+msgstr "Accept and create account"
+
+msgid "Compte créé ou déjà lié à la demande."
+msgstr "Account created or already linked to the request."
+
+msgid "Marquer comme contactée"
+msgstr "Mark as contacted"
+
+msgid "Marquer comme refusée"
+msgstr "Mark as declined"
+
+msgid "Envoyer l'accès au compte accepté"
+msgstr "Send access to the accepted account"
+
+#| msgid "Lien de connexion"
+msgid "Lien de connexion envoyé."
+msgstr "Login link sent."
+
+msgid "Envoi impossible. Le compte reste disponible."
+msgstr "Sending failed. The account remains available."
+
 msgid "E-mail ou mot de passe incorrect."
 msgstr "Wrong e-mail or password."
 
 msgid "E-mail"
 msgstr "E-mail"
 
-#| msgid "Mon profil"
 msgid "Photo de profil"
 msgstr "Profile photo"
 
@@ -242,8 +263,29 @@ msgstr "profile completed"
 msgid "Coché automatiquement quand le membre a choisi ses affinités."
 msgstr "Ticked automatically once the member has picked their tastes."
 
+#| msgid "Langues parlées"
+msgid "Langue des emails"
+msgstr "Email language"
+
+msgid "Accroche pour le récapitulatif"
+msgstr "Digest introduction"
+
 msgid "membre"
 msgstr "member"
+
+#| msgid "Tous les événements"
+msgid "Annonces des événements"
+msgstr "Event announcements"
+
+#| msgid "Ta réponse"
+msgid "Relances sans réponse"
+msgstr "Reminders when unanswered"
+
+msgid "Récapitulatif mensuel des nouveaux membres"
+msgstr "Monthly new member digest"
+
+msgid "Autoriser ma présentation dans le récapitulatif"
+msgstr "Allow my introduction in the digest"
 
 msgid "Loisirs"
 msgstr "Leisure"
@@ -404,8 +446,8 @@ msgstr "sponsor"
 msgid "statut"
 msgstr "status"
 
-msgid "Suivi de la demande. La création du compte et l'envoi de l'accès sont encore gérés séparément par l'équipe."
-msgstr "Request status. The team currently handles account creation and access emails separately."
+msgid "L'action d'acceptation crée le compte. L'accès est envoyé par lien de connexion, sans choix de mot de passe."
+msgstr "The acceptance action creates the account. Access uses a login link, with no password selection."
 
 msgid "compte créé"
 msgstr "account created"
@@ -475,6 +517,15 @@ msgstr ""
 "\n"
 "See you soon!\n"
 "The Club team"
+
+msgid "Demande déjà acceptée sans compte lié : rapprochement manuel nécessaire."
+msgstr "Request already accepted without a linked account: manual reconciliation required."
+
+msgid "Cette demande possède déjà un compte lié."
+msgstr "This request already has a linked account."
+
+msgid "Un compte utilise déjà cette adresse : rapprochement manuel nécessaire."
+msgstr "An account already uses this address: manual reconciliation required."
 
 msgid "Les premiers liens"
 msgstr "First connections"
@@ -990,6 +1041,12 @@ msgstr "It helps us introduce you to the right people."
 
 msgid "Refaire le swipe"
 msgstr "Redo the swipe"
+
+msgid "Mes préférences email"
+msgstr "My email preferences"
+
+msgid "La présentation mensuelle utilise uniquement ton nom, ton entreprise, ton secteur et cette accroche, si tu l'autorises."
+msgstr "With your permission, the monthly introduction uses only your name, company, sector and this introduction."
 
 msgid "Annuler"
 msgstr "Cancel"

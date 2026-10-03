@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Club des Affaires\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 19:02+0200\n"
+"POT-Creation-Date: 2026-10-03 19:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Club des Affaires\n"
 "Language-Team: Club des Affaires\n"
@@ -58,13 +58,34 @@ msgstr "%(event)s: %(new)s neue Paare, %(repeated)s Wiederholung(en)."
 msgid "Choisis deux membres différents."
 msgstr "Wähle zwei verschiedene Mitglieder."
 
+msgid "Accepter et créer le compte"
+msgstr "Annehmen und Konto erstellen"
+
+msgid "Compte créé ou déjà lié à la demande."
+msgstr "Konto erstellt oder bereits mit der Anfrage verknüpft."
+
+msgid "Marquer comme contactée"
+msgstr "Als kontaktiert markieren"
+
+msgid "Marquer comme refusée"
+msgstr "Als abgelehnt markieren"
+
+msgid "Envoyer l'accès au compte accepté"
+msgstr "Zugang zum angenommenen Konto senden"
+
+#| msgid "Lien de connexion"
+msgid "Lien de connexion envoyé."
+msgstr "Anmeldelink gesendet."
+
+msgid "Envoi impossible. Le compte reste disponible."
+msgstr "Versand fehlgeschlagen. Das Konto bleibt verfügbar."
+
 msgid "E-mail ou mot de passe incorrect."
 msgstr "E-Mail oder Passwort falsch."
 
 msgid "E-mail"
 msgstr "E-Mail"
 
-#| msgid "Mon profil"
 msgid "Photo de profil"
 msgstr "Profilfoto"
 
@@ -242,8 +263,29 @@ msgstr "Profil ausgefüllt"
 msgid "Coché automatiquement quand le membre a choisi ses affinités."
 msgstr "Wird automatisch angekreuzt, sobald das Mitglied seine Vorlieben gewählt hat."
 
+#| msgid "Langues parlées"
+msgid "Langue des emails"
+msgstr "Sprache der E-Mails"
+
+msgid "Accroche pour le récapitulatif"
+msgstr "Kurztext für die Zusammenfassung"
+
 msgid "membre"
 msgstr "Mitglied"
+
+#| msgid "Tous les événements"
+msgid "Annonces des événements"
+msgstr "Veranstaltungsankündigungen"
+
+#| msgid "Ta réponse"
+msgid "Relances sans réponse"
+msgstr "Erinnerungen ohne Antwort"
+
+msgid "Récapitulatif mensuel des nouveaux membres"
+msgstr "Monatliche Zusammenfassung neuer Mitglieder"
+
+msgid "Autoriser ma présentation dans le récapitulatif"
+msgstr "Meine Vorstellung in der Zusammenfassung erlauben"
 
 msgid "Loisirs"
 msgstr "Freizeit"
@@ -404,8 +446,8 @@ msgstr "Pate oder Patin"
 msgid "statut"
 msgstr "Status"
 
-msgid "Suivi de la demande. La création du compte et l'envoi de l'accès sont encore gérés séparément par l'équipe."
-msgstr "Anfragestatus. Das Team erstellt das Konto und versendet den Zugang derzeit separat."
+msgid "L'action d'acceptation crée le compte. L'accès est envoyé par lien de connexion, sans choix de mot de passe."
+msgstr "Die Annahme erstellt das Konto. Der Zugang erfolgt per Anmeldelink, ohne Passwortauswahl."
 
 msgid "compte créé"
 msgstr "Konto erstellt"
@@ -475,6 +517,15 @@ msgstr ""
 "\n"
 "Bis bald!\n"
 "Das Club-Team"
+
+msgid "Demande déjà acceptée sans compte lié : rapprochement manuel nécessaire."
+msgstr "Anfrage bereits ohne verknüpftes Konto angenommen: manuelle Zuordnung erforderlich."
+
+msgid "Cette demande possède déjà un compte lié."
+msgstr "Diese Anfrage hat bereits ein verknüpftes Konto."
+
+msgid "Un compte utilise déjà cette adresse : rapprochement manuel nécessaire."
+msgstr "Ein Konto verwendet bereits diese Adresse: manuelle Zuordnung erforderlich."
 
 msgid "Les premiers liens"
 msgstr "Die ersten Verbindungen"
@@ -990,6 +1041,12 @@ msgstr "So können wir dir die richtigen Leute vorstellen."
 
 msgid "Refaire le swipe"
 msgstr "Swipe wiederholen"
+
+msgid "Mes préférences email"
+msgstr "Meine E-Mail-Einstellungen"
+
+msgid "La présentation mensuelle utilise uniquement ton nom, ton entreprise, ton secteur et cette accroche, si tu l'autorises."
+msgstr "Die monatliche Vorstellung verwendet mit deiner Zustimmung nur deinen Namen, dein Unternehmen, deine Branche und diesen Kurztext."
 
 msgid "Annuler"
 msgstr "Abbrechen"

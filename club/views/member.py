@@ -16,10 +16,10 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.vary import vary_on_cookie
 
 from club.decorators import member_required
-from club.forms import MemberProfileForm, PersonalNoteForm
+from club.forms import EmailPreferencesForm, MemberProfileForm, PersonalNoteForm
 from club.services.access import visible_target
 from club.services.notes import get_personal_note, save_personal_note
-from club.models import RSVP, Connection, Event, Member, MemberTag, Sector, Tag
+from club.models import RSVP, Connection, EmailPreferences, Event, Member, MemberTag, Sector, Tag
 from club.services.events import current_event
 from club.services.federation import club_stats, collected_ids, collection_progress
 from club.services.intros import intros_for
@@ -203,10 +203,13 @@ def album(request):
 @require_http_methods(["GET", "POST"])
 def profile_edit(request):
     member = request.member  # always MY card, never an id taken from the URL
+    preferences = EmailPreferences.objects.filter(member=member).first() or EmailPreferences(member=member)
+    preferences_form = EmailPreferencesForm(request.POST if request.method == "POST" else None, instance=preferences)
     if request.method == "POST":
         form = MemberProfileForm(request.POST, request.FILES, instance=member)
-        if form.is_valid():
+        if form.is_valid() and preferences_form.is_valid():
             form.save()
+            preferences_form.save()
             save_tag_answers(member, request.POST)
             messages.success(request, _("Profil enregistré ✅"))
             return redirect("club:member_detail", pk=member.pk)
@@ -223,7 +226,7 @@ def profile_edit(request):
         items = [(tag, answers.get(tag.slug, MemberTag.Sentiment.NEUTRAL)) for tag in tags if tag.category == value]
         if items:
             groups.append((label, items))
-    return render(request, "club/profile_edit.html", {"form": form, "groups": groups})
+    return render(request, "club/profile_edit.html", {"form": form, "groups": groups, "preferences_form": preferences_form})
 
 
 @member_required

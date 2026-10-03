@@ -13,6 +13,7 @@ Les envois réels et les changements d'hébergement restent à configurer sépar
 
 | Phase | État | Vérifications / livraison |
 |---|---|---|
+| 5 | Terminée | 206 tests verts ; acceptation idempotente et rollback vérifiés ; préférences et langue enregistrées uniquement pour soi |
 | 4 | Livrée ; activation production en attente du volume | 201 tests verts ; normalisation et accès privé vérifiés ; Pillow 12.3 ; upload production désactivé ; procédure dans EXPLOITATION.md |
 | 3 | Terminée | 196 tests verts ; isolation des auteurs, CSRF, CSP, échappement, cache, contraintes et absence de fuite vérifiés |
 | 2 | Terminée | 189 tests verts ; 3 JPEG 256 × 256 vérifiés ; collectstatic OK ; licence et sources dans docs/demo/PHOTOS.md |
@@ -381,30 +382,30 @@ Fichiers à modifier : modèles et migrations, `club/forms.py`, `club/views/publ
 En migration, laisser `admitted_at=NULL` pour les profils existants. Le premier envoi mensuel ne doit pas présenter
 tout l'annuaire comme nouvellement inscrit. Une préférence manquante suit les mêmes défauts, sans erreur.
 
-- [ ] **5.1** Ajouter ces champs et `EmailPreferences`. Ne pas l'afficher dans l'album ou dans une vCard.
+- [x] **5.1** Ajouter ces champs et `EmailPreferences`. Ne pas l'afficher dans l'album ou dans une vCard.
   Ajouter les choix de langue, l'accroche et les préférences au profil personnel ; seuls les champs destinés
   à l'autoédition figurent dans le formulaire. Les valeurs `admitted_at` et les statuts restent staff/service.
-- [ ] **5.2** Dans `public.join`, sauvegarder la langue active FR/DE/EN de la demande validée.
+- [x] **5.2** Dans `public.join`, sauvegarder la langue active FR/DE/EN de la demande validée.
   Garder honeypot, normalisation d'adresse et protection anti-doublon. L'offre de prix n'est pas une preuve de paiement.
-- [ ] **5.3** Écrire `accept_invitation(invitation_id, actor)` dans une transaction. Vérifier `actor.is_staff`
+- [x] **5.3** Écrire `accept_invitation(invitation_id, actor)` dans une transaction. Vérifier `actor.is_staff`
   et `is_active`. Verrouiller la demande. Sur une première acceptation, créer `User` avec username/email normalisé,
   mot de passe inutilisable, puis `Member` avec `Sector.OTHER`, `member_since` courant, `onboarding_done=False`,
   langue préférée de la demande et `admitted_at=now`. Relier la demande au profil et passer à `ACCEPTED`.
-- [ ] **5.4** Si la demande est déjà liée au compte créé, retourner ce compte sans doublon ni nouvel email.
+- [x] **5.4** Si la demande est déjà liée au compte créé, retourner ce compte sans doublon ni nouvel email.
   Si l'adresse correspond à un autre compte ou à plusieurs données ambiguës, bloquer l'acceptation avec une erreur
   staff et demander un rapprochement manuel ; ne pas rattacher automatiquement une identité existante.
   Gérer aussi l'unicité du username en cas de concurrence. Toute erreur laisse la demande et la base cohérentes.
-- [ ] **5.5** Remplacer l'édition libre de `ACCEPTED` par une action admin « Accepter et créer le compte ».
+- [x] **5.5** Remplacer l'édition libre de `ACCEPTED` par une action admin « Accepter et créer le compte ».
   `member`, `admitted_at` et `welcome_sent_at` sont en lecture seule. Autoriser séparément « contactée » et « refusée »
   sur les demandes non acceptées. Ne pas permettre de redescendre un compte accepté au statut « nouvelle » par hasard.
-- [ ] **5.6** Jusqu'à la phase 6, proposer une action explicite pour envoyer l'accès via `send_login_link` après
+- [x] **5.6** Jusqu'à la phase 6, proposer une action explicite pour envoyer l'accès via `send_login_link` après
   création du compte. La création ne doit pas dépendre d'une réponse SMTP. Ne pas renseigner `welcome_sent_at` comme
   si un email de bienvenue avait été envoyé. Modifier le texte d'aide : le parcours utilise un lien de connexion,
   il ne permet pas encore de choisir un mot de passe dans une page qui n'existe pas.
-- [ ] **5.7** Faire utiliser la préférence de langue explicite par `email_language(member)`, puis son fallback
+- [x] **5.7** Faire utiliser la préférence de langue explicite par `email_language(member)`, puis son fallback
   actuel si elle est vide. La langue de lecture du navigateur et les langues parlées restent distinctes.
   Tester un membre bilingue qui choisit l'allemand pour ses emails.
-- [ ] **5.8** Tester acceptation une fois/deux fois, compte préexistant, erreur de création, utilisateur non staff,
+- [x] **5.8** Tester acceptation une fois/deux fois, compte préexistant, erreur de création, utilisateur non staff,
   langue DE/EN du formulaire, création de compte sans mot de passe utilisable et préservation des demandes existantes.
   Tester aussi qu'un membre modifie seulement ses propres préférences et ne peut pas poster `admitted_at`.
 
