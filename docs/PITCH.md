@@ -77,7 +77,7 @@ La répétition personnelle au chronomètre reste dans la liste avant scène ci-
 | **15 %** : indice de fédération des données de démo (180 paires sur 1 225) ; prochain palier à 20 % | `seed_demo` |
 | **49 ms** pour les rencontres de 200 inscrits · **0,8 s** pour le plan de tables de 200 invités | mesuré ([ARCHITECTURE §7](ARCHITECTURE.md)) |
 | **251 nouvelles paires, 1 répétition** : dîner de démo, 38 inscrits, tables de 6, 3 services | parcours enregistré dans la vidéo |
-| **401 tests automatisés** : dernière recette SQLite OK (6 tests de concurrence réservés à PostgreSQL) ; recette précédente de 400 tests OK sur PostgreSQL | `python manage.py test club`, [ARCHITECTURE §10](ARCHITECTURE.md) |
+| **401 tests automatisés** : recette SQLite OK avec horloge figée (6 cas PostgreSQL ignorés, deux fixtures sensibles à la date documentées dans [PLAN_PITCH](PLAN_PITCH.md)) ; recette précédente de 400 tests OK sur PostgreSQL | `python manage.py test club`, [ARCHITECTURE §10](ARCHITECTURE.md) |
 | **≈ 30 CHF par mois** de fonctionnement, **≈ 20 CHF** de mise en place hors développement | estimation ([ARCHITECTURE §9](ARCHITECTURE.md)) |
 
 ## 6. Les 7 minutes de questions

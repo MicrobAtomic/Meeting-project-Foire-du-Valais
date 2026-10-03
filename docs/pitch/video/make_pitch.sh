@@ -2,7 +2,7 @@
 # Rebuilds every pitch asset from the current code: fresh demo data in a scratch database (never db.sqlite3),
 # the demo video (record + compose), the slide 1 picture, the deck (PNG, PDF, PPTX with the video and the notes).
 # Needs: Google Chrome, ffmpeg (brew install ffmpeg), node + `npm install` in docs/pitch, uv.
-# Usage, from the repository root:   docs/pitch/video/make_pitch.sh 400     (400 = test count shown on the slides)
+# Usage, from the repository root:   docs/pitch/video/make_pitch.sh 401     (401 = test count shown on the slides)
 set -e
 REPO=${0:A:h:h:h:h}
 WORK=$REPO/docs/pitch/.build        # git-ignored: frames, overlays, scratch database, server log

@@ -15,7 +15,7 @@
 - [x] T4 — Vidéo H.264 1920 × 1080 de 76,8 s, six scènes téléphone et une scène staff ; captures inspectées, Lukas cadré dans l’album, synergies/coordonnées/bingo/palier/tables visibles, bandeau absent. Sous-titre bingo générique car les cases varient à chaque base jetable.
 - [x] T5 — Coûts documentés dans le deck, PITCH, ARCHITECTURE et SUBMISSION ; ancienne enveloppe retirée, annexes A3/A8 inspectées. Estimations : ≈ 30 CHF/mois et ≈ 20 CHF de mise en place hors développement ; tarifs publics revérifiés le 4 octobre 2026.
 - [x] T6 — Notes françaises identiques dans le PowerPoint et PITCH, quatre diapositives et repères par scène ; conclusion ajustée à 1:47 pour la vidéo de ≈ 77 s. Contrôle de débit par lecture synthétique locale : textes compatibles avec les créneaux ; répétition personnelle avant scène à effectuer.
-- [ ] T7 — Exports, inspection visuelle et suite de tests finale.
+- [x] T7 — Reconstruction complète finale réussie : 13 diapositives/pages, vidéo de 76,7 s intégrée à la diapositive 3 (octets identiques au MP4), notes vérifiées, huit annexes et aucun texte coupé. 401 tests OK avec horloge figée (6 cas PostgreSQL ignorés) ; deux défauts temporels des tests existants relevés avec l’horloge réelle, détaillés ci-dessous.
 - [ ] T8 — Livraison et push final.
 
 La recette utilise uniquement `docs/pitch/.build/pitch.sqlite3`, sans modifier la base locale ni le code de l'application.
@@ -299,3 +299,45 @@ section 4 (régler la vidéo en lecture automatique ; les annexes commencent à 
 
 `git add docs/ && git commit -m "docs(pitch): 4 diapositives + annexes, vidéo de 75 s, coûts réels" && git push`.
 Dis à l'humain : régler la vidéo en lecture automatique dans PowerPoint ou Keynote, répéter 5 fois au chronomètre.
+
+
+## Recette finale du 4 octobre 2026
+
+Les exports sont vérifiés : 13 pages PDF et 13 diapositives PowerPoint ; vidéo H.264 1920 × 1080 de **76,7 s**,
+intégrée uniquement à la diapositive 3 et identique au fichier `demo.mp4`. Les notes correspondent à `slides.json`,
+les quatre notes principales reprennent le conducteur français et les huit annexes sont numérotées A1 à A8.
+Inspection visuelle des treize diapositives et de sept scènes vidéo ; contrôle Chrome : aucun texte coupé.
+La reconstruction s'est terminée normalement et a arrêté son serveur 8010. Aucun fichier de l'application ni
+de sa base locale n'est modifié. Les anciens chiffres de budget ne subsistent que dans les plans historiques.
+
+### Tests sensibles au passage de minuit
+
+- T1, avant minuit : `manage.py test club`, **401 tests OK**, 6 cas PostgreSQL ignorés.
+- T7, après minuit en Suisse : 401 tests, **2 échecs**, 6 cas PostgreSQL ignorés. Ils concernent le code existant :
+  `GuestAccessTests.test_scan_attaches_only_real_people_and_notes_never_reach_the_principal` crée l'événement à
+  « maintenant + un jour », puis scanne une heure avant ; à 00 h, le scan simulé tombe la veille de l'événement
+  et est correctement refusé. `NoFrenchLeftTests.test_german_pages_really_are_german` attend toujours le
+  « Donnerstag, 15. Oktober 2026 » alors que `seed_demo` place le dîner à la date locale + 12 jours
+  (16 octobre depuis le 4 octobre).
+- Les deux tests passent avec une horloge figée au 3 octobre à 14 h suisse. La suite complète dans ce contexte
+  passe également : **401 tests OK en 48,1 s**, 6 cas PostgreSQL ignorés.
+
+Pour reproduire la vérification sans modifier les tests, depuis la racine :
+
+```bash
+env DEBUG=1 DATABASE_URL=sqlite:///:memory: .venv/bin/python - <<'PYTEST'
+import os
+from datetime import datetime, timezone
+from unittest.mock import patch
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
+import django
+django.setup()
+from django.core.management import call_command
+with patch("django.utils.timezone.now", return_value=datetime(2026, 10, 3, 12, tzinfo=timezone.utc)):
+    call_command("test", "club", interactive=False)
+PYTEST
+```
+
+Ces deux fixtures de tests restent à rendre indépendantes de la date dans une tâche séparée ; elles n'ont pas été
+modifiées dans ce plan limité à `docs/`. La lecture automatique de la vidéo dans PowerPoint/Keynote et les cinq
+répétitions au chronomètre restent à effectuer sur l'ordinateur de présentation (liste dans PITCH §4).

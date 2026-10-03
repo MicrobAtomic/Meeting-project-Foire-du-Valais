@@ -278,8 +278,11 @@ PostgreSQL Hobbyist-2 seul coûte 0,05811 CHF/h hors taxes, soit 41,84 CHF pour 
 
 ## 10. Qualité
 
-- **400 tests automatisés** (`env DEBUG=1 python manage.py test club`, environ 50 s), verts sur SQLite (6 cas de
-  concurrence y sont réservés à PostgreSQL) et sur PostgreSQL, sans test ignoré (3 octobre 2026, au soir).
+- **401 tests automatisés** (`env DEBUG=1 python manage.py test club`, environ 50 s). Recette du pitch :
+  401 tests verts avant minuit, puis avec horloge figée au 3 octobre 2026 (6 cas réservés à PostgreSQL).
+  Deux fixtures sensibles à la date échouent après minuit avec l’horloge réelle : diagnostic et reproduction
+  dans [PLAN_PITCH](PLAN_PITCH.md). La recette précédente a passé 400 tests sur PostgreSQL, sans test ignoré
+  (3 octobre 2026, au soir).
   La recette initiale de phase 9 a passé les 262 tests alors présents sur PostgreSQL dédié :
   - les algorithmes (rencontres, tables tournantes) et leurs règles absolues ;
   - la **matrice d'accès** : chaque route est classée (publique, membre, staff) et testée anonyme / membre / staff ; une nouvelle
