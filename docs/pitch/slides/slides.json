@@ -1,0 +1,62 @@
+[
+  {
+    "image": "slides/slide-01.png",
+    "notes": "(0:00 – 0:10) Bonjour ! Le Club des Affaires de la Foire du Valais, c'est une cinquantaine de dirigeantes et de dirigeants qui paient 500 francs par an pour quatre à cinq soirées.",
+    "video": null
+  },
+  {
+    "image": "slides/slide-02.png",
+    "notes": "(0:10 – 0:30) Ils viennent : 80 % de présence. Mais ils arrivent en inconnus, restent entre habitués, et entre deux soirées, le réseau n'existe pas. Le client nous a posé ses règles : pas de business forcé, une équipe qui a très peu de temps, des membres francophones et germanophones, et un club qui reste premium.",
+    "video": null
+  },
+  {
+    "image": "slides/slide-03.png",
+    "notes": "(0:30 – 0:50) Notre réponse : une web app qui suit le rythme du Club, sur les quatre piliers du défi. Se trouver : chaque membre a sa carte, ses passions, ce qu'il peut offrir et ce qu'il cherche. Repérer les synergies : avant chaque soirée, trois personnes à rencontrer, et pourquoi. Le soir même, on scanne un badge, et un jeu brise la glace. Et toute l'année, le Club se resserre.",
+    "video": null
+  },
+  {
+    "image": "slides/slide-04.png",
+    "notes": "(0:50 – 1:32, la vidéo tourne) Voici Camille, nouvelle membre. Avant le dîner, elle sait déjà qui rencontrer : Lukas. Ils aiment tous deux la Petite Arvine et le ski de randonnée ; il cherche du digital, son métier à elle, et elle veut s'ouvrir au marché alémanique, le sien. Au dîner, elle scanne son badge : la carte entre dans son album, ses coordonnées se débloquent, une case de son bingo se coche. Et côté équipe : un clic, et 38 invités changent de table à chaque service.",
+    "video": {
+      "x": 120,
+      "y": 128,
+      "w": 1680,
+      "h": 945
+    }
+  },
+  {
+    "image": "slides/slide-05.png",
+    "notes": "(1:32 – 1:47) Ce qui est nouveau : chaque vraie rencontre compte, et se compte. Le Club est connecté à 15 % aujourd'hui ; au prochain palier, une tournée de Petite Arvine pour tous. Mesurable pour le comité, motivant pour les membres.",
+    "video": null
+  },
+  {
+    "image": "slides/slide-06.png",
+    "notes": "(1:47 – 2:00) Et c'est faisable : ça tourne aujourd'hui, en trois langues, sécurisé, testé, pour moins de 500 francs par an. Un club qui se connaît se retrouve. Merci !",
+    "video": null
+  },
+  {
+    "image": "slides/slide-07.png",
+    "notes": "Annexe pour les questions : l'architecture.",
+    "video": null
+  },
+  {
+    "image": "slides/slide-08.png",
+    "notes": "Annexe : les algorithmes.",
+    "video": null
+  },
+  {
+    "image": "slides/slide-09.png",
+    "notes": "Annexe : sécurité et protection des données.",
+    "video": null
+  },
+  {
+    "image": "slides/slide-10.png",
+    "notes": "Annexe : recruter en douceur, seulement les bonnes personnes.",
+    "video": null
+  },
+  {
+    "image": "slides/slide-11.png",
+    "notes": "Annexe : coûts et feuille de route.",
+    "video": null
+  }
+]
