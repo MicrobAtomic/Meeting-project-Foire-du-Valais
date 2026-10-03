@@ -12,6 +12,9 @@ Projet réalisé pour le hackathon Foire du Valais (3–4 octobre 2026).
 Pitch et démo : [docs/PITCH.md](docs/PITCH.md) · Choix techniques : [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) ·
 Plan de réalisation : [docs/PLAN.md](docs/PLAN.md)
 
+Audit et plan détaillé des améliorations (photos, remplaçants, notes privées, emails et cotisation) :
+[docs/PLAN_AMELIORATIONS.md](docs/PLAN_AMELIORATIONS.md).
+
 ## Ce que fait l'application
 
 | Pour… | Fonctionnalités |
@@ -110,7 +113,7 @@ Plan B : le tunnel `cloudflared` ci-dessus.
 ## Tests
 
 ```bash
-python manage.py test club    # 170 tests, environ 30 s
+env DEBUG=1 python manage.py test club    # 185 tests au début des améliorations, environ 35 s
 ```
 
 Ils couvrent les algorithmes, la **matrice d'accès** (qui peut ouvrir quelle page : toute nouvelle route doit être

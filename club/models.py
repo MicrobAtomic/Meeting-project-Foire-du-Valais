@@ -186,7 +186,7 @@ class Event(models.Model):
     has_bingo = models.BooleanField(
         _("bingo des rencontres"),
         default=False,
-        help_text=_("Pour un apéro debout : chaque inscrit reçoit une grille « Trouve quelqu'un qui… » qu'il remplit en scannant des QR codes. Rien à préparer."),
+        help_text=_("Préparation du bingo : le modèle est disponible, le jeu n'est pas encore activé dans l'application."),
     )
 
     class Meta:
@@ -345,7 +345,7 @@ class InvitationRequest(models.Model):
         max_length=10,
         choices=Status.choices,
         default=Status.NEW,
-        help_text=_("« Acceptée » crée le compte du nouveau membre et lui envoie l'e-mail de bienvenue pour choisir son mot de passe."),
+        help_text=_("Suivi de la demande. La création du compte et l'envoi de l'accès sont encore gérés séparément par l'équipe."),
     )
     member = models.OneToOneField(
         Member, on_delete=models.SET_NULL, null=True, blank=True, related_name="invitation_request", verbose_name=_("compte créé")

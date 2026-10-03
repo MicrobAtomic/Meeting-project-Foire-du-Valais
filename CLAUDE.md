@@ -9,6 +9,10 @@ espace staff. Projet de hackathon : rendu le **dimanche 4 octobre 2026 à 13 h**
 Exécuter `docs/PLAN.md` phase par phase, dans l'ordre. Au début de chaque session : lis `docs/PLAN.md`,
 trouve la première case `- [ ]` non cochée, et fais cette tâche.
 
+Si la demande porte explicitement sur les améliorations décrites dans `docs/PLAN_AMELIORATIONS.md`, suivre ce
+nouveau plan et ses vérifications ; ne pas reprendre les tâches de déploiement de l'ancien plan à sa place.
+Une demande d'étude ou de rédaction de plan ne demande pas l'implémentation des fonctionnalités.
+
 ## Boucle de travail (obligatoire)
 
 1. Lis la tâche en entier, et les fichiers qu'elle cite, avant d'écrire du code.

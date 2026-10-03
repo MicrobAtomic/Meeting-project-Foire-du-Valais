@@ -211,7 +211,8 @@ puisse les présenter aux autres.
 
 ## 10. Qualité
 
-- **170 tests automatisés** (`python manage.py test club`, environ 30 s), sur SQLite **et** sur PostgreSQL :
+- **185 tests automatisés au début des améliorations** (`env DEBUG=1 python manage.py test club`, environ 35 s).
+  Audit actuel rejoué sur SQLite ; les contrôles PostgreSQL décrits ci-dessous proviennent de la validation initiale :
   - les algorithmes (rencontres, tables tournantes) et leurs règles absolues ;
   - la **matrice d'accès** : chaque route est classée (publique, membre, staff) et testée anonyme / membre / staff ; une nouvelle
     route non classée fait échouer la suite ; les actions qui modifient des données refusent le GET ;
