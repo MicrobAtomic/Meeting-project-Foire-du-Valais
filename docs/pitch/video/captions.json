@@ -1,0 +1,40 @@
+{
+  "phone": [
+    {
+      "kicker": "Before the evening",
+      "title": "Meet Camille, a new member",
+      "text": "Her album holds 2 of 49 cards. The Club is 15&nbsp;% connected."
+    },
+    {
+      "kicker": "Before the evening",
+      "title": "She already knows who to meet",
+      "text": "Lukas shares her love of Petite Arvine, and they can help each other: digital for him, the Swiss German market for her."
+    },
+    {
+      "kicker": "At the dinner",
+      "title": "She scans Lukas's badge",
+      "text": "One tap adds his card to her album. Her bingo even shows which square he can tick."
+    },
+    {
+      "kicker": "At the dinner",
+      "title": "Contacts unlock after a real meeting",
+      "text": "Phone, LinkedIn and a vCard for her address book. No cold messages."
+    },
+    {
+      "kicker": "At the dinner",
+      "title": "People bingo, computed for each guest",
+      "text": "Find someone who loves trail running, founded the Club, comes from Visp… A full line? Show it at the bar."
+    },
+    {
+      "kicker": "After",
+      "title": "Every real encounter counts",
+      "text": "3 of 49 cards, and the whole Club gets closer to its next milestone."
+    }
+  ],
+  "desk": [
+    {
+      "title": "For the team: one click",
+      "text": "rotating tables for 38 guests over 3 courses"
+    }
+  ]
+}

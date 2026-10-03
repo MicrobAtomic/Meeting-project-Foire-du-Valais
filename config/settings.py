@@ -132,6 +132,7 @@ if (_public_origin.scheme not in ("http", "https") or not _public_origin.netloc 
     raise ImproperlyConfigured("PUBLIC_BASE_URL must be an origin, HTTPS in production.")
 SITE_NAME = os.environ.get("SITE_NAME", "Club des Affaires")
 DEMO_MODE = os.environ.get("DEMO_MODE", "1") == "1"  # shows the "fictitious data" banner
+DEMO_BANNER = os.environ.get("DEMO_BANNER", "1") == "1"  # 0 only to capture pitch screenshots and the demo video
 MEDIA_ROOT = Path(os.environ.get("MEDIA_ROOT", BASE_DIR / "media"))
 # Enable in production only after provisioning a private, durable, backed-up volume.
 PROFILE_PHOTO_UPLOADS_ENABLED = os.environ.get("PROFILE_PHOTO_UPLOADS_ENABLED", "1" if DEBUG else "0") == "1"

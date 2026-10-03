@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="{% static 'css/app.css' %}">
 </head>
 <body class="min-h-screen bg-stone-50 text-stone-900 antialiased">
-{% if DEMO_MODE %}
+{% if DEMO_MODE and DEMO_BANNER %}
   <p class="no-print bg-amber-100 py-1 text-center text-xs text-amber-900">{% translate "Démo — profils et entreprises fictifs, portraits illustratifs" %}</p>
 {% endif %}
 

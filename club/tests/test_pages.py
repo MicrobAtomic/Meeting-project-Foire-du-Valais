@@ -89,3 +89,13 @@ class HeadingTests(TestCase):
         html = self.client.get(reverse("club:album")).content.decode()
         self.assertEqual(html.count("<h1"), 1)  # the page title only
         self.assertIn(">Bob Bonvin</h3>", html)
+
+
+class DemoBannerTests(TestCase):
+    def test_the_banner_shows_in_demo_mode_and_can_be_hidden_for_screenshots(self):
+        from django.test import override_settings
+
+        with override_settings(DEMO_MODE=True, DEMO_BANNER=True):
+            self.assertContains(self.client.get(reverse("club:landing")), "bg-amber-100 py-1")
+        with override_settings(DEMO_MODE=True, DEMO_BANNER=False):
+            self.assertNotContains(self.client.get(reverse("club:landing")), "bg-amber-100 py-1")
