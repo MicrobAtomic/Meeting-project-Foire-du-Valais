@@ -3,7 +3,7 @@
     "gif": "gifs/web.gif",
     "poster": "gifs/web.png",
     "planned_duration": 22.0,
-    "bytes": 323511,
+    "bytes": 323842,
     "states": [
       {
         "file": "000.png",
@@ -31,7 +31,7 @@
     "gif": "gifs/event.gif",
     "poster": "gifs/event.png",
     "planned_duration": 28,
-    "bytes": 350779,
+    "bytes": 350095,
     "states": [
       {
         "file": "000.png",
@@ -64,7 +64,7 @@
     "gif": "gifs/referral.gif",
     "poster": "gifs/referral.png",
     "planned_duration": 12,
-    "bytes": 147886,
+    "bytes": 148463,
     "states": [
       {
         "file": "000.png",

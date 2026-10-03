@@ -7,7 +7,7 @@ Le pitch suit Camille : découvrir le Club, rencontrer Lukas, garder le lien. **
 - [PDF de secours](pitch/Club-des-Affaires-pitch.pdf) : images fixes choisies pour montrer chaque preuve.
 - [Ancienne vidéo autonome](pitch/demo.mp4), environ 77 s : alternative disponible, absente du nouveau PowerPoint.
 
-Les diapositives sont en anglais ; le texte parlé est en français. Le conducteur vise **1 min 58 s**, avec avance manuelle. Les 241 mots ont été mesurés par lecture synthétique française : environ 98 s de parole, laissant 20 s de pauses et de transitions. Une répétition personnelle reste nécessaire. Les GIF bouclent et ne changent jamais la diapositive. Il n’est pas nécessaire d’attendre la fin d’une boucle.
+Les diapositives sont en anglais ; le texte parlé est en français. Le conducteur vise **1 min 58 s**, avec avance manuelle. Les 238 mots ont été mesurés par lecture synthétique française : environ 98 s de parole, laissant 20 s de pauses et de transitions. Une répétition personnelle reste nécessaire. Les GIF bouclent et ne changent jamais la diapositive. Il n’est pas nécessaire d’attendre la fin d’une boucle.
 
 ## Conducteur et texte à dire
 

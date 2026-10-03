@@ -1,8 +1,8 @@
 // Offline presentation. Export tools use ?export=1 to keep every slide visible.
 (() => {
   const params = new URLSearchParams(location.search);
-  document.body.innerHTML = document.body.innerHTML.replaceAll('__TESTS__', '401');
   if (params.has('export')) return;
+  document.body.innerHTML = document.body.innerHTML.replaceAll('__TESTS__', '401');
   const slides = [...document.querySelectorAll('section.slide')];
   const mainCount = slides.filter(slide => slide.dataset.script).length;
   const css = document.createElement('style');

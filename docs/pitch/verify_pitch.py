@@ -22,6 +22,7 @@ for row,slide in zip(slides,deck.slides):
     if row['id']:
         script=next(s for s in story if s['id']==row['id'])
         assert row['notes'].endswith(script['text']) and row['seconds']==script['seconds']
+        assert script['text'] in (HERE.parent/'PITCH.md').read_text()
     transition=slide._element.find('{http://schemas.openxmlformats.org/presentationml/2006/main}transition')
     assert transition is not None and transition.get('advClick')=='1' and transition.get('advTm') is None
     for shape,animation in zip(list(slide.shapes)[1:],row['animations']):
