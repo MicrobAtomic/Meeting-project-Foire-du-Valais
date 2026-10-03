@@ -1,6 +1,5 @@
 from django.contrib import messages
 from django.core.exceptions import ValidationError
-from django.db.models import Count, Q
 from django.db import transaction
 from django.http import HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect, render
@@ -10,7 +9,7 @@ from django.views.decorators.http import require_POST
 from django.views.decorators.http import require_http_methods
 
 from club.decorators import member_required
-from club.models import RSVP, Event, Substitute
+from club.models import RSVP, Substitute
 from club.forms import SubstituteForm
 from club.services.events import attendees, invalidate_event_plans, visible_events, with_attendee_counts
 from club.services.access import can_open_profile, visible_members

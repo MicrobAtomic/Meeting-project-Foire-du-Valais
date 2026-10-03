@@ -17,7 +17,7 @@ Les règles qui ont guidé la liste :
 
 | Événement | Format | Animations conseillées |
 |---|---|---|
-| Apéro des membres, Apéro de Noël | debout | 🎯 Bingo des rencontres · 🤝 Tes 3 rencontres |
+| Apéro des membres, Apéro de Noël | debout | 🤝 Tes 3 rencontres ; 🎯 bingo envisagé, parcours à développer |
 | Dîner, Soirée Wow | assis (apéritif debout) | 🎯 Bingo à l'apéritif · 🪑 Tables tournantes au repas · 🤝 Tes 3 rencontres |
 | Conférence de presse | assis puis apéro | 🤝 Tes 3 rencontres · ❓ La question de la soirée |
 | Visite d'entreprise | en petits groupes | 🔄 Trios express pendant la visite |

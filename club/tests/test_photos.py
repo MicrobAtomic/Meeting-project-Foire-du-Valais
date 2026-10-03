@@ -4,14 +4,16 @@ from unittest.mock import patch
 
 from django.core.exceptions import ValidationError
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django.test import TestCase, override_settings
+from django.test import TestCase, TransactionTestCase, override_settings
+from django.db import transaction
 from django.urls import reverse
 from PIL import Image
 
 from club.forms import MemberAdminForm, MemberProfileForm
 from club.models import Connection
-from club.services.photos import available_photo, normalize_member_photo, save_profile_photo
+from club.services.photos import available_photo, normalize_member_photo, photo_write_scope, save_profile_photo
 from club.tests.helpers import make_member
+from pathlib import Path
 
 
 def upload(format="PNG", size=(100, 200), **kwargs):
@@ -114,3 +116,65 @@ class PhotoTests(TestCase):
             form = MemberProfileForm(instance=self.a)
             self.assertNotIn("photo", form.fields)
             self.assertNotIn("remove_photo", form.fields)
+
+    def test_outer_rollback_preserves_old_photo_and_cleans_new_file(self):
+        save_profile_photo(self.a, normalize_member_photo(upload()))
+        old, storage = self.a.photo.name, self.a.photo.storage
+        before = set(Path(storage.location).rglob("*.jpg"))
+        with self.assertRaises(RuntimeError), photo_write_scope(), transaction.atomic():
+            save_profile_photo(self.a, normalize_member_photo(upload("JPEG")))
+            raise RuntimeError("later operation failed")
+        self.a.refresh_from_db()
+        self.assertEqual(self.a.photo.name, old)
+        self.assertTrue(storage.exists(old))
+        self.assertEqual(set(Path(storage.location).rglob("*.jpg")), before)
+
+    def test_profile_preferences_failure_rolls_back_profile_and_photo(self):
+        data = {name: getattr(self.a, name) for name in MemberProfileForm.Meta.fields if name != "photo"}
+        data["first_name"] = "Uncommitted"
+        save_profile_photo(self.a, normalize_member_photo(upload()))
+        old, storage = self.a.photo.name, self.a.photo.storage
+        before = set(Path(storage.location).rglob("*.jpg"))
+        with patch("club.forms.EmailPreferencesForm.save", side_effect=RuntimeError("preferences failed")):
+            with self.assertRaises(RuntimeError):
+                self.client.post(reverse("club:profile_edit"), {**data, "photo": upload()})
+        self.a.refresh_from_db()
+        self.assertEqual(self.a.first_name, "Prénom")
+        self.assertEqual(self.a.photo.name, old)
+        self.assertEqual(set(Path(storage.location).rglob("*.jpg")), before)
+
+    def test_admin_related_failure_cleans_uploaded_photo_after_outer_rollback(self):
+        from club.tests.helpers import make_staff
+        staff = make_staff()
+        staff.is_superuser = True
+        staff.save()
+        self.client.force_login(staff)
+        save_profile_photo(self.a, normalize_member_photo(upload()))
+        old, storage = self.a.photo.name, self.a.photo.storage
+        before = set(Path(storage.location).rglob("*.jpg"))
+        data = {field.name: getattr(self.a, field.name) for field in self.a._meta.fields
+                if not field.is_relation and field.name not in {"id", "photo", "created_at", "admitted_at", "guest_access_until"}}
+        data.update(user=self.a.user_id, photo=upload(), first_name="Uncommitted",
+                    **{"tag_links-TOTAL_FORMS": "0", "tag_links-INITIAL_FORMS": "0", "tag_links-MIN_NUM_FORMS": "0", "tag_links-MAX_NUM_FORMS": "1000"})
+        with patch("club.admin.MemberAdmin.save_related", side_effect=RuntimeError("related failed")):
+            with self.assertRaises(RuntimeError):
+                self.client.post(reverse("admin:club_member_change", args=[self.a.pk]), data)
+        self.a.refresh_from_db()
+        self.assertEqual(self.a.first_name, "Prénom")
+        self.assertEqual(self.a.photo.name, old)
+        self.assertEqual(set(Path(storage.location).rglob("*.jpg")), before)
+
+
+@override_settings(PASSWORD_HASHERS=["django.contrib.auth.hashers.MD5PasswordHasher"])
+class PhotoCommitTests(TransactionTestCase):
+    def test_old_cleanup_failure_does_not_delete_new_committed_photo(self):
+        with tempfile.TemporaryDirectory() as directory, override_settings(MEDIA_ROOT=directory):
+            member = make_member("commit@example.com")
+            save_profile_photo(member, normalize_member_photo(upload()))
+            old, storage = member.photo.name, member.photo.storage
+            with patch.object(storage, "delete", side_effect=OSError("storage unavailable")):
+                with self.assertLogs("django.db.backends.base", level="ERROR"):
+                    save_profile_photo(member, normalize_member_photo(upload("JPEG")))
+            member.refresh_from_db()
+            self.assertNotEqual(member.photo.name, old)
+            self.assertTrue(available_photo(member))

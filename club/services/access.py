@@ -3,9 +3,9 @@ from django.http import Http404
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 
-from club.models import Connection, Member
+from club.models import Member
 from club.services.federation import collected_ids
-from club.services.substitutions import member_access_valid, valid_guest_invitations
+from club.services.substitutions import valid_guest_invitations
 from club.services.events import attendees, visible_events
 from django.utils import timezone
 from django.conf import settings

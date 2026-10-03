@@ -1,7 +1,7 @@
 from django import forms
 from django.conf import settings
 from django.contrib import admin, messages
-from django.db.models import Count, Q
+from django.db.models import Count
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import ngettext
 
@@ -23,7 +23,7 @@ from club.models import (
 )
 from club.services.auth_links import send_login_link
 from club.forms import MemberAdminForm
-from club.services.photos import save_profile_photo
+from club.services.photos import photo_write_scope, save_profile_photo
 from club.services.membership import accept_invitation
 from club.services.notifications import cancel_event, publish_event, queue_welcome, retry_confirmed_failures
 from club.services.substitutions import approve_substitute, cancel_substitute, member_access_valid
@@ -53,6 +53,10 @@ class MemberAdmin(admin.ModelAdmin):
     autocomplete_fields = ["user"]
     inlines = [MemberTagInline]
     actions = ["send_login_links", "rotate_qr_token"]
+
+    def changeform_view(self, request, object_id=None, form_url="", extra_context=None):
+        with photo_write_scope():
+            return super().changeform_view(request, object_id, form_url, extra_context)
 
     def get_fields(self, request, obj=None):
         fields = super().get_fields(request, obj)

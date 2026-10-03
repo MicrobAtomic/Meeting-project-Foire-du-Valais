@@ -2,10 +2,19 @@
 
 from django.conf import settings
 from django.core.mail import send_mail
+from django.core.exceptions import ValidationError
 from django.urls import reverse
 from django.utils import translation
 from django.utils.translation import gettext as _
 from sesame.utils import get_query_string
+
+
+def ensure_demo_mail_backend():
+    if settings.DEMO_MODE and settings.EMAIL_BACKEND not in (
+        "django.core.mail.backends.locmem.EmailBackend", "django.core.mail.backends.console.EmailBackend",
+        "django.core.mail.backends.dummy.EmailBackend", "django.core.mail.backends.filebased.EmailBackend",
+    ):
+        raise ValidationError("SMTP is disabled in demo mode")
 
 
 def email_language(member) -> str:
@@ -23,6 +32,7 @@ def login_link(request, member) -> str:
 
 
 def send_login_link(request, member) -> None:
+    ensure_demo_mail_backend()
     link = login_link(request, member)
     with translation.override(email_language(member)):
         subject = _("Ton accès au Club des Affaires")

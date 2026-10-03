@@ -13,7 +13,7 @@ from club.services.photos import delete_unreferenced_photo
 def cleanup_member_photo(sender, instance, **kwargs):
     if instance.photo:
         name, storage = instance.photo.name, instance.photo.storage
-        transaction.on_commit(lambda: delete_unreferenced_photo(name, storage))
+        transaction.on_commit(lambda: delete_unreferenced_photo(name, storage), robust=True)
 
 
 @receiver(pre_delete, sender=Member)

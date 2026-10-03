@@ -2,6 +2,8 @@
 import logging
 import uuid
 import warnings
+from contextlib import contextmanager
+from contextvars import ContextVar
 from io import BytesIO
 
 from django.core.exceptions import ValidationError
@@ -14,6 +16,23 @@ from club.models import Member
 
 logger = logging.getLogger(__name__)
 MAX_BYTES = 2 * 1024 * 1024
+_photo_writes = ContextVar("club_photo_writes", default=None)
+
+
+@contextmanager
+def photo_write_scope():
+    """Wrap the outer database transaction to clean new files after any rollback."""
+    writes = []
+    token = _photo_writes.set(writes)
+    try:
+        yield
+    finally:
+        _photo_writes.reset(token)
+        for name, storage in writes:
+            try:
+                delete_unreferenced_photo(name, storage)
+            except Exception:
+                logger.exception("Could not clean an unreferenced portrait")
 
 
 def normalize_member_photo(upload):
@@ -59,15 +78,18 @@ def save_profile_photo(member, normalized=None, remove=False, old_name=None):
         with transaction.atomic():
             if normalized is not None:
                 new_name = storage.save(f"member_photos/{uuid.uuid4().hex}.jpg", normalized)
+                writes = _photo_writes.get()
+                if writes is not None:
+                    writes.append((new_name, storage))
                 member.photo = new_name
             elif remove:
                 member.photo = ""
             member.save()
             if (normalized is not None or remove) and old_name:
-                transaction.on_commit(lambda: delete_unreferenced_photo(old_name, storage))
+                transaction.on_commit(lambda: delete_unreferenced_photo(old_name, storage), robust=True)
     except Exception:
         if new_name:
-            storage.delete(new_name)
+            delete_unreferenced_photo(new_name, storage)
         member.photo = old_name
         raise
     return member

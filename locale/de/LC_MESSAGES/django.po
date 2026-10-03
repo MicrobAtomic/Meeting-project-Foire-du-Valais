@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Club des Affaires\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 21:03+0200\n"
+"POT-Creation-Date: 2026-10-03 21:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Club des Affaires\n"
 "Language-Team: Club des Affaires\n"
@@ -517,7 +517,6 @@ msgstr "Erinnerung"
 msgid "Nouveaux membres"
 msgstr "Neue Mitglieder"
 
-#| msgid "Accès réservé"
 msgid "Accès invité"
 msgstr "Gastzugang"
 
@@ -560,7 +559,6 @@ msgstr "Bingo-Felder"
 msgid "Validé"
 msgstr "Bestätigt"
 
-#| msgid "Annuler"
 msgid "Annulé"
 msgstr "Abgesagt"
 
@@ -651,7 +649,6 @@ msgstr "Prüfe Titel, Ort, zukünftiges Datum und Antwortfrist vor der Veröffen
 msgid "Bienvenue au Club des Affaires"
 msgstr "Willkommen im Club des Affaires"
 
-#| msgid "Ton accès au Club des Affaires"
 msgid "Ton accès invité au Club des Affaires"
 msgstr "Dein Gastzugang zum Club des Affaires"
 
@@ -684,14 +681,12 @@ msgstr "Das vertretene Mitglied muss aktiv sein."
 msgid "Le profil invité a été supprimé. Crée une nouvelle demande."
 msgstr "Das Gastprofil wurde gelöscht. Erstelle eine neue Anfrage."
 
-#| msgid "Cette page s'est perdue en montagne"
 msgid "Cette demande n'est plus en attente."
 msgstr "Diese Anfrage ist nicht mehr offen."
 
 msgid "Confirme que la personne représente la même entreprise."
 msgstr "Bestätige, dass die Person dasselbe Unternehmen vertritt."
 
-#| msgid "Demande déjà acceptée sans compte lié : rapprochement manuel nécessaire."
 msgid "Identité ambiguë : rapprochement manuel nécessaire."
 msgstr "Identität unklar: manuelle Prüfung erforderlich."
 
@@ -971,11 +966,9 @@ msgstr "Du hast geantwortet, dass du nicht kommst."
 msgid "Tu n'as pas encore répondu."
 msgstr "Du hast noch nicht geantwortet."
 
-#| msgid "Ton placement"
 msgid "Ton remplacement"
 msgstr "Deine Vertretung"
 
-#| msgid "Ton placement"
 msgid "Annuler mon remplacement"
 msgstr "Meine Vertretung absagen"
 
@@ -1236,7 +1229,6 @@ msgstr "Schlage eine Person aus deinem Unternehmen vor. Sie erhält ein eigenes 
 msgid "Envoyer ma demande"
 msgstr "Anfrage senden"
 
-#| msgid "Voir l'événement"
 msgid "Retour à l'événement"
 msgstr "Zurück zum Anlass"
 
@@ -1539,14 +1531,12 @@ msgstr "Administration öffnen"
 msgid "Publication et emails"
 msgstr "Veröffentlichung und E-Mails"
 
-#| msgid "Ton placement"
 msgid "Remplacements"
 msgstr "Vertretungen"
 
 msgid "Aucune demande de remplacement."
 msgstr "Keine Vertretungsanfragen."
 
-#| msgid "Traiter dans l'administration"
 msgid "Vérifier les demandes dans l'administration"
 msgstr "Anfragen in der Administration prüfen"
 

@@ -12,8 +12,10 @@ Projet réalisé pour le hackathon Foire du Valais (3–4 octobre 2026).
 Pitch et démo : [docs/PITCH.md](docs/PITCH.md) · Choix techniques : [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) ·
 Plan de réalisation : [docs/PLAN.md](docs/PLAN.md)
 
-Audit et plan détaillé des améliorations (photos, remplaçants, notes privées, emails et cotisation) :
+Suivi des améliorations livrées (photos, remplaçants, notes privées, emails et cotisation) :
 [docs/PLAN_AMELIORATIONS.md](docs/PLAN_AMELIORATIONS.md).
+Recette : [docs/RECETTE_AMELIORATIONS.md](docs/RECETTE_AMELIORATIONS.md) ·
+Exploitation : [docs/EXPLOITATION.md](docs/EXPLOITATION.md).
 
 ## Ce que fait l'application
 
@@ -22,6 +24,17 @@ Audit et plan détaillé des améliorations (photos, remplaçants, notes privée
 | **Les membres** | album de cartes avec recherche et filtres · fiche de chaque membre, points communs · coordonnées et vCard débloquées après une vraie rencontre (scan du QR) · profil et affinités, swipe façon « cartes » · événements : réponse en un clic, **tes rencontres**, ton placement à table, qui vient · parrainage : lien personnel, QR, offre · connexion par mot de passe **ou par lien reçu par e-mail** · interface en français, allemand et anglais |
 | **L'équipe événements** | tableau de bord (indice de fédération, membres isolés, demandes d'invitation) · préparation d'un événement : génération des rencontres, **plan de tables tournantes**, badges A4 avec QR code · back-office Django complet (membres, événements, inscriptions, demandes) |
 | **Les futurs membres** | vitrine publique sans aucun nom de membre · formulaire « Demander une invitation » (avec ou sans lien de parrainage) |
+
+Les améliorations ajoutent les portraits de démo avec sources/licences, l'upload de photo protégé,
+les notes privées propres à chaque auteur, les préférences d'emails et l'acceptation d'une invitation avec création du compte.
+Les remplaçants validés ont une identité et un QR distincts : leurs rencontres restent les leurs, leur accès expire
+et ils ne gonflent pas les compteurs de cotisants. La cotisation configurable est affichée sur la demande d'invitation
+(500 CHF par défaut) ; les factures restent gérées manuellement. L'offre commerciale de parrainage est masquée par défaut.
+
+Annoncer un événement prépare des emails et des relances pour les membres sans réponse. Le récapitulatif mensuel
+montre des aperçus de nouveaux profils avec consentement et lien vers le site. **Les envois automatiques sont désactivés**
+(`NOTIFICATIONS_ENABLED=0`) ; aucun cron n'est installé. L'upload de photos en production attend un stockage privé
+persistant (`PROFILE_PHOTO_UPLOADS_ENABLED=0` par défaut en production). Voir l'exploitation avant activation.
 
 ## Lancer le projet en 5 minutes (macOS)
 
@@ -34,16 +47,18 @@ cd ~/Meeting-project-Foire-du-Valais
 uv venv --python 3.12 .venv
 source .venv/bin/activate
 uv pip install -r requirements.txt
+export DEBUG=1  # environnement local ; nécessaire si l'IDE définit une autre valeur
 
 # 3. Base de données et données de démo (50 membres fictifs)
 python manage.py migrate
-python manage.py seed_demo --reset
+python manage.py seed_demo  # première installation sur une base vide
 
 # 4. Démarrer
 python manage.py runserver
 ```
 
-Ouvre ensuite http://127.0.0.1:8000. Le mot de passe de tous les comptes de démo est `club-demo-2026`.
+Ouvre ensuite http://127.0.0.1:8000. Le mot de passe des trois comptes de connexion ci-dessous est `club-demo-2026`
+(ou la valeur `DEMO_PASSWORD` si définie). Les autres profils fictifs n'ont pas de mot de passe utilisable.
 
 | Compte | Rôle |
 |---|---|
@@ -51,9 +66,11 @@ Ouvre ensuite http://127.0.0.1:8000. Le mot de passe de tous les comptes de dém
 | `lukas.imboden@example.com` | Pilier du Club depuis 2017 (parle français et allemand) |
 | `equipe@example.com` | Équipe événements (staff) : `/staff/` et `/admin/` |
 
-La fois suivante : `cd ~/Meeting-project-Foire-du-Valais && source .venv/bin/activate && python manage.py migrate && python manage.py runserver`
+La fois suivante : `cd ~/Meeting-project-Foire-du-Valais && source .venv/bin/activate && env DEBUG=1 python manage.py migrate && env DEBUG=1 python manage.py runserver`
 (`migrate` applique les éventuelles évolutions de la base après une mise à jour du code, sans rien effacer).
 `python manage.py seed_demo --reset` remet les données de démo à zéro (les comptes sont recréés : tu devras te reconnecter).
+Une erreur `no such column: club_member.demo_photo_key` après mise à jour se corrige avec `migrate`, après sauvegarde,
+sans réinitialiser la démo. La procédure est dans [EXPLOITATION.md](docs/EXPLOITATION.md).
 Le CSS est déjà compilé (`static/css/app.css`) : le binaire Tailwind n'est utile que pour modifier le design
 (voir [CLAUDE.md](CLAUDE.md)).
 
@@ -113,13 +130,15 @@ Plan B : le tunnel `cloudflared` ci-dessus.
 ## Tests
 
 ```bash
-env DEBUG=1 python manage.py test club    # 185 tests au début des améliorations, environ 35 s
+env DEBUG=1 python manage.py test club    # 262 tests, environ 70 s ; 6 cas de concurrence réservés à PostgreSQL
 ```
 
 Ils couvrent les algorithmes, la **matrice d'accès** (qui peut ouvrir quelle page : toute nouvelle route doit être
 classée), la CSP stricte, le CSRF, les formulaires, le lien de connexion, les badges, la reproductibilité des données
 de démo et les traductions (aucune phrase française sur les pages allemandes et anglaises). La suite passe sur SQLite
-et sur PostgreSQL (`DATABASE_URL=postgres://… python manage.py test club`).
+et sur PostgreSQL (`env DEBUG=1 DATABASE_URL=postgresql://… python manage.py test club`), sur une base de test dédiée.
+Les tests incluent confidentialité des notes/photos, expiration des sessions invitées, validations concurrentes,
+relances, consentements mensuels et désabonnement. La recette du 3 octobre 2026 est documentée avec ses limites.
 
 ## E-mails (lien de connexion)
 
@@ -136,6 +155,10 @@ EMAIL_HOST=smtp.exemple.ch   EMAIL_PORT=587   EMAIL_USE_TLS=1
 EMAIL_HOST_USER=…            EMAIL_HOST_PASSWORD=…
 DEFAULT_FROM_EMAIL="Club des Affaires <club@exemple.ch>"
 ```
+
+Le mode démo (`DEMO_MODE=1` par défaut) bloque les backends réels, y compris pour les liens de connexion.
+Après configuration et essai autorisé, passer à `DEMO_MODE=0`. L'automatisation des campagnes exige en plus
+`NOTIFICATIONS_ENABLED=1` et un ordonnanceur ; la procédure est dans [EXPLOITATION.md](docs/EXPLOITATION.md).
 
 ## Traductions (FR · DE · EN)
 

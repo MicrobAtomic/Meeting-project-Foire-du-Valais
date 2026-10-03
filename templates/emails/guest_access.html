@@ -1,4 +1,4 @@
-{% load i18n %}<html><body><h1>{% translate "Ton accès invité au Club des Affaires" %}</h1>
+{% load i18n %}<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><h1>{% translate "Ton accès invité au Club des Affaires" %}</h1>
 <p>{% blocktranslate %}Salut {{ name }},{% endblocktranslate %}</p>
 <p>{% blocktranslate %}Ton accès temporaire est ouvert jusqu'au {{ until }}. Complète ton propre profil ; tes rencontres restent les tiennes.{% endblocktranslate %}</p>
 <p><a href="{{ link }}">{% translate "Se connecter" %}</a></p>

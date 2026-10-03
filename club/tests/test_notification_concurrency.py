@@ -14,6 +14,11 @@ from club.models import Member, RSVP, Substitute
 from club.services.substitutions import approve_substitute, request_substitute
 from club.tests.test_substitutions import substitute_data
 from django.core.exceptions import ValidationError
+from club.models import InvitationRequest
+from club.services.membership import accept_invitation
+from club.services.digests import prepare_digest
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 
 @skipUnless(connection.vendor == "postgresql", "Concurrency must be verified on PostgreSQL")
@@ -107,3 +112,46 @@ class NotificationConcurrencyTests(TransactionTestCase):
         self.assertEqual(sum(result is not None for result in results), 1)
         self.assertEqual(Substitute.objects.filter(status="approved").count(), 1)
         self.assertEqual(Member.objects.filter(kind="guest").count(), 1)
+
+    def test_concurrent_admission_creates_one_member_and_one_welcome(self):
+        staff = make_staff()
+        invitation = InvitationRequest.objects.create(first_name="Fictif", last_name="Test", email="new@example.com",
+                                                       company="Test", job_title="Test")
+        barrier = Barrier(2)
+
+        def accept():
+            close_old_connections()
+            try:
+                barrier.wait(timeout=10)
+                return accept_invitation(invitation.pk, staff).pk
+            finally:
+                connections.close_all()
+
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            results = list(pool.map(lambda _: accept(), range(2)))
+        self.assertEqual(results[0], results[1])
+        self.assertEqual(Member.objects.count(), 1)
+        self.assertEqual(NotificationDelivery.objects.count(), 1)
+
+    def test_concurrent_monthly_preparation_reserves_one_campaign(self):
+        from club.models import DigestEntry, EmailPreferences
+        candidate = make_member("candidate@example.com", admitted_at=timezone.now() - timedelta(days=60), onboarding_done=True)
+        recipient = make_member("recipient@example.com")
+        EmailPreferences.objects.create(member=candidate, allow_member_spotlight=True)
+        EmailPreferences.objects.create(member=recipient, monthly_digest=True)
+        now = datetime(timezone.now().year + 1, 2, 1, 9, tzinfo=ZoneInfo("Europe/Zurich"))
+        barrier = Barrier(2)
+
+        def prepare():
+            close_old_connections()
+            try:
+                barrier.wait(timeout=10)
+                return prepare_digest(now)
+            finally:
+                connections.close_all()
+
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            results = list(pool.map(lambda _: prepare(), range(2)))
+        self.assertEqual(sorted(results), [0, 1])
+        self.assertEqual(DigestEntry.objects.count(), 1)
+        self.assertEqual(NotificationDelivery.objects.count(), 1)

@@ -1,0 +1,11 @@
+# EXEMPLE UNIQUEMENT : aucun job n'est installé par ce fichier.
+# Adapter /srv/club, charger les variables de production depuis un fichier privé
+# avec scripts/run-job.sh, et créer les logs
+# avec des droits limités au compte applicatif. Le lanceur doit utiliser la même
+# version du code et la même base que le serveur web ; DEBUG=0 en production.
+# NOTIFICATIONS_ENABLED reste à 0 jusqu'à la recette SMTP autorisée.
+# Le calendrier suisse mensuel est calculé par Django, pas par le fuseau du cron.
+CLUB_APP_DIR=/srv/club
+CLUB_ENV_FILE=/srv/club/.env.jobs
+*/15 * * * * /srv/club/scripts/run-job.sh process_notifications --limit 50 >> /srv/club/log/notifications.log 2>&1
+0 * * * * /srv/club/scripts/run-job.sh expire_guest_access >> /srv/club/log/guests.log 2>&1

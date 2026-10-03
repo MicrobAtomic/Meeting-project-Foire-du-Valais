@@ -15,7 +15,7 @@ from django.utils.translation import gettext as _
 from sesame.utils import get_query_string
 
 from club.models import RSVP, EmailPreferences, Event, InvitationRequest, Member, NotificationCampaign, NotificationDelivery
-from club.services.auth_links import email_language
+from club.services.auth_links import email_language, ensure_demo_mail_backend
 from club.services.membership import require_staff
 
 Kind = NotificationCampaign.Kind
@@ -204,11 +204,7 @@ def process_notifications(limit=50, dry_run=False, now=None):
                 "digest_due": prepare_digest(now, dry_run=True), "sent": 0}
     if not settings.NOTIFICATIONS_ENABLED:
         raise ValidationError("NOTIFICATIONS_ENABLED=0")
-    if settings.DEMO_MODE and settings.EMAIL_BACKEND not in (
-        "django.core.mail.backends.locmem.EmailBackend", "django.core.mail.backends.console.EmailBackend",
-        "django.core.mail.backends.dummy.EmailBackend", "django.core.mail.backends.filebased.EmailBackend",
-    ):
-        raise ValidationError("SMTP is disabled in demo mode")
+    ensure_demo_mail_backend()
     NotificationDelivery.objects.filter(status=Status.SENDING, claimed_at__lt=now - timedelta(minutes=15)).update(
         status=Status.UNCERTAIN, last_error_code="abandoned_claim")
     prepare_reminders(now)

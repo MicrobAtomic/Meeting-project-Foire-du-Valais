@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Club des Affaires\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 21:03+0200\n"
+"POT-Creation-Date: 2026-10-03 21:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Club des Affaires\n"
 "Language-Team: Club des Affaires\n"
@@ -517,7 +517,6 @@ msgstr "Reminder"
 msgid "Nouveaux membres"
 msgstr "New members"
 
-#| msgid "Accès réservé"
 msgid "Accès invité"
 msgstr "Guest access"
 
@@ -560,7 +559,6 @@ msgstr "bingo squares"
 msgid "Validé"
 msgstr "Approved"
 
-#| msgid "Annuler"
 msgid "Annulé"
 msgstr "Cancelled"
 
@@ -651,7 +649,6 @@ msgstr "Check the title, venue, future date and response deadline before publish
 msgid "Bienvenue au Club des Affaires"
 msgstr "Welcome to the Club des Affaires"
 
-#| msgid "Ton accès au Club des Affaires"
 msgid "Ton accès invité au Club des Affaires"
 msgstr "Your guest access to the Club des Affaires"
 
@@ -684,14 +681,12 @@ msgstr "The principal must be an active member."
 msgid "Le profil invité a été supprimé. Crée une nouvelle demande."
 msgstr "The guest profile was deleted. Create a new request."
 
-#| msgid "Cette page s'est perdue en montagne"
 msgid "Cette demande n'est plus en attente."
 msgstr "This request is no longer pending."
 
 msgid "Confirme que la personne représente la même entreprise."
 msgstr "Confirm that the person represents the same company."
 
-#| msgid "Demande déjà acceptée sans compte lié : rapprochement manuel nécessaire."
 msgid "Identité ambiguë : rapprochement manuel nécessaire."
 msgstr "Ambiguous identity: manual review required."
 
@@ -971,11 +966,9 @@ msgstr "You said you're not coming."
 msgid "Tu n'as pas encore répondu."
 msgstr "You haven't answered yet."
 
-#| msgid "Ton placement"
 msgid "Ton remplacement"
 msgstr "Your substitution"
 
-#| msgid "Ton placement"
 msgid "Annuler mon remplacement"
 msgstr "Cancel my substitution"
 
@@ -1236,7 +1229,6 @@ msgstr "Propose a colleague from your company. They will have their own profile 
 msgid "Envoyer ma demande"
 msgstr "Send my request"
 
-#| msgid "Voir l'événement"
 msgid "Retour à l'événement"
 msgstr "Back to the event"
 
@@ -1539,14 +1531,12 @@ msgstr "Open the admin"
 msgid "Publication et emails"
 msgstr "Publication and emails"
 
-#| msgid "Ton placement"
 msgid "Remplacements"
 msgstr "Substitutions"
 
 msgid "Aucune demande de remplacement."
 msgstr "No substitution requests."
 
-#| msgid "Traiter dans l'administration"
 msgid "Vérifier les demandes dans l'administration"
 msgstr "Review requests in administration"
 

@@ -42,7 +42,7 @@ Les contraintes qui ont guidé l'architecture :
  └─────────────────────────────────────────────┘
         │                         │
         ▼                         ▼
-   PostgreSQL               SMTP (liens magiques)
+   PostgreSQL               SMTP (liens et notifications, activation requise)
    (SQLite en dev)
 ```
 
@@ -98,9 +98,31 @@ InvitationRequest ──> Member (parrain, optionnel)
 | `Match` | « Tes 3 rencontres » proposées pour un événement | Paire ordonnée et unique par événement |
 | `SeatingPlan` / `SeatAssignment` | Tables tournantes | Une seule place par membre et par service |
 | `InvitationRequest` | Demande d'adhésion depuis la vitrine, avec parrain éventuel | — |
+| `PersonalNote` | Mémo privé d'un auteur sur une cible accessible | Une note par auteur/cible, auteur différent de la cible ; aucun écran admin |
+| `EmailPreferences` | Langue sur le profil, réception des annonces/relances et consentements mensuels distincts | Un jeu de préférences par profil |
+| `NotificationCampaign` / `NotificationDelivery` | File persistante : bienvenue, annonce, relance, récapitulatif, accès invité | Campagne unique par portée ; destinataire unique par campagne ; réservation atomique |
+| `DigestEntry` | Réservation des profils présentés au récapitulatif | Un profil présenté dans une seule campagne |
+| `Substitute` | Titulaire absent et invité distinct pour un événement, statut contrôlé par service staff | Une demande par titulaire/événement ; un invité approuvé par événement ; invité différent du titulaire |
 
 Le rang d'un membre (Membre fondateur, Pilier du Club, Membre, Nouvelle recrue) est **calculé** à partir de son année
 d'adhésion. Il ne peut donc pas être falsifié par le membre.
+Un profil `kind=guest` affiche « Invité », sans ancienneté d'adhésion. `guest_access_until` est calculé d'après ses
+invitations approuvées (48 h après le début par défaut). Une nouvelle invitation peut réactiver le même compte.
+
+`services/access.py` centralise le périmètre des fiches, photos, notes, contacts et scans ; `@member_required`
+recontrôle l'expiration à chaque requête. `attendees(event)` fournit les personnes réellement présentes aux
+rencontres proposées, tables, badges et compteurs. Ces générations verrouillent l'événement, et une modification
+de présence/remplacement invalide les plans. `Connection` relie les deux personnes rencontrées, jamais le titulaire
+absent. Le scan invité exige un contexte commun du jour vérifié. L'indice de fédération porte sur les membres réguliers actifs.
+
+Les photos privées sont normalisées par Pillow puis stockées hors du répertoire public. La lecture authentifiée
+est sans cache ; les parcours profil/admin nettoient les nouveaux fichiers après rollback et les anciens après commit.
+Un arrêt brutal peut laisser un fichier orphelin à traiter par l'exploitant. Le volume durable de production reste à provisionner.
+
+Les notifications sont préparées en transaction, puis traitées par une commande limitée à 50 envois par passage.
+Les préférences, réponses et autorisations sont revérifiées à l'envoi. Une remise incertaine au serveur SMTP ne donne
+lieu à aucune relance automatique. Les résumés mensuels sont volontaires et partiels. Voir [EXPLOITATION.md](EXPLOITATION.md)
+pour les états, la reprise et les réglages : SMTP réel et ordonnanceur restent désactivés.
 
 ## 5. Sécurité
 
@@ -112,7 +134,7 @@ d'adhésion. Il ne peut donc pas être falsifié par le membre.
 | CSRF / effets de bord | Toute écriture passe par un POST avec jeton CSRF. Scanner un QR (GET) n'écrit rien : on confirme d'abord. La déconnexion se fait en POST. | templates, `scan` |
 | XSS (A03) | Échappement automatique des templates, **CSP stricte** (`script-src 'self'`, pas de JavaScript ni de style inline, `frame-ancestors 'none'`), contrôlée par un test. | `club/middleware.py`, `test_album.py` |
 | Injection SQL / vCard | ORM paramétré. Les champs vCard sont échappés selon la RFC 6350 (testé avec une tentative d'injection). | `services/vcard.py` |
-| Authentification (A07) | Mots de passe hachés (PBKDF2) et validateurs de robustesse. Lien magique à usage unique, valable 15 minutes : la demande publique répond **la même chose** pour une adresse inconnue (personne ne peut tester qui est membre), limite à un e-mail par adresse et par minute, page claire quand le lien a expiré, e-mail dans la langue du membre. Les membres fictifs n'ont **aucun mot de passe utilisable**. Session de **6 mois d'inactivité** (renouvelée à chaque visite) pour ne pas obliger des dirigeants pressés à se reconnecter, cookie `HttpOnly`, `Secure`, `SameSite=Lax`. Pas de création de compte publique : on « demande une invitation » via un mini-formulaire protégé (CSRF, champ piège anti-bot, anti-doublon), sans qu'aucune donnée de membre ne soit exposée. | settings, `seed_demo` |
+| Authentification (A07) | Mots de passe hachés (PBKDF2) et validateurs de robustesse. Lien magique à usage unique, valable 15 minutes : la demande publique répond **la même chose** pour une adresse inconnue (personne ne peut tester qui est membre), limite à un e-mail par adresse et par minute, page claire quand le lien a expiré, e-mail dans la langue du membre. Les profils fictifs hors comptes de connexion de la démo n'ont aucun mot de passe utilisable. Session de **6 mois d'inactivité** (renouvelée à chaque visite) pour ne pas obliger des dirigeants pressés à se reconnecter, cookie `HttpOnly`, `Secure`, `SameSite=Lax`. Pas de création de compte publique : on « demande une invitation » via un mini-formulaire protégé (CSRF, champ piège anti-bot, anti-doublon), sans qu'aucune donnée de membre ne soit exposée. | settings, `seed_demo` |
 | Mauvaise configuration (A05) | `DEBUG` désactivé en production, `SECRET_KEY` obligatoire, HTTPS forcé, HSTS, cookies `Secure` et `HttpOnly`, `X-Frame-Options: DENY`. `check --deploy` ne signale **aucun problème**, seuls deux avertissements sont désactivés de façon justifiée (HSTS sur les sous-domaines et preload, inapplicables sur un domaine PaaS partagé). | `config/settings.py` |
 | Fuite vers des tiers | Aucun CDN, aucune police externe, aucun outil d'analyse : rien ne transmet l'adresse IP d'un membre à un tiers. La CSP le garantit (`default-src 'self'`). | `club/middleware.py` |
 
@@ -128,7 +150,9 @@ tentatives de connexion (django-axes), journal d'audit des actions du staff.
   choisit de partager.
 - **Hébergement** : démo en Union européenne (pays adéquat au sens de la nLPD) avec des données 100 % fictives.
   Production visée en Suisse.
-- **Droits des personnes** : export et suppression à la demande via l'admin dès la V1. Self-service prévu en V1.1.
+- **Droits des personnes** : procédure d'export/suppression à exécuter et contrôler par l'équipe dans
+  [EXPLOITATION.md](EXPLOITATION.md). L'admin standard ne fournit pas un export complet. Les notes des autres auteurs
+  font l'objet d'un examen par l'équipe responsable. Self-service non implémenté.
 
 ## 7. Algorithmes
 
@@ -211,8 +235,8 @@ puisse les présenter aux autres.
 
 ## 10. Qualité
 
-- **185 tests automatisés au début des améliorations** (`env DEBUG=1 python manage.py test club`, environ 35 s).
-  Audit actuel rejoué sur SQLite ; les contrôles PostgreSQL décrits ci-dessous proviennent de la validation initiale :
+- **262 tests automatisés** (`env DEBUG=1 python manage.py test club`, environ 70 s).
+  Recette des améliorations sur SQLite (6 cas de concurrence réservés à PostgreSQL) et PostgreSQL dédié :
   - les algorithmes (rencontres, tables tournantes) et leurs règles absolues ;
   - la **matrice d'accès** : chaque route est classée (publique, membre, staff) et testée anonyme / membre / staff ; une nouvelle
     route non classée fait échouer la suite ; les actions qui modifient des données refusent le GET ;
@@ -222,12 +246,15 @@ puisse les présenter aux autres.
   - les traductions : catalogues complets, mêmes textes dans les trois langues, et **aucune phrase française sur les pages
     allemandes et anglaises** ;
   - la reproductibilité des données de démo après chaque réinitialisation.
+  - la confidentialité des notes/photos, les rollbacks des uploads dans le profil et l'admin ;
+  - les invités actifs/expirés, l'identité des rencontres, les refus sur URL directe et les liens magiques ;
+  - les états de notifications, relances, consentements et désabonnement, ainsi que six cas de concurrence PostgreSQL.
 - **Mode production vérifié** : `python manage.py check --deploy` sans alerte, `build.sh` (fichiers statiques versionnés,
   migrations, données de démo si la base est vide) sur PostgreSQL, gunicorn derrière un proxy HTTPS : redirection HTTPS, en-têtes
   de sécurité, cookies `Secure`, CSS et JS en cache immuable, hôte invalide refusé.
-- **Contrôle visuel automatique** : 48 pages parcourues à 390 px (téléphone) et 1 280 px (ordinateur), en français, en allemand
-  et en anglais : aucun débordement horizontal, aucune erreur de console, de réseau ou de politique de sécurité. Impression des
-  badges vérifiée sur un vrai PDF A4.
+- **Recette navigateur des améliorations** : 90 pages parcourues à 390 px et 1 280 px, en FR/DE/EN, avec membre,
+  invité, staff sans profil et anonyme. Aucun débordement, image cassée, erreur JavaScript/CSP ni appel externe détecté.
+  Badges générés en PDF A4. Voir [RECETTE_AMELIORATIONS.md](RECETTE_AMELIORATIONS.md) pour les preuves et limites.
 - **Scénario du pitch rejoué automatiquement** de bout en bout (vitrine, rencontres, album, scan du QR, vCard, tableau de bord,
   plan de tables en direct, bascule en allemand).
 - Les données de démo sont reproductibles (graine fixe, identifiants d'événements fixes). La commande `seed_demo` **vérifie
@@ -238,6 +265,7 @@ puisse les présenter aux autres.
 | Version | Contenu |
 |---|---|
 | **V1 — hackathon** | Album de cartes, QR et vCard, profil et affinités, événements avec rencontres et tables tournantes, tableau de bord staff, vitrine et parrainage, FR/DE/EN |
+| **Améliorations livrées** | Portraits de démo, photos privées (production désactivée), notes personnelles, cotisation configurable/facture manuelle, acceptation des invitations, préférences et campagnes email (envois désactivés), récapitulatif mensuel volontaire, remplaçants avec identité propre et accès temporaire |
 | **V1.1 — production** | Hébergement suisse, **connexion par lien : étape de confirmation par bouton** (certaines passerelles de sécurité e-mail ouvrent les liens à l'avance et consomment le lien à usage unique), domaine, e-mails, charte graphique du Club, import des membres existants (CSV), consentement et politique de confidentialité, export et suppression en libre-service, double authentification staff |
-| **V2** | Bourse « je cherche / je propose », groupes de codéveloppement, paiement des cotisations (TWINT, QR-facture), newsletter générée automatiquement (portrait de membre, nouveaux venus, prochain événement), photos d'événements |
+| **V2** | Bourse « je cherche / je propose », groupes de codéveloppement, paiement des cotisations (TWINT, QR-facture), photos d'événements |
 | **V3** | Plusieurs clubs sur la même plateforme (marque blanche pour d'autres associations ou foires) |

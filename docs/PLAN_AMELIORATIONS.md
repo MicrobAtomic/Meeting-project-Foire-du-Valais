@@ -1,7 +1,7 @@
 # Plan des améliorations — profils, remplaçants, notes et emails
 
 > Demande du 3 octobre 2026. Audit du dépôt au commit `b4b0816`.
-> Ce document décrit du travail **à réaliser** : ses cases ne signifient pas que les fonctionnalités existent.
+> Les cases cochées indiquent le travail livré et vérifié. Les activations externes encore nécessaires sont signalées séparément.
 > Destinataire : une IA qui a besoin de tâches courtes, de décisions explicites et de vérifications précises.
 > Pendant l'exécution de ces améliorations, suivre ce document ; conserver `PLAN.md` comme historique du hackathon.
 
@@ -13,6 +13,7 @@ Les envois réels et les changements d'hébergement restent à configurer sépar
 
 | Phase | État | Vérifications / livraison |
 |---|---|---|
+| 9 | Recette technique terminée ; activation réelle en attente | 262 tests PostgreSQL verts ; SQLite vert (6 cas PostgreSQL seuls) ; 90 pages + 30 aperçus HTML FR/DE/EN, PDF A4, copie/migrations et dry-run vérifiés ; tâche 9.6 ouverte |
 | 8 | Terminée | 254 tests SQLite (4 cas PostgreSQL seuls) ; 254 tests PostgreSQL verts ; identité distincte, expiration de session, confidentialité et validations concurrentes vérifiées |
 | 7 | Terminée | 231 tests SQLite verts (2 cas PostgreSQL seuls) ; limite de 4 aperçus, consentements, 09 h suisse, désabonnement signé/CSRF et absence de données privées vérifiés |
 | 6 | Terminée ; SMTP/cron non activés | 222 tests SQLite (2 cas PostgreSQL seuls) ; 219 tests PostgreSQL verts, dont publications et réservations concurrentes ; backend mémoire uniquement |
@@ -790,20 +791,20 @@ comptables et du processus de facture manuelle du Club, après une demande expli
 Fichiers : `README.md`, `docs/ARCHITECTURE.md`, `docs/ANIMATIONS.md`, nouveau `docs/EXPLOITATION.md`, traductions,
 configuration d'hébergement préparée selon le prestataire retenu.
 
-- [ ] **9.1** Exécuter la suite complète sur SQLite, puis les tests de concurrence pertinents et la suite sur
+- [x] **9.1** Exécuter la suite complète sur SQLite, puis les tests de concurrence pertinents et la suite sur
   une base **PostgreSQL de test dédiée**, jamais la base de production. Contrôler les migrations depuis une copie
   du schéma existant, avec conservation des profils, connexions, invitations et événements déjà présents.
-- [ ] **9.2** Vérifier à 390 px et 1 280 px, FR/DE/EN : invitation avec prix, photo/initiales, édition de profil,
+- [x] **9.2** Vérifier à 390 px et 1 280 px, FR/DE/EN : invitation avec prix, photo/initiales, édition de profil,
   note et suppression, préférences email, aperçu des campagnes staff, remplaçant et compte invité, impression A4.
   Contrôler console, réseau, débordements et CSP. Refaire la démonstration Camille–Lukas d'origine.
-- [ ] **9.3** Tester les accès anonyme, membre A, membre B, staff sans profil, invité actif et invité expiré.
+- [x] **9.3** Tester les accès anonyme, membre A, membre B, staff sans profil, invité actif et invité expiré.
   Vérifier aussi les URL directes de photo, note, vCard, événement et scan ; ne pas limiter la recette aux liens visibles.
   Tester une note sentinelle dans les réponses reçues par les autres rôles et un désabonnement avant l'envoi.
-- [ ] **9.4** Documenter dans `EXPLOITATION.md` : variables `PUBLIC_BASE_URL`, email/timeout, stockage privé,
+- [x] **9.4** Documenter dans `EXPLOITATION.md` : variables `PUBLIC_BASE_URL`, email/timeout, stockage privé,
   sauvegardes, restauration, préférences, publication, états d'envoi et reprise des échecs/états ambigus.
   Documenter que SMTP accepté ne signifie pas livré, que les notes ne sont pas chiffrées de bout en bout et que
   mettre un compte en veille n'est pas supprimer ses données.
-- [ ] **9.5** Préparer la planification toutes les 15 minutes de `process_notifications --limit 50` et chaque
+- [x] **9.5** Préparer la planification toutes les 15 minutes de `process_notifications --limit 50` et chaque
   heure de `expire_guest_access`. Le calendrier mensuel et les relances sont décidés par les services avec l'heure
   suisse ; ils ne reposent pas sur le fuseau implicite de l'hébergeur. Les jobs utilisent le même code et la même
   base que le site. Activer un seul ordonnanceur ; les réservations protègent néanmoins les chevauchements.
@@ -811,14 +812,16 @@ configuration d'hébergement préparée selon le prestataire retenu.
   à une adresse de l'équipe explicitement autorisée. Vérifier l'expéditeur et SPF/DKIM/DMARC avec le prestataire,
   puis rendre l'activation de l'automatisation explicite dans la configuration de production.
   Le mode démo ne doit envoyer qu'en console/mémoire ; bloquer un backend réel en démo hors essai autorisé.
-- [ ] **9.7** Ajouter une procédure d'export/suppression : données de profil, photo, préférences, invitations,
+- [x] **9.7** Ajouter une procédure d'export/suppression : données de profil, photo, préférences, invitations,
   notes dont la personne est auteur/cible, rencontres, accès invités et historique d'emails minimal.
   Pour une demande d'accès portant sur des notes écrites par autrui, transmettre à l'équipe responsable du traitement
   pour examen ; ne pas produire automatiquement un export de notes privées destiné à leur cible.
   Ne pas prétendre que l'admin standard offre déjà un export/suppression complet de toutes ces données.
-- [ ] **9.8** Mettre à jour l'architecture, le README et les chiffres de tests selon la mesure finale.
+- [x] **9.8** Mettre à jour l'architecture, le README et les chiffres de tests selon la mesure finale.
   Documenter ce qui est opérationnel et ce qui reste désactivé. Recompiler traductions et CSS, contrôler le diff.
   Ne pas cocher une tâche de déploiement si seuls les fichiers de configuration ont été préparés.
+
+**Recette exécutée :** voir [RECETTE_AMELIORATIONS.md](RECETTE_AMELIORATIONS.md). Les `--dry-run` et le blocage SMTP en démo sont validés. L’essai vers une adresse d’équipe, SPF/DKIM/DMARC et l’activation de production de 9.6 restent à réaliser ; aucun envoi réel ni cron n’a été activé. Le stockage durable de production reste également un prérequis, comme indiqué en phase 4.
 
 **Validation :** recette de confidentialité et de présence passée ; migrations vérifiées ; documentation exploitable ;
 envoi réel et hébergement activés seulement dans le périmètre demandé et configuré par l'équipe.
@@ -881,3 +884,21 @@ Ne change pas les assertions existantes pour faire passer un test. Ajoute les ca
 Prépare les fichiers avant de demander un choix externe ; ne pousse, ne déploie et n'envoie aucun email réel
 sans que cela fasse partie de la demande en cours.
 ```
+
+
+## Journal de livraison
+
+| Phase | Commit | État Git |
+|---|---|---|
+| 0 — état initial et documentation | `a0314b2` | Poussé sur `main` |
+| 1 — tarif et facture manuelle | `d07594a` | Poussé sur `main` |
+| 2 — portraits de démo | `e009eb2` | Poussé sur `main` |
+| 3 — notes privées | `4df8cc7` | Poussé sur `main` |
+| 4 — photos protégées | `f9420d3` | Poussé sur `main` ; activation production en attente du volume |
+| 5 — acceptation et préférences | `f8a3969` | Poussé sur `main` |
+| 6 — annonces et relances | `3cb1270` | Poussé sur `main` ; SMTP/cron désactivés |
+| 7 — récapitulatif mensuel | `8399a2d` | Poussé sur `main` |
+| 8 — identité et accès invités | `94d7b14` | Poussé sur `main` |
+| 9 — recette et exploitation | Commit contenant ce journal | Recette locale terminée ; push vérifié à la livraison |
+
+La phase 9 corrige aussi le nettoyage des photos après rollback dans le profil/admin, bloque SMTP pour les liens directs en mode démo et retire les promesses de bingo actif des nouvelles données de démo. La facturation demeure manuelle.

@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
+from django.db import transaction
 from django.http import FileResponse, Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
@@ -21,7 +22,8 @@ from club.services.access import can_open_profile, scan_event, visible_members, 
 from club.services.substitutions import require_regular
 from club.services.notes import get_personal_note, save_personal_note
 from club.models import RSVP, Connection, EmailPreferences, Event, Member, MemberTag, Sector, Tag
-from club.services.events import current_event, visible_events
+from club.services.events import visible_events
+from club.services.photos import photo_write_scope
 from club.services.federation import club_stats, collected_guest_count, collected_ids, collection_progress
 from club.services.intros import intros_for
 from club.services.milestones import album_goal, club_progress
@@ -212,9 +214,10 @@ def profile_edit(request):
     if request.method == "POST":
         form = MemberProfileForm(request.POST, request.FILES, instance=member)
         if form.is_valid() and preferences_form.is_valid():
-            form.save()
-            preferences_form.save()
-            save_tag_answers(member, request.POST)
+            with photo_write_scope(), transaction.atomic():
+                form.save()
+                preferences_form.save()
+                save_tag_answers(member, request.POST)
             messages.success(request, _("Profil enregistré ✅"))
             return redirect("club:member_detail", pk=member.pk)
     else:
