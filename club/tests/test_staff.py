@@ -15,7 +15,7 @@ class StaffToolsTests(TestCase):
         self.staff = make_staff()
         self.members = [make_member(f"m{i}@example.com", first_name=f"Prénom{i}", last_name=f"Nom{i}",
                                     sector=["tech", "finance", "health"][i % 3]) for i in range(9)]
-        self.event = Event.objects.create(title="Dîner test", kind="dinner", location="Martigny", has_seating=True,
+        self.event = Event.objects.create(is_published=True, title="Dîner test", kind="dinner", location="Martigny", has_seating=True,
                                           starts_at=timezone.now() + timedelta(days=4))
         for member in self.members[:8]:  # 8 registered, 1 not
             RSVP.objects.create(event=self.event, member=member, status="yes")
@@ -113,9 +113,9 @@ class StaffDashboardTests(TestCase):
         crowd = [make_member(f"c{i}@example.com") for i in range(4)]
         for other in crowd:
             Connection.link(bob, other)
-        event = Event.objects.create(title="Dîner à préparer", kind="dinner", location="Martigny",
+        event = Event.objects.create(is_published=True, title="Dîner à préparer", kind="dinner", location="Martigny",
                                      starts_at=timezone.now() + timedelta(days=3))
-        old = Event.objects.create(title="Soirée passée", kind="apero", location="Sion",
+        old = Event.objects.create(is_published=True, title="Soirée passée", kind="apero", location="Sion",
                                    starts_at=timezone.now() - timedelta(days=3))
         Connection.link(alice, crowd[0], event=old)
         InvitationRequest.objects.create(first_name="Marie", last_name="Dupont", company="Dupont SA",

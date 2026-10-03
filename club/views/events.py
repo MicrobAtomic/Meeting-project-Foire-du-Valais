@@ -8,7 +8,7 @@ from django.views.decorators.http import require_POST
 
 from club.decorators import member_required
 from club.models import RSVP, Event
-from club.services.events import attendees
+from club.services.events import attendees, visible_events
 from club.services.federation import collected_ids
 from club.services.intros import intros_for, seats_for
 
@@ -21,7 +21,7 @@ def visible_intros(member, event):
 @member_required
 def event_list(request):
     now = timezone.now()
-    events = Event.objects.annotate(yes_count=Count("rsvps", filter=Q(rsvps__status=RSVP.Status.YES)))
+    events = visible_events(request.member).annotate(yes_count=Count("rsvps", filter=Q(rsvps__status=RSVP.Status.YES)))
     answers = dict(RSVP.objects.filter(member=request.member).values_list("event_id", "status"))
     context = {
         "upcoming": [(e, answers.get(e.pk)) for e in events.filter(starts_at__gte=now).order_by("starts_at")],
@@ -33,7 +33,7 @@ def event_list(request):
 @member_required
 def event_detail(request, pk):
     me = request.member
-    event = get_object_or_404(Event, pk=pk)
+    event = get_object_or_404(visible_events(me), pk=pk)
     answer = RSVP.objects.filter(event=event, member=me).values_list("status", flat=True).first()
     registered = answer == RSVP.Status.YES
     collected = collected_ids(me)
@@ -61,12 +61,15 @@ def event_detail(request, pk):
 @member_required
 @require_POST
 def event_rsvp(request, pk):
-    event = get_object_or_404(Event, pk=pk)
+    event = get_object_or_404(visible_events(request.member), pk=pk)
     status = request.POST.get("status")
     if status not in RSVP.Status.values:
         return HttpResponseBadRequest("Invalid status")
     if event.is_past:
         messages.error(request, _("Cet événement est déjà passé."))
+        return redirect("club:event_detail", pk=event.pk)
+    if not event.responses_open:
+        messages.error(request, _("Les réponses sont fermées pour cet événement."))
         return redirect("club:event_detail", pk=event.pk)
     RSVP.objects.update_or_create(event=event, member=request.member, defaults={"status": status})
     if status == RSVP.Status.YES:

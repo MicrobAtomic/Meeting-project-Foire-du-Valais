@@ -157,15 +157,15 @@ class Command(BaseCommand):
         # introductions of the demo storyline stay identical after every --reset.
         # Texts in French, German and English: "Soirée Wow" is a brand name and keeps no translation (the French shows).
         past = [
-            Event.objects.create(pk=1, title="Conférence de presse de la Foire", title_de="Medienkonferenz der Foire",
+            Event.objects.create(is_published=True, pk=1, title="Conférence de presse de la Foire", title_de="Medienkonferenz der Foire",
                                  title_en="Foire press conference", kind=Event.Kind.CONFERENCE,
                                  starts_at=at(-120, 10, 0), location="CERM, Martigny"),
-            Event.objects.create(pk=2, title="Apéro des membres", title_de="Mitglieder-Apéro", title_en="Members' drinks",
+            Event.objects.create(is_published=True, pk=2, title="Apéro des membres", title_de="Mitglieder-Apéro", title_en="Members' drinks",
                                  kind=Event.Kind.APERO, starts_at=at(-60), location="Caveau du Club, Martigny"),
-            Event.objects.create(pk=3, title="Soirée Wow", kind=Event.Kind.DINNER,
+            Event.objects.create(is_published=True, pk=3, title="Soirée Wow", kind=Event.Kind.DINNER,
                                  starts_at=at(-3, 19, 0), location="CERM, Martigny"),
         ]
-        upcoming = Event.objects.create(
+        upcoming = Event.objects.create(is_published=True,
             pk=4, title="Dîner d'automne", title_de="Herbstdinner", title_en="Autumn dinner",
             kind=Event.Kind.DINNER, starts_at=at(12, 19, 0),
             location="Salle des Bisses, Martigny", has_seating=True, has_bingo=True,
@@ -174,7 +174,7 @@ class Command(BaseCommand):
             description_de="Stehapéro mit Begegnungs-Bingo, dann drei Gänge an drei verschiedenen Tischen: Wir mischen uns!",
             description_en="Standing drinks with people bingo, then three courses at three different tables: let's mingle!",
         )
-        later = Event.objects.create(
+        later = Event.objects.create(is_published=True,
             pk=5, title="Apéro de Noël", title_de="Weihnachtsapéro", title_en="Christmas drinks",
             kind=Event.Kind.APERO, starts_at=at(75), has_bingo=True,
             location="Lieu surprise (navette depuis la gare de Martigny)",

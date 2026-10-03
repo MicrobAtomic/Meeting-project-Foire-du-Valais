@@ -11,7 +11,7 @@ from club.tests.helpers import assert_csp_clean, make_member, make_staff
 
 class BadgesTests(TestCase):
     def setUp(self):
-        self.event = Event.objects.create(title="Dîner badges", kind="dinner", location="Martigny",
+        self.event = Event.objects.create(is_published=True, title="Dîner badges", kind="dinner", location="Martigny",
                                           starts_at=timezone.now() + timedelta(days=3))
         self.members = [make_member(f"m{i}@example.com", first_name=f"Prénom{i:02d}", last_name=f"Nom{i:02d}",
                                     company=f"Société {i:02d} SA") for i in range(9)]
@@ -61,7 +61,7 @@ class BadgesTests(TestCase):
         self.assertEqual(response.content.decode().count("print:break-after-page"), 1)
 
     def test_empty_event_explains_itself(self):
-        empty = Event.objects.create(title="Vide", kind="apero", location="Sion", starts_at=timezone.now() + timedelta(days=9))
+        empty = Event.objects.create(is_published=True, title="Vide", kind="apero", location="Sion", starts_at=timezone.now() + timedelta(days=9))
         response = self.client.get(reverse("club:staff_badges", args=[empty.pk]))
         self.assertContains(response, "Aucun inscrit pour l")
         self.assertNotContains(response, "data-print")

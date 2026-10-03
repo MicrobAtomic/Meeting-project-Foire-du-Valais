@@ -1,0 +1,9 @@
+{% load i18n %}{{ event.localized_title }}
+{{ date }} · {{ event.localized_location }}
+
+{% blocktranslate %}Salut {{ name }},{% endblocktranslate %}
+{% translate "Découvre cet événement et indique ta réponse sur le site." %}
+{{ link }}
+
+{% translate "Mes préférences email" %} : {{ preferences_url }}
+{{ site_name }}

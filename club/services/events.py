@@ -24,7 +24,11 @@ def connected_pairs(member_ids) -> set[tuple[int, int]]:
 
 def current_event():
     """Event taking place today (used to tag the connections made during it)."""
-    return Event.objects.filter(starts_at__date=timezone.localdate()).first()
+    return visible_events().filter(cancelled_at__isnull=True, starts_at__date=timezone.localdate()).first()
+
+
+def visible_events(member=None):
+    return Event.objects.filter(is_published=True)
 
 
 @transaction.atomic

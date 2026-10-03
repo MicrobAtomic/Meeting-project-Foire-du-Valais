@@ -1,0 +1,6 @@
+{% load i18n %}<html><body><h1>{% translate "Bienvenue au Club des Affaires" %}</h1>
+<p>{% blocktranslate %}Salut {{ name }},{% endblocktranslate %}</p>
+<p>{% translate "Ton compte est prêt. Complète ton profil pour préparer tes rencontres." %}</p>
+<p><a href="{{ link }}">{% translate "Se connecter" %}</a></p>
+<p>{% blocktranslate %}Ce lien est valable {{ minutes }} minutes et utilisable une seule fois.{% endblocktranslate %}</p>
+<p>{{ site_name }}</p></body></html>

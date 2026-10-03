@@ -40,7 +40,7 @@ class AccessMatrixTests(TestCase):
     def setUp(self):
         self.alice = make_member("alice@example.com")
         self.bob = make_member("bob@example.com")
-        self.event = Event.objects.create(title="Dîner", kind="dinner", location="Martigny", starts_at="2030-01-01T18:00Z")
+        self.event = Event.objects.create(is_published=True, title="Dîner", kind="dinner", location="Martigny", starts_at="2030-01-01T18:00Z")
         self.bob.photo = "member_photos/matrix.jpg"
         from unittest.mock import patch
         from io import BytesIO

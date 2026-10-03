@@ -11,7 +11,7 @@ from club.tests.helpers import make_member
 
 class IntrosTests(TestCase):
     def setUp(self):
-        self.event = Event.objects.create(title="Dîner", kind="dinner", location="Martigny",
+        self.event = Event.objects.create(is_published=True, title="Dîner", kind="dinner", location="Martigny",
                                           starts_at=timezone.now() + timedelta(days=5), has_seating=True)
         self.alice = make_member("alice@example.com")
         self.bob = make_member("bob@example.com")

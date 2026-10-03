@@ -12,7 +12,7 @@ from club.tests.helpers import assert_csp_clean, make_member, make_staff
 
 
 def make_event(days=5, **extra):
-    fields = {"title": "Dîner d'essai", "kind": "dinner", "location": "Martigny", "has_seating": True,
+    fields = {"is_published": True, "title": "Dîner d'essai", "kind": "dinner", "location": "Martigny", "has_seating": True,
               "starts_at": timezone.now() + timedelta(days=days)}
     fields.update(extra)
     return Event.objects.create(**fields)

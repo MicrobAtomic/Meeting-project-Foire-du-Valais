@@ -13,7 +13,7 @@ class EventLanguagesTests(TestCase):
     """Event texts are typed in French and, optionally, in German and English: the page shows the reader's language."""
 
     def setUp(self):
-        self.event = Event.objects.create(
+        self.event = Event.objects.create(is_published=True,
             title="Apéro de Noël", title_de="Weihnachtsapéro", kind="apero", starts_at=timezone.now() + timedelta(days=9),
             location="Lieu surprise", location_de="Überraschungsort", location_en="Secret venue",
             description="On monte, il y aura de la neige.", description_de="Es geht bergauf, es wird Schnee liegen.",

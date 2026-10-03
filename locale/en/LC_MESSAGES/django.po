@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Club des Affaires\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 19:07+0200\n"
+"POT-Creation-Date: 2026-10-03 19:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Club des Affaires\n"
 "Language-Team: Club des Affaires\n"
@@ -38,6 +38,19 @@ msgstr "Regenerate the QR code (the old one will stop working)"
 msgid "%(count)s QR code(s) régénéré(s)."
 msgstr "%(count)s QR code(s) regenerated."
 
+msgid "Publier et préparer l'annonce"
+msgstr "Publish and prepare announcement"
+
+msgid "Annonce préparée. L'envoi est traité par la commande périodique."
+msgstr "Announcement prepared. Sending is handled by the scheduled command."
+
+#| msgid "Voir l'événement"
+msgid "Annuler l'événement"
+msgstr "Cancel event"
+
+msgid "Événement annulé. Contacte les inscrits via le processus habituel de l'équipe."
+msgstr "Event cancelled. Contact attendees through the team’s usual process."
+
 msgid "inscrits"
 msgstr "attendees"
 
@@ -70,15 +83,21 @@ msgstr "Mark as contacted"
 msgid "Marquer comme refusée"
 msgstr "Mark as declined"
 
-msgid "Envoyer l'accès au compte accepté"
-msgstr "Send access to the accepted account"
+#| msgid "Envoyer l'accès au compte accepté"
+msgid "Préparer l'accès au compte accepté"
+msgstr "Prepare access to the accepted account"
 
-#| msgid "Lien de connexion"
-msgid "Lien de connexion envoyé."
-msgstr "Login link sent."
+msgid "Accès préparé dans la file d'emails."
+msgstr "Access prepared in the email queue."
 
-msgid "Envoi impossible. Le compte reste disponible."
-msgstr "Sending failed. The account remains available."
+msgid "États des envois"
+msgstr "Delivery statuses"
+
+msgid "Réessayer les échecs confirmés uniquement"
+msgstr "Retry confirmed failures only"
+
+msgid "Échecs confirmés replanifiés. Les résultats incertains nécessitent une revue manuelle."
+msgstr "Confirmed failures rescheduled. Uncertain outcomes require manual review."
 
 msgid "E-mail ou mot de passe incorrect."
 msgstr "Wrong e-mail or password."
@@ -263,7 +282,6 @@ msgstr "profile completed"
 msgid "Coché automatiquement quand le membre a choisi ses affinités."
 msgstr "Ticked automatically once the member has picked their tastes."
 
-#| msgid "Langues parlées"
 msgid "Langue des emails"
 msgstr "Email language"
 
@@ -273,11 +291,9 @@ msgstr "Digest introduction"
 msgid "membre"
 msgstr "member"
 
-#| msgid "Tous les événements"
 msgid "Annonces des événements"
 msgstr "Event announcements"
 
-#| msgid "Ta réponse"
 msgid "Relances sans réponse"
 msgstr "Reminders when unanswered"
 
@@ -346,6 +362,13 @@ msgstr "type"
 
 msgid "début"
 msgstr "start"
+
+msgid "Publié"
+msgstr "Published"
+
+#| msgid "bingo des rencontres"
+msgid "Fin des réponses"
+msgstr "Response deadline"
 
 msgid "lieu"
 msgstr "place"
@@ -464,6 +487,39 @@ msgstr "invitation request"
 msgid "demandes d'invitation"
 msgstr "invitation requests"
 
+msgid "Bienvenue"
+msgstr "Welcome"
+
+msgid "Annonce"
+msgstr "Announcement"
+
+msgid "Relance"
+msgstr "Reminder"
+
+#| msgid "membres"
+msgid "Nouveaux membres"
+msgstr "New members"
+
+#| msgid "atteint"
+msgid "En attente"
+msgstr "Pending"
+
+msgid "En cours d'envoi"
+msgstr "Sending"
+
+#| msgid "Acceptée"
+msgid "Accepté par SMTP"
+msgstr "Accepted by SMTP"
+
+msgid "Ignoré"
+msgstr "Skipped"
+
+msgid "Échec confirmé"
+msgstr "Confirmed failure"
+
+msgid "Résultat incertain"
+msgstr "Uncertain result"
+
 msgid "adore"
 msgstr "loves"
 
@@ -563,6 +619,22 @@ msgstr "No more strangers"
 msgid "Tout le monde se connaît : la grande fête du Club."
 msgstr "Everybody knows everybody: the Club's big party."
 
+msgid "Vérifie le titre, le lieu, la date future et la fin des réponses avant publication."
+msgstr "Check the title, venue, future date and response deadline before publishing."
+
+#| msgid "Club des Affaires"
+msgid "Bienvenue au Club des Affaires"
+msgstr "Welcome to the Club des Affaires"
+
+#, python-format
+#| msgid "Tous les événements"
+msgid "Nouvel événement : %(title)s"
+msgstr "New event: %(title)s"
+
+#, python-format
+msgid "Ta réponse pour : %(title)s"
+msgstr "Your response for: %(title)s"
+
 msgid "Photo invalide : JPEG, PNG ou WebP non animé, 2 Mio et 4096 × 4096 pixels maximum."
 msgstr "Invalid photo: non-animated JPEG, PNG or WebP, at most 2 MiB and 4096 × 4096 pixels."
 
@@ -620,6 +692,9 @@ msgstr "Course %(number)s"
 
 msgid "Cet événement est déjà passé."
 msgstr "This event has already taken place."
+
+msgid "Les réponses sont fermées pour cet événement."
+msgstr "Responses are closed for this event."
 
 msgid "C'est noté, à bientôt ! 🥂"
 msgstr "Noted, see you soon! 🥂"
@@ -797,6 +872,10 @@ msgstr "Try other filters."
 
 msgid "Tous les événements"
 msgstr "All events"
+
+#| msgid "Événements"
+msgid "Événement annulé"
+msgstr "Event cancelled"
 
 msgid "Tables tournantes : à chaque service, tu changes de table pour rencontrer de nouvelles personnes."
 msgstr "Rotating tables: at every course you change tables to meet new people."
@@ -1061,6 +1140,24 @@ msgstr "Add this card to your album: you'll then be able to swap contact details
 msgid "Ajouter %(name)s à mon album"
 msgstr "Add %(name)s to my album"
 
+#, python-format
+#| msgid "Salut %(name)s 👋"
+msgid "Salut %(name)s,"
+msgstr "Hi %(name)s,"
+
+msgid "Découvre cet événement et indique ta réponse sur le site."
+msgstr "Discover this event and submit your response on the website."
+
+msgid "Ton compte est prêt. Complète ton profil pour préparer tes rencontres."
+msgstr "Your account is ready. Complete your profile to prepare for your meetings."
+
+msgid "Se connecter"
+msgstr "Log in"
+
+#, python-format
+msgid "Ce lien est valable %(minutes)s minutes et utilisable une seule fois."
+msgstr "This link is valid for %(minutes)s minutes and can be used only once."
+
 msgid "Demander une invitation"
 msgstr "Request an invitation"
 
@@ -1086,9 +1183,6 @@ msgstr "Send my request"
 
 msgid "Déjà membre ?"
 msgstr "Already a member?"
-
-msgid "Se connecter"
-msgstr "Log in"
 
 msgid "Merci !"
 msgstr "Thank you!"
@@ -1313,6 +1407,9 @@ msgstr "Everybody is well connected 🎉"
 
 msgid "Ouvrir l'administration"
 msgstr "Open the admin"
+
+msgid "Publication et emails"
+msgstr "Publication and emails"
 
 msgid "Un badge par inscrit à imprimer sur feuilles A4 : prénom, entreprise, sujet de conversation et QR code."
 msgstr "One badge per attendee to print on A4 sheets: first name, company, conversation topic and QR code."

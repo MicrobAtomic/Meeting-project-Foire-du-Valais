@@ -198,6 +198,10 @@ class Event(models.Model):
     title_en = models.CharField(_("titre (anglais)"), max_length=150, blank=True, help_text=_("Facultatif : vide, le texte français s'affiche."))
     kind = models.CharField(_("type"), max_length=12, choices=Kind.choices)
     starts_at = models.DateTimeField(_("début"))
+    is_published = models.BooleanField(_("Publié"), default=False, editable=False)
+    published_at = models.DateTimeField(null=True, blank=True, editable=False)
+    cancelled_at = models.DateTimeField(null=True, blank=True, editable=False)
+    rsvp_deadline = models.DateTimeField(_("Fin des réponses"), null=True, blank=True)
     location = models.CharField(_("lieu"), max_length=150)
     location_de = models.CharField(_("lieu (allemand)"), max_length=150, blank=True, help_text=_("Facultatif : vide, le texte français s'affiche."))
     location_en = models.CharField(_("lieu (anglais)"), max_length=150, blank=True, help_text=_("Facultatif : vide, le texte français s'affiche."))
@@ -242,6 +246,11 @@ class Event(models.Model):
     @property
     def is_past(self):
         return self.starts_at < timezone.now()
+
+    @property
+    def responses_open(self):
+        now = timezone.now()
+        return self.is_published and not self.cancelled_at and now < min(self.rsvp_deadline or self.starts_at, self.starts_at)
 
 
 class RSVP(models.Model):
@@ -386,6 +395,45 @@ class InvitationRequest(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} ({self.company})"
+
+
+class NotificationCampaign(models.Model):
+    class Kind(models.TextChoices):
+        WELCOME = "welcome", _("Bienvenue")
+        ANNOUNCEMENT = "event_announcement", _("Annonce")
+        REMINDER = "event_reminder", _("Relance")
+        DIGEST = "new_members", _("Nouveaux membres")
+
+    kind = models.CharField(max_length=24, choices=Kind.choices)
+    scope_key = models.CharField(max_length=120, unique=True)
+    event = models.ForeignKey(Event, on_delete=models.SET_NULL, null=True, blank=True, related_name="notification_campaigns")
+    invitation = models.ForeignKey(InvitationRequest, on_delete=models.SET_NULL, null=True, blank=True)
+    month = models.DateField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    cancelled_at = models.DateTimeField(null=True, blank=True)
+
+
+class NotificationDelivery(models.Model):
+    class Status(models.TextChoices):
+        PENDING = "pending", _("En attente")
+        SENDING = "sending", _("En cours d'envoi")
+        SENT = "sent", _("Accepté par SMTP")
+        SKIPPED = "skipped", _("Ignoré")
+        FAILED = "failed", _("Échec confirmé")
+        UNCERTAIN = "uncertain", _("Résultat incertain")
+
+    campaign = models.ForeignKey(NotificationCampaign, on_delete=models.PROTECT, related_name="deliveries")
+    recipient = models.ForeignKey(Member, on_delete=models.CASCADE, related_name="notification_deliveries")
+    status = models.CharField(max_length=10, choices=Status.choices, default=Status.PENDING)
+    attempts = models.PositiveSmallIntegerField(default=0)
+    next_attempt_at = models.DateTimeField(default=timezone.now)
+    claimed_at = models.DateTimeField(null=True, blank=True)
+    sent_at = models.DateTimeField(null=True, blank=True)
+    last_error_code = models.CharField(max_length=40, blank=True)
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=["campaign", "recipient"], name="unique_campaign_recipient")]
+        indexes = [models.Index(fields=["status", "next_attempt_at"], name="notification_due")]
 
 
 class BingoSquare(models.Model):

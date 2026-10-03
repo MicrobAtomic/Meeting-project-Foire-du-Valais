@@ -20,7 +20,7 @@ from club.forms import EmailPreferencesForm, MemberProfileForm, PersonalNoteForm
 from club.services.access import visible_target
 from club.services.notes import get_personal_note, save_personal_note
 from club.models import RSVP, Connection, EmailPreferences, Event, Member, MemberTag, Sector, Tag
-from club.services.events import current_event
+from club.services.events import current_event, visible_events
 from club.services.federation import club_stats, collected_ids, collection_progress
 from club.services.intros import intros_for
 from club.services.milestones import album_goal, club_progress
@@ -41,7 +41,7 @@ STATUS_CHOICES = [
 def home(request):
     collected, total = collection_progress(request.member)
     stats = club_stats()
-    next_event = Event.objects.filter(starts_at__gte=timezone.now()).order_by("starts_at").first()
+    next_event = visible_events(request.member).filter(cancelled_at__isnull=True, starts_at__gte=timezone.now()).order_by("starts_at").first()
     answer = None
     next_intros = []
     if next_event:

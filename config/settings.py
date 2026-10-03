@@ -1,5 +1,6 @@
 import os
 import sys
+from urllib.parse import urlsplit
 from pathlib import Path
 
 import dj_database_url
@@ -121,6 +122,14 @@ EMAIL_PORT = int(os.environ.get("EMAIL_PORT", "25"))
 EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "")
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
 EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS", "0") == "1"
+EMAIL_TIMEOUT = 10
+NOTIFICATIONS_ENABLED = os.environ.get("NOTIFICATIONS_ENABLED", "0") == "1"
+PUBLIC_BASE_URL = os.environ.get("PUBLIC_BASE_URL", os.environ.get("RENDER_EXTERNAL_URL", "http://127.0.0.1:8000" if DEBUG or TESTING else "")).rstrip("/")
+_public_origin = urlsplit(PUBLIC_BASE_URL)
+if (_public_origin.scheme not in ("http", "https") or not _public_origin.netloc or _public_origin.path
+        or _public_origin.query or _public_origin.fragment or _public_origin.username or _public_origin.password
+        or (not DEBUG and not TESTING and _public_origin.scheme != "https")):
+    raise ImproperlyConfigured("PUBLIC_BASE_URL must be an origin, HTTPS in production.")
 SITE_NAME = os.environ.get("SITE_NAME", "Club des Affaires")
 DEMO_MODE = os.environ.get("DEMO_MODE", "1") == "1"  # shows the "fictitious data" banner
 MEDIA_ROOT = Path(os.environ.get("MEDIA_ROOT", BASE_DIR / "media"))

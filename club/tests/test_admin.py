@@ -14,7 +14,7 @@ class AdminTests(TestCase):
         self.admin_user = get_user_model().objects.create_superuser("admin@example.com", "admin@example.com", PASSWORD)
         self.client.force_login(self.admin_user)
         self.members = [make_member(f"m{i}@example.com", sector=["tech", "finance"][i % 2]) for i in range(8)]
-        self.event = Event.objects.create(title="Dîner", kind="dinner", location="Martigny",
+        self.event = Event.objects.create(is_published=True, title="Dîner", kind="dinner", location="Martigny",
                                           starts_at=timezone.now() + timedelta(days=3), has_seating=True)
         for member in self.members:
             RSVP.objects.create(event=self.event, member=member, status=RSVP.Status.YES)

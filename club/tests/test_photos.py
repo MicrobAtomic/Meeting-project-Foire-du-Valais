@@ -68,7 +68,7 @@ class PhotoTests(TestCase):
         self.assertEqual(response["Content-Type"], "image/jpeg")
         self.assertIn("no-store", response["Cache-Control"])
         self.assertIn("Cookie", response["Vary"])
-        response.close()
+        self.assertTrue(b"".join(response.streaming_content).startswith(b"\xff\xd8"))
         self.assertEqual(self.client.post(url).status_code, 405)
         self.b.visible_in_directory = False
         self.b.save()

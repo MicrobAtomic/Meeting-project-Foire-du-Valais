@@ -42,6 +42,8 @@ def accept_invitation(invitation_id, actor):
             invitation.member = member
             invitation.status = InvitationRequest.Status.ACCEPTED
             invitation.save(update_fields=["member", "status"])
+            from club.services.notifications import queue_welcome
+            queue_welcome(invitation)
     except IntegrityError:
         raise ValidationError(_("Un compte utilise déjà cette adresse : rapprochement manuel nécessaire.")) from None
     return member

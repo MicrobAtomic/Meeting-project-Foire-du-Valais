@@ -10,9 +10,9 @@
     <div class="flex items-start gap-3">
       <div class="text-3xl" aria-hidden="true">{{ e|kind_emoji }}</div>
       <div class="min-w-0 flex-1">
-        <h3 class="font-semibold">{{ e.title }}</h3>
+        <h3 class="font-semibold">{{ e.localized_title }}</h3>{% if e.cancelled_at %}<p class="chip">{% translate "Événement annulé" %}</p>{% endif %}
         <p class="text-sm text-stone-600">{{ e.starts_at|datetime_short }}</p>
-        <p class="text-sm text-stone-600">📍 {{ e.location }}</p>
+        <p class="text-sm text-stone-600">📍 {{ e.localized_location }}</p>
       </div>
     </div>
     <div class="flex items-center justify-between border-t border-stone-100 pt-2 text-sm">
@@ -35,8 +35,8 @@
     <div class="flex items-start gap-3">
       <div class="text-2xl" aria-hidden="true">{{ e|kind_emoji }}</div>
       <div class="min-w-0 flex-1">
-        <h3 class="font-semibold">{{ e.title }}</h3>
-        <p class="text-sm text-stone-600">{{ e.starts_at|date_long }} · {{ e.location }}</p>
+        <h3 class="font-semibold">{{ e.localized_title }}</h3>{% if e.cancelled_at %}<p class="chip">{% translate "Événement annulé" %}</p>{% endif %}
+        <p class="text-sm text-stone-600">{{ e.starts_at|date_long }} · {{ e.localized_location }}</p>
       </div>
       {% if status == "yes" %}<span class="text-sm font-medium text-emerald-700">✅ {% translate "Tu y étais" %}</span>{% endif %}
     </div>

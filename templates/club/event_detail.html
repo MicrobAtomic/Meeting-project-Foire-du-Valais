@@ -1,5 +1,5 @@
 {% extends "base.html" %}{% load i18n club_ui %}
-{% block title %}{{ event.title }} · {{ SITE_NAME }}{% endblock %}
+{% block title %}{{ event.localized_title }} · {{ SITE_NAME }}{% endblock %}
 {% block content %}
 <div class="space-y-5">
   <p><a href="{% url 'club:event_list' %}" class="text-sm text-stone-600 hover:text-red-700">← {% translate "Tous les événements" %}</a></p>
@@ -8,16 +8,17 @@
     <div class="flex items-start gap-3">
       <div class="text-4xl" aria-hidden="true">{{ event|kind_emoji }}</div>
       <div class="min-w-0">
-        <h1 class="text-2xl font-semibold">{{ event.title }}</h1>
+        <h1 class="text-2xl font-semibold">{{ event.localized_title }}</h1>
         <p class="text-stone-600">{{ event.starts_at|datetime_long }}</p>
-        <p class="text-stone-600">📍 {{ event.location }}</p>
+        <p class="text-stone-600">📍 {{ event.localized_location }}</p>
       </div>
     </div>
-    {% if event.description %}<p class="pt-1 text-sm">{{ event.description }}</p>{% endif %}
+    {% if event.localized_description %}<p class="pt-1 text-sm">{{ event.localized_description }}</p>{% endif %}
+    {% if event.cancelled_at %}<p class="chip">{% translate "Événement annulé" %}</p>{% endif %}
     {% if event.has_seating %}<p class="text-sm text-stone-600">🔀 {% translate "Tables tournantes : à chaque service, tu changes de table pour rencontrer de nouvelles personnes." %}</p>{% endif %}
   </section>
 
-  {% if not event.is_past %}
+  {% if event.responses_open %}
   <section class="card space-y-3">
     <h2 class="font-semibold">{% translate "Ta réponse" %}</h2>
     <form method="post" action="{% url 'club:event_rsvp' event.pk %}" class="flex flex-wrap gap-2">

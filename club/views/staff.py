@@ -1,6 +1,7 @@
 from datetime import timedelta
 
 from django.contrib import messages
+from django.core.exceptions import ValidationError
 from django.db.models import Count, Q
 from django.http import HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect, render
@@ -14,6 +15,7 @@ from club.decorators import staff_required
 from club.forms import SeatingForm
 from club.models import RSVP, Event, InvitationRequest, Match, SeatingPlan, Tag
 from club.services.events import attendees, generate_matches, generate_seating
+from club.services.notifications import cancel_event, publish_event
 from club.services.federation import (
     active_connections,
     active_members,
@@ -91,6 +93,17 @@ def event_tools(request, pk):
     seating_form = SeatingForm()
     if request.method == "POST":
         action = request.POST.get("action")
+        if action in ("publish", "cancel"):
+            try:
+                if action == "publish":
+                    publish_event(event.pk, request.user)
+                    messages.success(request, _("Annonce préparée. L'envoi est traité par la commande périodique."))
+                else:
+                    cancel_event(event.pk, request.user)
+                    messages.info(request, _("Événement annulé. Contacte les inscrits via le processus habituel de l'équipe."))
+            except ValidationError as error:
+                messages.error(request, " ".join(error.messages))
+            return redirect("club:staff_event", pk=event.pk)
         if action == "matches":
             count = generate_matches(event)
             messages.success(request, ngettext("%(count)s rencontre générée.", "%(count)s rencontres générées.", count) % {"count": count})

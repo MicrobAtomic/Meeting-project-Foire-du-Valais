@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Club des Affaires\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 19:07+0200\n"
+"POT-Creation-Date: 2026-10-03 19:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Club des Affaires\n"
 "Language-Team: Club des Affaires\n"
@@ -38,6 +38,19 @@ msgstr "QR-Code neu erzeugen (der alte funktioniert dann nicht mehr)"
 msgid "%(count)s QR code(s) régénéré(s)."
 msgstr "%(count)s QR-Code(s) neu erzeugt."
 
+msgid "Publier et préparer l'annonce"
+msgstr "Veröffentlichen und Ankündigung vorbereiten"
+
+msgid "Annonce préparée. L'envoi est traité par la commande périodique."
+msgstr "Ankündigung vorbereitet. Der Versand erfolgt durch den regelmässigen Auftrag."
+
+#| msgid "Voir l'événement"
+msgid "Annuler l'événement"
+msgstr "Veranstaltung absagen"
+
+msgid "Événement annulé. Contacte les inscrits via le processus habituel de l'équipe."
+msgstr "Veranstaltung abgesagt. Informiere die Angemeldeten über den üblichen Ablauf des Teams."
+
 msgid "inscrits"
 msgstr "Angemeldete"
 
@@ -70,15 +83,21 @@ msgstr "Als kontaktiert markieren"
 msgid "Marquer comme refusée"
 msgstr "Als abgelehnt markieren"
 
-msgid "Envoyer l'accès au compte accepté"
-msgstr "Zugang zum angenommenen Konto senden"
+#| msgid "Envoyer l'accès au compte accepté"
+msgid "Préparer l'accès au compte accepté"
+msgstr "Zugang zum angenommenen Konto vorbereiten"
 
-#| msgid "Lien de connexion"
-msgid "Lien de connexion envoyé."
-msgstr "Anmeldelink gesendet."
+msgid "Accès préparé dans la file d'emails."
+msgstr "Zugang in der E-Mail-Warteschlange vorbereitet."
 
-msgid "Envoi impossible. Le compte reste disponible."
-msgstr "Versand fehlgeschlagen. Das Konto bleibt verfügbar."
+msgid "États des envois"
+msgstr "Versandstatus"
+
+msgid "Réessayer les échecs confirmés uniquement"
+msgstr "Nur bestätigte Fehler erneut versuchen"
+
+msgid "Échecs confirmés replanifiés. Les résultats incertains nécessitent une revue manuelle."
+msgstr "Bestätigte Fehler neu geplant. Unklare Ergebnisse müssen manuell geprüft werden."
 
 msgid "E-mail ou mot de passe incorrect."
 msgstr "E-Mail oder Passwort falsch."
@@ -263,7 +282,6 @@ msgstr "Profil ausgefüllt"
 msgid "Coché automatiquement quand le membre a choisi ses affinités."
 msgstr "Wird automatisch angekreuzt, sobald das Mitglied seine Vorlieben gewählt hat."
 
-#| msgid "Langues parlées"
 msgid "Langue des emails"
 msgstr "Sprache der E-Mails"
 
@@ -273,11 +291,9 @@ msgstr "Kurztext für die Zusammenfassung"
 msgid "membre"
 msgstr "Mitglied"
 
-#| msgid "Tous les événements"
 msgid "Annonces des événements"
 msgstr "Veranstaltungsankündigungen"
 
-#| msgid "Ta réponse"
 msgid "Relances sans réponse"
 msgstr "Erinnerungen ohne Antwort"
 
@@ -346,6 +362,13 @@ msgstr "Art"
 
 msgid "début"
 msgstr "Beginn"
+
+msgid "Publié"
+msgstr "Veröffentlicht"
+
+#| msgid "bingo des rencontres"
+msgid "Fin des réponses"
+msgstr "Antwortfrist"
 
 msgid "lieu"
 msgstr "Ort"
@@ -464,6 +487,39 @@ msgstr "Einladungsanfrage"
 msgid "demandes d'invitation"
 msgstr "Einladungsanfragen"
 
+msgid "Bienvenue"
+msgstr "Willkommen"
+
+msgid "Annonce"
+msgstr "Ankündigung"
+
+msgid "Relance"
+msgstr "Erinnerung"
+
+#| msgid "membres"
+msgid "Nouveaux membres"
+msgstr "Neue Mitglieder"
+
+#| msgid "atteint"
+msgid "En attente"
+msgstr "Ausstehend"
+
+msgid "En cours d'envoi"
+msgstr "Wird gesendet"
+
+#| msgid "Acceptée"
+msgid "Accepté par SMTP"
+msgstr "Von SMTP angenommen"
+
+msgid "Ignoré"
+msgstr "Übersprungen"
+
+msgid "Échec confirmé"
+msgstr "Bestätigter Fehler"
+
+msgid "Résultat incertain"
+msgstr "Unklares Ergebnis"
+
 msgid "adore"
 msgstr "liebt"
 
@@ -563,6 +619,22 @@ msgstr "Nie mehr Fremde"
 msgid "Tout le monde se connaît : la grande fête du Club."
 msgstr "Alle kennen sich: das grosse Fest des Clubs."
 
+msgid "Vérifie le titre, le lieu, la date future et la fin des réponses avant publication."
+msgstr "Prüfe Titel, Ort, zukünftiges Datum und Antwortfrist vor der Veröffentlichung."
+
+#| msgid "Club des Affaires"
+msgid "Bienvenue au Club des Affaires"
+msgstr "Willkommen im Club des Affaires"
+
+#, python-format
+#| msgid "Tous les événements"
+msgid "Nouvel événement : %(title)s"
+msgstr "Neue Veranstaltung: %(title)s"
+
+#, python-format
+msgid "Ta réponse pour : %(title)s"
+msgstr "Deine Antwort für: %(title)s"
+
 msgid "Photo invalide : JPEG, PNG ou WebP non animé, 2 Mio et 4096 × 4096 pixels maximum."
 msgstr "Ungültiges Foto: nicht animiertes JPEG, PNG oder WebP, maximal 2 MiB und 4096 × 4096 Pixel."
 
@@ -620,6 +692,9 @@ msgstr "Gang %(number)s"
 
 msgid "Cet événement est déjà passé."
 msgstr "Dieser Anlass ist bereits vorbei."
+
+msgid "Les réponses sont fermées pour cet événement."
+msgstr "Für diese Veranstaltung ist die Antwortfrist abgelaufen."
 
 msgid "C'est noté, à bientôt ! 🥂"
 msgstr "Notiert, bis bald! 🥂"
@@ -797,6 +872,10 @@ msgstr "Probiere andere Filter."
 
 msgid "Tous les événements"
 msgstr "Alle Anlässe"
+
+#| msgid "Événements"
+msgid "Événement annulé"
+msgstr "Veranstaltung abgesagt"
 
 msgid "Tables tournantes : à chaque service, tu changes de table pour rencontrer de nouvelles personnes."
 msgstr "Wechseltische: bei jedem Gang wechselst du den Tisch, um neue Leute kennenzulernen."
@@ -1061,6 +1140,24 @@ msgstr "Füge diese Karte deinem Album hinzu: dann könnt ihr eure Kontaktdaten 
 msgid "Ajouter %(name)s à mon album"
 msgstr "%(name)s zu meinem Album hinzufügen"
 
+#, python-format
+#| msgid "Salut %(name)s 👋"
+msgid "Salut %(name)s,"
+msgstr "Hallo %(name)s,"
+
+msgid "Découvre cet événement et indique ta réponse sur le site."
+msgstr "Entdecke diese Veranstaltung und gib deine Antwort auf der Website an."
+
+msgid "Ton compte est prêt. Complète ton profil pour préparer tes rencontres."
+msgstr "Dein Konto ist bereit. Vervollständige dein Profil, um deine Begegnungen vorzubereiten."
+
+msgid "Se connecter"
+msgstr "Anmelden"
+
+#, python-format
+msgid "Ce lien est valable %(minutes)s minutes et utilisable une seule fois."
+msgstr "Dieser Link ist %(minutes)s Minuten gültig und kann nur einmal verwendet werden."
+
 msgid "Demander une invitation"
 msgstr "Einladung anfragen"
 
@@ -1086,9 +1183,6 @@ msgstr "Anfrage senden"
 
 msgid "Déjà membre ?"
 msgstr "Schon Mitglied?"
-
-msgid "Se connecter"
-msgstr "Anmelden"
 
 msgid "Merci !"
 msgstr "Danke!"
@@ -1313,6 +1407,9 @@ msgstr "Alle sind gut vernetzt 🎉"
 
 msgid "Ouvrir l'administration"
 msgstr "Administration öffnen"
+
+msgid "Publication et emails"
+msgstr "Veröffentlichung und E-Mails"
 
 msgid "Un badge par inscrit à imprimer sur feuilles A4 : prénom, entreprise, sujet de conversation et QR code."
 msgstr "Ein Namensschild pro angemeldeter Person zum Drucken auf A4-Blättern: Vorname, Unternehmen, Gesprächsthema und QR-Code."

@@ -13,6 +13,8 @@ from club.models import (
     Match,
     Member,
     MemberTag,
+    NotificationCampaign,
+    NotificationDelivery,
     SeatAssignment,
     SeatingPlan,
     Tag,
@@ -22,6 +24,7 @@ from club.services.auth_links import send_login_link
 from club.forms import MemberAdminForm
 from club.services.photos import save_profile_photo
 from club.services.membership import accept_invitation
+from club.services.notifications import cancel_event, publish_event, queue_welcome, retry_confirmed_failures
 from django.core.exceptions import ValidationError
 from club.services.events import generate_matches, generate_seating
 from club.ui import RANK_STYLE
@@ -93,12 +96,28 @@ class RSVPInline(admin.TabularInline):
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    list_display = ["title", "kind", "starts_at", "location", "has_seating", "attendees"]
+    list_display = ["title", "kind", "starts_at", "location", "has_seating", "is_published", "attendees"]
+    readonly_fields = ["is_published", "published_at", "cancelled_at"]
     list_filter = ["kind", "has_seating"]
     search_fields = ["title", "location"]
     date_hierarchy = "starts_at"
     inlines = [RSVPInline]
-    actions = ["make_matches", "make_seating"]
+    actions = ["make_matches", "make_seating", "publish", "cancel"]
+
+    @admin.action(description=_("Publier et préparer l'annonce"))
+    def publish(self, request, queryset):
+        for event in queryset:
+            try:
+                publish_event(event.pk, request.user)
+                self.message_user(request, _("Annonce préparée. L'envoi est traité par la commande périodique."))
+            except ValidationError as error:
+                self.message_user(request, " ".join(error.messages), level=messages.ERROR)
+
+    @admin.action(description=_("Annuler l'événement"))
+    def cancel(self, request, queryset):
+        for event in queryset:
+            cancel_event(event.pk, request.user)
+        self.message_user(request, _("Événement annulé. Contacte les inscrits via le processus habituel de l'équipe."))
 
     def get_queryset(self, request):
         return super().get_queryset(request).annotate(
@@ -218,12 +237,42 @@ class InvitationRequestAdmin(admin.ModelAdmin):
     def mark_declined(self, request, queryset):
         queryset.exclude(status=InvitationRequest.Status.ACCEPTED).filter(member__isnull=True).update(status=InvitationRequest.Status.DECLINED)
 
-    @admin.action(description=_("Envoyer l'accès au compte accepté"))
+    @admin.action(description=_("Préparer l'accès au compte accepté"))
     def send_access(self, request, queryset):
         for invitation in queryset.filter(status=InvitationRequest.Status.ACCEPTED, member__isnull=False).select_related("member__user"):
             if invitation.member.user.is_active:
-                try:
-                    send_login_link(request, invitation.member)
-                    self.message_user(request, _("Lien de connexion envoyé."))
-                except Exception:
-                    self.message_user(request, _("Envoi impossible. Le compte reste disponible."), level=messages.ERROR)
+                queue_welcome(invitation)
+                self.message_user(request, _("Accès préparé dans la file d'emails."))
+
+
+class ReadOnlyNotificationAdmin(admin.ModelAdmin):
+    def get_readonly_fields(self, request, obj=None):
+        return [field.name for field in self.model._meta.fields]
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+@admin.register(NotificationCampaign)
+class NotificationCampaignAdmin(ReadOnlyNotificationAdmin):
+    list_display = ["scope_key", "kind", "created_at", "cancelled_at", "delivery_counts"]
+    list_filter = ["kind"]
+
+    @admin.display(description=_("États des envois"))
+    def delivery_counts(self, obj):
+        return ", ".join(f"{row['status']}: {row['count']}" for row in obj.deliveries.values("status").annotate(count=Count("pk")))
+
+
+@admin.register(NotificationDelivery)
+class NotificationDeliveryAdmin(ReadOnlyNotificationAdmin):
+    list_display = ["campaign", "recipient", "status", "attempts", "next_attempt_at", "sent_at", "last_error_code"]
+    list_filter = ["status", "campaign__kind"]
+    actions = ["retry_failed"]
+
+    @admin.action(description=_("Réessayer les échecs confirmés uniquement"))
+    def retry_failed(self, request, queryset):
+        retry_confirmed_failures(queryset)
+        self.message_user(request, _("Échecs confirmés replanifiés. Les résultats incertains nécessitent une revue manuelle."))

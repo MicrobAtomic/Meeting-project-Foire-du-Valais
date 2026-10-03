@@ -12,6 +12,13 @@
 
   <div class="no-print grid gap-4 md:grid-cols-2">
     <section class="card space-y-3 md:col-span-2">
+      <h2 class="font-semibold">{% translate "Publication et emails" %}</h2>
+      {% if event.cancelled_at %}<p>{% translate "Événement annulé" %}</p>
+      {% elif event.is_published %}<p>{% translate "Publié" %}</p>
+      {% else %}<form method="post">{% csrf_token %}<button type="submit" name="action" value="publish" class="btn btn-primary">{% translate "Publier et préparer l'annonce" %}</button></form>{% endif %}
+      {% if not event.cancelled_at %}<form method="post">{% csrf_token %}<button type="submit" name="action" value="cancel" class="btn btn-secondary">{% translate "Annuler l'événement" %}</button></form>{% endif %}
+    </section>
+    <section class="card space-y-3 md:col-span-2">
       <h2 class="font-semibold">🏷️ {% translate "Badges" %}</h2>
       <p class="text-sm text-stone-600">{% translate "Un badge par inscrit à imprimer sur feuilles A4 : prénom, entreprise, sujet de conversation et QR code." %}</p>
       <a href="{% url 'club:staff_badges' event.pk %}" class="btn btn-secondary">{% translate "Ouvrir les badges" %}</a>

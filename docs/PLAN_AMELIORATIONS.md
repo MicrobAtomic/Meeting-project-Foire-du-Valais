@@ -13,6 +13,7 @@ Les envois réels et les changements d'hébergement restent à configurer sépar
 
 | Phase | État | Vérifications / livraison |
 |---|---|---|
+| 6 | Terminée ; SMTP/cron non activés | 222 tests SQLite (2 cas PostgreSQL seuls) ; 219 tests PostgreSQL verts, dont publications et réservations concurrentes ; backend mémoire uniquement |
 | 5 | Terminée | 206 tests verts ; acceptation idempotente et rollback vérifiés ; préférences et langue enregistrées uniquement pour soi |
 | 4 | Livrée ; activation production en attente du volume | 201 tests verts ; normalisation et accès privé vérifiés ; Pillow 12.3 ; upload production désactivé ; procédure dans EXPLOITATION.md |
 | 3 | Terminée | 196 tests verts ; isolation des auteurs, CSRF, CSP, échappement, cache, contraintes et absence de fuite vérifiés |
@@ -438,21 +439,21 @@ Statuts de livraison : `pending`, `sending`, `sent`, `skipped`, `failed`, `uncer
 Conserver seulement les références nécessaires et les codes d'erreur, sans copies des notes, secrets ni corps d'emails.
 Le contenu est rendu au moment de l'envoi, après vérification des droits et préférences.
 
-- [ ] **6.1** Ajouter les champs, modèles, contraintes et index utiles : statut/date de tentative et campagne/destinataire.
+- [x] **6.1** Ajouter les champs, modèles, contraintes et index utiles : statut/date de tentative et campagne/destinataire.
   Les événements brouillons n'apparaissent ni sur l'accueil, ni dans la liste, ni par accès direct, ni au scan,
   ni aux membres invités ultérieurs. Le staff peut les préparer. Classer et tester les éventuelles routes ajoutées.
   Adapter les fixtures de nouveaux événements pour déclarer explicitement ceux qui sont publiés ; préserver les
   assertions de comportement des tests existants.
-- [ ] **6.2** Écrire `publish_event(event_id, actor)`. Dans une transaction, verrouiller l'événement, vérifier staff,
+- [x] **6.2** Écrire `publish_event(event_id, actor)`. Dans une transaction, verrouiller l'événement, vérifier staff,
   titre, date future, lieu, échéance cohérente et absence d'annulation. Marquer publié, puis créer une campagne
   `event:<pk>:announcement` et une livraison par membre actif avec annonces autorisées.
   Une sauvegarde ordinaire, une deuxième publication ou deux appels concurrents ne crée aucune seconde campagne.
-- [ ] **6.3** Ajouter les actions staff/admin « Publier et préparer l'annonce » et « Annuler l'événement ».
+- [x] **6.3** Ajouter les actions staff/admin « Publier et préparer l'annonce » et « Annuler l'événement ».
   Après publication, montrer « annonce préparée » et les compteurs. L'envoi part dans la commande, pas dans la requête.
   L'annulation retire les futures inscriptions et relances ; garder l'historique visible avec une mention « annulé ».
   La notification exceptionnelle d'annulation est un lot ultérieur : l'équipe doit contacter les inscrits via son
   processus habituel tant qu'elle n'existe pas. Ne pas créer un nouveau mail d'annonce en éditant une date ou un lieu.
-- [ ] **6.4** Utiliser une requête commune des événements visibles dans `home`, `event_list`, `event_detail`,
+- [x] **6.4** Utiliser une requête commune des événements visibles dans `home`, `event_list`, `event_detail`,
   `event_rsvp` et `current_event`. Refuser un RSVP après `rsvp_deadline`, après le début ou après annulation.
   Quand l'échéance est vide, prendre le début de l'événement. Les fenêtres et comparaisons utilisent des datetimes
   conscients du fuseau ; les dates affichées et le mois métier utilisent `Europe/Zurich`.
@@ -467,31 +468,31 @@ Ajouter `NOTIFICATIONS_ENABLED=False` par défaut pour rendre l'activation de l'
 La préparation et le mode aperçu restent disponibles quand ce réglage est désactivé ; l'envoi réel est refusé.
 Les tests activent ce réglage uniquement avec le backend mémoire.
 
-- [ ] **6.5** Créer des templates texte + HTML pour bienvenue, annonce et relance, dans la langue du destinataire.
+- [x] **6.5** Créer des templates texte + HTML pour bienvenue, annonce et relance, dans la langue du destinataire.
   Utiliser [EmailMultiAlternatives](https://docs.djangoproject.com/en/5.2/topics/email/) et une connexion SMTP réutilisée
   par lot. L'email d'événement montre titre, date, lieu et un bouton vers la page privée de l'événement.
   Le clic n'inscrit jamais quelqu'un : connexion si nécessaire, puis réponse par POST/CSRF sur le site.
-- [ ] **6.6** Pour la bienvenue, générer le lien magique **au moment de l'envoi** : un jeton préparé des heures
+- [x] **6.6** Pour la bienvenue, générer le lien magique **au moment de l'envoi** : un jeton préparé des heures
   avant serait périmé. Préparer la campagne `invitation:<pk>:welcome` dans la transaction d'acceptation de phase 5.
   Renseigner `welcome_sent_at` uniquement lorsque SMTP accepte le message. Une panne mail ne défait pas le compte.
   Ne pas ajouter des liens magiques valables 15 minutes aux annonces et récapitulatifs destinés à être lus plus tard.
-- [ ] **6.7** Écrire `process_notifications --dry-run --limit 50`, avec exécution unique et sortie résumée.
+- [x] **6.7** Écrire `process_notifications --dry-run --limit 50`, avec exécution unique et sortie résumée.
   Le mode `--dry-run` ne modifie ni campagne, livraison, dates ni compteur, et n'envoie rien.
   Une exécution réelle prépare les travaux dus puis traite au plus le nombre demandé.
   Les [commandes Django](https://docs.djangoproject.com/en/5.2/howto/custom-management-commands/) peuvent être déclenchées
   par un ordonnanceur ; la commande elle-même ne doit pas lancer une boucle infinie.
-- [ ] **6.8** Réserver chaque livraison dans une transaction courte par une transition conditionnelle
+- [x] **6.8** Réserver chaque livraison dans une transaction courte par une transition conditionnelle
   `pending/failed → sending`, avec heure et compteur. Envoyer hors de la transaction, puis enregistrer le résultat.
   Deux processus ne peuvent réserver la même ligne. En PostgreSQL, tester les verrous avec `TransactionTestCase` ;
   [`select_for_update()` n'a pas d'effet sur SQLite](https://docs.djangoproject.com/en/5.2/ref/models/querysets/#select-for-update).
   La contrainte unique et la transition conditionnelle restent nécessaires.
-- [ ] **6.9** Distinguer rejet SMTP établi et résultat ambigu. Pour un refus avant acceptation, garder `failed`
+- [x] **6.9** Distinguer rejet SMTP établi et résultat ambigu. Pour un refus avant acceptation, garder `failed`
   et proposer au plus trois essais avec délais progressifs, par exemple 15 min puis 1 h.
   Pour une coupure après une tentative dont l'acceptation est inconnue, passer `uncertain` et demander une revue staff.
   Une ligne `sending` abandonnée depuis plus de 15 minutes devient aussi `uncertain`, sans renvoi automatique.
   Ne pas promettre un envoi « exactement une fois » : une interruption après SMTP mais avant l'écriture en base
   rend cette garantie impossible avec SMTP seul. La prudence sur les cas ambigus limite le risque de doublons.
-- [ ] **6.10** Juste avant chaque envoi, vérifier utilisateur actif, adresse disponible, préférence toujours autorisée,
+- [x] **6.10** Juste avant chaque envoi, vérifier utilisateur actif, adresse disponible, préférence toujours autorisée,
   campagne non annulée et événement encore valable. Sinon passer `skipped`, sans email.
   Aucune relance ne part après une réponse ou après l'échéance. Logs : type, identifiants, compteurs et code d'erreur ;
   pas d'adresse en clair, jeton de connexion, contenu de profil ou note.
@@ -501,15 +502,15 @@ Les tests activent ce réglage uniquement avec le backend mémoire.
 
 ### 6C. Relances sans spam
 
-- [ ] **6.11** Faire préparer par la commande les campagnes `event:<pk>:reminder:14` et `event:<pk>:reminder:3`
+- [x] **6.11** Faire préparer par la commande les campagnes `event:<pk>:reminder:14` et `event:<pk>:reminder:3`
   lorsque leur date est atteinte. Prévoir uniquement les membres actifs sans **aucune** ligne RSVP, avec annonces
   et relances autorisées, auxquels l'annonce de cet événement a été acceptée par SMTP.
   Un `YES` ou un `NO`, un remplacement demandé ultérieurement, une désactivation ou un désabonnement exclut le membre.
-- [ ] **6.12** Relancer au plus deux fois et attendre au moins 72 h après le dernier email réussi de l'événement.
+- [x] **6.12** Relancer au plus deux fois et attendre au moins 72 h après le dernier email réussi de l'événement.
   Un événement annoncé à J−5 ne doit pas déclencher une relance J−14 rattrapée immédiatement ; supprimer les paliers
   antérieurs à la publication. Si l'ordonnanceur reprend à J−2 après une panne, préparer seulement le dernier palier
   pertinent, sans deux emails rapprochés. Si la fin des réponses est dépassée, ne rien envoyer.
-- [ ] **6.13** Présenter dans l'admin la campagne, les compteurs et les états en lecture seule.
+- [x] **6.13** Présenter dans l'admin la campagne, les compteurs et les états en lecture seule.
   Une action explicite de reprise peut relancer un échec confirmé. Pour un résultat `uncertain`, afficher qu'un email
   a peut-être déjà été envoyé ; ne pas inclure ces lignes dans une action « tout renvoyer ».
   Pas de bouton de campagne accessible aux membres et pas de pixels d'ouverture.
