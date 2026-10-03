@@ -31,3 +31,16 @@ class EventAdminTests(TestCase):
         response = self.client.post(url, {"action": "make_seating", "_selected_action": [self.event.pk]}, follow=True)
         self.assertContains(response, "pas de repas assis")
         self.assertFalse(SeatingPlan.objects.filter(event=self.event).exists())
+
+
+class AdminGuideTests(TestCase):
+    def test_the_admin_home_explains_the_six_gestures_with_their_links(self):
+        user = make_staff()
+        user.is_superuser = True
+        user.save()
+        self.client.force_login(user)
+        page = self.client.get(reverse("admin:index"))
+        self.assertContains(page, "Mode d'emploi")
+        for name in ("admin:club_event_add", "club:staff_dashboard", "admin:club_invitationrequest_changelist",
+                     "admin:club_substitute_changelist", "admin:club_member_changelist", "admin:auth_user_changelist"):
+            self.assertContains(page, reverse(name))

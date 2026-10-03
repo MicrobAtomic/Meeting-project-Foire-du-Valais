@@ -1,0 +1,8 @@
+{
+  "name": "club-des-affaires-pitch",
+  "private": true,
+  "description": "Builds the pitch deck (PNG, PDF) from deck.html; the PPTX is built by build_pptx.py",
+  "type": "module",
+  "scripts": { "build": "node build_deck.mjs" },
+  "dependencies": { "puppeteer-core": "^25.0.0" }
+}

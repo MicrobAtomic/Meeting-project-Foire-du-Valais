@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Club des Affaires — pitch deck</title>
+<!-- Source of the pitch deck. Slides are 1920 x 1080 sections; build with docs/pitch/build.mjs
+     (PNG per slide, PDF, PPTX with the demo video and the French speaker notes). -->
+<style>
+  :root {
+    --red: #b91c1c; --red-dark: #7f1d1d; --red-soft: #fef2f2;
+    --ink: #1c1917; --muted: #57534e; --faint: #a8a29e; --line: #e7e5e4;
+    --paper: #fafaf9; --card: #ffffff; --amber: #fffbeb; --amber-line: #fcd34d; --green: #047857;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #e7e5e4; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Inter, Helvetica, Arial, sans-serif;
+         color: var(--ink); -webkit-font-smoothing: antialiased; }
+  @page { size: 1920px 1080px; margin: 0; }
+  .slide { width: 1920px; height: 1080px; position: relative; overflow: hidden; background: var(--paper);
+           padding: 96px 120px; page-break-after: always; break-after: page; display: flex; flex-direction: column; }
+  .kicker { font-size: 24px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--red); }
+  h1 { font-size: 92px; line-height: 1.02; font-weight: 800; letter-spacing: -.02em; }
+  h2 { font-size: 64px; line-height: 1.08; font-weight: 800; letter-spacing: -.015em; margin-top: 18px; }
+  .lead { font-size: 34px; line-height: 1.4; color: var(--muted); margin-top: 28px; max-width: 1180px; }
+  .foot { position: absolute; left: 120px; right: 120px; bottom: 44px; display: flex; justify-content: space-between;
+          font-size: 20px; color: var(--faint); }
+  .foot b { color: var(--red); font-weight: 700; }
+  .grid { display: grid; gap: 28px; margin-top: 56px; }
+  .g2 { grid-template-columns: 1fr 1fr; } .g3 { grid-template-columns: repeat(3, 1fr); } .g4 { grid-template-columns: repeat(4, 1fr); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 28px; padding: 36px; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+  .card h3 { font-size: 34px; font-weight: 750; line-height: 1.15; }
+  .card p { font-size: 25px; line-height: 1.45; color: var(--muted); margin-top: 14px; }
+  .emoji { font-size: 56px; line-height: 1; margin-bottom: 18px; display: block; }
+  .stat { font-size: 84px; font-weight: 800; color: var(--red); letter-spacing: -.02em; line-height: 1; }
+  .stat-label { font-size: 24px; color: var(--muted); margin-top: 12px; }
+  ul.clean { list-style: none; }
+  ul.clean li { font-size: 30px; line-height: 1.35; padding: 16px 0 16px 52px; position: relative; border-bottom: 1px solid var(--line); }
+  ul.clean li:last-child { border-bottom: 0; }
+  ul.clean li::before { content: "—"; position: absolute; left: 0; color: var(--red); font-weight: 800; }
+  .tag { display: inline-block; font-size: 22px; font-weight: 700; padding: 8px 18px; border-radius: 999px; background: var(--red-soft); color: var(--red); }
+  .muted { color: var(--muted); }
+  .phone { width: 380px; height: 780px; border-radius: 56px; background: #0c0a09; padding: 14px; box-shadow: 0 30px 60px rgba(28,25,23,.25); }
+  .phone img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 44px; display: block; background: #fff; }
+  .split { display: flex; gap: 96px; align-items: center; flex: 1; }
+  .split > .text { flex: 1; }
+  .quote { font-size: 40px; line-height: 1.3; font-weight: 700; }
+  .red { color: var(--red); }
+
+  /* title */
+  .title { background: radial-gradient(1200px 700px at 85% 20%, #fee2e2 0%, rgba(254,226,226,0) 60%), var(--paper); }
+  .title h1 { font-size: 112px; margin-top: 26px; max-width: 1100px; }
+  .title .lead { font-size: 38px; }
+
+  /* video */
+  .video { background: #0c0a09; color: #fafaf9; padding: 72px 120px 0; }
+  .video .kicker { color: #fca5a5; }
+  .video .frame { margin-top: 28px; flex: 1; border-radius: 24px; background: #1c1917; display: flex; align-items: center;
+                  justify-content: center; color: #a8a29e; font-size: 28px; margin-bottom: 72px; }
+
+  /* pillars */
+  .pillar { border-top: 8px solid var(--red); }
+  .pillar small { display: block; font-size: 20px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); margin-bottom: 10px; }
+
+  /* table for appendix */
+  table { width: 100%; border-collapse: collapse; margin-top: 36px; font-size: 26px; }
+  th, td { text-align: left; padding: 16px 18px; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.35; }
+  th { font-size: 20px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); font-weight: 700; }
+  td.n { text-align: right; font-weight: 700; color: var(--red); white-space: nowrap; }
+  .appendix { background: #fff; }
+  .appendix .kicker::after { content: " · Appendix"; color: var(--faint); }
+
+  .arch { display: grid; grid-template-columns: 1fr 1.4fr 1fr; gap: 28px; margin-top: 48px; align-items: stretch; }
+  .arch .box { border: 2px solid var(--line); border-radius: 24px; padding: 28px; background: var(--paper); font-size: 24px; line-height: 1.5; }
+  .arch .box h3 { font-size: 28px; margin-bottom: 10px; }
+  .arch .core { border-color: var(--red); background: var(--red-soft); }
+</style>
+</head>
+<body>
+
+<!-- 1 · Title -->
+<section class="slide title" data-notes="(0:00 – 0:10) Bonjour ! Le Club des Affaires de la Foire du Valais, c'est une cinquantaine de dirigeantes et de dirigeants qui paient 500 francs par an pour quatre à cinq soirées.">
+  <div class="split">
+    <div class="text">
+      <p class="kicker">Hack VS · Challenge Foire du Valais</p>
+      <h1>Never a stranger at the Club again.</h1>
+      <p class="lead">A year-round networking platform for the members of the Club des Affaires de la Foire du Valais.</p>
+      <p class="lead" style="font-size:26px;margin-top:56px">Live demo · public on GitHub · FR / DE / EN</p>
+    </div>
+    <div class="phone"><img src="img/home.png" alt=""></div>
+  </div>
+  <div class="foot"><span><b>Club des Affaires</b> · Foire du Valais</span><span>github.com/MicrobAtomic/Meeting-project-Foire-du-Valais</span></div>
+</section>
+
+<!-- 2 · The challenge -->
+<section class="slide" data-notes="(0:10 – 0:30) Ils viennent : 80 % de présence. Mais ils arrivent en inconnus, restent entre habitués, et entre deux soirées, le réseau n'existe pas. Le client nous a posé ses règles : pas de business forcé, une équipe qui a très peu de temps, des membres francophones et germanophones, et un club qui reste premium.">
+  <p class="kicker">The challenge</p>
+  <h2>The network only lives<br>on event nights.</h2>
+  <div class="grid g4" style="margin-top:48px">
+    <div><p class="stat">≈ 50</p><p class="stat-label">business leaders</p></div>
+    <div><p class="stat">500</p><p class="stat-label">CHF a year, per member</p></div>
+    <div><p class="stat">4–5</p><p class="stat-label">evenings a year</p></div>
+    <div><p class="stat">80 %</p><p class="stat-label">attendance… among strangers</p></div>
+  </div>
+  <div class="grid g2" style="margin-top:56px">
+    <div class="card"><h3>What we observed</h3><p>Members come, but arrive as strangers and stay in small groups. Between two evenings, communication only goes one way: from the Foire to them.</p></div>
+    <div class="card"><h3>What the client asked for</h3><p>No forced selling: business is a door, not the core · a small team with little time · French and German speakers · premium means the people and the evenings · the member list stays private.</p></div>
+  </div>
+</section>
+
+<!-- 3 · The solution -->
+<section class="slide" data-notes="(0:30 – 0:50) Notre réponse : une web app qui suit le rythme du Club, sur les quatre piliers du défi. Se trouver : chaque membre a sa carte, ses passions, ce qu'il peut offrir et ce qu'il cherche. Repérer les synergies : avant chaque soirée, trois personnes à rencontrer, et pourquoi. Le soir même, on scanne un badge, et un jeu brise la glace. Et toute l'année, le Club se resserre.">
+  <p class="kicker">The solution</p>
+  <h2>One app that follows the rhythm of the Club.</h2>
+  <div class="grid g4">
+    <div class="card pillar"><small>Find</small><span class="emoji">🔍</span><h3>Member cards</h3><p>Sector, passions, pet peeves, what you can help with and what you look for. An album for members only.</p></div>
+    <div class="card pillar"><small>Synergies</small><span class="emoji">⚡</span><h3>Your 3 introductions</h3><p>Before each evening: three people to meet and why: shared passions, complementary sectors, a need the other can meet.</p></div>
+    <div class="card pillar"><small>Collaborate</small><span class="emoji">🤝</span><h3>Meet for real</h3><p>Scan a badge: the card joins your album, contact details unlock. People bingo at drinks, rotating tables at dinner.</p></div>
+    <div class="card pillar"><small>Belong</small><span class="emoji">🏔️</span><h3>A club that grows closer</h3><p>Shared milestones with Valais rewards, a monthly digest of new members, invitations by referral.</p></div>
+  </div>
+</section>
+
+<!-- 4 · Demo video -->
+<section class="slide video" data-notes="(0:50 – 1:32, la vidéo tourne) Voici Camille, nouvelle membre. Avant le dîner, elle sait déjà qui rencontrer : Lukas. Ils aiment tous deux la Petite Arvine et le ski de randonnée ; il cherche du digital, son métier à elle, et elle veut s'ouvrir au marché alémanique, le sien. Au dîner, elle scanne son badge : la carte entre dans son album, ses coordonnées se débloquent, une case de son bingo se coche. Et côté équipe : un clic, et 38 invités changent de table à chaque service.">
+  <p class="kicker">Demo · 40 seconds</p>
+  <div class="frame" data-video>demo.mp4</div>
+</section>
+
+<!-- 5 · Innovation & impact -->
+<section class="slide" data-notes="(1:32 – 1:47) Ce qui est nouveau : chaque vraie rencontre compte, et se compte. Le Club est connecté à 15 % aujourd'hui ; au prochain palier, une tournée de Petite Arvine pour tous. Mesurable pour le comité, motivant pour les membres.">
+  <p class="kicker">What is new</p>
+  <h2>Every real encounter counts — and is counted.</h2>
+  <div class="grid g2" style="margin-top:44px">
+    <div class="card"><span class="emoji">🃏</span><h3>A collectible album</h3><p>A QR scan is the proof you really met: only then do contact details unlock. No cold messages, no spam.</p></div>
+    <div class="card"><span class="emoji">📈</span><h3>15 % connected → shared milestones</h3><p>The share of member pairs who know each other. At 20 %, a round of Petite Arvine; at 35 %, a raclette; at 100 %, “never a stranger”.</p></div>
+    <div class="card"><span class="emoji">🎯</span><h3>A bingo computed for each guest</h3><p>Only people present tonight, nudging you to strangers and to your 3 introductions; a full card is always possible (bipartite matching).</p></div>
+    <div class="card"><span class="emoji">🪑</span><h3>Rotating tables that really mix</h3><p>38 guests, 3 courses: about 250 new pairs, a single repeat. A Social Golfer heuristic, computed in under a second.</p></div>
+  </div>
+</section>
+
+<!-- 6 · Feasibility -->
+<section class="slide" data-notes="(1:47 – 2:00) Et c'est faisable : ça tourne aujourd'hui, en trois langues, sécurisé, testé, pour moins de 500 francs par an. Un club qui se connaît se retrouve. Merci !">
+  <p class="kicker">Feasibility & impact</p>
+  <h2>It works today.</h2>
+  <div class="split" style="gap:72px;margin-top:24px">
+    <ul class="clean text">
+      <li><b>Django 5.2 LTS</b>, server-rendered, PostgreSQL: one framework, few moving parts</li>
+      <li><b>Secure by default</b>: closed to visitors, strict CSP, tested access matrix, contacts only after a real meeting</li>
+      <li><b>__TESTS__ automated tests</b>, every page checked in FR / DE / EN on phone and desktop</li>
+      <li><b>For a small team</b>: create the event, tick an activity, click “Prepare”. Accept a member: one click</li>
+      <li><b>&lt; CHF 500 a year</b> to run · 6–8 days to production, within the CHF 10k budget</li>
+    </ul>
+    <div class="card" style="width:560px;background:var(--red);border:0;color:#fff">
+      <p class="quote" style="color:#fff">“A club that knows itself comes back together.”</p>
+      <p style="font-size:26px;line-height:1.45;margin-top:28px;color:#fee2e2">Next: from 50 to 100 members through referrals, then the same platform for other clubs and fairs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- A1 · Architecture -->
+<section class="slide appendix" data-notes="Annexe pour les questions : l'architecture.">
+  <p class="kicker">Architecture</p>
+  <h2>Boring technology, on purpose.</h2>
+  <div class="arch">
+    <div class="box"><h3>Members &amp; staff</h3>Phone or computer browser · nothing to install · a QR code opens the right page · FR / DE / EN</div>
+    <div class="box core"><h3>Django 5.2 LTS · gunicorn</h3>Member area · staff tools · Django admin (back office) · public showcase<br><b>services/</b>: matching · rotating tables · bingo · federation index &amp; milestones · notifications &amp; digest — pure Python, unit-tested</div>
+    <div class="box"><h3>Data &amp; delivery</h3>PostgreSQL (SQLite in dev) · SMTP for e-mails · static files served by the app (no CDN, no tracker) · Swiss hosting for production</div>
+  </div>
+  <table>
+    <tr><th>Choice</th><th>Why</th></tr>
+    <tr><td>Web app, not native</td><td>Nothing to install for 50 busy people; one code base instead of three</td></tr>
+    <tr><td>Server-rendered templates</td><td>No API to expose and secure, light pages on mobile, strict CSP possible</td></tr>
+    <tr><td>Django admin</td><td>A complete, secure back office from day one, in the staff's language</td></tr>
+  </table>
+</section>
+
+<!-- A2 · Algorithms -->
+<section class="slide appendix" data-notes="Annexe : les algorithmes.">
+  <p class="kicker">Algorithms</p>
+  <h2>Three small algorithms, measured.</h2>
+  <table>
+    <tr><th>What</th><th>How</th><th style="text-align:right">Measured</th></tr>
+    <tr><td><b>Your 3 introductions</b></td><td>Pair score: +3 shared passion, +2 shared pet peeve, +2 different sectors, +3 newcomer with a pillar, + a bonus when one can meet the other's need. Never two people who already know each other, never without a common language. Fair greedy rounds.</td><td class="n">200 guests: 49 ms</td></tr>
+    <tr><td><b>Rotating tables</b></td><td>Social Golfer problem (NP-hard): local search with restarts; penalties for sitting together again, no common language, already acquainted, same sector.</td><td class="n">200 guests: 0.8 s</td></tr>
+    <tr><td><b>People bingo</b></td><td>Per-player grid from tonight's guests only; priority to strangers and to your introductions; a full card stays possible (bipartite matching, augmenting paths); a scan ticks the rarest square.</td><td class="n">49 tests</td></tr>
+    <tr><td><b>Federation index</b></td><td>Density of the “who met whom” graph = connections ÷ member pairs; drives the Club milestones and lists isolated members for the staff.</td><td class="n">demo: 15 %</td></tr>
+  </table>
+</section>
+
+<!-- A3 · Security -->
+<section class="slide appendix" data-notes="Annexe : sécurité et protection des données.">
+  <p class="kicker">Security &amp; privacy</p>
+  <h2>Closed by default.</h2>
+  <div class="grid g2" style="margin-top:44px">
+    <div class="card"><h3>Application security</h3><p>Login required everywhere (middleware) · tested access matrix: a new route must be classified or the suite fails · CSRF on every form · strict CSP, no inline script or style · QR codes carry 128-bit random tokens · single-use login links (15 min) · HTTPS, HSTS, secure cookies.</p></div>
+    <div class="card"><h3>Data protection (Swiss nLPD)</h3><p>Directory visible to members only · contact details shared only after a real meeting · any member can hide their card · private notes visible to their author only · photos served privately · minimal data · production hosted in Switzerland.</p></div>
+  </div>
+</section>
+
+<!-- A4 · Go-to-market -->
+<section class="slide appendix" data-notes="Annexe : recruter en douceur, seulement les bonnes personnes.">
+  <p class="kicker">Go-to-market</p>
+  <h2>No ads. Invitations.</h2>
+  <table>
+    <tr><th>Channel</th><th>How</th></tr>
+    <tr><td><b>Referral</b> (n°1)</td><td>Each member has a personal link and QR code; an optional referral discount, to be validated by the committee</td></tr>
+    <tr><td><b>Discovery guest</b></td><td>At the Christmas drinks, each member may bring one person: an evening sells better than a brochure</td></tr>
+    <tr><td><b>Substitutes</b></td><td>A member who cannot come sends a colleague, who receives the evening's details and an invitation</td></tr>
+    <tr><td><b>Foire exhibitors</b></td><td>20–30 hand-picked exhibitors invited by letter; members invite one exhibitor to the Wow evening</td></tr>
+    <tr><td><b>Upper Valais</b></td><td>German-speaking ambassadors; one drinks evening a year hosted by a member in the Upper Valais</td></tr>
+  </table>
+  <p class="lead" style="font-size:26px;margin-top:28px">Goal: 15–20 new members a year, at most 5 newcomers per evening, more than 60 % via referral.</p>
+</section>
+
+<!-- A5 · Cost & roadmap -->
+<section class="slide appendix" data-notes="Annexe : coûts et feuille de route.">
+  <p class="kicker">Cost &amp; roadmap</p>
+  <h2>Within budget, ready to grow.</h2>
+  <div class="grid g2" style="margin-top:44px">
+    <div class="card"><h3>Cost</h3><p>Swiss hosting, database, e-mails and domain: under CHF 500 a year, less than 2 % of the fees. From this prototype to production: about 6 to 8 days (Swiss hosting, e-mail sending, branding, member import, two-factor login for the staff, privacy policy), within the CHF 10,000 envelope.</p></div>
+    <div class="card"><h3>Roadmap</h3><p><b>V1.1</b> production in Switzerland, member import, privacy self-service. <b>V2</b> “I'm looking for / I offer” board, co-development groups, membership payment (TWINT, QR-bill). <b>V3</b> the same platform for other clubs and fairs (white label).</p></div>
+  </div>
+</section>
+
+</body>
+</html>

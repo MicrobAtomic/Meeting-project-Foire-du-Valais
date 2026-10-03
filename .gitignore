@@ -15,3 +15,6 @@ media/
 
 # Copies de travail des agents (Claude Code)
 .claude/worktrees/
+
+# Outils du deck (npm install dans docs/pitch)
+docs/pitch/node_modules/

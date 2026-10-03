@@ -1,0 +1,41 @@
+{% extends "admin/index.html" %}{% load i18n %}
+{% block content %}
+<div class="module" id="club-howto">
+  <h2>{% translate "Mode d'emploi" %}</h2>
+  <p>{% translate "Six gestes suffisent pour faire vivre le Club. Chacun a son lien." %}</p>
+  <ol>
+    <li>
+      <strong>{% translate "Créer un événement" %}</strong><br>
+      {% translate "Événements → Ajouter : le texte en français (en allemand et en anglais si possible), puis les animations : « repas assis » pour un dîner, « bingo des rencontres » pour un apéro debout. Ensuite, coche l'événement → « Publier et préparer l'annonce » : les membres le voient." %}<br>
+      <a href="{% url 'admin:club_event_add' %}" class="addlink">{% translate "Ajouter un événement" %}</a>
+    </li>
+    <li>
+      <strong>{% translate "Une semaine avant" %}</strong><br>
+      {% translate "Tableau de bord → Préparer : les rencontres, le plan de tables si c'est un dîner, les badges à imprimer." %}<br>
+      <a href="{% url 'club:staff_dashboard' %}" class="changelink">{% translate "Ouvrir le tableau de bord" %}</a>
+    </li>
+    <li>
+      <strong>{% translate "Nouvelle demande d'invitation" %}</strong><br>
+      {% translate "Demandes d'invitation → coche-la → « Accepter et créer le compte », puis « Préparer l'accès au compte accepté »." %}<br>
+      <a href="{% url 'admin:club_invitationrequest_changelist' %}" class="changelink">{% translate "Voir les demandes" %}</a>
+    </li>
+    <li>
+      <strong>{% translate "Un membre envoie un remplaçant" %}</strong><br>
+      {% translate "Remplaçant·e·s → coche la demande → « Valider l'identité et l'accès du remplaçant »." %}<br>
+      <a href="{% url 'admin:club_substitute_changelist' %}" class="changelink">{% translate "Voir les remplacements" %}</a>
+    </li>
+    <li>
+      <strong>{% translate "Un membre n'arrive plus à se connecter" %}</strong><br>
+      {% translate "Membres → coche-le → « Envoyer un lien de connexion »." %}<br>
+      <a href="{% url 'admin:club_member_changelist' %}" class="changelink">{% translate "Ouvrir les membres" %}</a>
+    </li>
+    <li>
+      <strong>{% translate "Un membre quitte le Club" %}</strong><br>
+      {% translate "Utilisateurs → ouvre son compte → décoche « Actif » : sa carte disparaît de l'album, ses rencontres restent." %}<br>
+      <a href="{% url 'admin:auth_user_changelist' %}" class="changelink">{% translate "Ouvrir les utilisateurs" %}</a>
+    </li>
+  </ol>
+  <p class="help">{% translate "Tout le reste (rencontres proposées, plans de tables, cases de bingo, paliers du Club) est calculé automatiquement : pas besoin d'y toucher." %}</p>
+</div>
+{{ block.super }}
+{% endblock %}
