@@ -211,11 +211,26 @@ puisse les présenter aux autres.
 
 ## 10. Qualité
 
-- **27 tests automatisés** : algorithmes, contrôle d'accès, flux du QR, vCard, CSP, lien magique, profil.
-  Lancement : `python manage.py test club`.
-- `python manage.py check --deploy` : aucun problème.
-- Les données de démo sont reproductibles (graine fixe). La commande `seed_demo` **vérifie elle-même** le scénario
-  du pitch : Camille, nouvelle recrue, doit se voir présenter Lukas, pilier du Club.
+- **170 tests automatisés** (`python manage.py test club`, environ 30 s), sur SQLite **et** sur PostgreSQL :
+  - les algorithmes (rencontres, tables tournantes) et leurs règles absolues ;
+  - la **matrice d'accès** : chaque route est classée (publique, membre, staff) et testée anonyme / membre / staff ; une nouvelle
+    route non classée fait échouer la suite ; les actions qui modifient des données refusent le GET ;
+  - la CSP stricte sur chaque page, le CSRF dans chaque formulaire des templates, l'absence de script ou de style en ligne ;
+  - le QR, la vCard, le lien de connexion (usage unique, expiration, même réponse pour une adresse inconnue, un envoi par minute),
+    le formulaire public (champ piège, doublons, parrainage), les badges ;
+  - les traductions : catalogues complets, mêmes textes dans les trois langues, et **aucune phrase française sur les pages
+    allemandes et anglaises** ;
+  - la reproductibilité des données de démo après chaque réinitialisation.
+- **Mode production vérifié** : `python manage.py check --deploy` sans alerte, `build.sh` (fichiers statiques versionnés,
+  migrations, données de démo si la base est vide) sur PostgreSQL, gunicorn derrière un proxy HTTPS : redirection HTTPS, en-têtes
+  de sécurité, cookies `Secure`, CSS et JS en cache immuable, hôte invalide refusé.
+- **Contrôle visuel automatique** : 48 pages parcourues à 390 px (téléphone) et 1 280 px (ordinateur), en français, en allemand
+  et en anglais : aucun débordement horizontal, aucune erreur de console, de réseau ou de politique de sécurité. Impression des
+  badges vérifiée sur un vrai PDF A4.
+- **Scénario du pitch rejoué automatiquement** de bout en bout (vitrine, rencontres, album, scan du QR, vCard, tableau de bord,
+  plan de tables en direct, bascule en allemand).
+- Les données de démo sont reproductibles (graine fixe, identifiants d'événements fixes). La commande `seed_demo` **vérifie
+  elle-même** le scénario du pitch : Camille, nouvelle recrue, doit se voir présenter Lukas, pilier du Club.
 
 ## 11. Feuille de route
 

@@ -555,12 +555,12 @@ Pour éviter les requêtes N+1, toute liste de cartes charge les membres avec
 
 ### Phase 10 — Préparation de la démo et gel du code (45 min, dimanche 11:00)
 
-- [ ] **10.1** Réinitialiser les données de production, en local et en ligne. Il faut le **même** mot de passe que
+- [ ] **10.1** *(en local : fait, voir README ; en ligne : 👤 à faire par l'humain, il faut l'adresse de la base Render)* Réinitialiser les données de production, en local et en ligne. Il faut le **même** mot de passe que
   sur Render, et l'« External Database URL » se copie depuis le tableau de bord Render de la base.
   ```bash
   DATABASE_URL='<External Database URL>' DEMO_PASSWORD='<le même que sur Render>' python manage.py seed_demo --reset
   ```
-- [ ] **10.2** Imprimer 2 badges, Lukas et un autre membre, depuis `/staff/evenements/<id>/badges/`.
+- [ ] **10.2** 👤 Imprimer 2 badges, Lukas et un autre membre, depuis `/staff/evenements/<id>/badges/` **du site en ligne** (le QR code contient l'adresse du site où la page est ouverte : un badge imprimé depuis `127.0.0.1` ne marcherait pas sur un téléphone).
 - [ ] **10.3** 👤 Répéter le scénario ci-dessous **deux fois** sur un vrai téléphone et un ordinateur.
 - [ ] **10.4** 👤 Enregistrer une vidéo de secours du scénario complet (QuickTime → Nouvel enregistrement de l'écran),
   environ 2 minutes.
@@ -573,17 +573,26 @@ Pour éviter les requêtes N+1, toute liste de cartes charge les membres avec
 
 ## 6. Scénario de démo (2 minutes, à répéter)
 
+> Ce scénario a été **rejoué automatiquement de bout en bout** (vrais clics dans Chrome, téléphone et ordinateur) : toutes les
+> étapes passent, sans erreur de console ni de sécurité. Le texte à dire est dans [PITCH.md](PITCH.md).
+
 1. **Vitrine** : la page publique et « Demander une invitation ». Aucun nom de membre n'est visible de l'extérieur.
 2. **Camille, nouvelle recrue**, sur le téléphone :
    - l'accueil affiche « 2 / 49 cartes » et le prochain dîner ;
    - **« Tes 3 rencontres »** : Lukas, parce qu'ils partagent ❤️ la Petite Arvine, ⛷️ le ski de rando, 🏃 le trail,
-     et 💀 les réunions du lundi matin. On voit aussi la phrase pour engager la conversation.
+     et 💀 les réunions du lundi matin (raisons complètes sur la page de l'événement). On voit aussi la phrase pour
+     engager la conversation.
 3. **L'album** : les cartes, les rangs (fondateur doré, nouvelle recrue en vert) et le filtre « germanophones ».
 4. **La rencontre en vrai** :
    - Camille scanne le badge imprimé de Lukas → « Ajouter Lukas à mon album » ;
    - les coordonnées sont débloquées → « Ajouter à mes contacts » → la vCard s'ouvre dans Contacts ;
    - l'album passe à 3 / 49.
 5. **Le staff** :
-   - le tableau de bord affiche l'indice de fédération (il a bougé) et les membres isolés ;
-   - « Dîner d'automne » → plan de tables généré en direct : 38 invités, 3 services, environ 1 répétition.
-6. **Bascule en DE** : l'interface et les affinités passent en allemand, ce qui sert l'ambition suisse.
+   - le tableau de bord : « Rencontres enregistrées » passe de 180 à 181, l'indice reste à 15 %, les membres isolés et la
+     demande d'invitation faite depuis la vitrine apparaissent ;
+   - « Dîner d'automne » → « Préparer » → plan de tables généré en direct : 38 invités, 3 services, environ 250 nouvelles
+     paires et 1 répétition.
+6. **Bascule en DE** : l'interface, les dates et les affinités passent en allemand, ce qui sert l'ambition suisse.
+
+**En bonus, si le temps le permet** : Profil → « Refaire le swipe » ; « Inviter quelqu'un » (lien, QR, parrainage) ;
+« Ouvrir les badges » (feuille A4) ; « Recevoir un lien de connexion par e-mail » (l'e-mail s'affiche dans la console du serveur).
