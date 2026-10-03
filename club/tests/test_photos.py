@@ -156,7 +156,8 @@ class PhotoTests(TestCase):
         data = {field.name: getattr(self.a, field.name) for field in self.a._meta.fields
                 if not field.is_relation and field.name not in {"id", "photo", "created_at", "admitted_at", "guest_access_until"}}
         data.update(user=self.a.user_id, photo=upload(), first_name="Uncommitted",
-                    **{"tag_links-TOTAL_FORMS": "0", "tag_links-INITIAL_FORMS": "0", "tag_links-MIN_NUM_FORMS": "0", "tag_links-MAX_NUM_FORMS": "1000"})
+                    **{"tag_links-TOTAL_FORMS": "0", "tag_links-INITIAL_FORMS": "0", "tag_links-MIN_NUM_FORMS": "0", "tag_links-MAX_NUM_FORMS": "1000"},
+                    **{"expertise_links-TOTAL_FORMS": "0", "expertise_links-INITIAL_FORMS": "0", "expertise_links-MIN_NUM_FORMS": "0", "expertise_links-MAX_NUM_FORMS": "1000"})
         with patch("club.admin.MemberAdmin.save_related", side_effect=RuntimeError("related failed")):
             with self.assertRaises(RuntimeError):
                 self.client.post(reverse("admin:club_member_change", args=[self.a.pk]), data)

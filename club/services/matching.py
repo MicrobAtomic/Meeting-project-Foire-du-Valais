@@ -5,12 +5,14 @@ from __future__ import annotations
 import random
 from collections import Counter
 from dataclasses import dataclass
-from itertools import combinations
+from itertools import combinations, zip_longest
 
 WEIGHT_SHARED_LIKE = 3
 WEIGHT_SHARED_DISLIKE = 2
 WEIGHT_CROSS_SECTOR = 2
 WEIGHT_NEWCOMER_WITH_PILLAR = 3
+WEIGHT_SYNERGY = 4  # a need of one covered by the other: a discreet bonus, the human affinities stay the core
+MAX_SYNERGIES_PER_PAIR = 2
 
 
 @dataclass(frozen=True)
@@ -22,6 +24,8 @@ class Profile:
     dislikes: frozenset[str] = frozenset()
     is_newcomer: bool = False
     is_pillar: bool = False
+    offers: frozenset[str] = frozenset()  # themes of mutual help the person can help on
+    needs: frozenset[str] = frozenset()  # themes the person is looking for
 
 
 @dataclass(frozen=True)
@@ -33,10 +37,21 @@ class Proposal:
     shared_dislikes: tuple[str, ...]
     cross_sector: bool
     welcomes_newcomer: bool
+    synergies: tuple[tuple[int, int, str], ...] = ()  # (helper id, seeker id, theme slug)
 
 
 def pair_key(first: int, second: int) -> tuple[int, int]:
     return (first, second) if first < second else (second, first)
+
+
+def synergies_between(p: Profile, q: Profile) -> tuple[tuple[int, int, str], ...]:
+    """Needs of one covered by the offers of the other, in both directions, at most MAX_SYNERGIES_PER_PAIR.
+
+    When both can help each other, one of each direction is kept before a second one in the same direction."""
+    p_helps_q = [(p.id, q.id, slug) for slug in sorted(p.offers & q.needs)]
+    q_helps_p = [(q.id, p.id, slug) for slug in sorted(q.offers & p.needs)]
+    interleaved = [synergy for pair in zip_longest(p_helps_q, q_helps_p) for synergy in pair if synergy is not None]
+    return tuple(interleaved[:MAX_SYNERGIES_PER_PAIR])
 
 
 def score_pair(p: Profile, q: Profile) -> Proposal | None:
@@ -47,14 +62,16 @@ def score_pair(p: Profile, q: Profile) -> Proposal | None:
     shared_dislikes = tuple(sorted(p.dislikes & q.dislikes))
     cross_sector = p.sector != q.sector
     welcomes_newcomer = (p.is_newcomer and q.is_pillar) or (q.is_newcomer and p.is_pillar)
+    synergies = synergies_between(p, q)
     score = (
         WEIGHT_SHARED_LIKE * len(shared_likes)
         + WEIGHT_SHARED_DISLIKE * len(shared_dislikes)
         + (WEIGHT_CROSS_SECTOR if cross_sector else 0)
         + (WEIGHT_NEWCOMER_WITH_PILLAR if welcomes_newcomer else 0)
+        + WEIGHT_SYNERGY * len(synergies)
     )
     a, b = pair_key(p.id, q.id)
-    return Proposal(a, b, score, shared_likes, shared_dislikes, cross_sector, welcomes_newcomer)
+    return Proposal(a, b, score, shared_likes, shared_dislikes, cross_sector, welcomes_newcomer, synergies)
 
 
 def compute_matches(

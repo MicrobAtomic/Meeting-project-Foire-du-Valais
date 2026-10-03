@@ -164,7 +164,7 @@ class DemoEventScenarioTests(TestCase):
     def test_home_shows_the_dinner_and_her_three_introductions_with_a_first_reason(self):
         response = self.client.get(reverse("club:home"))
         assert_csp_clean(self, response)
-        for text in ("Dîner d&#x27;automne", "Lukas Imboden", "Joëlle Moret", "Olivier Gay", "Petite Arvine"):
+        for text in ("Dîner d&#x27;automne", "Lukas Imboden", "Joëlle Moret", "Florence Gay", "Petite Arvine"):
             self.assertContains(response, text)  # short version: first common affinity + icebreaker
 
     def test_event_page_shows_every_reason_of_the_introductions(self):

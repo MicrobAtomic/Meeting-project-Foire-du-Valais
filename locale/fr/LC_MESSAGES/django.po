@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Club des Affaires\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 22:59+0200\n"
+"POT-Creation-Date: 2026-10-03 23:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Club des Affaires\n"
 "Language-Team: Club des Affaires\n"
@@ -398,6 +398,25 @@ msgstr "affinité du membre"
 msgid "affinités du membre"
 msgstr "affinités du membre"
 
+msgid "thème d'entraide"
+msgstr "thème d'entraide"
+
+msgid "thèmes d'entraide"
+msgstr "thèmes d'entraide"
+
+msgid "Je peux aider sur"
+msgstr "Je peux aider sur"
+
+#| msgid "Rechercher"
+msgid "Je cherche"
+msgstr "Je cherche"
+
+msgid "thème d'entraide du membre"
+msgstr "thème d'entraide du membre"
+
+msgid "thèmes d'entraide du membre"
+msgstr "thèmes d'entraide du membre"
+
 msgid "Apéro"
 msgstr "Apéro"
 
@@ -684,6 +703,19 @@ msgstr "vient de %(region)s"
 msgid "🃏 Joker : quelqu'un que tu n'avais jamais rencontré"
 msgstr "🃏 Joker : quelqu'un que tu n'avais jamais rencontré"
 
+#, python-format
+msgid "Choisis %(max)s thèmes au plus pour « %(kind)s »."
+msgstr "Choisis %(max)s thèmes au plus pour « %(kind)s »."
+
+#, python-format
+msgid "Tu cherches « %(topic)s » : %(name)s peut t'aider."
+msgstr "Tu cherches « %(topic)s » : %(name)s peut t'aider."
+
+#, python-format
+#| msgid "%(name)s peut valider la case « %(square)s » de ton bingo."
+msgid "%(name)s cherche « %(topic)s » : c'est ton domaine."
+msgstr "%(name)s cherche « %(topic)s » : c'est ton domaine."
+
 msgid ""
 "Demande déjà acceptée sans compte lié : rapprochement manuel nécessaire."
 msgstr ""
@@ -955,7 +987,6 @@ msgstr "Mode d'emploi"
 msgid "Six gestes suffisent pour faire vivre le Club. Chacun a son lien."
 msgstr "Six gestes suffisent pour faire vivre le Club. Chacun a son lien."
 
-#| msgid "événement"
 msgid "Créer un événement"
 msgstr "Créer un événement"
 
@@ -970,7 +1001,6 @@ msgstr ""
 "rencontres » pour un apéro debout. Ensuite, coche l'événement → « Publier et"
 " préparer l'annonce » : les membres le voient."
 
-#| msgid "Annuler l'événement"
 msgid "Ajouter un événement"
 msgstr "Ajouter un événement"
 
@@ -984,11 +1014,9 @@ msgstr ""
 "Tableau de bord → Préparer : les rencontres, le plan de tables si c'est un "
 "dîner, les badges à imprimer."
 
-#| msgid "Tableau de bord"
 msgid "Ouvrir le tableau de bord"
 msgstr "Ouvrir le tableau de bord"
 
-#| msgid "demande d'invitation"
 msgid "Nouvelle demande d'invitation"
 msgstr "Nouvelle demande d'invitation"
 
@@ -999,15 +1027,12 @@ msgstr ""
 "Demandes d'invitation → coche-la → « Accepter et créer le compte », puis « "
 "Préparer l'accès au compte accepté »."
 
-#| msgid "Ouvrir les badges"
 msgid "Voir les demandes"
 msgstr "Voir les demandes"
 
-#| msgid "Proposer un remplaçant"
 msgid "Un membre envoie un remplaçant"
 msgstr "Un membre envoie un remplaçant"
 
-#| msgid "Valider l'identité et l'accès du remplaçant"
 msgid ""
 "Remplaçant·e·s → coche la demande → « Valider l'identité et l'accès du "
 "remplaçant »."
@@ -1015,18 +1040,15 @@ msgstr ""
 "Remplaçant·e·s → coche la demande → « Valider l'identité et l'accès du "
 "remplaçant »."
 
-#| msgid "Ton remplacement"
 msgid "Voir les remplacements"
 msgstr "Voir les remplacements"
 
 msgid "Un membre n'arrive plus à se connecter"
 msgstr "Un membre n'arrive plus à se connecter"
 
-#| msgid "Envoyer un lien de connexion"
 msgid "Membres → coche-le → « Envoyer un lien de connexion »."
 msgstr "Membres → coche-le → « Envoyer un lien de connexion »."
 
-#| msgid "Ouvrir les badges"
 msgid "Ouvrir les membres"
 msgstr "Ouvrir les membres"
 
@@ -1040,7 +1062,6 @@ msgstr ""
 "Utilisateurs → ouvre son compte → décoche « Actif » : sa carte disparaît de "
 "l'album, ses rencontres restent."
 
-#| msgid "Ouvrir les badges"
 msgid "Ouvrir les utilisateurs"
 msgstr "Ouvrir les utilisateurs"
 
@@ -1153,6 +1174,9 @@ msgstr "Anglophones"
 
 msgid "Statut"
 msgstr "Statut"
+
+msgid "Peut m'aider sur…"
+msgstr "Peut m'aider sur…"
 
 msgid "Filtrer"
 msgstr "Filtrer"
@@ -1534,6 +1558,15 @@ msgstr "Langues parlées"
 
 msgid "Pour briser la glace"
 msgstr "Pour briser la glace"
+
+#| msgid "Pas encore membre ?"
+msgid "Entraide entre membres"
+msgstr "Entraide entre membres"
+
+msgid ""
+"Facultatif, 3 au plus. C'est une porte ouverte, pas une vitrine commerciale."
+msgstr ""
+"Facultatif, 3 au plus. C'est une porte ouverte, pas une vitrine commerciale."
 
 msgid "Contact et confidentialité"
 msgstr "Contact et confidentialité"

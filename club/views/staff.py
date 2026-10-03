@@ -24,6 +24,7 @@ from club.services.federation import (
     degrees,
     isolated_members,
 )
+from club.services.expertise import topics_by_slug
 from club.services.milestones import club_progress
 from club.services.qr import qr_svg
 from club.ui import round_label
@@ -57,6 +58,7 @@ def dashboard(request):
 
 def matches_for_display(event):
     tags = {tag.slug: tag for tag in Tag.objects.all()}
+    topics = topics_by_slug()
     matches = Match.objects.filter(event=event).select_related("member_a", "member_b").order_by("-score", "pk")
     return [
         {
@@ -65,6 +67,7 @@ def matches_for_display(event):
             "score": m.score,
             "likes": [tags[s] for s in m.shared_likes if s in tags],
             "dislikes": [tags[s] for s in m.shared_dislikes if s in tags],
+            "synergies": [topics[s] for s in dict.fromkeys(synergy[2] for synergy in m.synergies) if s in topics],
         }
         for m in matches
     ]

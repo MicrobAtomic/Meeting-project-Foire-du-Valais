@@ -4,7 +4,9 @@ from django.db import transaction
 from django.db.models import Exists, OuterRef, Q
 from django.utils import timezone
 
-from club.models import RSVP, Connection, Event, Match, Member, MemberTag, SeatAssignment, SeatingPlan, Substitute
+from club.models import (
+    RSVP, Connection, Event, Match, Member, MemberExpertise, MemberTag, SeatAssignment, SeatingPlan, Substitute,
+)
 from club.services.matching import Profile, compute_matches
 from club.services.seating import Guest, compute_seating
 
@@ -66,6 +68,11 @@ def generate_matches(event, per_person: int = 3) -> int:
             likes[member_id].add(slug)
         elif sentiment == MemberTag.Sentiment.DISLIKE:
             dislikes[member_id].add(slug)
+    offers, needs = defaultdict(set), defaultdict(set)
+    for member_id, slug, kind in MemberExpertise.objects.filter(member_id__in=ids).values_list(
+        "member_id", "expertise__slug", "kind"
+    ):
+        (offers if kind == MemberExpertise.Kind.OFFER else needs)[member_id].add(slug)
     profiles = [
         Profile(
             id=m.pk,
@@ -75,6 +82,8 @@ def generate_matches(event, per_person: int = 3) -> int:
             dislikes=frozenset(dislikes[m.pk]),
             is_newcomer=m.rank == Member.RANK_NEWCOMER,
             is_pillar=m.rank in (Member.RANK_FOUNDER, Member.RANK_PILLAR),
+            offers=frozenset(offers[m.pk]),
+            needs=frozenset(needs[m.pk]),
         )
         for m in members
     ]
@@ -90,6 +99,7 @@ def generate_matches(event, per_person: int = 3) -> int:
             shared_dislikes=list(p.shared_dislikes),
             cross_sector=p.cross_sector,
             welcomes_newcomer=p.welcomes_newcomer,
+            synergies=[list(synergy) for synergy in p.synergies],
         )
         for p in proposals
     )

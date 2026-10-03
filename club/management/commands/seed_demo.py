@@ -14,8 +14,9 @@ from django.db.models import Q
 from django.utils import timezone
 
 from club import demo_data
-from club.models import RSVP, Connection, Event, InvitationRequest, Match, Member, MemberTag, Sector, Tag
+from club.models import RSVP, Connection, Event, Expertise, InvitationRequest, Match, Member, MemberTag, Sector, Tag
 from club.services.events import generate_matches
+from club.services.expertise import save_expertise
 from club.services.federation import club_stats
 
 User = get_user_model()
@@ -29,7 +30,7 @@ def ascii_slug(text):
 
 
 class Command(BaseCommand):
-    help = "Create fictitious demo data: tags, ~50 members, events, connections, introductions."
+    help = "Create fictitious demo data: tags, help themes, ~50 members, events, connections, introductions."
 
     def add_arguments(self, parser):
         parser.add_argument("--reset", action="store_true", help="Delete demo data (users @example.com, events, tags) first.")
@@ -44,6 +45,7 @@ class Command(BaseCommand):
             User.objects.filter(email__endswith=DEMO_DOMAIN).delete()
             Event.objects.all().delete()
             Tag.objects.all().delete()
+            Expertise.objects.all().delete()
             InvitationRequest.objects.all().delete()
         elif Member.objects.exists():
             raise CommandError("Members already exist. Use --reset to recreate the demo data.")
@@ -52,6 +54,7 @@ class Command(BaseCommand):
         password = os.environ.get("DEMO_PASSWORD") or ("club-demo-2026" if settings.DEBUG else secrets.token_urlsafe(12))
         year = timezone.localdate().year
         tags = self.create_tags()
+        topics = self.create_expertise()
 
         staff = User.objects.create_user(
             username=demo_data.STAFF["email"], email=demo_data.STAFF["email"], password=password,
@@ -69,6 +72,7 @@ class Command(BaseCommand):
         self.create_rsvps(rng, members, past, upcoming, later, camille, lukas)
         self.create_connections(rng, members, past, camille, lukas)
         self.create_invitation_requests(lukas)
+        self.assign_expertise(topics, camille, lukas, others)
         intros = generate_matches(upcoming)
 
         self.check_storyline(upcoming, camille, lukas)
@@ -91,6 +95,12 @@ class Command(BaseCommand):
                 icebreaker_fr=ice_fr, icebreaker_de=ice_de, icebreaker_en=ice_en,
             )
         return tags
+
+    def create_expertise(self):
+        return {
+            slug: Expertise.objects.create(slug=slug, emoji=emoji, label_fr=label_fr, label_de=label_de, label_en=label_en, order=order)
+            for order, (slug, emoji, label_fr, label_de, label_en) in enumerate(demo_data.EXPERTISE)
+        }
 
     def create_member(self, tags, *, email, likes, dislikes, password=None, **fields):
         user = User.objects.create_user(username=email, email=email, password=password)  # None -> unusable password
@@ -146,6 +156,23 @@ class Command(BaseCommand):
                 phone=f"+41 79 000 {(i + 3) // 100:02d} {(i + 3) % 100:02d}",
             ))
         return members
+
+    def assign_expertise(self, topics, camille, lukas, others):
+        """« Je peux aider sur… / Je cherche… ». Camille and Lukas follow the storyline; everybody else gets 1 or 2
+        themes of their sector to offer (the Swiss German market for German speakers) and 0 to 2 to look for.
+        Drawn with its OWN generator: the main one must never move, or the connections and the 15 % index would change."""
+        for member, story in ((camille, demo_data.CAMILLE_EXPERTISE), (lukas, demo_data.LUKAS_EXPERTISE)):
+            save_expertise(member, [topics[s] for s in story["offers"]], [topics[s] for s in story["needs"]])
+        rng = random.Random(2026)
+        everything = list(topics)
+        for member in others:
+            offers = rng.sample(demo_data.SECTOR_EXPERTISE[member.sector], rng.randint(1, 2))
+            if member.speaks_de and rng.random() < 0.5:
+                offers = [*offers[:1], "marche-alemanique"]
+            needs = rng.sample([slug for slug in everything if slug not in offers], rng.choice([0, 1, 1, 2]))
+            if not member.speaks_de and rng.random() < 0.35 and "marche-alemanique" not in needs:
+                needs = ["marche-alemanique", *needs[:1]]
+            save_expertise(member, [topics[s] for s in offers], [topics[s] for s in needs])
 
     def create_events(self):
         now = timezone.localtime()
@@ -273,8 +300,11 @@ class Command(BaseCommand):
 
     def check_storyline(self, upcoming, camille, lukas):
         pair = sorted((camille.pk, lukas.pk))
-        if not Match.objects.filter(event=upcoming, member_a_id=pair[0], member_b_id=pair[1]).exists():
+        match = Match.objects.filter(event=upcoming, member_a_id=pair[0], member_b_id=pair[1]).first()
+        if match is None:
             raise CommandError("Storyline broken: Camille must be introduced to Lukas for the upcoming dinner.")
+        if {(helper, seeker) for helper, seeker, _slug in match.synergies} != {(camille.pk, lukas.pk), (lukas.pk, camille.pk)}:
+            raise CommandError("Storyline broken: Camille and Lukas must be able to help each other, both ways (digital, Swiss German market).")
         if Connection.involving(camille).count() != 2:
             raise CommandError("Storyline broken: Camille must start with exactly 2 connections.")
         index = club_stats()["index"]

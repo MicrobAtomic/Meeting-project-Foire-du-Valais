@@ -89,6 +89,7 @@
             {% for tag in m.likes %}<span class="chip">❤️ {{ tag.emoji }} {{ tag.label }}</span>{% endfor %}
             {% for tag in m.dislikes %}<span class="chip">💀 {{ tag.emoji }} {{ tag.label }}</span>{% endfor %}
           </p>
+          {% if m.synergies %}<p class="flex flex-wrap gap-1.5">{% for topic in m.synergies %}<span class="chip">🤝 {{ topic.emoji }} {{ topic.label }}</span>{% endfor %}</p>{% endif %}
         </li>
         {% endfor %}
       </ul>

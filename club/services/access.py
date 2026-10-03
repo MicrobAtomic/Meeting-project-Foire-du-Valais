@@ -39,7 +39,7 @@ def visible_members(viewer):
 
 
 def visible_target(viewer, pk):
-    return get_object_or_404(visible_members(viewer).select_related("user").prefetch_related("tag_links__tag"), pk=pk)
+    return get_object_or_404(visible_members(viewer).select_related("user").prefetch_related("tag_links__tag", "expertise_links__expertise"), pk=pk)
 
 
 def can_open_profile(viewer, target):

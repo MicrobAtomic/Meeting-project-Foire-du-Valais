@@ -47,7 +47,7 @@ def event_detail(request, pk):
         attendees(event)
         .filter(pk__in=visible_members(me).values("pk"))
         .select_related("user")
-        .prefetch_related("tag_links__tag")
+        .prefetch_related("tag_links__tag", "expertise_links__expertise")
     )
     intros = visible_intros(me, event) if registered else []
     context = {

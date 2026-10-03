@@ -1,0 +1,16 @@
+{% comment %}
+Un groupe de thèmes d'entraide, en cases à cocher présentées comme des pastilles.
+Usage : {% include "club/_expertise_field.html" with field=form.offers icon="🧰" %}
+{% endcomment %}
+<fieldset>
+  <legend class="mb-2 text-sm font-semibold text-stone-700"><span aria-hidden="true">{{ icon }}</span> {{ field.label }}…</legend>
+  <div class="flex flex-wrap gap-2">
+    {% for checkbox in field %}
+    <label class="cursor-pointer">
+      {{ checkbox.tag }}
+      <span class="chip px-3 py-1.5 text-sm ring-1 ring-stone-200 transition peer-checked:bg-red-50 peer-checked:text-red-800 peer-checked:ring-2 peer-checked:ring-red-700 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-red-700">{{ checkbox.choice_label }}</span>
+    </label>
+    {% endfor %}
+  </div>
+  {% for error in field.errors %}<p class="mt-2 text-xs text-red-700" role="alert">{{ error }}</p>{% endfor %}
+</fieldset>

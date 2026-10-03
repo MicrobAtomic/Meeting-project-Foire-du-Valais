@@ -22,5 +22,11 @@ Une rencontre proposée. Usage : {% include "club/_intro.html" with intro=intro 
     </p>
     {% endif %}
   {% endif %}
+  {% if intro.synergies %}
+  <div class="space-y-1 text-xs text-stone-600">
+    {% if short %}<p><span aria-hidden="true">🤝</span> {{ intro.synergies.0.text }}</p>
+    {% else %}{% for synergy in intro.synergies %}<p><span aria-hidden="true">🤝</span> {{ synergy.text }}</p>{% endfor %}{% endif %}
+  </div>
+  {% endif %}
   <p class="rounded-xl bg-amber-50 p-3 text-sm text-amber-900">💬 {{ intro.icebreaker }}</p>
 </article>

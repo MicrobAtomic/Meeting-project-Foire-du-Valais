@@ -24,7 +24,9 @@ class SeedDemoTests(TestCase):
         self.seed(reset=True)
         self.seed(reset=True)
         self.assertEqual(self.camille_intros(), first)
-        self.assertEqual(first, [("Lukas Imboden", 16), ("Joëlle Moret", 16), ("Olivier Gay", 11)])
+        # Lukas: 16 + 8 (the two synergies of the storyline). Florence Gay (12 = 8 + 4: Camille can help on digital)
+        # replaces Olivier Gay (11) now that help themes add a discreet bonus.
+        self.assertEqual(first, [("Lukas Imboden", 24), ("Joëlle Moret", 16), ("Florence Gay", 12)])
 
     def test_if_empty_leaves_existing_data_alone(self):
         self.seed()

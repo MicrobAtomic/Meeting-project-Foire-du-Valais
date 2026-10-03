@@ -1,7 +1,10 @@
+from collections import Counter
+
 from django import forms
 from django.conf import settings
 from django.contrib import admin, messages
 from django.db.models import Count
+from django.forms.models import BaseInlineFormSet
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import ngettext
 
@@ -9,9 +12,11 @@ from club.models import (
     RSVP,
     Connection,
     Event,
+    Expertise,
     InvitationRequest,
     Match,
     Member,
+    MemberExpertise,
     MemberTag,
     NotificationCampaign,
     NotificationDelivery,
@@ -22,6 +27,7 @@ from club.models import (
     new_qr_token,
 )
 from club.services.auth_links import email_language, send_login_link
+from club.services.expertise import MAX_PER_KIND, too_many_themes
 from club.forms import MemberAdminForm
 from club.services.photos import photo_write_scope, save_profile_photo
 from club.services.membership import accept_invitation
@@ -43,6 +49,30 @@ class MemberTagInline(admin.TabularInline):
     autocomplete_fields = ["tag"]
 
 
+class MemberExpertiseFormSet(BaseInlineFormSet):
+    """The member's own form allows MAX_PER_KIND themes of each kind at most: so does the admin."""
+
+    def clean(self):
+        super().clean()
+        counts = Counter(
+            form.cleaned_data["kind"]
+            for form in self.forms
+            if hasattr(form, "cleaned_data")
+            and form.cleaned_data.get("expertise")
+            and form.cleaned_data.get("kind")
+            and not form.cleaned_data.get("DELETE")
+        )
+        for kind, count in counts.items():
+            if count > MAX_PER_KIND:
+                raise too_many_themes(kind)
+
+
+class MemberExpertiseInline(admin.TabularInline):
+    model = MemberExpertise
+    formset = MemberExpertiseFormSet
+    extra = 0
+
+
 @admin.register(Member)
 class MemberAdmin(admin.ModelAdmin):
     form = MemberAdminForm
@@ -51,7 +81,7 @@ class MemberAdmin(admin.ModelAdmin):
     search_fields = ["first_name", "last_name", "company", "user__email"]
     readonly_fields = ["qr_token", "referral_code", "created_at", "admitted_at", "kind", "guest_access_until"]
     autocomplete_fields = ["user"]
-    inlines = [MemberTagInline]
+    inlines = [MemberTagInline, MemberExpertiseInline]
     actions = ["send_login_links", "rotate_qr_token"]
 
     def changeform_view(self, request, object_id=None, form_url="", extra_context=None):
@@ -177,6 +207,13 @@ class TagAdmin(admin.ModelAdmin):
     list_display = ["emoji", "label_fr", "label_de", "label_en", "category", "order"]
     list_editable = ["order"]
     list_filter = ["category"]
+    search_fields = ["slug", "label_fr", "label_de", "label_en"]
+
+
+@admin.register(Expertise)
+class ExpertiseAdmin(admin.ModelAdmin):
+    list_display = ["emoji", "label_fr", "label_de", "label_en", "order"]
+    list_editable = ["order"]
     search_fields = ["slug", "label_fr", "label_de", "label_en"]
 
 

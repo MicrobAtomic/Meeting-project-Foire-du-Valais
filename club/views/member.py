@@ -26,6 +26,7 @@ from club.services.bingo import find_square, square_label, tick
 from club.services.events import visible_events
 from club.services.photos import normalize_member_photo, photo_write_scope
 from club.services.federation import club_stats, collected_guest_count, collected_ids, collection_progress
+from club.services.expertise import members_offering, topics_by_slug
 from club.services.intros import intros_for
 from club.services.milestones import album_goal, club_progress
 from club.services.profile import common_tags, save_tag_answers
@@ -211,12 +212,14 @@ def album(request):
         visible_members(me)
         .exclude(pk=me.pk)
         .select_related("user")
-        .prefetch_related("tag_links__tag")
+        .prefetch_related("tag_links__tag", "expertise_links__expertise")
     )
+    topics = topics_by_slug()
     query = request.GET.get("q", "").strip()
     sector = request.GET.get("secteur", "")
     language = request.GET.get("langue", "")
     status = request.GET.get("statut", "toutes")
+    help_topic = request.GET.get("aide", "")
     if query:
         members = members.filter(
             Q(first_name__icontains=query) | Q(last_name__icontains=query) | Q(company__icontains=query)
@@ -225,6 +228,8 @@ def album(request):
         members = members.filter(sector=sector)
     if language in LANGUAGE_FIELDS:
         members = members.filter(**{LANGUAGE_FIELDS[language]: True})
+    if help_topic in topics:  # « Peut m'aider sur… »: the members who offer this theme
+        members = members.filter(pk__in=members_offering(help_topic))
     if status == "album":
         members = members.filter(pk__in=collected)
     elif status == "a-rencontrer":
@@ -241,7 +246,8 @@ def album(request):
         "stats": club_stats(),
         "sectors": Sector.choices,
         "statuses": STATUS_CHOICES,
-        "filters": {"q": query, "sector": sector, "language": language, "status": status},
+        "topics": list(topics.values()),
+        "filters": {"q": query, "sector": sector, "language": language, "status": status, "help": help_topic},
     }
     return render(request, "club/album.html", context)
 

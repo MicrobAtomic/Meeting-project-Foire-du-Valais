@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Club des Affaires\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 22:59+0200\n"
+"POT-Creation-Date: 2026-10-03 23:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Club des Affaires\n"
 "Language-Team: Club des Affaires\n"
@@ -394,6 +394,25 @@ msgstr "member's taste"
 msgid "affinités du membre"
 msgstr "member's tastes"
 
+msgid "thème d'entraide"
+msgstr "help topic"
+
+msgid "thèmes d'entraide"
+msgstr "help topics"
+
+msgid "Je peux aider sur"
+msgstr "I can help with"
+
+#| msgid "Rechercher"
+msgid "Je cherche"
+msgstr "I'm looking for"
+
+msgid "thème d'entraide du membre"
+msgstr "member's help topic"
+
+msgid "thèmes d'entraide du membre"
+msgstr "member's help topics"
+
 msgid "Apéro"
 msgstr "Apéro"
 
@@ -680,6 +699,19 @@ msgstr "comes from %(region)s"
 msgid "🃏 Joker : quelqu'un que tu n'avais jamais rencontré"
 msgstr "🃏 Wildcard: someone you had never met"
 
+#, python-format
+msgid "Choisis %(max)s thèmes au plus pour « %(kind)s »."
+msgstr "Choose up to %(max)s topics for “%(kind)s”."
+
+#, python-format
+msgid "Tu cherches « %(topic)s » : %(name)s peut t'aider."
+msgstr "You're looking for “%(topic)s”: %(name)s can help you."
+
+#, python-format
+#| msgid "%(name)s peut valider la case « %(square)s » de ton bingo."
+msgid "%(name)s cherche « %(topic)s » : c'est ton domaine."
+msgstr "%(name)s is looking for “%(topic)s”: that's your area."
+
 msgid ""
 "Demande déjà acceptée sans compte lié : rapprochement manuel nécessaire."
 msgstr ""
@@ -950,7 +982,6 @@ msgstr "Quick guide"
 msgid "Six gestes suffisent pour faire vivre le Club. Chacun a son lien."
 msgstr "Six steps are enough to keep the Club alive. Each one has its link."
 
-#| msgid "événement"
 msgid "Créer un événement"
 msgstr "Create an event"
 
@@ -965,7 +996,6 @@ msgstr ""
 "drinks. Then tick the event → “Publish and prepare announcement”: members "
 "can see it."
 
-#| msgid "Annuler l'événement"
 msgid "Ajouter un événement"
 msgstr "Add an event"
 
@@ -979,11 +1009,9 @@ msgstr ""
 "Dashboard → Prepare: the introductions, the seating plan for a dinner, the "
 "badges to print."
 
-#| msgid "Tableau de bord"
 msgid "Ouvrir le tableau de bord"
 msgstr "Open the dashboard"
 
-#| msgid "demande d'invitation"
 msgid "Nouvelle demande d'invitation"
 msgstr "New invitation request"
 
@@ -994,15 +1022,12 @@ msgstr ""
 "Invitation requests → tick it → “Accept and create account”, then “Prepare "
 "access to the accepted account”."
 
-#| msgid "Ouvrir les badges"
 msgid "Voir les demandes"
 msgstr "See the requests"
 
-#| msgid "Proposer un remplaçant"
 msgid "Un membre envoie un remplaçant"
 msgstr "A member sends a substitute"
 
-#| msgid "Valider l'identité et l'accès du remplaçant"
 msgid ""
 "Remplaçant·e·s → coche la demande → « Valider l'identité et l'accès du "
 "remplaçant »."
@@ -1010,18 +1035,15 @@ msgstr ""
 "Substitutes → tick the request → “Approve the substitute’s identity and "
 "access”."
 
-#| msgid "Ton remplacement"
 msgid "Voir les remplacements"
 msgstr "See the substitutions"
 
 msgid "Un membre n'arrive plus à se connecter"
 msgstr "A member can no longer log in"
 
-#| msgid "Envoyer un lien de connexion"
 msgid "Membres → coche-le → « Envoyer un lien de connexion »."
 msgstr "Members → tick them → “Send a login link”."
 
-#| msgid "Ouvrir les badges"
 msgid "Ouvrir les membres"
 msgstr "Open the members"
 
@@ -1035,7 +1057,6 @@ msgstr ""
 "Users → open their account → untick “Active”: their card disappears from the"
 " album, their connections remain."
 
-#| msgid "Ouvrir les badges"
 msgid "Ouvrir les utilisateurs"
 msgstr "Open the users"
 
@@ -1148,6 +1169,9 @@ msgstr "English speakers"
 
 msgid "Statut"
 msgstr "Status"
+
+msgid "Peut m'aider sur…"
+msgstr "Can help me with…"
 
 msgid "Filtrer"
 msgstr "Filter"
@@ -1517,6 +1541,14 @@ msgstr "Spoken languages"
 
 msgid "Pour briser la glace"
 msgstr "To break the ice"
+
+#| msgid "Pas encore membre ?"
+msgid "Entraide entre membres"
+msgstr "Members helping each other"
+
+msgid ""
+"Facultatif, 3 au plus. C'est une porte ouverte, pas une vitrine commerciale."
+msgstr "Optional, up to 3. It's an open door, not a sales showcase."
 
 msgid "Contact et confidentialité"
 msgstr "Contact and privacy"

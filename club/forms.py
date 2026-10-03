@@ -4,7 +4,8 @@ from django.db.models.fields.files import FieldFile
 from django.contrib.auth.forms import AuthenticationForm
 from django.utils.translation import gettext_lazy as _
 
-from club.models import EmailPreferences, InvitationRequest, Member, Substitute
+from club.models import EmailPreferences, Expertise, InvitationRequest, Member, MemberExpertise, Substitute
+from club.services.expertise import MAX_PER_KIND, save_expertise, too_many_themes
 from club.services.photos import normalize_member_photo, save_profile_photo
 
 
@@ -57,9 +58,24 @@ class MemberAdminForm(PhotoForm):
         fields = "__all__"
 
 
+class ExpertiseChoiceField(forms.ModelMultipleChoiceField):
+    """Help themes as checkboxes: « 💻 Digital & IA », in the language of the page."""
+
+    def label_from_instance(self, obj):
+        return f"{obj.emoji} {obj.label}"
+
+
 class MemberProfileForm(PhotoForm):
     """What a member may edit about THEIR card. member_since, is_founder, qr_token, referral_code and user
-    are deliberately absent: only the staff manages them (the form ignores them even if posted)."""
+    are deliberately absent: only the staff manages them (the form ignores them even if posted).
+
+    `offers` / `needs` (« Je peux aider sur… » / « Je cherche… ») are optional, MAX_PER_KIND themes each: they are
+    written for the instance, i.e. for the logged-in member, when the form is saved."""
+
+    offers = ExpertiseChoiceField(label=MemberExpertise.Kind.OFFER.label, queryset=Expertise.objects.all(),
+                                  required=False, widget=forms.CheckboxSelectMultiple)
+    needs = ExpertiseChoiceField(label=MemberExpertise.Kind.NEED.label, queryset=Expertise.objects.all(),
+                                 required=False, widget=forms.CheckboxSelectMultiple)
 
     class Meta:
         model = Member
@@ -108,6 +124,29 @@ class MemberProfileForm(PhotoForm):
             ("", _("Selon mes langues parlées")),
             *Member._meta.get_field("preferred_language").choices,
         ]
+        for name in ("offers", "needs"):  # visually hidden checkboxes: the pill next to each one shows its state
+            self.fields[name].widget.attrs["class"] = "peer sr-only"
+        if self.instance.pk:
+            for link in self.instance.expertise_links.all():
+                self.initial.setdefault("offers" if link.kind == MemberExpertise.Kind.OFFER else "needs", []).append(link.expertise_id)
+
+    def clean_offers(self):
+        return self._at_most_per_kind("offers", MemberExpertise.Kind.OFFER)
+
+    def clean_needs(self):
+        return self._at_most_per_kind("needs", MemberExpertise.Kind.NEED)
+
+    def _at_most_per_kind(self, name, kind):
+        themes = list(self.cleaned_data[name])
+        if len(themes) > MAX_PER_KIND:
+            raise too_many_themes(kind)
+        return themes
+
+    def save(self, commit=True):
+        member = super().save(commit=commit)
+        if commit:
+            save_expertise(member, self.cleaned_data["offers"], self.cleaned_data["needs"])
+        return member
 
 
 class EmailPreferencesForm(forms.ModelForm):

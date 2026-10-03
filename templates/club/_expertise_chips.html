@@ -1,0 +1,6 @@
+{% if topics %}
+<div class="space-y-1">
+  <p class="text-xs font-medium text-stone-600"><span aria-hidden="true">{{ icon }}</span> {{ title }}</p>
+  <p class="flex flex-wrap gap-1.5">{% for topic in topics %}<span class="chip">{{ topic.emoji }} {{ topic.label }}</span>{% endfor %}</p>
+</div>
+{% endif %}

@@ -64,6 +64,40 @@ TAGS = [
      "Pour ou contre ? Défendez votre camp.", "Dafür oder dagegen? Verteidigt eure Seite.", "For or against? Defend your side."),
 ]
 
+# Themes of mutual help « Je peux aider sur… / Je cherche… »: (slug, emoji, label_fr, label_de, label_en)
+EXPERTISE = [
+    ("digital", "💻", "Digital & IA", "Digitalisierung & KI", "Digital & AI"),
+    ("marketing", "📣", "Marketing & communication", "Marketing & Kommunikation", "Marketing & communications"),
+    ("recrutement", "🧑‍💼", "Recrutement & RH", "Rekrutierung & HR", "Recruiting & HR"),
+    ("financement", "💰", "Financement", "Finanzierung", "Funding"),
+    ("marche-alemanique", "🇨🇭", "Marché alémanique", "Deutschschweizer Markt", "Swiss German market"),
+    ("export", "🌍", "Export & international", "Export & international", "Export & international"),
+    ("succession", "🔑", "Succession d'entreprise", "Unternehmensnachfolge", "Business succession"),
+    ("juridique", "⚖️", "Juridique & fiscalité", "Recht & Steuern", "Legal & tax"),
+    ("immobilier", "🏢", "Immobilier & locaux", "Immobilien & Räume", "Real estate & premises"),
+    ("energie", "⚡", "Énergie & durabilité", "Energie & Nachhaltigkeit", "Energy & sustainability"),
+    ("tourisme", "🏨", "Tourisme & événementiel", "Tourismus & Events", "Tourism & events"),
+    ("achats", "🤝", "Fournisseurs locaux", "Lokale Lieferanten", "Local suppliers"),
+    ("innovation", "🧪", "Innovation & R&D", "Innovation & F&E", "Innovation & R&D"),
+    ("logistique", "🚚", "Logistique & transport", "Logistik & Transport", "Logistics & transport"),
+]
+
+# Themes a member of each sector can plausibly help on: the demo draws 1 or 2 of them per member.
+SECTOR_EXPERTISE = {
+    "construction": ["immobilier", "energie", "achats", "succession"],
+    "finance": ["financement", "succession", "juridique", "immobilier"],
+    "tourism": ["tourisme", "marketing", "achats", "recrutement"],
+    "wine_food": ["export", "achats", "marketing", "tourisme"],
+    "energy": ["energie", "innovation", "financement", "immobilier"],
+    "industry": ["innovation", "export", "logistique", "achats"],
+    "tech": ["digital", "innovation", "marketing", "recrutement"],
+    "health": ["recrutement", "innovation", "juridique", "digital"],
+    "services": ["juridique", "succession", "financement", "recrutement"],
+    "retail": ["achats", "marketing", "logistique", "digital"],
+    "transport": ["logistique", "export", "energie", "achats"],
+    "media": ["marketing", "digital", "tourisme", "innovation"],
+}
+
 STAFF = {"email": "equipe@example.com", "first_name": "Équipe", "last_name": "Événements"}
 
 # Demo storyline: Camille (newcomer) must be introduced to Lukas (pillar) at the upcoming dinner.
@@ -85,6 +119,9 @@ LUKAS = {
     "dislikes": ["reunions-lundi", "powerpoint"],
     "qr_token": "demo-lukas",  # fixed on purpose: the README links to /m/demo-lukas/ to replay the meeting on stage
 }
+# ...and a synergy both ways: Camille helps on digital and looks for the Swiss German market, Lukas the other way round.
+CAMILLE_EXPERTISE = {"offers": ["digital"], "needs": ["marche-alemanique"]}
+LUKAS_EXPERTISE = {"offers": ["marche-alemanique"], "needs": ["digital"]}
 
 FIRST_NAMES_FR = [
     "Julien", "Sophie", "Nicolas", "Valérie", "Pierre-Alain", "Nathalie", "Grégoire", "Isabelle", "Yannick",

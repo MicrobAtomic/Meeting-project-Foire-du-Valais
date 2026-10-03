@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Club des Affaires\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 22:59+0200\n"
+"POT-Creation-Date: 2026-10-03 23:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Club des Affaires\n"
 "Language-Team: Club des Affaires\n"
@@ -402,6 +402,25 @@ msgstr "Vorliebe des Mitglieds"
 msgid "affinités du membre"
 msgstr "Vorlieben des Mitglieds"
 
+msgid "thème d'entraide"
+msgstr "Hilfsthema"
+
+msgid "thèmes d'entraide"
+msgstr "Hilfsthemen"
+
+msgid "Je peux aider sur"
+msgstr "Ich kann helfen bei"
+
+#| msgid "Rechercher"
+msgid "Je cherche"
+msgstr "Ich suche"
+
+msgid "thème d'entraide du membre"
+msgstr "Hilfsthema des Mitglieds"
+
+msgid "thèmes d'entraide du membre"
+msgstr "Hilfsthemen des Mitglieds"
+
 msgid "Apéro"
 msgstr "Apéro"
 
@@ -688,6 +707,19 @@ msgstr "kommt aus %(region)s"
 msgid "🃏 Joker : quelqu'un que tu n'avais jamais rencontré"
 msgstr "🃏 Joker: jemand, den du noch nie getroffen hast"
 
+#, python-format
+msgid "Choisis %(max)s thèmes au plus pour « %(kind)s »."
+msgstr "Wähle höchstens %(max)s Themen für «%(kind)s»."
+
+#, python-format
+msgid "Tu cherches « %(topic)s » : %(name)s peut t'aider."
+msgstr "Du suchst «%(topic)s»: %(name)s kann dir helfen."
+
+#, python-format
+#| msgid "%(name)s peut valider la case « %(square)s » de ton bingo."
+msgid "%(name)s cherche « %(topic)s » : c'est ton domaine."
+msgstr "%(name)s sucht «%(topic)s»: Das ist dein Fachgebiet."
+
 msgid ""
 "Demande déjà acceptée sans compte lié : rapprochement manuel nécessaire."
 msgstr ""
@@ -963,7 +995,6 @@ msgstr ""
 "Sechs Handgriffe genügen, um den Club lebendig zu halten. Jeder hat seinen "
 "Link."
 
-#| msgid "événement"
 msgid "Créer un événement"
 msgstr "Einen Anlass erstellen"
 
@@ -978,7 +1009,6 @@ msgstr ""
 "«Begegnungs-Bingo» für einen Stehapéro. Danach den Anlass ankreuzen → "
 "«Veröffentlichen und Ankündigung vorbereiten»: Die Mitglieder sehen ihn."
 
-#| msgid "Annuler l'événement"
 msgid "Ajouter un événement"
 msgstr "Anlass hinzufügen"
 
@@ -992,11 +1022,9 @@ msgstr ""
 "Übersicht → Vorbereiten: die Begegnungen, der Tischplan bei einem Dinner, "
 "die Badges zum Drucken."
 
-#| msgid "Tableau de bord"
 msgid "Ouvrir le tableau de bord"
 msgstr "Übersicht öffnen"
 
-#| msgid "demande d'invitation"
 msgid "Nouvelle demande d'invitation"
 msgstr "Neue Einladungsanfrage"
 
@@ -1007,15 +1035,12 @@ msgstr ""
 "Einladungsanfragen → ankreuzen → «Annehmen und Konto erstellen», dann "
 "«Zugang zum angenommenen Konto vorbereiten»."
 
-#| msgid "Ouvrir les badges"
 msgid "Voir les demandes"
 msgstr "Anfragen ansehen"
 
-#| msgid "Proposer un remplaçant"
 msgid "Un membre envoie un remplaçant"
 msgstr "Ein Mitglied schickt eine Vertretung"
 
-#| msgid "Valider l'identité et l'accès du remplaçant"
 msgid ""
 "Remplaçant·e·s → coche la demande → « Valider l'identité et l'accès du "
 "remplaçant »."
@@ -1023,18 +1048,15 @@ msgstr ""
 "Vertretungen → die Anfrage ankreuzen → «Identität und Zugang der Vertretung "
 "bestätigen»."
 
-#| msgid "Ton remplacement"
 msgid "Voir les remplacements"
 msgstr "Vertretungen ansehen"
 
 msgid "Un membre n'arrive plus à se connecter"
 msgstr "Ein Mitglied kann sich nicht mehr anmelden"
 
-#| msgid "Envoyer un lien de connexion"
 msgid "Membres → coche-le → « Envoyer un lien de connexion »."
 msgstr "Mitglieder → ankreuzen → «Anmeldelink senden»."
 
-#| msgid "Ouvrir les badges"
 msgid "Ouvrir les membres"
 msgstr "Mitglieder öffnen"
 
@@ -1048,7 +1070,6 @@ msgstr ""
 "Benutzer → das Konto öffnen → «Aktiv» abwählen: Die Karte verschwindet aus "
 "dem Album, die Begegnungen bleiben."
 
-#| msgid "Ouvrir les badges"
 msgid "Ouvrir les utilisateurs"
 msgstr "Benutzer öffnen"
 
@@ -1161,6 +1182,9 @@ msgstr "Englischsprachige"
 
 msgid "Statut"
 msgstr "Status"
+
+msgid "Peut m'aider sur…"
+msgstr "Kann mir helfen bei…"
 
 msgid "Filtrer"
 msgstr "Filtern"
@@ -1540,6 +1564,15 @@ msgstr "Gesprochene Sprachen"
 
 msgid "Pour briser la glace"
 msgstr "Zum Eisbrechen"
+
+#| msgid "Pas encore membre ?"
+msgid "Entraide entre membres"
+msgstr "Gegenseitige Hilfe unter Mitgliedern"
+
+msgid ""
+"Facultatif, 3 au plus. C'est une porte ouverte, pas une vitrine commerciale."
+msgstr ""
+"Freiwillig, höchstens 3. Das ist eine offene Tür, kein Verkaufsschaufenster."
 
 msgid "Contact et confidentialité"
 msgstr "Kontakt und Datenschutz"

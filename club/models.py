@@ -194,6 +194,47 @@ class MemberTag(models.Model):
         constraints = [models.UniqueConstraint(fields=["member", "tag"], name="unique_member_tag")]
 
 
+class Expertise(models.Model):
+    """A theme of mutual help ('Digital & IA', 'Financement'…): what a member can help with, or is looking for."""
+
+    slug = models.SlugField(unique=True)
+    emoji = models.CharField(max_length=8)
+    label_fr = models.CharField(max_length=80)
+    label_de = models.CharField(max_length=80, blank=True)
+    label_en = models.CharField(max_length=80, blank=True)
+    order = models.PositiveSmallIntegerField(default=0)
+
+    class Meta:
+        ordering = ["order", "slug"]
+        verbose_name = _("thème d'entraide")
+        verbose_name_plural = _("thèmes d'entraide")
+
+    def __str__(self):
+        return f"{self.emoji} {self.label_fr}"
+
+    @property
+    def label(self):
+        lang = (get_language() or "fr")[:2]
+        return getattr(self, f"label_{lang}", "") or self.label_fr
+
+
+class MemberExpertise(models.Model):
+    """One theme a member offers help on, or looks for. At most 3 per kind and per member (form + services.expertise)."""
+
+    class Kind(models.TextChoices):
+        OFFER = "offer", _("Je peux aider sur")
+        NEED = "need", _("Je cherche")
+
+    member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name="expertise_links")
+    expertise = models.ForeignKey(Expertise, on_delete=models.CASCADE, related_name="member_links")
+    kind = models.CharField(max_length=8, choices=Kind.choices)
+
+    class Meta:
+        verbose_name = _("thème d'entraide du membre")
+        verbose_name_plural = _("thèmes d'entraide du membre")
+        constraints = [models.UniqueConstraint(fields=["member", "expertise", "kind"], name="unique_member_expertise")]
+
+
 class Event(models.Model):
     class Kind(models.TextChoices):
         APERO = "apero", _("Apéro")
@@ -328,6 +369,7 @@ class Match(models.Model):
     shared_dislikes = models.JSONField(default=list)
     cross_sector = models.BooleanField(default=False)
     welcomes_newcomer = models.BooleanField(default=False)
+    synergies = models.JSONField(default=list)  # [[helper_id, seeker_id, expertise_slug], …]
 
     class Meta:
         verbose_name = _("rencontre proposée")

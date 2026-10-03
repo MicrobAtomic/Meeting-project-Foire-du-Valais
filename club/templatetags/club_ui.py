@@ -2,6 +2,7 @@ import re
 
 from django import template
 from django.conf import settings
+from django.db.models import Prefetch, prefetch_related_objects
 from django.templatetags.static import static
 from django.urls import reverse
 from club.services.photos import available_photo
@@ -9,7 +10,7 @@ from django.utils.formats import date_format
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext
 
-from club.models import MemberTag
+from club.models import MemberExpertise, MemberTag
 from club.ui import EVENT_KIND_EMOJI, RANK_STYLE, SECTOR_STYLE
 
 register = template.Library()
@@ -61,6 +62,17 @@ def rank_badge(member):
 def tags_with(member, sentiment):
     """{% tags_with member "like" as likes %} — needs prefetch_related("tag_links__tag") to avoid N+1 queries."""
     return [link.tag for link in member.tag_links.all() if link.sentiment == sentiment]
+
+
+@register.simple_tag
+def expertise_with(member, kind):
+    """{% expertise_with member "offer" as offers %}: the help themes of a member, in display order.
+
+    The views that list cards load them with prefetch_related("expertise_links__expertise"): no query here.
+    Anywhere else (a single card) one query per member fetches them all, whatever the number of themes."""
+    prefetch_related_objects([member], Prefetch("expertise_links", queryset=MemberExpertise.objects.select_related("expertise")))
+    themes = [link.expertise for link in member.expertise_links.all() if link.kind == kind]
+    return sorted(themes, key=lambda theme: (theme.order, theme.slug))
 
 
 @register.filter

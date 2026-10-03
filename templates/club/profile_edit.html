@@ -57,6 +57,17 @@
       {% include "club/_field.html" with field=form.talk_to_me_about %}
     </section>
 
+    {% if form.offers.field.choices %}
+    <section class="card space-y-4">
+      <div>
+        <h2 class="font-semibold">🤝 {% translate "Entraide entre membres" %}</h2>
+        <p class="mt-1 text-sm text-stone-600">{% translate "Facultatif, 3 au plus. C'est une porte ouverte, pas une vitrine commerciale." %}</p>
+      </div>
+      {% include "club/_expertise_field.html" with field=form.offers icon="🧰" %}
+      {% include "club/_expertise_field.html" with field=form.needs icon="🔎" %}
+    </section>
+    {% endif %}
+
     <section class="card space-y-4">
       <h2 class="font-semibold">📇 {% translate "Contact et confidentialité" %}</h2>
       {% include "club/_field.html" with field=form.phone %}

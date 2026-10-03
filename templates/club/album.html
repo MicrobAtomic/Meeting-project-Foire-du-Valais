@@ -7,7 +7,7 @@
 <progress class="bar mt-3" value="{{ progress.0 }}" max="{{ progress.1|default:1 }}"></progress>
 
 <form method="get" class="card mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-  <div class="sm:col-span-2 lg:col-span-4">
+  <div class="sm:col-span-2 {% if topics %}lg:col-span-3{% else %}lg:col-span-4{% endif %}">
     <label for="f-q" class="sr-only">{% translate "Rechercher" %}</label>
     <input type="search" id="f-q" name="q" value="{{ filters.q }}" placeholder="{% translate 'Un nom, une entreprise…' %}" class="input">
   </div>
@@ -33,7 +33,16 @@
       {% for value, label in statuses %}<option value="{{ value }}"{% if filters.status == value %} selected{% endif %}>{{ label }}</option>{% endfor %}
     </select>
   </div>
-  <div class="flex gap-2">
+  {% if topics %}
+  <div class="lg:col-start-4 lg:row-start-1">
+    <label for="f-aide" class="sr-only">{% translate "Peut m'aider sur…" %}</label>
+    <select id="f-aide" name="aide" class="input">
+      <option value="">{% translate "Peut m'aider sur…" %}</option>
+      {% for topic in topics %}<option value="{{ topic.slug }}"{% if filters.help == topic.slug %} selected{% endif %}>{{ topic.emoji }} {{ topic.label }}</option>{% endfor %}
+    </select>
+  </div>
+  {% endif %}
+  <div class="flex gap-2{% if topics %} sm:col-span-2 lg:col-span-1{% endif %}">
     <button type="submit" class="btn btn-primary flex-1">{% translate "Filtrer" %}</button>
     <a href="{% url 'club:album' %}" class="btn btn-secondary">{% translate "Réinitialiser" %}</a>
   </div>

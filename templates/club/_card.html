@@ -2,8 +2,9 @@
 Carte membre. Usage : {% include "club/_card.html" with member=m collected=True size="compact" %}
   size      : "compact" (défaut, toute la carte est un lien) ou "full"
   collected : True / False pour afficher le pied de carte, None pour le masquer (ma propre carte)
-Pour éviter les requêtes N+1, charger les membres avec select_related("user").prefetch_related("tag_links__tag").
-{% endcomment %}{% load i18n club_ui %}{% tags_with member "like" as likes %}{% tags_with member "dislike" as dislikes %}
+Pour éviter les requêtes N+1, charger les membres avec
+select_related("user").prefetch_related("tag_links__tag", "expertise_links__expertise").
+{% endcomment %}{% load i18n club_ui %}{% tags_with member "like" as likes %}{% tags_with member "dislike" as dislikes %}{% expertise_with member "offer" as offers %}{% expertise_with member "need" as needs %}
 {% if size != "full" %}<a href="{% url 'club:member_detail' member.pk %}" class="block h-full rounded-2xl transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700">{% endif %}
 <article class="card h-full space-y-3 {{ member|rank_ring }}">
   <header class="flex items-center {% if size == 'full' %}gap-4{% else %}gap-3{% endif %}">
@@ -33,9 +34,16 @@ Pour éviter les requêtes N+1, charger les membres avec select_related("user").
     {% if member.fun_fact %}<p class="text-sm italic text-stone-700">« {{ member.fun_fact }} »</p>{% endif %}
     {% if member.talk_to_me_about %}<p class="text-sm"><span class="font-medium">{% translate "Parle-moi de…" %}</span> {{ member.talk_to_me_about }}</p>{% endif %}
     {% if member.region %}<p class="text-sm text-stone-600">📍 {{ member.region }}</p>{% endif %}
+    {% if offers or needs %}
+    <div class="space-y-2 border-t border-stone-100 pt-3">
+      {% include "club/_expertise_chips.html" with topics=offers icon="🧰" title=_("Je peux aider sur") %}
+      {% include "club/_expertise_chips.html" with topics=needs icon="🔎" title=_("Je cherche") %}
+    </div>
+    {% endif %}
   {% else %}
     {% include "club/_tag_chips.html" with tags=likes|slice:":4" icon="❤️" title=_("J'adore") %}
     {% include "club/_tag_chips.html" with tags=dislikes|slice:":2" icon="💀" title=_("Je déteste") %}
+    {% include "club/_tag_chips.html" with tags=offers|slice:":2" icon="🧰" title=_("Je peux aider sur") %}
   {% endif %}
 
   {% if collected is not None %}
