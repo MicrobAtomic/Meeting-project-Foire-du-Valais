@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Club des Affaires\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 17:18+0200\n"
+"POT-Creation-Date: 2026-10-03 17:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Club des Affaires\n"
 "Language-Team: Club des Affaires\n"
@@ -166,7 +166,6 @@ msgstr "Transport & logistics"
 msgid "Communication & médias"
 msgstr "Communication & media"
 
-#| msgid "secteur"
 msgid "Autre secteur"
 msgstr "Other sector"
 
@@ -228,13 +227,9 @@ msgstr "LinkedIn"
 msgid "visible dans l'album"
 msgstr "visible in the album"
 
-#| msgid ""
-#| "Si tu décoches, seuls les membres que tu as déjà rencontrés pourront voir ta"
-#| " carte."
 msgid "Décoché : seuls les membres déjà rencontrés voient sa carte."
 msgstr "Unticked: only members they have already met can see their card."
 
-#| msgid "Profil complété 🎉"
 msgid "profil complété"
 msgstr "profile completed"
 
@@ -256,7 +251,6 @@ msgstr "Culture & curiosities"
 msgid "Vie de bureau"
 msgstr "Office life"
 
-#| msgid "Swipe tes affinités"
 msgid "affinité"
 msgstr "taste"
 
@@ -319,7 +313,6 @@ msgstr ""
 "For a seated dinner: the team generates a plan where everyone changes table "
 "at every course (Dashboard → Prepare)."
 
-#| msgid "Tes rencontres"
 msgid "bingo des rencontres"
 msgstr "people bingo"
 
@@ -339,11 +332,9 @@ msgstr "I'm coming"
 msgid "Je ne viens pas"
 msgstr "I'm not coming"
 
-#| msgid "Ta réponse"
 msgid "réponse"
 msgstr "answer"
 
-#| msgid "description"
 msgid "inscription"
 msgstr "registration"
 
@@ -356,23 +347,18 @@ msgstr "Added by admin"
 msgid "Données de démo"
 msgstr "Demo data"
 
-#| msgid "rencontres"
 msgid "rencontre"
 msgstr "connection"
 
-#| msgid "Rencontres proposées"
 msgid "rencontre proposée"
 msgstr "suggested introduction"
 
-#| msgid "Rencontres proposées"
 msgid "rencontres proposées"
 msgstr "suggested introductions"
 
-#| msgid "Plan de tables"
 msgid "plan de tables"
 msgstr "seating plan"
 
-#| msgid "Plan de tables"
 msgid "plans de tables"
 msgstr "seating plans"
 
@@ -394,14 +380,12 @@ msgstr "e-mail"
 msgid "message"
 msgstr "message"
 
-#| msgid "Langue"
 msgid "langue"
 msgstr "language"
 
 msgid "parrain ou marraine"
 msgstr "sponsor"
 
-#| msgid "Statut"
 msgid "statut"
 msgstr "status"
 
@@ -421,19 +405,15 @@ msgstr "welcome email sent on"
 msgid "reçue le"
 msgstr "received on"
 
-#| msgid "Demandes d'invitation"
 msgid "demande d'invitation"
 msgstr "invitation request"
 
-#| msgid "Demandes d'invitation"
 msgid "demandes d'invitation"
 msgstr "invitation requests"
 
-#| msgid "J'adore"
 msgid "adore"
 msgstr "loves"
 
-#| msgid "Je déteste"
 msgid "déteste"
 msgstr "hates"
 
@@ -449,7 +429,6 @@ msgstr "bingo square"
 msgid "cases de bingo"
 msgstr "bingo squares"
 
-#| msgid "membre depuis (année)"
 msgid "membre remplacé"
 msgstr "member replaced"
 
@@ -492,7 +471,6 @@ msgstr "First connections"
 msgid "Le Club fait connaissance."
 msgstr "The Club gets acquainted."
 
-#| msgid "L'album du Club"
 msgid "La tournée du Club"
 msgstr "A round on the Club"
 
@@ -505,7 +483,6 @@ msgstr "The members' raclette"
 msgid "Une raclette au feu de bois offerte à tout le Club."
 msgstr "A wood-fire raclette on the house for the whole Club."
 
-#| msgid "L'album du Club"
 msgid "La cuvée du Club"
 msgstr "The Club cuvée"
 
@@ -518,7 +495,6 @@ msgstr "The summit outing"
 msgid "Une sortie surprise en montagne pour tout le Club."
 msgstr "A surprise mountain outing for the whole Club."
 
-#| msgid "Plus jamais d'inconnus au Club."
 msgid "Plus jamais d'inconnus"
 msgstr "No more strangers"
 
@@ -838,28 +814,6 @@ msgstr "Complete your profile in 2 minutes"
 msgid "Swipe tes affinités : on te présentera les bonnes personnes."
 msgstr "Swipe your tastes: we'll introduce you to the right people."
 
-#| msgid "Données de démo"
-msgid "Mode démo"
-msgstr "Demo mode"
-
-#, python-format
-#| msgid "rencontres"
-msgid "Rencontre %(name)s"
-msgstr "Meet %(name)s"
-
-#| msgid ""
-#| "Scanne le code d'un membre rencontré : sa carte rejoint ton album et ses "
-#| "coordonnées se débloquent."
-msgid ""
-"Scanne ce QR code avec ton téléphone, ou ouvre son lien : sa carte rejoint "
-"ton album, ses coordonnées se débloquent et le Club progresse."
-msgstr ""
-"Scan this QR code with your phone or open its link: the card joins your "
-"album, the contact details unlock and the Club moves forward."
-
-msgid "Ouvrir le lien du QR code"
-msgstr "Open the QR code link"
-
 msgid "Ton album"
 msgstr "Your album"
 
@@ -1114,9 +1068,6 @@ msgstr "A club that lives all year round"
 msgid "Avant : se rencontrer"
 msgstr "Before: get to know each other"
 
-#| msgid ""
-#| "Chaque membre a sa carte : son entreprise, ses passions, ce qu'il adore… et "
-#| "ce qu'il déteste. Tu sais déjà avec qui trinquer."
 msgid ""
 "Chaque membre a sa carte : son entreprise, ses passions, ce qu'il adore… et "
 "ce qu'il déteste. Avant chaque soirée, tu sais déjà avec qui trinquer."
@@ -1128,9 +1079,6 @@ msgstr ""
 msgid "Pendant : se mélanger"
 msgstr "During: mingle"
 
-#| msgid ""
-#| "Tes trois rencontres de la soirée, des tables qui tournent à chaque service,"
-#| " un QR code pour garder le contact. Fini les petits groupes."
 msgid ""
 "Chaque soirée a son jeu pour briser la glace : le bingo des rencontres à "
 "l'apéro, des tables qui tournent au dîner, et un QR code pour garder le "
@@ -1152,7 +1100,6 @@ msgstr ""
 msgid "Comment rejoindre le Club"
 msgstr "How to join the Club"
 
-#| msgid "Demander une invitation"
 msgid "Demande une invitation"
 msgstr "Request an invitation"
 
@@ -1280,7 +1227,6 @@ msgstr "of which %(n)s in the last 30 days"
 msgid "Nouvelles recrues de l'année"
 msgstr "This year's newcomers"
 
-#| msgid "Pilier du Club"
 msgid "Paliers du Club"
 msgstr "Club milestones"
 
@@ -1292,14 +1238,11 @@ msgstr ""
 "reward is announced at the next event."
 
 #, python-format
-#| msgid "%(n)s rencontre"
-#| msgid_plural "%(n)s rencontres"
 msgid "encore %(n)s rencontre"
 msgid_plural "encore %(n)s rencontres"
 msgstr[0] "%(n)s more connection"
 msgstr[1] "%(n)s more connections"
 
-#| msgid "À venir"
 msgid "à venir"
 msgstr "upcoming"
 

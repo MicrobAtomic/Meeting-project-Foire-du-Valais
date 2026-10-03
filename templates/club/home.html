@@ -11,18 +11,6 @@
 </a>
 {% endif %}
 
-{% if demo %}
-<section class="card mt-5 flex flex-col items-center gap-4 bg-amber-50 ring-2 ring-amber-300 sm:flex-row">
-  <div class="shrink-0 rounded-xl bg-white p-2 [&>svg]:h-32 [&>svg]:w-32">{{ demo.qr_svg|scalable_svg }}</div>
-  <div class="space-y-2 text-center sm:text-left">
-    <p class="text-xs font-semibold uppercase tracking-widest text-amber-800">🎬 {% translate "Mode démo" %}</p>
-    <h2 class="font-semibold">{% blocktranslate with name=demo.member.full_name %}Rencontre {{ name }}{% endblocktranslate %}</h2>
-    <p class="text-sm text-stone-600">{% translate "Scanne ce QR code avec ton téléphone, ou ouvre son lien : sa carte rejoint ton album, ses coordonnées se débloquent et le Club progresse." %}</p>
-    <a href="{{ demo.url }}" class="btn btn-secondary">🔳 {% translate "Ouvrir le lien du QR code" %}</a>
-  </div>
-</section>
-{% endif %}
-
 <div class="mt-6 grid gap-4 md:grid-cols-2">
   <section class="card space-y-3">
     <h2 class="font-semibold">🃏 {% translate "Ton album" %}</h2>

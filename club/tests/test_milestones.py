@@ -1,10 +1,7 @@
-from datetime import timedelta
-
-from django.test import SimpleTestCase, TestCase, override_settings
+from django.test import SimpleTestCase, TestCase
 from django.urls import reverse
-from django.utils import timezone
 
-from club.models import RSVP, Connection, Event, Match
+from club.models import Connection
 from club.services.milestones import CLUB_MILESTONES, album_goal, club_progress, connections_needed
 from club.tests.helpers import make_member, make_staff
 
@@ -81,36 +78,3 @@ class MilestonePagesTests(TestCase):
         for milestone in CLUB_MILESTONES:
             self.assertContains(response, str(milestone.reward).replace("'", "&#x27;"))
         self.assertContains(response, "encore 2 rencontres")  # 10 % of 15 pairs
-
-
-class DemoContactTests(TestCase):
-    def setUp(self):
-        self.camille = make_member("camille@example.com", first_name="Camille")
-        self.lukas = make_member("lukas@example.com", first_name="Lukas", last_name="Imboden")
-        self.event = Event.objects.create(title="Dîner", kind="dinner", location="Martigny",
-                                          starts_at=timezone.now() + timedelta(days=5))
-        for member in (self.camille, self.lukas):
-            RSVP.objects.create(event=self.event, member=member, status=RSVP.Status.YES)
-        Match.objects.create(event=self.event, member_a=self.camille, member_b=self.lukas, score=5)
-        self.client.force_login(self.camille.user)
-
-    @override_settings(DEMO_MODE=True)
-    def test_demo_mode_offers_the_qr_code_of_the_first_introduction(self):
-        response = self.client.get(reverse("club:home"))
-        self.assertContains(response, "Rencontre Lukas Imboden")
-        self.assertContains(response, reverse("club:scan", args=[self.lukas.qr_token]))
-        self.assertContains(response, "<svg")
-
-    @override_settings(DEMO_MODE=True)
-    def test_once_met_the_demo_offers_someone_else(self):
-        Connection.link(self.camille, self.lukas)
-        other = make_member("other@example.com", first_name="Zoé", last_name="Zufferey")
-        response = self.client.get(reverse("club:home"))
-        self.assertNotContains(response, "Rencontre Lukas Imboden")
-        self.assertContains(response, reverse("club:scan", args=[other.qr_token]))
-
-    @override_settings(DEMO_MODE=False)
-    def test_never_outside_demo_mode(self):
-        response = self.client.get(reverse("club:home"))
-        self.assertNotContains(response, "Mode démo")
-        self.assertNotContains(response, self.lukas.qr_token)

@@ -48,7 +48,8 @@ Ouvre ensuite http://127.0.0.1:8000. Le mot de passe de tous les comptes de dém
 | `lukas.imboden@example.com` | Pilier du Club depuis 2017 (parle français et allemand) |
 | `equipe@example.com` | Équipe événements (staff) : `/staff/` et `/admin/` |
 
-La fois suivante : `cd ~/Meeting-project-Foire-du-Valais && source .venv/bin/activate && python manage.py runserver`.
+La fois suivante : `cd ~/Meeting-project-Foire-du-Valais && source .venv/bin/activate && python manage.py migrate && python manage.py runserver`
+(`migrate` applique les éventuelles évolutions de la base après une mise à jour du code, sans rien effacer).
 `python manage.py seed_demo --reset` remet les données de démo à zéro (les comptes sont recréés : tu devras te reconnecter).
 Le CSS est déjà compilé (`static/css/app.css`) : le binaire Tailwind n'est utile que pour modifier le design
 (voir [CLAUDE.md](CLAUDE.md)).
@@ -59,13 +60,30 @@ Le CSS est déjà compilé (`static/css/app.css`) : le binaire Tailwind n'est ut
 2. **Camille** (téléphone) : l'accueil montre « 2 / 49 cartes » et le prochain dîner, avec **ses 3 rencontres**, dont
    Lukas (Petite Arvine, ski de rando, trail, et les réunions du lundi matin en commun).
 3. **L'album** : rangs (fondateur doré, nouvelle recrue verte), filtre « Germanophones ».
-4. **La rencontre** : fenêtre privée, connecte-toi en Lukas → « Mon QR » ; dans la fenêtre de Camille, ouvre le lien du
-   QR → « Ajouter Lukas à mon album » → ses coordonnées et sa vCard se débloquent ; l'album passe à 3 / 49.
+4. **La rencontre** : connectée en Camille, ouvre le QR code de Lukas (ci-dessous) → « Ajouter Lukas à mon album » →
+   ses coordonnées et sa vCard se débloquent, l'album passe à 3 / 49 et le Club se rapproche de son prochain palier.
 5. **Le staff** (`equipe@example.com`) : tableau de bord (rencontres +1, membres isolés, demande d'invitation) →
    « Dîner d'automne » → « Préparer » → **plan de tables généré en direct** (38 invités, 3 services, environ 1 répétition).
 6. **Bascule en allemand** (FR · DE · EN en haut de page) : interface, dates, affinités et phrases d'accroche.
 
 Le déroulé complet, avec le texte à dire, est dans [docs/PITCH.md](docs/PITCH.md).
+
+### Le QR code de Lukas, pour jouer la rencontre
+
+<img src="docs/demo/qr-lukas.svg" alt="QR code de Lukas Imboden (démo)" width="160">
+
+- **En local** (connecté·e en Camille) : http://127.0.0.1:8000/m/demo-lukas/
+- **En ligne** : `https://<adresse-du-site>/m/demo-lukas/`. Pour que l'image ci-dessus se scanne avec un téléphone,
+  régénère-la avec l'adresse publique : `python manage.py demo_qr https://<adresse-du-site>` (elle remplace
+  `docs/demo/qr-lukas.svg`).
+
+Ce lien ne change pas d'une remise à zéro à l'autre : dans les données de démo, le QR code de Lukas est fixe
+(celui des autres membres est aléatoire).
+
+**Refaire la manipulation** : `python manage.py demo_reset` remet Camille à son point de départ (2 cartes, grilles de
+bingo vierges) et rend à Lukas le QR code ci-dessus. Le reste des données ne bouge pas, personne n'est déconnecté.
+Sur le site en ligne, sans terminal : connecte-toi en équipe → Administration → Rencontres → cherche « Imboden » →
+coche la rencontre Camille Rey – Lukas Imboden → action « Supprimer ».
 
 **Bonus : scanner avec ton vrai téléphone.** Laisse `runserver` tourner et, dans un 2ᵉ terminal :
 
@@ -75,6 +93,7 @@ cloudflared tunnel --url http://localhost:8000
 ```
 
 Ouvre l'URL `https://….trycloudflare.com` affichée : le QR code affiché via cette URL se scanne avec l'appareil photo.
+Pour le QR code de Lukas du README : `python manage.py demo_qr https://….trycloudflare.com`.
 
 ## Démo en ligne
 

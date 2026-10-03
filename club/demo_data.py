@@ -83,6 +83,7 @@ LUKAS = {
     "talk_to_me_about": "La construction bois en montagne", "phone": "+41 79 000 00 02",
     "likes": ["ski-rando", "petite-arvine", "trail", "patrouille-glaciers", "combats-reines"],
     "dislikes": ["reunions-lundi", "powerpoint"],
+    "qr_token": "demo-lukas",  # fixed on purpose: the README links to /m/demo-lukas/ to replay the meeting on stage
 }
 
 FIRST_NAMES_FR = [

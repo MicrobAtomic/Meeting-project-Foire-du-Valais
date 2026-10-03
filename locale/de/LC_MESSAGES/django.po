@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Club des Affaires\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 17:18+0200\n"
+"POT-Creation-Date: 2026-10-03 17:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Club des Affaires\n"
 "Language-Team: Club des Affaires\n"
@@ -167,7 +167,6 @@ msgstr "Transport & Logistik"
 msgid "Communication & médias"
 msgstr "Kommunikation & Medien"
 
-#| msgid "secteur"
 msgid "Autre secteur"
 msgstr "Andere Branche"
 
@@ -229,13 +228,9 @@ msgstr "LinkedIn"
 msgid "visible dans l'album"
 msgstr "im Album sichtbar"
 
-#| msgid ""
-#| "Si tu décoches, seuls les membres que tu as déjà rencontrés pourront voir ta"
-#| " carte."
 msgid "Décoché : seuls les membres déjà rencontrés voient sa carte."
 msgstr "Nicht angekreuzt: Nur bereits getroffene Mitglieder sehen die Karte."
 
-#| msgid "Profil complété 🎉"
 msgid "profil complété"
 msgstr "Profil ausgefüllt"
 
@@ -259,7 +254,6 @@ msgstr "Kultur & Neugier"
 msgid "Vie de bureau"
 msgstr "Büroalltag"
 
-#| msgid "Swipe tes affinités"
 msgid "affinité"
 msgstr "Vorliebe"
 
@@ -322,7 +316,6 @@ msgstr ""
 "Für ein Essen mit Sitzplätzen: Das Team erstellt einen Plan, bei dem alle "
 "bei jedem Gang den Tisch wechseln (Übersicht → Vorbereiten)."
 
-#| msgid "Tes rencontres"
 msgid "bingo des rencontres"
 msgstr "Begegnungs-Bingo"
 
@@ -342,11 +335,9 @@ msgstr "Ich komme"
 msgid "Je ne viens pas"
 msgstr "Ich komme nicht"
 
-#| msgid "Ta réponse"
 msgid "réponse"
 msgstr "Antwort"
 
-#| msgid "description"
 msgid "inscription"
 msgstr "Anmeldung"
 
@@ -359,23 +350,18 @@ msgstr "Admin-Eintrag"
 msgid "Données de démo"
 msgstr "Demodaten"
 
-#| msgid "rencontres"
 msgid "rencontre"
 msgstr "Begegnung"
 
-#| msgid "Rencontres proposées"
 msgid "rencontre proposée"
 msgstr "vorgeschlagene Begegnung"
 
-#| msgid "Rencontres proposées"
 msgid "rencontres proposées"
 msgstr "vorgeschlagene Begegnungen"
 
-#| msgid "Plan de tables"
 msgid "plan de tables"
 msgstr "Tischplan"
 
-#| msgid "Plan de tables"
 msgid "plans de tables"
 msgstr "Tischpläne"
 
@@ -397,14 +383,12 @@ msgstr "E-Mail"
 msgid "message"
 msgstr "Nachricht"
 
-#| msgid "Langue"
 msgid "langue"
 msgstr "Sprache"
 
 msgid "parrain ou marraine"
 msgstr "Pate oder Patin"
 
-#| msgid "Statut"
 msgid "statut"
 msgstr "Status"
 
@@ -424,19 +408,15 @@ msgstr "Willkommens-E-Mail gesendet am"
 msgid "reçue le"
 msgstr "eingegangen am"
 
-#| msgid "Demandes d'invitation"
 msgid "demande d'invitation"
 msgstr "Einladungsanfrage"
 
-#| msgid "Demandes d'invitation"
 msgid "demandes d'invitation"
 msgstr "Einladungsanfragen"
 
-#| msgid "J'adore"
 msgid "adore"
 msgstr "liebt"
 
-#| msgid "Je déteste"
 msgid "déteste"
 msgstr "hasst"
 
@@ -452,7 +432,6 @@ msgstr "Bingo-Feld"
 msgid "cases de bingo"
 msgstr "Bingo-Felder"
 
-#| msgid "membre depuis (année)"
 msgid "membre remplacé"
 msgstr "vertretenes Mitglied"
 
@@ -495,7 +474,6 @@ msgstr "Die ersten Verbindungen"
 msgid "Le Club fait connaissance."
 msgstr "Der Club lernt sich kennen."
 
-#| msgid "L'album du Club"
 msgid "La tournée du Club"
 msgstr "Die Runde des Clubs"
 
@@ -508,7 +486,6 @@ msgstr "Das Raclette der Mitglieder"
 msgid "Une raclette au feu de bois offerte à tout le Club."
 msgstr "Ein Raclette am Holzfeuer, offeriert für den ganzen Club."
 
-#| msgid "L'album du Club"
 msgid "La cuvée du Club"
 msgstr "Die Club-Cuvée"
 
@@ -521,7 +498,6 @@ msgstr "Der Ausflug zum Gipfel"
 msgid "Une sortie surprise en montagne pour tout le Club."
 msgstr "Ein Überraschungsausflug in die Berge für den ganzen Club."
 
-#| msgid "Plus jamais d'inconnus au Club."
 msgid "Plus jamais d'inconnus"
 msgstr "Nie mehr Fremde"
 
@@ -842,29 +818,6 @@ msgstr "Vervollständige dein Profil in 2 Minuten"
 msgid "Swipe tes affinités : on te présentera les bonnes personnes."
 msgstr "Swipe deine Vorlieben: wir stellen dir die richtigen Leute vor."
 
-#| msgid "Données de démo"
-msgid "Mode démo"
-msgstr "Demo-Modus"
-
-#, python-format
-#| msgid "rencontres"
-msgid "Rencontre %(name)s"
-msgstr "Triff %(name)s"
-
-#| msgid ""
-#| "Scanne le code d'un membre rencontré : sa carte rejoint ton album et ses "
-#| "coordonnées se débloquent."
-msgid ""
-"Scanne ce QR code avec ton téléphone, ou ouvre son lien : sa carte rejoint "
-"ton album, ses coordonnées se débloquent et le Club progresse."
-msgstr ""
-"Scanne diesen QR-Code mit deinem Handy oder öffne den Link: Die Karte kommt "
-"in dein Album, die Kontaktdaten werden freigeschaltet und der Club kommt "
-"weiter."
-
-msgid "Ouvrir le lien du QR code"
-msgstr "Link des QR-Codes öffnen"
-
 msgid "Ton album"
 msgstr "Dein Album"
 
@@ -1123,9 +1076,6 @@ msgstr "Ein Club, der das ganze Jahr lebt"
 msgid "Avant : se rencontrer"
 msgstr "Vorher: sich kennenlernen"
 
-#| msgid ""
-#| "Chaque membre a sa carte : son entreprise, ses passions, ce qu'il adore… et "
-#| "ce qu'il déteste. Tu sais déjà avec qui trinquer."
 msgid ""
 "Chaque membre a sa carte : son entreprise, ses passions, ce qu'il adore… et "
 "ce qu'il déteste. Avant chaque soirée, tu sais déjà avec qui trinquer."
@@ -1137,9 +1087,6 @@ msgstr ""
 msgid "Pendant : se mélanger"
 msgstr "Währenddessen: sich mischen"
 
-#| msgid ""
-#| "Tes trois rencontres de la soirée, des tables qui tournent à chaque service,"
-#| " un QR code pour garder le contact. Fini les petits groupes."
 msgid ""
 "Chaque soirée a son jeu pour briser la glace : le bingo des rencontres à "
 "l'apéro, des tables qui tournent au dîner, et un QR code pour garder le "
@@ -1162,7 +1109,6 @@ msgstr ""
 msgid "Comment rejoindre le Club"
 msgstr "So wirst du Mitglied"
 
-#| msgid "Demander une invitation"
 msgid "Demande une invitation"
 msgstr "Einladung anfragen"
 
@@ -1293,7 +1239,6 @@ msgstr "davon %(n)s in den letzten 30 Tagen"
 msgid "Nouvelles recrues de l'année"
 msgstr "Neumitglieder dieses Jahres"
 
-#| msgid "Pilier du Club"
 msgid "Paliers du Club"
 msgstr "Stufen des Clubs"
 
@@ -1305,14 +1250,11 @@ msgstr ""
 "wird ihre Belohnung am nächsten Anlass angekündigt."
 
 #, python-format
-#| msgid "%(n)s rencontre"
-#| msgid_plural "%(n)s rencontres"
 msgid "encore %(n)s rencontre"
 msgid_plural "encore %(n)s rencontres"
 msgstr[0] "noch %(n)s Begegnung"
 msgstr[1] "noch %(n)s Begegnungen"
 
-#| msgid "À venir"
 msgid "à venir"
 msgstr "noch offen"
 

@@ -31,24 +31,6 @@ STATUS_CHOICES = [
 ]
 
 
-def demo_contact(request, me, intros):
-    """Demo mode only: someone to "meet" on stage, with their QR code. The first introduction not yet in the album,
-    else any card still to collect."""
-    collected = collected_ids(me)
-    other = next((intro["other"] for intro in intros if intro["other"].pk not in collected), None)
-    if other is None:
-        other = (
-            Member.objects.filter(user__is_active=True, visible_in_directory=True)
-            .exclude(pk__in=collected | {me.pk})
-            .order_by("pk")
-            .first()
-        )
-    if other is None:
-        return None
-    url = request.build_absolute_uri(reverse("club:scan", args=[other.qr_token]))
-    return {"member": other, "url": url, "qr_svg": qr_svg(url)}
-
-
 @member_required
 def home(request):
     collected, total = collection_progress(request.member)
@@ -69,7 +51,6 @@ def home(request):
         "next_event": next_event,
         "next_status": answer,
         "next_intros": next_intros,
-        "demo": demo_contact(request, request.member, next_intros) if settings.DEMO_MODE else None,
     }
     return render(request, "club/home.html", context)
 
