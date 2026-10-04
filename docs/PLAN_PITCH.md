@@ -1,77 +1,41 @@
-# Présentation en deux minutes — suivi et reprise
+# Présentation avec captures fixes — suivi et reprise
 
-Demande du 4 octobre 2026 : intégrer A1 au récit principal, remplacer la vidéo imposant son rythme par des GIF lents, conserver le contrôle manuel, alléger les Markdown. Ce plan remplace [la version vidéo](archive/PLAN_PITCH_VIDEO.md).
+Demande actuelle : remplacer chaque image des GIF par une diapositive fixe, conserver le même texte anglais dans chaque séquence, répartir les notes françaises selon l’écran et garder l’avance entièrement manuelle. Cette version remplace [les GIF](archive/PLAN_PITCH_GIFS.md).
 
-## Décisions
+## Ordre et timing indicatif
 
-Sept diapositives principales, anglais à l'écran et français dans les notes, **118 secondes prévues** :
+**18 diapositives principales, 118 s prévues**, puis séparation et sept annexes (26 pages au total).
 
-| Diapo | Temps | Preuve / rôle |
+| Diapos | Images / rôle | Temps du chapitre |
 |---|---|---|
-| 1 — Promesse | 0–8 s | Plus jamais d'inconnus au Club |
-| 2 — Problème et solution | 8–24 s | ≈ 50 membres, 4–5 soirées ; les quatre piliers de A1 intégrés |
-| 3 — Avant la soirée | 24–46 s | GIF : accueil, connexion, album, synergies avec Lukas |
-| 4 — Pendant la soirée | 46–74 s | GIF : badge, confirmation de rencontre, bingo ; coordonnées et progrès collectif |
-| 5 — Entre les soirées | 74–86 s | GIF parrainage ; relances et récapitulatif mensuel regroupés en une idée |
-| 6 — Pour l'équipe | 86–104 s | GIF tableau de bord, préparation, tables ; trois explications courtes |
-| 7 — Lancement | 104–118 s | Coût estimatif ≈ 30 CHF/mois, étapes de lancement, factures manuelles |
+| 1 | Promesse + accueil public, ancienne première image du GIF de la diapo 3 | 0:00–0:08 |
+| 2 | Défi et quatre piliers | 0:08–0:24 |
+| 3–6 | Connexion → accueil personnel de Camille → album → rencontres proposées | 0:24–0:46 |
+| 7–11 | QR de Lukas → confirmation → carte ajoutée → coordonnées → bingo | 0:46–1:14 |
+| 12–14 | Lien de parrainage → QR de parrainage → demande parrainée | 1:14–1:26 |
+| 15–17 | Tableau de bord staff → préparation → tables | 1:26–1:44 |
+| 18 | Coût et lancement | 1:44–1:58 |
 
-Critique du découpage initial : une visite exhaustive des écrans et trois sous-parties marketing n'entrent pas en deux minutes. Connexion très courte ; priorité aux synergies et aux rencontres, qui distinguent le produit. Les fonctionnalités secondaires restent dans les annexes. Pas de diapositive A1 supplémentaire : ses quatre piliers sont la réponse au problème, sur la diapositive 2.
+La deuxième image de l’ancien GIF web (connexion) devient la première de la séquence web ; sa première image (vitrine) passe en couverture. Le nouvel accueil personnel est capturé avant la rencontre, pour montrer la progression initiale de Camille. Aucun changement automatique d’image, aucune attente de boucle.
 
-## Vérifications externes
+## Livraison
 
-- [Microsoft](https://support.microsoft.com/en-gb/powerpoint/add-an-animated-gif-to-a-slide?nochrome=true), consulté le 4 octobre : GIF pris en charge en diaporama dans PowerPoint installé Mac/Windows ; PowerPoint web ne les anime pas en diaporama. Une lecture HTML locale avec clavier sera fournie.
-- La [page publique du hackathon](https://ai-weeks.ch/events/hack-vs) annonce les présentations mais ne précise pas de contrainte MP4. La mention « uniquement MP4 » vient de l'ancien plan, sans source publique confirmée. Le MP4 existant sera conservé comme alternative, sans imposer son rythme à cette nouvelle version.
-- Aucun email réel ; SMTP/cron non activés. Parrainage montré sans remise promotionnelle (offre désactivée). Hébergement suisse et import sont des étapes de lancement, pas une production déjà déployée.
+- [x] S1 — Plan et captures fixes ; nouvel accueil de Camille, manifestes et reconstruction isolée.
+- [ ] S2 — Séquences de diapositives, notes adaptées, PowerPoint/PDF/HTML statiques.
+- [ ] S3 — Documentation actualisée, vérifications des notes/ordre/cadrage/navigation et livraison poussée.
 
-## Livraisons
+Chaque étape terminée est cochée, commitée et poussée sur main. Ne pas toucher à l’application ni à `db.sqlite3` ; le serveur 8000 de l’utilisateur reste indépendant. Captures sur une base jetable et un serveur 8010 appartenant au script ; refuser un port déjà occupé. Aucun email réel.
 
-- [x] G1 — Récit, timing, contraintes et plan de reprise enregistrés.
-- [x] G2 — Quatre GIF de l'application réelle, lents, sur base jetable ; manifestes et reconstruction documentés.
-- [x] G3 — Deck, GIF intégrés au PPTX, PDF avec images fixes, lecture HTML manuelle et notes synchronisées.
-- [x] G4 — Documents regroupés, anciens plans archivés, liens corrigés, index utile.
-- [x] G5 — Vérification des exports, cadrages, animations et durée orale ; recette et livraison poussées.
+## Sources et reprise
 
-Chaque étape terminée est cochée, commitée et poussée sur `main`. L'application et `db.sqlite3` restent intactes. Les captures utilisent uniquement `docs/pitch/.build/` (ignoré par Git).
+- Source graphique commune par chapitre : `pitch/template.html` ; conducteur par écran : `pitch/story.json`.
+- `pitch/build_deck.mjs` produit `pitch/deck.html`, les PNG et le PDF ; `pitch/build_pptx.py` produit le PowerPoint et ses notes.
+- Captures réelles : `pitch/screens/` ; outils `capture_screens.mjs` et `make_screens.py`.
+- `DEBUG=release` dans l’environnement : forcer `DEBUG=1` pour Django. python-pptx via uv isolé, sans dépendance ajoutée à l’application.
+- Deux tests existants dépendent de l’heure/date : scan invité avant 01 h suisse et date allemande littérale. La recette complète utilise l’horloge du 3 octobre 2026 12:00 UTC, comme [le journal précédent](archive/PLAN_PITCH_VIDEO.md#tests-sensibles-au-passage-de-minuit), sans changer les assertions.
 
-## Reprise
+Le fichier temporaire PowerPoint `~$…pptx` présent au départ appartient à la session de l’utilisateur ; il n’est ni supprimé ni ajouté à Git.
 
-État initial : `4dde623`, dépôt propre. Chrome, ffmpeg, Node, puppeteer-core et uv disponibles. `DEBUG=release` dans l'environnement : forcer `DEBUG=1` pour Django. python-pptx s'exécute via uv isolé, sans dépendance ajoutée à l'application. Port de capture 8010 ; refuser un port déjà utilisé.
+### S1 — Captures terminées
 
-Deux tests existants sont dépendants de l'heure/date : `GuestAccessTests.test_scan_attaches_only_real_people_and_notes_never_reach_the_principal` (scan simulé la veille avant 01 h suisse) et `NoFrenchLeftTests.test_german_pages_really_are_german` (date littérale 15 octobre). La suite précédente passe avec horloge figée au 3 octobre 2026 12:00 UTC : 401 tests, 6 réservés à PostgreSQL ignorés. Diagnostic et commande dans [l'ancien journal](archive/PLAN_PITCH_VIDEO.md#tests-sensibles-au-passage-de-minuit). Ne pas modifier les assertions pour cette tâche de présentation.
-
-### G2 — Captures terminées
-
-Quatre GIF de l’application réelle : web 17 s, rencontre 22 s, parrainage 14 s, équipe 16 s. Boucles lentes, pauses de 2 à 7,5 s, moins de 0,4 Mio chacun. Coordonnées débloquées et case Lukas vérifiées ; offre de remise absente ; aucun email envoyé. Les cadrages tiennent compte de l’en-tête fixe. Reconstruction : `.venv/bin/python docs/pitch/make_gifs.py --assets-only`.
-
-### G3 — Deck et lecteur terminés
-
-Sept diapositives principales, séparation et sept annexes (15 pages). A1 intégrée à la diapo 2 ; les anciennes annexes A2–A8 deviennent A1–A7. Quatre GIF originaux intégrés au PPTX, notes françaises identiques au conducteur, avance manuelle explicite. Le PDF utilise des posters fixes choisis pour chaque preuve. Lecteur HTML sans connexion : clavier, notes, plein écran, reprise du GIF, accès séparé aux questions.
-
-Pauses finales ajustées pour éviter une reprise prématurée : web **22 s**, rencontre **28 s**, parrainage **12 s**, équipe **18 s**. Moins de 0,4 Mio chacun. Vérifications : aucun texte coupé ou superposé aux captures ; GIF animé et reprise effective dans Chrome local ; notes, 15 pages et octets GIF identiques dans le PPTX. PowerPoint installé n’a pas été piloté : son affichage réel doit être vérifié sur l’ordinateur de scène.
-
-Le texte français compte 238 mots. Lecture synthétique locale Thomas à 150 mots/min : 6,99 / 12,32 / 20,15 / 21,29 / 10,20 / 15,19 / 11,78 secondes, soit **97,92 s** de parole pour un conducteur de **118 s**. Environ 20 s restent pour respirer, changer de diapositive et regarder les écrans ; ce contrôle ne remplace pas la répétition personnelle.
-
-### G4 — Documentation regroupée
-
-`docs/` comporte six Markdown actifs (contre dix hors index auparavant) : index, PITCH, suivi, architecture, exploitation et marketing. Soumission FR/EN intégrée à PITCH ; animations intégrées à MARKETING. Trois anciens plans/recettes déplacés dans `docs/archive/`, avec mentions d’archive, et ancien plan vidéo conservé. Aucun historique de test ni attribution de photo perdu. README et CLAUDE orientent vers l’index et le plan actif. Tous les liens Markdown vers des fichiers locaux ont été vérifiés ; zéro lien cassé. Les offres et envois non activés sont explicitement distingués dans MARKETING.
-
-### G5 — Recette finale et livraison
-
-Reconstruction intégrale depuis une base jetable réussie, puis contrôles navigateur et fichiers réussis : 7 principales + séparation + 7 annexes, quatre GIF de 22,01 / 28,01 / 12,01 / 18,01 s, notes françaises identiques entre conducteur/HTML/PPTX, avance manuelle, GIF originaux conservés, PDF de 15 pages. Lecture hors ligne, reprise du GIF, notes, passage aux annexes et redimensionnement à 1280 × 720 vérifiés. Aucun appel externe ni erreur JavaScript ; aucun texte coupé ou superposé aux captures. Captures des cartes, synergies, contacts, case bingo et tables inspectées.
-
-Contrôles Django : aucune erreur ; migrations : aucune différence. Suite complète SQLite avec horloge de référence : **401 tests en 47,19 s, OK, 6 cas PostgreSQL ignorés**. Les deux fixtures temporelles existantes restent documentées plus haut, sans modification de leurs assertions. Aucun fichier de `club/`, `config/`, `templates/` ou `static/` changé depuis `4dde623` ; base locale non utilisée et serveur de capture arrêté. Aucun email envoyé.
-
-Restent hors vérification automatique : répétition personnelle au chronomètre et lecture dans PowerPoint installé sur l’ordinateur de scène. Le lecteur HTML offre une alternative locale dont les animations ont été vérifiées ; le PDF est un secours statique.
-
-## Sauvegardes Git
-
-| Étape | Commit | État |
-|---|---|---|
-| G1 — récit et plan | `2f7ffe7` | Poussé sur main |
-| G2 — captures GIF | `f5dd0ed` | Poussé sur main |
-| G3 — deck, conducteur et lecteur | `96c3b6c` | Poussé sur main |
-| G4 — documentation regroupée | `c8ffaec` | Poussé sur main |
-| G5 — reconstruction et recette finales | Commit contenant cette ligne | Poussé avec les livrables finaux |
-
-Livraison : [PowerPoint](pitch/Club-des-Affaires-pitch.pptx), [PDF](pitch/Club-des-Affaires-pitch.pdf), [lecteur local](pitch/deck.html), [conducteur et textes de soumission](PITCH.md). Toutes les étapes de cette demande sont terminées ; ne pas relancer les anciennes cases des archives.
+Seize PNG réels : vitrine, connexion, accueil de Camille, album, synergies, cinq écrans rencontre, trois parrainage et trois staff. L’accueil personnel est capturé avant le scan : 2 / 49 cartes et prochain dîner visibles. Les coordonnées et la case bingo de Lukas sont vérifiées. La base jetable `pitch/.build/screens.sqlite3` et le serveur du script sont indépendants de la base utilisateur. Aucun email envoyé.

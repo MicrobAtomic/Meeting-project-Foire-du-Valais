@@ -1,0 +1,93 @@
+{
+  "scenes": {
+    "web": [
+      {
+        "file": "000.png",
+        "label": "Public home",
+        "url": "http://127.0.0.1:8010/"
+      },
+      {
+        "file": "001.png",
+        "label": "Member login",
+        "url": "http://127.0.0.1:8010/connexion/"
+      },
+      {
+        "file": "002.png",
+        "label": "Camille dashboard before her meeting",
+        "url": "http://127.0.0.1:8010/accueil/"
+      },
+      {
+        "file": "003.png",
+        "label": "Lukas in the filtered album",
+        "url": "http://127.0.0.1:8010/album/?aide=marche-alemanique"
+      },
+      {
+        "file": "004.png",
+        "label": "Suggested introductions and synergies",
+        "url": "http://127.0.0.1:8010/evenements/4/"
+      }
+    ],
+    "event": [
+      {
+        "file": "000.png",
+        "label": "Lukas shows his QR badge",
+        "url": "http://127.0.0.1:8010/moi/qr/"
+      },
+      {
+        "file": "001.png",
+        "label": "Camille confirms the meeting",
+        "url": "http://127.0.0.1:8010/m/demo-lukas/"
+      },
+      {
+        "file": "002.png",
+        "label": "The card joins the album",
+        "url": "http://127.0.0.1:8010/membres/2/"
+      },
+      {
+        "file": "003.png",
+        "label": "Contact details unlock",
+        "url": "http://127.0.0.1:8010/membres/2/"
+      },
+      {
+        "file": "004.png",
+        "label": "One real encounter ticks one square",
+        "url": "http://127.0.0.1:8010/evenements/4/bingo/"
+      }
+    ],
+    "referral": [
+      {
+        "file": "000.png",
+        "label": "A personal invitation link",
+        "url": "http://127.0.0.1:8010/moi/inviter/"
+      },
+      {
+        "file": "001.png",
+        "label": "A QR to invite a future member",
+        "url": "http://127.0.0.1:8010/moi/inviter/"
+      },
+      {
+        "file": "002.png",
+        "label": "The sponsored invitation request",
+        "url": "http://127.0.0.1:8010/rejoindre/?ref=0AA0CD20"
+      }
+    ],
+    "admin": [
+      {
+        "file": "000.png",
+        "label": "Membership and meetings dashboard",
+        "url": "http://127.0.0.1:8010/staff/"
+      },
+      {
+        "file": "001.png",
+        "label": "Prepare the event with one action",
+        "url": "http://127.0.0.1:8010/staff/evenements/4/"
+      },
+      {
+        "file": "002.png",
+        "label": "Rotating tables for 38 guests",
+        "url": "http://127.0.0.1:8010/staff/evenements/4/"
+      }
+    ]
+  },
+  "errors": []
+}

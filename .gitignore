@@ -19,3 +19,6 @@ media/
 # Outils du deck (npm install dans docs/pitch)
 docs/pitch/node_modules
 docs/pitch/.build/
+
+# Fichiers de verrouillage PowerPoint locaux
+/docs/pitch/~$*.pptx
