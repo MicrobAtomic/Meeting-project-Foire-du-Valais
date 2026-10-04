@@ -81,8 +81,9 @@ La reconstruction complète ci-dessus crée un nouveau PowerPoint avec les notes
 ```bash
 .venv/bin/python docs/pitch/make_screens.py --assets-only --only-intros
 # Pour les trois captures de parrainage, remplacer --only-intros par --only-referral.
+# Pour le dashboard de la diapo 15, utiliser --only-dashboard.
 cd docs/pitch
-node build_deck.mjs --tests 402
+node build_deck.mjs --tests 403
 UV_CACHE_DIR=/tmp/club-pitch-uv uv run --no-project --with python-pptx python build_pptx.py --refresh-images
 UV_CACHE_DIR=/tmp/club-pitch-uv uv run --no-project --with python-pptx python verify_pitch.py --preserved-pptx .build/pitch-before-image-refresh.pptx
 node verify_browser.mjs
@@ -93,6 +94,8 @@ Le remplacement des images conserve tous les autres contenus du PPTX et sauvegar
 Les notes, l’ordre des 16 captures, la couverture, l’absence de média animé et le contrôle manuel sont vérifiés. Résultats et limites : [PLAN_PITCH](PLAN_PITCH.md).
 
 Chiffres du client : environ 50 membres, cotisation de 500 CHF/an, 4–5 soirées/an. Démo : 15 % de paires connectées, prochain palier à 20 %, dîner de 38 invités sur trois services. Coût de fonctionnement **estimé** à ≈ 30 CHF/mois (300–450 CHF/an), mise en place ≈ 20 CHF hors développement ; détails et sources dans [ARCHITECTURE](ARCHITECTURE.md).
+
+La diapo 15 distingue **181 rencontres enregistrées cette année** et **6 nouveaux membres cette année**. Les 181 incluent la rencontre Camille/Lukas présentée précédemment ; le total historique et les 30 derniers jours restent indiqués sous le compteur annuel. Une rencontre compte une paire distincte de membres actifs, selon la date d’enregistrement ; revoir une personne déjà connue ne crée pas une nouvelle paire.
 
 ## Questions du jury
 

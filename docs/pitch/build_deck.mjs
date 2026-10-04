@@ -1,5 +1,5 @@
 // Shared chapter template + screen-by-screen script -> static deck, PNGs, PDF and PPTX metadata.
-// Usage from docs/pitch: node build_deck.mjs --tests 402
+// Usage from docs/pitch: node build_deck.mjs --tests 403
 import puppeteer from 'puppeteer-core';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -32,7 +32,7 @@ try {
   });
   document.body.replaceChildren(...main,...appendices,player);
   document.body.innerHTML=document.body.innerHTML.replaceAll('__TESTS__',count);
- },story,arg('tests','402'));
+ },story,arg('tests','403'));
  await page.evaluate(async()=>{await document.fonts.ready;await Promise.all([...document.images].map(img=>img.decode()));});
  fs.writeFileSync(path.join(here,'deck.html'),'<!doctype html>\n'+await page.evaluate(()=>document.documentElement.outerHTML)+'\n');
  fs.mkdirSync(path.join(here,'slides'),{recursive:true});

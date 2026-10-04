@@ -8,7 +8,8 @@ const base = process.env.BASE || 'http://127.0.0.1:8010';
 const browser = await puppeteer.launch({executablePath: process.env.CHROME || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', headless: true, args:['--hide-scrollbars','--force-color-profile=srgb']});
 const onlyIntros = process.argv.includes('--only-intros');
 const onlyReferral = process.argv.includes('--only-referral');
-const manifest = onlyIntros || onlyReferral ? JSON.parse(fs.readFileSync(path.join(out,'manifest.json'),'utf8')).scenes : {};
+const onlyDashboard = process.argv.includes('--only-dashboard');
+const manifest = onlyIntros || onlyReferral || onlyDashboard ? JSON.parse(fs.readFileSync(path.join(out,'manifest.json'),'utf8')).scenes : {};
 const errors = [];
 const pause = ms => new Promise(r => setTimeout(r, ms));
 async function session(email, desktop = false) {
@@ -89,6 +90,23 @@ try {
     await go(camille,'/evenements/4/');
     await scrollTo(camille,'section h2.text-lg');
     await shot(camille,'web','Suggested introductions and synergies',4);
+  } else if (onlyDashboard) {
+    if (manifest.admin?.length !== 3) throw new Error('Expected the three existing admin screenshots');
+    // Same point in the story as the original full capture: Camille has just met Lukas.
+    const camille = await session('camille.rey@example.com');
+    await go(camille,'/m/demo-lukas/');
+    await Promise.all([camille.waitForNavigation({waitUntil:'networkidle0'}),camille.click('main form button[type=submit]')]);
+    const staff = await session('equipe@example.com',true);
+    const headings = {fr:['Rencontres enregistrées cette année','Nouveaux membres cette année'],de:['Begegnungen dieses Jahr','Neue Mitglieder dieses Jahr'],en:['Connections this year','New members this year']};
+    for (const language of ['fr','de','en']) {
+      await staff.setCookie({name:'django_language',value:language,url:base});
+      await go(staff,'/staff/');
+      const cards = await staff.$$eval('main .grid > section.card',nodes => nodes.slice(0,4).map(el => ({label:el.querySelector('p').innerText,value:el.querySelector('.text-4xl').innerText})));
+      if (cards[2].value !== '181' || cards[3].value !== '6') throw new Error(`${language}: wrong annual connections or new members`);
+      if (cards[2].label !== headings[language][0] || cards[3].label !== headings[language][1]) throw new Error(`${language}: ambiguous dashboard labels`);
+      console.log(`PASS dashboard: ${language}, 181 annual connections / 6 new members`);
+    }
+    await shot(staff,'admin','Membership and meetings dashboard',0);
   } else if (onlyReferral) {
     if (manifest.referral?.length !== 3) throw new Error('Expected the three existing referral screenshots');
     const camille = await session('camille.rey@example.com');

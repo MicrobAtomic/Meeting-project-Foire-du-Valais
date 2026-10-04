@@ -87,11 +87,15 @@ Dans le PPTX existant, seules les images des diapos 12, 13, 14, 18 et 21 ont cha
 ### Rencontres annuelles du dashboard — demande du 4 octobre
 
 - [x] D1 — Distinguer le compteur des rencontres de l’année, le total historique et les nouveaux membres ; vérifier la période et les traductions.
-- [ ] D2 — Refaire la capture du dashboard et les exports de la diapositive 15, conserver les notes PowerPoint et pousser.
+- [x] D2 — Refaire la capture du dashboard et les exports de la diapositive 15, conserver les notes PowerPoint et pousser.
 
 Le « 6 » de la capture initiale comptait les nouveaux membres ; le total des rencontres était déjà de 181 après le scan Camille/Lukas. L’affichage est clarifié : rencontres enregistrées pendant l’année civile locale jusqu’à maintenant, total historique et 30 derniers jours, nouveaux membres de l’année. Les données de rencontres et l’indice de fédération restent calculés depuis la base, sans multiplier ni ajouter artificiellement les chiffres.
 
 D1 vérifiée : nouveau test du changement d’année à minuit suisse, distinction entre année et total, exclusion des dates futures des périodes année/30 jours, membres inactifs et invités exclus des statistiques de membres. Libellés vérifiés en FR/DE/EN. Traductions compilées, CSS recompilé sans différence, contrôle Django sans erreur ; **403 tests en 94,64 s, OK, 6 cas PostgreSQL ignorés**, avec l’horloge de référence. Tests existants inchangés.
+
+D2 vérifiée : capture du dashboard après le scan Camille/Lukas, comme dans le récit initial : **181 rencontres annuelles, 181 au total, 64 sur les 30 derniers jours, 6 nouveaux membres**. Libellés et chiffres contrôlés dans Chrome en FR/DE/EN ; capture et diapo 15 inspectées. PDF, HTML et PPTX actualisés ; les indications de tests passent à 403.
+
+Dans le PPTX retouché par l’utilisateur, seules les images des diapos 15, 18 et 21 changent (dashboard et nombre de tests) ; notes et tous les autres contenus conservés octet pour octet. Contrôles fichiers et navigateur réussis : 26 pages, ordre, stabilité jusqu’au clic, progression manuelle, annexes, redimensionnement et absence de texte coupé ou superposé. Aucun changement des données de la base utilisateur ; serveur de capture arrêté et aucun email envoyé. Réouvrir le PowerPoint pour charger cette version.
 
 | Étape | Commit | État |
 |---|---|---|
@@ -101,6 +105,8 @@ D1 vérifiée : nouveau test du changement d’année à minuit suisse, distinct
 | P1 — portraits dans les rencontres du site | `8a4ca7e` | Poussé sur main |
 | P2 — capture et exports, notes conservées | `410180d` | Poussé sur main |
 | R1 — tarif de parrainage sur le site | `5165466` | Poussé sur main |
-| R2 — présentation et capture de parrainage | Commit contenant cette ligne | Poussé avec les livrables corrigés |
+| R2 — présentation et capture de parrainage | `2eeca53` | Poussé sur main |
+| D1 — compteur annuel du dashboard | `5d6108c` | Poussé sur main |
+| D2 — capture du dashboard et diapo 15 | Commit contenant cette ligne | Poussé avec les livrables corrigés |
 
 Livraison : [PowerPoint](pitch/Club-des-Affaires-pitch.pptx), [PDF](pitch/Club-des-Affaires-pitch.pdf), [HTML local](pitch/deck.html), [conducteur](PITCH.md). Toutes les étapes de cette demande sont terminées.
