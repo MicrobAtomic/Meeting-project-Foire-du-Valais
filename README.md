@@ -3,213 +3,96 @@
 > **In English.** *Never a stranger at the Club again.* A members-only web app that keeps the business club of the
 > Foire du Valais alive between its evenings: member cards (passions, what you can help with, what you look for),
 > three introductions before each event with the reason why, a QR scan at the event that adds the card to your album
-> and unlocks contact details, a people bingo computed for each guest and rotating tables at seated dinners, and
-> shared milestones that show the Club growing closer. Django 5.2, FR / DE / EN, secure by default, automated tests.
-> Two-minute pitch with manually advanced screenshots: [docs/pitch/](docs/pitch) · submission texts: [submission texts](docs/PITCH.md#textes-de-soumission)
-> · architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+> and unlocks contact details, a people bingo computed for each guest and rotating tables at seated dinners, and shared
+> milestones that show the Club growing closer. Django 5.2, FR / DE / EN, secure by default, 403 automated tests.
 
-**Plus jamais d'inconnus au Club.** Une web app réservée aux membres du Club des Affaires, qui vit au rythme des
-événements :
+**Plus jamais d'inconnus au Club.** J'ai réalisé seul cette web app pour le hackathon de la Foire du Valais
+(3 et 4 octobre 2026) : une plateforme réservée aux membres du Club des Affaires, qui suit le rythme des soirées.
+Avant, chacun sait qui rencontrer et pourquoi ; pendant, un QR code prouve la rencontre et un jeu brise la glace ;
+après, l'album se remplit et le Club voit qu'il se resserre.
 
-- **Avant** : l'album de cartes des membres, les affinités (swipe), « tes 3 rencontres » pour la prochaine soirée.
-- **Pendant** : on scanne le QR code de quelqu'un pour ajouter sa carte et ses coordonnées ; chaque soirée a son jeu
-  pour briser la glace (**bingo des rencontres** à l'apéro, **tables tournantes** au dîner assis) ; les badges sont
-  imprimés par l'équipe.
-- **Après** : « ton album 18 / 49 » et ses objectifs pour le membre ; l'indice de fédération et les **paliers du Club**
-  (une récompense valaisanne à chaque palier) pour tout le monde.
+## Le dossier, dans l'ordre
 
-Projet réalisé pour le hackathon Foire du Valais (3–4 octobre 2026).
-[Documentation](docs/README.md) · [Pitch de deux minutes](docs/PITCH.md) ·
-[Architecture](docs/ARCHITECTURE.md) · [Exploitation](docs/EXPLOITATION.md).
+| | Document | Ce qu'on y trouve |
+|---|---|---|
+| 1 | [Le sujet et la solution](docs/SOLUTION.md) | Le défi, ce que le client m'a dit, la solution pilier par pilier, les parcours |
+| 2 | [Les choix techniques](docs/ARCHITECTURE.md) | La stack, les options écartées et pourquoi, la sécurité, les algorithmes, les coûts |
+| 3 | [Recruter et animer](docs/MARKETING.md) | Le plan de recrutement ciblé et le catalogue des jeux de soirée |
+| 4 | [Le pitch](docs/PITCH.md) | Le texte de deux minutes, les questions du jury, les textes de soumission |
+| 5 | [Mettre en service](docs/EXPLOITATION.md) | Hébergement, e-mails, photos, sauvegardes, données personnelles |
 
-Le [plan de présentation](docs/PLAN_PITCH.md) indique les étapes livrées et leur vérification.
-Les anciens plans et recettes sont conservés dans [les archives](docs/archive/).
-
-## Ce que fait l'application
-
-| Pour… | Fonctionnalités |
-|---|---|
-| **Les membres** | album de cartes avec recherche et filtres (dont « Peut m'aider sur… ») · fiche de chaque membre, points communs · coordonnées et vCard débloquées après une vraie rencontre (scan du QR) · profil et affinités, swipe façon « cartes », **ce que tu peux offrir et ce que tu cherches** (la synergie compte dans tes rencontres) · événements : réponse en un clic, **tes rencontres**, ton placement à table, **ta grille de bingo**, qui vient · **paliers du Club** et objectifs d'album · parrainage : lien personnel, QR, offre · connexion par mot de passe **ou par lien reçu par e-mail** · interface en français, allemand et anglais |
-| **L'équipe événements** | tableau de bord (rencontres de l’année et total historique, nouveaux membres, indice de fédération, membres isolés, demandes d'invitation) · préparation d'un événement : génération des rencontres, **plan de tables tournantes** (repas assis), gagnants du **bingo** (apéros), badges A4 avec QR code · back-office Django complet avec un **mode d'emploi en six gestes** et un encart par langue (FR / DE / EN) pour chaque événement |
-| **Les futurs membres** | vitrine publique sans aucun nom de membre · formulaire « Demander une invitation » (avec ou sans lien de parrainage) |
-
-Les améliorations ajoutent les portraits de démo avec sources/licences, l'upload de photo protégé avec aperçu avant enregistrement,
-les notes privées propres à chaque auteur, la langue des communications et l'acceptation d'une invitation avec création du compte.
-Le choix de langue est visible dans l'admin pour les emails et les courriers papier ; les options email sont repliées dans le profil.
-Les photos JPEG/PNG/WebP/HEIC/HEIF/AVIF sont orientées, recadrées et compressées automatiquement en JPEG ;
-les fichiers de téléphone sont acceptés jusqu’à 20 Mio et 50 mégapixels. Les remplaçants validés ont une identité et un QR distincts : leurs rencontres restent les leurs, leur accès expire
-et ils ne gonflent pas les compteurs de cotisants. La cotisation configurable est affichée sur la demande d'invitation
-(500 CHF par défaut) ; les factures restent gérées manuellement. En démo, un lien de parrainage valide affiche
-500 CHF barrés puis 350 CHF la première année, et 500 CHF/an ensuite. Hors démo, l'offre reste masquée par défaut ;
-`REFERRAL_OFFER_ENABLED=1` l'active et `REFERRAL_OFFER_ENABLED=0` la masque explicitement dans tous les modes.
-
-Annoncer un événement prépare des emails et des relances pour les membres sans réponse. Le récapitulatif mensuel
-montre des aperçus de nouveaux profils avec consentement et lien vers le site. **Les envois automatiques sont désactivés**
-(`NOTIFICATIONS_ENABLED=0`) ; aucun cron n'est installé. L'upload de photos en production attend un stockage privé
-persistant (`PROFILE_PHOTO_UPLOADS_ENABLED=0` par défaut en production). Voir l'exploitation avant activation.
+Le deck se trouve dans [docs/pitch/](docs/pitch/) (PowerPoint et PDF). Les plans de réalisation et les recettes sont
+archivés dans [docs/archive/](docs/archive/).
 
 ## Lancer le projet en 5 minutes (macOS)
 
 ```bash
-# 1. Outils (une seule fois)
-brew install uv
-
-# 2. Python 3.12 et dépendances
-cd ~/Meeting-project-Foire-du-Valais
-uv venv --python 3.12 .venv
-source .venv/bin/activate
+brew install uv                                   # une seule fois
+git clone https://github.com/MicrobAtomic/Meeting-project-Foire-du-Valais.git
+cd Meeting-project-Foire-du-Valais
+uv venv --python 3.12 .venv && source .venv/bin/activate
 uv pip install -r requirements.txt
-export DEBUG=1  # environnement local ; nécessaire si l'IDE définit une autre valeur
-
-# 3. Base de données et données de démo (50 membres fictifs)
+export DEBUG=1                                    # mode développement
 python manage.py migrate
-python manage.py seed_demo  # première installation sur une base vide
-
-# 4. Démarrer
-python manage.py runserver
+python manage.py seed_demo                        # 50 membres fictifs, 5 événements
+python manage.py runserver                        # http://127.0.0.1:8000
 ```
 
-Ouvre ensuite http://127.0.0.1:8000. Le mot de passe des trois comptes de connexion ci-dessous est `club-demo-2026`
-(ou la valeur `DEMO_PASSWORD` si définie). Les autres profils fictifs n'ont pas de mot de passe utilisable.
+Les fois suivantes : `source .venv/bin/activate && export DEBUG=1 && python manage.py migrate && python manage.py runserver`
+(`migrate` applique les évolutions de la base sans rien effacer). `python manage.py seed_demo --reset` remet toutes les
+données de démo à zéro ; il faut alors se reconnecter.
+
+Le mot de passe des trois comptes de démo est `club-demo-2026` (ou la valeur de `DEMO_PASSWORD`).
 
 | Compte | Rôle |
 |---|---|
-| `camille.rey@example.com` | Nouvelle recrue, 2 cartes dans son album : **le compte du pitch** |
-| `lukas.imboden@example.com` | Pilier du Club depuis 2017 (parle français et allemand) |
-| `equipe@example.com` | Équipe événements (staff) : `/staff/` et `/admin/` |
+| `camille.rey@example.com` | Nouvelle membre, 2 cartes dans son album : le compte de la démo |
+| `lukas.imboden@example.com` | Pilier du Club depuis 2017, bilingue français-allemand |
+| `equipe@example.com` | Équipe événements : `/staff/` et `/admin/` |
 
-La fois suivante : `cd ~/Meeting-project-Foire-du-Valais && source .venv/bin/activate && env DEBUG=1 python manage.py migrate && env DEBUG=1 python manage.py runserver`
-(`migrate` applique les éventuelles évolutions de la base après une mise à jour du code, sans rien effacer).
-`python manage.py seed_demo --reset` remet les données de démo à zéro (les comptes sont recréés : tu devras te reconnecter).
-Une erreur `no such column: club_member.demo_photo_key` après mise à jour se corrige avec `migrate`, après sauvegarde,
-sans réinitialiser la démo. La procédure est dans [EXPLOITATION.md](docs/EXPLOITATION.md).
-Le CSS est déjà compilé (`static/css/app.css`) : le binaire Tailwind n'est utile que pour modifier le design
-(voir [CLAUDE.md](CLAUDE.md)).
+Toutes les personnes et entreprises sont fictives ; trois portraits illustratifs ont leurs sources dans
+[docs/demo/PHOTOS.md](docs/demo/PHOTOS.md).
 
-## Parcourir la démo (2 minutes)
+## Parcourir la démo en 2 minutes
 
-1. **Vitrine** : http://127.0.0.1:8000 (déconnecté) → « Demander une invitation » : aucun nom de membre n'est visible.
-2. **Camille** (téléphone) : l'accueil montre « 2 / 49 cartes » et le prochain dîner, avec **ses 3 rencontres**, dont
-   Lukas (Petite Arvine, ski de rando, trail, et les réunions du lundi matin en commun).
-3. **L'album** : rangs (fondateur doré, nouvelle recrue verte), filtre « Germanophones ».
-4. **La rencontre** : connectée en Camille, ouvre le QR code de Lukas (ci-dessous) : la page annonce la case de son
-   bingo que Lukas peut cocher → « Ajouter Lukas à mon album » → ses coordonnées et sa vCard se débloquent, une case du
-   bingo se coche, l'album passe à 3 / 49 et le Club se rapproche de son prochain palier.
-5. **Le bingo** : « Dîner d'automne » → « Voir ma grille » : 9 cases « Trouve quelqu'un qui… », la case de Lukas cochée.
-6. **Le staff** (`equipe@example.com`) : tableau de bord (paliers, membres isolés, demandes d'invitation) →
-   « Dîner d'automne » → « Préparer » → **plan de tables généré en direct** (38 invités, 3 services, environ 1 répétition).
-   L'Apéro de Noël (debout) n'a pas de plan de tables, mais la liste des gagnants du bingo. L'accueil de
-   l'administration (`/admin/`) explique les six gestes de l'équipe.
-7. **Bascule en allemand** (FR · DE · EN en haut de page) : interface, dates, affinités, événements et phrases
-   d'accroche.
+1. **La vitrine** (déconnecté) : la promesse et « Demander une invitation » ; aucun nom de membre n'apparaît.
+2. **Camille** : son accueil (album 2 / 49, le Club connecté à 15 %, le prochain palier), puis le *Dîner d'automne* et
+   ses 3 rencontres : Lukas cherche du digital, elle cherche le marché alémanique.
+3. **La rencontre** : ouvre le QR code de Lukas ci-dessous → « Ajouter Lukas à mon album » : ses coordonnées et sa vCard
+   se débloquent, une case du bingo se coche.
+4. **Le bingo** : *Dîner d'automne* → « Voir ma grille ».
+5. **L'équipe** (`equipe@example.com`) : tableau de bord → *Dîner d'automne* → « Préparer » → le plan de tables se
+   génère en direct (38 invités, 3 services). L'administration (`/admin/`) s'ouvre sur son mode d'emploi.
+6. **Les langues** : FR · DE · EN en haut de page.
 
-Le déroulé complet, avec le texte à dire, est dans [docs/PITCH.md](docs/PITCH.md).
+<img src="docs/demo/qr-lukas.svg" alt="QR code de Lukas Imboden (démo)" width="140">
 
-### Le QR code de Lukas, pour jouer la rencontre
-
-<img src="docs/demo/qr-lukas.svg" alt="QR code de Lukas Imboden (démo)" width="160">
-
-- **En local** (connecté·e en Camille) : http://127.0.0.1:8000/m/demo-lukas/
-- **En ligne** : `https://<adresse-du-site>/m/demo-lukas/`. Pour que l'image ci-dessus se scanne avec un téléphone,
-  régénère-la avec l'adresse publique : `python manage.py demo_qr https://<adresse-du-site>` (elle remplace
-  `docs/demo/qr-lukas.svg`).
-
-Ce lien ne change pas d'une remise à zéro à l'autre : dans les données de démo, le QR code de Lukas est fixe
-(celui des autres membres est aléatoire).
-
-**Refaire la manipulation** : `python manage.py demo_reset` remet Camille à son point de départ (2 cartes, grilles de
-bingo vierges) et rend à Lukas le QR code ci-dessus. Le reste des données ne bouge pas, personne n'est déconnecté.
-Sur le site en ligne, sans terminal : connecte-toi en équipe → Administration → Rencontres → cherche « Imboden » →
-coche la rencontre Camille Rey – Lukas Imboden → action « Supprimer ».
-
-**Bonus : scanner avec ton vrai téléphone.** Laisse `runserver` tourner et, dans un 2ᵉ terminal :
-
-```bash
-brew install cloudflared
-cloudflared tunnel --url http://localhost:8000
-```
-
-Ouvre l'URL `https://….trycloudflare.com` affichée : le QR code affiché via cette URL se scanne avec l'appareil photo.
-Pour le QR code de Lukas du README : `python manage.py demo_qr https://….trycloudflare.com`.
-
-## Démo en ligne
-
-URL : *à renseigner une fois le déploiement fait (tâche 2.4 du plan).*
-
-1. Sur https://dashboard.render.com : **New → Blueprint**, autoriser le dépôt GitHub et le sélectionner.
-2. Render lit `render.yaml` (un service web et une base PostgreSQL gratuits, à Frankfurt). Saisir une valeur pour
-   `DEMO_PASSWORD` (le mot de passe de démo), puis **Apply**. Premier build : environ 5 minutes.
-3. Chaque `git push` sur `main` redéploie automatiquement. Les données de démo ne sont créées que si la base est vide.
-
-⚠️ L'offre gratuite se met en veille après 15 minutes : **ouvrir l'URL 2 minutes avant le pitch**.
-Plan B : le tunnel `cloudflared` ci-dessus.
+Le QR code de Lukas ouvre http://127.0.0.1:8000/m/demo-lukas/ (connecté en Camille). Pour une adresse en ligne :
+`python manage.py demo_qr https://<adresse>`. Pour rejouer la rencontre : `python manage.py demo_reset` (Camille revient
+à 2 cartes et à un bingo vierge, sans rien changer d'autre).
 
 ## Tests
 
 ```bash
-env DEBUG=1 python manage.py test club    # 400 tests, environ 50 s ; 6 cas de concurrence réservés à PostgreSQL
+env DEBUG=1 python manage.py test club      # 403 tests, environ 1 min ; 6 cas réservés à PostgreSQL
 ```
 
-Ils couvrent les algorithmes, la **matrice d'accès** (qui peut ouvrir quelle page : toute nouvelle route doit être
-classée), la CSP stricte, le CSRF, les formulaires, le lien de connexion, les badges, la reproductibilité des données
-de démo et les traductions (aucune phrase française sur les pages allemandes et anglaises). La suite passe sur SQLite
-et sur PostgreSQL (`env DEBUG=1 DATABASE_URL=postgresql://… python manage.py test club`), sur une base de test dédiée.
-Les tests incluent confidentialité des notes/photos, expiration des sessions invitées, validations concurrentes,
-relances, consentements mensuels et désabonnement. La recette du 3 octobre 2026 est documentée avec ses limites.
+Ils couvrent les algorithmes, la matrice d'accès (toute nouvelle page doit être classée publique, membre ou équipe),
+la sécurité des pages, les traductions (aucune phrase française ne doit rester sur une page allemande ou anglaise), la
+confidentialité des notes et des photos, et la reproductibilité des données de démo. Le détail est dans
+[ARCHITECTURE](docs/ARCHITECTURE.md#10-qualité).
 
-## E-mails (lien de connexion)
-
-Un membre peut se connecter **sans mot de passe** : « Recevoir un lien de connexion par e-mail » sur la page de connexion, ou
-l'équipe lui envoie un lien (admin → Membres → cocher → action « Envoyer un lien de connexion »). Le lien est valable 15 minutes
-et ne sert qu'une fois ; l'e-mail est rédigé dans la langue du membre.
-
-En local, les e-mails s'**affichent dans la console** du serveur. Pour envoyer de vrais e-mails (compte SMTP Brevo, Mailjet,
-Infomaniak…), définir ces variables d'environnement (sur Render : onglet *Environment*) :
+## Structure du code
 
 ```
-EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
-EMAIL_HOST=smtp.exemple.ch   EMAIL_PORT=587   EMAIL_USE_TLS=1
-EMAIL_HOST_USER=…            EMAIL_HOST_PASSWORD=…
-DEFAULT_FROM_EMAIL="Club des Affaires <club@exemple.ch>"
+config/              réglages Django (sécurité, langues, base de données par variable d'environnement), routes
+club/models.py       membres, affinités, thèmes d'entraide, événements, rencontres, bingo, remplaçants, notifications
+club/services/       logique métier testée : matching, tables tournantes, bingo, fédération et paliers, e-mails…
+club/views/          vitrine · espace membre · événements · bingo · équipe
+club/admin.py        administration de l'équipe événements
+templates/ static/   pages en FR / DE / EN, un peu de JavaScript sans dépendance, CSS Tailwind compilé
+locale/              traductions
+docs/                le dossier ci-dessus, le deck (pitch/) et les archives
 ```
 
-Le mode démo (`DEMO_MODE=1` par défaut) bloque les backends réels, y compris pour les liens de connexion.
-Après configuration et essai autorisé, passer à `DEMO_MODE=0`. L'automatisation des campagnes exige en plus
-`NOTIFICATIONS_ENABLED=1` et un ordonnanceur ; la procédure est dans [EXPLOITATION.md](docs/EXPLOITATION.md).
-
-## Traductions (FR · DE · EN)
-
-L'interface suit la langue du navigateur (ou le choix FR / DE / EN en haut de page, mémorisé). Les catalogues sont dans
-`locale/<langue>/LC_MESSAGES/django.po`, les fichiers compilés `.mo` sont commités (l'hébergeur n'a pas gettext).
-Après avoir ajouté ou modifié un texte (`{% translate %}` dans un template, `gettext` en Python) :
-
-```bash
-export PATH="$(brew --prefix gettext)/bin:$PATH"
-python manage.py makemessages -l fr -l de -l en --no-wrap --no-location --ignore=.venv --ignore=staticfiles --ignore="club/tests/*"
-# traduire les msgstr vides de locale/de/... et locale/en/... (allemand suisse : « ss », tutoiement), copier la source dans locale/fr/...
-python manage.py compilemessages --ignore=.venv --ignore=.claude
-python manage.py test club.tests.test_i18n     # aucun texte non traduit, aucune phrase française sur les pages DE/EN
-```
-
-## Sécurité en bref
-
-Fermé par défaut (toute page demande une connexion, sauf la vitrine, la connexion et la demande d'invitation) · coordonnées
-visibles seulement après une rencontre · CSP stricte (aucun script ni style en ligne, aucun service tiers) · CSRF sur tous
-les formulaires · HTTPS, HSTS et cookies sécurisés en production · liens de connexion à usage unique · même réponse pour une
-adresse inconnue. Détails et mesures : [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
-
-## Structure
-
-```
-config/                  réglages Django (sécurité, i18n, base de données par variable d'environnement), routes
-club/models.py           membres, affinités, événements, inscriptions, rencontres, plans de tables, demandes d'invitation
-club/services/           logique métier testée : matching, tables tournantes, fédération, vCard, QR, e-mails de connexion…
-club/views/              public · member · events · staff
-club/admin.py            back-office de l'équipe événements
-club/management/         seed_demo : données de démo fictives et reproductibles
-templates/ static/       pages (FR/DE/EN), JS sans dépendance (swipe, copier, imprimer), CSS compilé
-assets/css/input.css     sources Tailwind
-locale/                  traductions fr / de / en (.po et .mo)
-docs/                    README.md · PITCH.md · ARCHITECTURE.md · EXPLOITATION.md · MARKETING.md · archive/
-render.yaml build.sh     déploiement Render
-```
+Les règles pour reprendre le code avec un assistant IA sont dans [CLAUDE.md](CLAUDE.md).

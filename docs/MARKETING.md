@@ -1,9 +1,11 @@
-# Engagement du Club — recrutement et animations
+# Recruter et animer
 
-**Objectif** : passer de 50 à 100 membres en trois ans environ, sans perdre l'esprit du Club. Le Club veut
-rester premium, et ce sont la qualité des membres et des soirées qui le rendent premium. Le plan ne
-cherche donc pas le volume. Il touche peu de monde, mais les bonnes personnes, au bon moment, par
-quelqu'un qu'elles connaissent.
+Deux propositions pour faire grandir le Club sans le dénaturer : un plan de recrutement ciblé, puis les jeux qui
+brisent la glace pendant les soirées.
+
+**L'objectif que je propose** : passer de 50 à 100 membres en trois ans environ, sans perdre l'esprit du Club. Le Club
+veut rester premium, et ce sont la qualité des membres et des soirées qui le rendent premium. Mon plan ne cherche donc
+pas le volume : il touche peu de monde, mais les bonnes personnes, au bon moment, par quelqu'un qu'elles connaissent.
 
 ## 1. Le principe : pas de publicité, des invitations
 
@@ -55,16 +57,10 @@ masse, publier la liste des membres, démarcher par téléphone.
 
 ## 5. Le parcours d'un futur membre, déjà outillé
 
-1. **Il découvre le Club par quelqu'un** : un parrain (lien ou QR code personnel), une soirée comme invité,
-   ou une soirée où il remplace un membre.
-2. **Il demande une invitation** : la vitrine ne montre aucun nom de membre, et la demande prend deux minutes,
-   en français, allemand ou anglais.
-3. **L'équipe l'accepte** : elle passe la demande à « Acceptée ». Le compte se crée et l'e-mail de bienvenue est préparé ; l’envoi réel dépend de l’activation SMTP/cron.
-4. **Il crée son accès** : il choisit son mot de passe, complète sa carte et swipe ses affinités.
-5. **Il vit sa première soirée** : ses 3 rencontres l'attendent, dont un pilier du Club, plus le bingo à
-   l'apéro ou les tables tournantes au dîner.
-6. **Il revient** : son album se remplit, les paliers du Club approchent. À son tour, il parraine
-   quelqu'un.
+Découverte par un parrain, une soirée d'invité ou un remplacement → demande d'invitation en deux minutes, sans voir
+aucun nom de membre → acceptation par l'équipe, qui crée le compte → accès, carte et affinités → première soirée avec
+ses 3 rencontres → album, paliers, et à son tour il parraine quelqu'un. Chaque étape existe déjà dans l'application
+(détail dans [SOLUTION](SOLUTION.md)).
 
 ## 6. Une année type, sans événement supplémentaire
 

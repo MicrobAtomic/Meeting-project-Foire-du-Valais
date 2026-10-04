@@ -6,8 +6,9 @@ espace staff. Projet de hackathon : rendu le **dimanche 4 octobre 2026 à 13 h**
 
 ## Ta mission
 
-Suivre d’abord la demande actuelle de l’humain. Au début de chaque session, lire `docs/README.md`
-pour trouver le document actif. Pour la présentation, le suivi et la reprise sont dans `docs/PLAN_PITCH.md`.
+Suivre d’abord la demande actuelle de l’humain. Au début de chaque session, lire `README.md` : il donne
+le dossier dans l’ordre (solution, architecture, marketing, pitch, exploitation). Le deck se fabrique selon
+`docs/pitch/README.md`. Vérifier `git status` et `git log` : une autre IA peut avoir travaillé entre deux sessions.
 Les anciens plans de réalisation et d’amélioration sont conservés dans `docs/archive/` ; leurs cases ouvertes
 sont historiques et ne constituent pas une autorisation de déployer ou d’activer des services.
 Une demande d’étude ou de rédaction de plan ne demande pas l’implémentation des fonctionnalités.
@@ -74,8 +75,10 @@ Comptes de démo : `camille.rey@example.com` (nouvelle membre), `lukas.imboden@e
 
 ## Où trouver quoi
 
-- `docs/README.md` : index et état actuel ; `docs/PLAN_PITCH.md` : suivi de la présentation.
-- `docs/archive/` : anciens plans et recettes datées.
+- `README.md` : lancer le projet, parcourir la démo, et le dossier dans l’ordre.
+- `docs/SOLUTION.md`, `docs/MARKETING.md`, `docs/PITCH.md`, `docs/EXPLOITATION.md` : le produit, le recrutement,
+  le pitch, la mise en service. `docs/pitch/README.md` : fabriquer le deck.
+- `docs/archive/` : anciens plans et recettes datées (historiques, à ne pas relancer).
 - `docs/ARCHITECTURE.md` : les choix techniques et leurs raisons. Ils sont arrêtés, ne les remets pas en cause.
 - `club/services/` : la logique métier testée (matching, tables tournantes, fédération, vCard, QR, profil, rencontres).
 - `club/ui.py` et `club/templatetags/club_ui.py` : couleurs, emojis et libellés des cartes.
