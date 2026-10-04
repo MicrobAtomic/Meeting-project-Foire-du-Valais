@@ -2,7 +2,7 @@
 
 [![La démo commentée en 3 minutes : cliquer pour la voir](docs/pitch/demo-preview.gif)](docs/pitch/demo-long.mp4)
 
-**▶ [Voir la démo commentée (3 min 15)](docs/pitch/demo-long.mp4)** · [lecture directe](https://github.com/MicrobAtomic/Meeting-project-Foire-du-Valais/raw/main/docs/pitch/demo-long.mp4) — en anglais,
+**▶ [Voir la démo commentée (3 min 15)](docs/pitch/demo-long.mp4)** · [télécharger (11 Mo)](https://github.com/MicrobAtomic/Meeting-project-Foire-du-Valais/raw/main/docs/pitch/demo-long.mp4) — en anglais,
 avec la voix et les sous-titres. C'est le moyen le plus rapide de comprendre le projet : un prospect demande une
 invitation, l'équipe l'accepte, Camille vit sa soirée, l'équipe prépare le dîner.
 
