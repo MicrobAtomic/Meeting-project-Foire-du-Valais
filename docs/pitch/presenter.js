@@ -11,20 +11,12 @@
   const controls = document.createElement('nav');
   controls.className = 'presenter-controls';
   controls.setAttribute('aria-label','Presentation controls');
-  controls.innerHTML = '<button data-action="back" aria-label="Previous slide">←</button><span></span><button data-action="next" aria-label="Next slide">→</button><button data-action="replay">Replay GIF · R</button><button data-action="notes">Notes · N</button><button data-action="appendix">Q&amp;A · A</button><button data-action="fullscreen">Fullscreen · F</button>';
+  controls.innerHTML = '<button data-action="back" aria-label="Previous slide">←</button><span></span><button data-action="next" aria-label="Next slide">→</button><button data-action="notes">Notes · N</button><button data-action="appendix">Q&amp;A · A</button><button data-action="fullscreen">Fullscreen · F</button>';
   const notes = document.createElement('aside');
   notes.className = 'presenter-notes';
   document.body.append(controls,notes);
   document.body.classList.add('presenting');
   let index = 0;
-  function replay() {
-    for (const img of slides[index].querySelectorAll('[data-animation]')) {
-      // Clone creates a new image decoder, starting this GIF when this slide becomes visible.
-      const replacement = img.cloneNode();
-      replacement.src = img.dataset.animation + '?replay=' + Date.now();
-      img.replaceWith(replacement);
-    }
-  }
   function layout() {
     const scale = Math.min(innerWidth/1920,innerHeight/1080);
     slides[index].style.transform = `scale(${scale})`;
@@ -37,12 +29,11 @@
     slides.forEach((slide,i) => slide.classList.toggle('current',i===index));
     controls.querySelector('span').textContent = index < mainCount ? `${index+1}/${mainCount} · manual timing` : `Q&A ${index-mainCount}/${slides.length-mainCount-1}`;
     notes.textContent = slides[index].dataset.notes;
-    replay(); layout();
+    layout();
   }
   function action(name) {
     if (name === 'next') show(index+1);
     if (name === 'back') show(index-1);
-    if (name === 'replay') replay();
     if (name === 'notes') notes.classList.toggle('visible');
     if (name === 'appendix') { index = index < mainCount ? mainCount : mainCount-1; show(index); }
     if (name === 'fullscreen') {
@@ -51,12 +42,15 @@
     }
   }
   controls.addEventListener('click',e => action(e.target.closest('button')?.dataset.action));
+  document.addEventListener('click',e => {
+    if (e.target.closest('section.slide.current') && !e.target.closest('a,button,input,select,textarea')) action('next');
+  });
   document.addEventListener('keydown',e => {
     if (['ArrowRight',' ','PageDown'].includes(e.key)) {e.preventDefault();action('next');}
     if (['ArrowLeft','PageUp'].includes(e.key)) {e.preventDefault();action('back');}
     if (e.key === 'Home') show(0);
     if (e.key === 'End') {index=mainCount-1;show(index);}
-    const names = {r:'replay',n:'notes',a:'appendix',f:'fullscreen'};
+    const names = {n:'notes',a:'appendix',f:'fullscreen'};
     if (names[e.key.toLowerCase()]) action(names[e.key.toLowerCase()]);
   });
   addEventListener('resize',layout);

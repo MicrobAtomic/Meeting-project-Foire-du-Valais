@@ -1,68 +1,86 @@
 # Présenter le Club des Affaires en deux minutes
 
-Le pitch suit Camille : découvrir le Club, rencontrer Lukas, garder le lien. **Sept diapositives principales**, puis une séparation et sept annexes pour les questions. Les quatre piliers de l’ancienne A1 font partie de la diapositive 2.
+Le pitch garde **sept chapitres**, déclinés en **18 diapositives principales fixes**, puis une séparation et sept annexes (26 pages). **Un clic = un nouvel écran**. Le texte anglais reste identique dans chaque séquence ; les notes françaises sont réparties pour suivre l’image.
 
-- [PowerPoint avec quatre GIF intégrés et notes françaises](pitch/Club-des-Affaires-pitch.pptx).
-- [Présentation HTML locale](pitch/deck.html) : fonctionne sans connexion ; conserver le dossier `pitch/` complet.
-- [PDF de secours](pitch/Club-des-Affaires-pitch.pdf) : images fixes choisies pour montrer chaque preuve.
-- [Ancienne vidéo autonome](pitch/demo.mp4), environ 77 s : alternative disponible, absente du nouveau PowerPoint.
+- [PowerPoint statique et notes françaises par écran](pitch/Club-des-Affaires-pitch.pptx).
+- [Présentation HTML locale](pitch/deck.html) : conserver le dossier `pitch/` complet.
+- [PDF avec exactement les mêmes écrans](pitch/Club-des-Affaires-pitch.pdf).
+- [Ancienne vidéo autonome](pitch/demo.mp4), environ 77 s : alternative disponible, absente du PowerPoint.
 
-Les diapositives sont en anglais ; le texte parlé est en français. Le conducteur vise **1 min 58 s**, avec avance manuelle. Les 238 mots ont été mesurés par lecture synthétique française : environ 98 s de parole, laissant 20 s de pauses et de transitions. Une répétition personnelle reste nécessaire. Les GIF bouclent et ne changent jamais la diapositive. Il n’est pas nécessaire d’attendre la fin d’une boucle.
+L’accueil public, ancienne première image du GIF de la diapo 3, passe en couverture. La séquence web commence par l’ancienne deuxième image (connexion), puis montre **l’accueil de Camille → son album → ses rencontres proposées**. QR, bingo, parrainage et administration suivent aussi une capture par diapositive.
+
+Le conducteur reste à **1:58**. Les temps ci-dessous sont des repères ; aucune image et aucune diapositive ne changent automatiquement. Les 226 mots durent environ 94 s en lecture synthétique française à 150 mots/min, laissant environ 24 s pour les clics et les pauses. La durée orale et les clics doivent être répétés ensemble.
 
 ## Conducteur et texte à dire
 
-Le texte est également dans les notes de l’orateur du PowerPoint. `pitch/story.json` contient le conducteur vérifié avec les exports.
+Le même texte est dans les notes de l’orateur du PowerPoint et dans `pitch/story.json`. On ne répète pas le texte anglais à chaque nouveau screenshot : on poursuit la phrase au rythme de l’écran.
 
-| Temps | Diapo | Texte français |
+| Temps | Diapo · écran | Texte français |
 |---|---|---|
-| 0:00–0:08 | 1 · Promesse | « Bonjour. Notre promesse au Club des Affaires : plus jamais d’inconnus, même pour une nouvelle membre. » |
-| 0:08–0:24 | 2 · Défi → quatre piliers | « Cinquante dirigeants se retrouvent quatre à cinq fois par an, mais restent entre habitués. Notre réponse suit quatre étapes : se trouver, repérer les synergies, se rencontrer et garder le lien. » |
-| 0:24–0:46 | 3 · Avant · web | « Voici Camille. Rien à installer : elle se connecte et découvre l’album des membres. Avant le dîner, trois rencontres lui sont proposées, avec une raison. Lukas cherche du digital, son métier à elle ; il peut l’aider à découvrir le marché alémanique. Leurs passions donnent un premier sujet de conversation. » |
-| 0:46–1:14 | 4 · Pendant · rencontres | « Le soir même, Lukas lui montre son QR code. Camille confirme leur rencontre : sa carte rejoint son album et ses coordonnées se débloquent. Son bingo coche une case : le jeu pousse à parler à de nouvelles personnes. Chaque rencontre fait aussi avancer le Club vers un palier collectif, avec une récompense valaisanne. » |
-| 1:14–1:26 | 5 · Entre · fidélisation | « Entre les soirées : annonces et relances ciblées, puis un récapitulatif mensuel des nouveaux membres. Le parrainage permet d’inviter une personne de confiance. » |
-| 1:26–1:44 | 6 · Équipe · tableau de bord | « Pour l’équipe, ce tableau de bord montre les membres et les rencontres. Elle prépare les soirées, génère les badges et les tables tournantes. Ici, trente-huit invités sont mélangés sur trois services. Elle peut aussi repérer les membres isolés. » |
-| 1:44–1:58 | 7 · Coût et lancement | « Pour lancer : hébergement suisse, import des membres, activation des emails. Environ trente francs par mois, hors développement. Un club qui se connaît se retrouve. Merci. » |
+| 0:00–0:08 | 1 · Promesse · accueil public | « Bonjour. Notre promesse au Club des Affaires : plus jamais d’inconnus, même pour une nouvelle membre. » |
+| 0:08–0:24 | 2 · Défi · quatre piliers | « Cinquante dirigeants se retrouvent quatre à cinq fois par an, mais restent entre habitués. Notre réponse suit quatre étapes : se trouver, repérer les synergies, se rencontrer et garder le lien. » |
+| 0:24–0:28 | 3 · Camille · connexion | « Voici Camille. Elle se connecte, sans rien installer. » |
+| 0:28–0:32 | 4 · Camille · accueil personnel | « Son accueil montre l’album et les paliers du Club. » |
+| 0:32–0:35 | 5 · Camille · album | « Dans l’album, elle découvre les membres. » |
+| 0:35–0:46 | 6 · Camille · rencontres proposées | « Trois rencontres sont proposées, avec une raison : Lukas cherche du digital et peut l’aider sur le marché alémanique. Leurs passions lancent la conversation. » |
+| 0:46–0:50 | 7 · Lukas · QR | « Le soir même, Lukas lui montre son QR code. » |
+| 0:50–0:54 | 8 · Confirmer la rencontre | « Camille confirme leur rencontre. » |
+| 0:54–0:57 | 9 · Carte ajoutée | « Sa carte rejoint son album. » |
+| 0:57–1:01 | 10 · Coordonnées débloquées | « Ses coordonnées se débloquent. » |
+| 1:01–1:14 | 11 · Bingo · progrès du Club | « Son bingo coche une case : le jeu pousse à parler à de nouvelles personnes. Chaque rencontre fait aussi avancer le Club vers un palier collectif, avec une récompense valaisanne. » |
+| 1:14–1:19 | 12 · Parrainage · lien personnel | « Entre les soirées : annonces, relances et récapitulatif des nouveaux membres. » |
+| 1:19–1:23 | 13 · Parrainage · QR | « Le parrainage permet d’inviter une personne de confiance. » |
+| 1:23–1:26 | 14 · Demande parrainée | « L’invité demande à rejoindre le Club. » |
+| 1:26–1:32 | 15 · Équipe · tableau de bord | « L’équipe voit les membres, les rencontres et les personnes isolées. » |
+| 1:32–1:37 | 16 · Équipe · préparer | « Elle prépare les soirées, génère les badges et les tables tournantes. » |
+| 1:37–1:44 | 17 · Équipe · tables | « Ici, trente-huit invités sont mélangés sur trois services. » |
+| 1:44–1:58 | 18 · Coût et lancement | « Pour lancer : hébergement suisse, import des membres, activation des emails. Environ trente francs par mois, hors développement. Un club qui se connaît se retrouve. Merci. » |
 
-## Pourquoi ce découpage
+## Sept chapitres, plusieurs écrans
 
-La connexion ne mérite que deux secondes d’image : ce qui distingue la solution, ce sont les synergies, le scan après une vraie rencontre et le jeu qui mélange les invités. Les annonces, relances et nouveaux membres forment une seule idée : garder le lien. Le tableau de bord explique comment une petite équipe fait vivre ce parcours. La conclusion conserve le coût et trois étapes de lancement ; les autres fonctionnalités restent dans les annexes.
-
-| GIF | Boucle | Ce qui apparaît |
+| Chapitre | Diapositives | Durée indicative |
 |---|---|---|
-| Web | 22 s | Vitrine 2,5 s → connexion 2 s → album 5 s → synergies 12,5 s |
-| Rencontre | 28 s | QR 4 s → confirmation 4 s → carte 3 s → coordonnées 4 s → bingo 13 s |
-| Parrainage | 12 s | Invitation personnelle 4 s → QR 4 s → demande parrainée 4 s |
-| Équipe | 18 s | Tableau de bord 5 s → préparation 4 s → tables 9 s |
+| Promesse | 1 | 8 s |
+| Problème et solution | 2 | 16 s |
+| Avant la soirée | 3–6 | 22 s |
+| Pendant la soirée | 7–11 | 28 s |
+| Entre les soirées | 12–14 | 12 s |
+| Pour l’équipe | 15–17 | 18 s |
+| Lancement | 18 | 14 s |
+
+Le jury découvre chaque capture quand tu la présentes. Les quatre piliers restent en diapo 2. Les titres et explications de chaque chapitre sont communs à ses écrans successifs : seules la capture et la numérotation changent. Les notes suivent la capture ; le nombre de diapositives ne rajoute pas de chapitre au récit.
 
 Les emails sont préparés mais **SMTP et cron restent à activer**. Le récapitulatif mensuel requiert le consentement. Aucune remise de parrainage n’est activée. Les factures de cotisation restent manuelles. L’hébergement suisse est une étape de lancement.
 
 ## Utilisation avant scène
 
-- PowerPoint **installé** sur Mac ou Windows : lancer le diaporama pour voir les GIF ; ils restent fixes dans le mode d’édition. [Microsoft indique que PowerPoint web ne les anime pas en diaporama](https://support.microsoft.com/en-gb/powerpoint/add-an-animated-gif-to-a-slide?nochrome=true).
-- HTML : ouvrir `pitch/deck.html` dans Chrome. **← / → ou Espace** pour avancer ; **F** plein écran ; **N** notes ; **R** rejouer le GIF ; **A** annexes / retour à la conclusion. L’avance s’arrête après la diapo 7, avant les annexes. Les commandes s’effacent quand la souris reste immobile.
-- PDF : toutes les images sont fixes. Copier aussi le dossier `pitch/` complet pour utiliser le lecteur HTML hors ligne.
-- Répéter au chronomètre sur l’ordinateur de présentation. Viser 1:55–1:58 ; le conducteur n’impose aucun compte à rebours.
+- PowerPoint : ouvrir à nouveau le fichier exporté, lancer le diaporama, avancer avec les flèches ou la télécommande. Les notes de chaque image sont accessibles dans le mode présentateur. Aucun média à lancer.
+- HTML : ouvrir `pitch/deck.html` dans Chrome. **clic sur la diapositive, ← / → ou Espace** pour avancer ; **F** plein écran ; **N** notes ; **A** annexes / retour à la conclusion. L’avance s’arrête après la diapo 18. Les commandes s’effacent quand la souris reste immobile.
+- PDF : mêmes 26 pages fixes, utilisables aussi comme présentation. Copier le dossier `pitch/` complet pour utiliser le lecteur HTML hors ligne.
+- Répéter au chronomètre avec les **17 changements d’écran** ; viser 1:55–1:58. Les notes ne sont pas un compte à rebours obligatoire.
 
-La [page publique du hackathon](https://ai-weeks.ch/events/hack-vs) ne précise pas de contrainte sur les médias. L’exigence « MP4 uniquement » citée dans l’ancien plan n’a pas de source publique retrouvée ; la vidéo existante reste disponible comme alternative. La limite de deux minutes et le choix des GIF viennent de la demande actuelle.
+La version précédente et ses contrôles sont conservés dans [le journal GIF](archive/PLAN_PITCH_GIFS.md). La vidéo autonome reste une alternative ; la présentation principale suit la demande actuelle de captures fixes.
 
 ## Reconstruction et preuves
 
-Depuis la racine, avec Chrome, ffmpeg, Node, uv et `npm install` dans `docs/pitch/` :
+Depuis la racine, avec Chrome, Node, uv et `npm install` dans `docs/pitch/` :
 
 ```bash
-.venv/bin/python docs/pitch/make_gifs.py
-# Réexporter rapidement en conservant les captures :
-.venv/bin/python docs/pitch/make_gifs.py --reuse-captures
+.venv/bin/python docs/pitch/make_screens.py
+# Réexporter directement les captures conservées dans le dépôt :
+.venv/bin/python docs/pitch/make_screens.py --reuse-captures
 cd docs/pitch
 node verify_browser.mjs
 UV_CACHE_DIR=/tmp/club-pitch-uv uv run --no-project --with python-pptx python verify_pitch.py
 ```
 
-Le script crée uniquement `pitch/.build/gifs.sqlite3`, refuse un port 8010 déjà occupé et arrête son propre serveur en cas d’erreur. Le code métier, la base locale, le serveur 8000 et les réglages d’envoi ne sont pas modifiés. Les GIF originaux sont intégrés au PowerPoint ; le PDF utilise des posters explicites. Le journal de vérification et les limites connues sont dans [PLAN_PITCH](PLAN_PITCH.md).
+Le texte anglais commun à chaque chapitre vient de `pitch/template.html`, le texte français par écran de `pitch/story.json`. `build_deck.mjs` génère `deck.html`, les PNG et le PDF. Le script de capture utilise uniquement `pitch/.build/screens.sqlite3`, refuse un port 8010 déjà occupé et arrête son propre serveur en cas d’erreur. Les captures sont de l’application réelle, avec les données fictives ; l’accueil personnel de Camille précède le scan. Aucun email réel.
+
+Les notes, l’ordre des 16 captures, la couverture, l’absence de média animé et le contrôle manuel sont vérifiés. Résultats et limites : [PLAN_PITCH](PLAN_PITCH.md).
 
 Chiffres du client : environ 50 membres, cotisation de 500 CHF/an, 4–5 soirées/an. Démo : 15 % de paires connectées, prochain palier à 20 %, dîner de 38 invités sur trois services. Coût de fonctionnement **estimé** à ≈ 30 CHF/mois (300–450 CHF/an), mise en place ≈ 20 CHF hors développement ; détails et sources dans [ARCHITECTURE](ARCHITECTURE.md).
 
-## 6. Les 7 minutes de questions
+## Questions du jury
 
 **Pourquoi Django plutôt que Next.js et Supabase ?**
 L'équipe a besoin d'un back-office (membres, événements, inscriptions) dès le premier jour : Django le fournit, sécurisé.
@@ -153,12 +171,12 @@ Le code est public sur GitHub ; la démo en ligne avec les comptes du README ; e
 
 ## Textes de soumission
 
-Textes anglais et français à copier dans le formulaire. Le PowerPoint actuel contient les GIF ; la vidéo autonome est conservée en alternative.
+Textes anglais et français à copier dans le formulaire. Le PowerPoint actuel contient les captures fixes ; la vidéo autonome est conservée en alternative.
 
 ### Links
 
 - **GitHub**: https://github.com/MicrobAtomic/Meeting-project-Foire-du-Valais
-- **Pitch deck**: [docs/pitch/Club-des-Affaires-pitch.pptx](pitch/Club-des-Affaires-pitch.pptx) (four animated GIFs embedded,
+- **Pitch deck**: [docs/pitch/Club-des-Affaires-pitch.pptx](pitch/Club-des-Affaires-pitch.pptx) (fixed screenshots, one per slide,
   French talk in the speaker notes) · PDF: [docs/pitch/Club-des-Affaires-pitch.pdf](pitch/Club-des-Affaires-pitch.pdf)
 - **Alternative standalone video** (about 77 s): [docs/pitch/demo.mp4](pitch/demo.mp4)
 - **Live demo**: *to fill in once deployed (README, “Démo en ligne”)*. Accounts: `camille.rey@example.com` (new member),

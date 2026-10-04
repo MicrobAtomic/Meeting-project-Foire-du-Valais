@@ -1,5 +1,4 @@
-"""Validate generated files without changing the app. Run via uv --with python-pptx."""
-import hashlib
+"""Validate static exports, the requested screen order and notes without changing the app."""
 import json
 from pathlib import Path
 import re
@@ -9,36 +8,36 @@ from pptx import Presentation
 HERE=Path(__file__).resolve().parent
 slides=json.loads((HERE/'slides/slides.json').read_text())
 story=json.loads((HERE/'story.json').read_text())
-gifs=json.loads((HERE/'gifs/manifest.json').read_text())
+captures=json.loads((HERE/'screens/manifest.json').read_text())
 deck=Presentation(HERE/'Club-des-Affaires-pitch.pptx')
-assert len(slides)==len(deck.slides)==15
-assert sum(s['seconds'] or 0 for s in slides)==118
-assert len(story)==7 and len(gifs)==4
-assert len(re.findall(rb'/Type\s*/Page\b',(HERE/'Club-des-Affaires-pitch.pdf').read_bytes()))==15
-for row,slide in zip(slides,deck.slides):
+assert len(slides)==len(deck.slides)==26
+assert len(story)==18 and sum(s['seconds'] for s in story)==118
+assert len(re.findall(rb'/Type\s*/Page\b',(HERE/'Club-des-Affaires-pitch.pdf').read_bytes()))==26
+assert story[0]['screen']=='screens/web/000.png'
+assert [(r['id'],r['screen']) for r in story[2:6]]==[
+    ('web-login','screens/web/001.png'),('web-dashboard','screens/web/002.png'),
+    ('web-album','screens/web/003.png'),('web-intros','screens/web/004.png')]
+used=[r['screen'] for r in story if r['screen']]
+expected=[f'screens/{name}/{frame["file"]}' for name,frames in captures['scenes'].items() for frame in frames]
+assert set(used)==set(expected) and len(used)==len(set(used))==16
+assert captures['errors']==[]
+clock=0
+for row in story:
+    assert row['start']==clock and row['end']==clock+row['seconds'];clock=row['end']
+for i,(row,slide) in enumerate(zip(slides,deck.slides)):
     assert Image.open(HERE/row['image']).size==(1920,1080)
     assert slide.notes_slide.notes_text_frame.text==row['notes']
-    assert len(slide.shapes)==1+len(row['animations'])
+    assert len(slide.shapes)==1 and slide.shapes[0].image.blob==(HERE/row['image']).read_bytes()
     if row['id']:
-        script=next(s for s in story if s['id']==row['id'])
-        assert row['notes'].endswith(script['text']) and row['seconds']==script['seconds']
+        script=story[i]
+        assert row['id']==script['id'] and row['notes'].endswith(script['text'])
+        assert row['seconds']==script['seconds'] and row['chapter']==script['chapter']
         assert script['text'] in (HERE.parent/'PITCH.md').read_text()
+        assert [s['source'] for s in row['screens']]==([script['screen']] if script['screen'] else [])
     transition=slide._element.find('{http://schemas.openxmlformats.org/presentationml/2006/main}transition')
     assert transition is not None and transition.get('advClick')=='1' and transition.get('advTm') is None
-    for shape,animation in zip(list(slide.shapes)[1:],row['animations']):
-        assert shape.image.blob==(HERE/animation['source']).read_bytes()
+    assert slide._element.find('{http://schemas.openxmlformats.org/presentationml/2006/main}timing') is None
 with ZipFile(HERE/'Club-des-Affaires-pitch.pptx') as archive:
-    embedded=[name for name in archive.namelist() if name.endswith('.gif')]
-    assert len(embedded)==4
-    assert not any(name.endswith('.mp4') for name in archive.namelist())
-    embedded_hashes={hashlib.sha256(archive.read(name)).hexdigest() for name in embedded}
-    assert embedded_hashes=={hashlib.sha256((HERE/value['gif']).read_bytes()).hexdigest() for value in gifs.values()}
-for name,value in gifs.items():
-    image=Image.open(HERE/value['gif'])
-    assert image.n_frames>3 and image.info['loop']==0
-    duration=0
-    for frame in range(image.n_frames):
-        image.seek(frame);duration+=image.info.get('duration',0)
-    assert abs(duration/1000-value['planned_duration'])<.15,(name,duration)
-    print(f'{name}: {duration/1000:.2f}s, {image.n_frames} frames, original GIF embedded')
-print('PASS: 7 main slides + divider + 7 appendices; 4 GIFs; 15 PDF pages; notes and manual advancement; 118s plan.')
+    assert not any(name.endswith(('.gif','.mp4')) for name in archive.namelist())
+    assert all(name.endswith('.png') for name in archive.namelist() if name.startswith('ppt/media/'))
+print('PASS: 18 manual slides + divider + 7 appendices; 16 unique fixed screens; cover and web order; notes; 26 PDF pages; 118s plan.')

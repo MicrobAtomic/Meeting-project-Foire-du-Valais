@@ -1,51 +1,182 @@
 [
   {
     "id": "intro",
+    "chapter": "intro",
     "seconds": 8,
+    "text": "Bonjour. Notre promesse au Club des Affaires : plus jamais d’inconnus, même pour une nouvelle membre.",
+    "screen": "screens/web/000.png",
+    "label": "Public home",
     "start": 0,
-    "end": 8,
-    "text": "Bonjour. Notre promesse au Club des Affaires : plus jamais d’inconnus, même pour une nouvelle membre."
+    "end": 8
   },
   {
     "id": "problem",
+    "chapter": "problem",
     "seconds": 16,
+    "text": "Cinquante dirigeants se retrouvent quatre à cinq fois par an, mais restent entre habitués. Notre réponse suit quatre étapes : se trouver, repérer les synergies, se rencontrer et garder le lien.",
+    "screen": null,
+    "label": null,
     "start": 8,
-    "end": 24,
-    "text": "Cinquante dirigeants se retrouvent quatre à cinq fois par an, mais restent entre habitués. Notre réponse suit quatre étapes : se trouver, repérer les synergies, se rencontrer et garder le lien."
+    "end": 24
   },
   {
-    "id": "web",
-    "seconds": 22,
+    "id": "web-login",
+    "chapter": "web",
+    "seconds": 4,
+    "text": "Voici Camille. Elle se connecte, sans rien installer.",
+    "screen": "screens/web/001.png",
+    "label": "Member login",
     "start": 24,
-    "end": 46,
-    "text": "Voici Camille. Rien à installer : elle se connecte et découvre l’album des membres. Avant le dîner, trois rencontres lui sont proposées, avec une raison. Lukas cherche du digital, son métier à elle ; il peut l’aider à découvrir le marché alémanique. Leurs passions donnent un premier sujet de conversation."
+    "end": 28
   },
   {
-    "id": "event",
-    "seconds": 28,
+    "id": "web-dashboard",
+    "chapter": "web",
+    "seconds": 4,
+    "text": "Son accueil montre l’album et les paliers du Club.",
+    "screen": "screens/web/002.png",
+    "label": "Camille dashboard",
+    "start": 28,
+    "end": 32
+  },
+  {
+    "id": "web-album",
+    "chapter": "web",
+    "seconds": 3,
+    "text": "Dans l’album, elle découvre les membres.",
+    "screen": "screens/web/003.png",
+    "label": "Members’ album",
+    "start": 32,
+    "end": 35
+  },
+  {
+    "id": "web-intros",
+    "chapter": "web",
+    "seconds": 11,
+    "text": "Trois rencontres sont proposées, avec une raison : Lukas cherche du digital et peut l’aider sur le marché alémanique. Leurs passions lancent la conversation.",
+    "screen": "screens/web/004.png",
+    "label": "Suggested introductions",
+    "start": 35,
+    "end": 46
+  },
+  {
+    "id": "event-qr",
+    "chapter": "event",
+    "seconds": 4,
+    "text": "Le soir même, Lukas lui montre son QR code.",
+    "screen": "screens/event/000.png",
+    "label": "Lukas’s QR badge",
     "start": 46,
-    "end": 74,
-    "text": "Le soir même, Lukas lui montre son QR code. Camille confirme leur rencontre : sa carte rejoint son album et ses coordonnées se débloquent. Son bingo coche une case : le jeu pousse à parler à de nouvelles personnes. Chaque rencontre fait aussi avancer le Club vers un palier collectif, avec une récompense valaisanne."
+    "end": 50
   },
   {
-    "id": "referral",
-    "seconds": 12,
+    "id": "event-confirm",
+    "chapter": "event",
+    "seconds": 4,
+    "text": "Camille confirme leur rencontre.",
+    "screen": "screens/event/001.png",
+    "label": "Meeting confirmation",
+    "start": 50,
+    "end": 54
+  },
+  {
+    "id": "event-card",
+    "chapter": "event",
+    "seconds": 3,
+    "text": "Sa carte rejoint son album.",
+    "screen": "screens/event/002.png",
+    "label": "The collected member card",
+    "start": 54,
+    "end": 57
+  },
+  {
+    "id": "event-contacts",
+    "chapter": "event",
+    "seconds": 4,
+    "text": "Ses coordonnées se débloquent.",
+    "screen": "screens/event/003.png",
+    "label": "Unlocked contact details",
+    "start": 57,
+    "end": 61
+  },
+  {
+    "id": "event-bingo",
+    "chapter": "event",
+    "seconds": 13,
+    "text": "Son bingo coche une case : le jeu pousse à parler à de nouvelles personnes. Chaque rencontre fait aussi avancer le Club vers un palier collectif, avec une récompense valaisanne.",
+    "screen": "screens/event/004.png",
+    "label": "One encounter, one bingo square",
+    "start": 61,
+    "end": 74
+  },
+  {
+    "id": "referral-link",
+    "chapter": "referral",
+    "seconds": 5,
+    "text": "Entre les soirées : annonces, relances et récapitulatif des nouveaux membres.",
+    "screen": "screens/referral/000.png",
+    "label": "Personal referral link",
     "start": 74,
-    "end": 86,
-    "text": "Entre les soirées : annonces et relances ciblées, puis un récapitulatif mensuel des nouveaux membres. Le parrainage permet d’inviter une personne de confiance."
+    "end": 79
   },
   {
-    "id": "admin",
-    "seconds": 18,
+    "id": "referral-qr",
+    "chapter": "referral",
+    "seconds": 4,
+    "text": "Le parrainage permet d’inviter une personne de confiance.",
+    "screen": "screens/referral/001.png",
+    "label": "Personal referral QR",
+    "start": 79,
+    "end": 83
+  },
+  {
+    "id": "referral-request",
+    "chapter": "referral",
+    "seconds": 3,
+    "text": "L’invité demande à rejoindre le Club.",
+    "screen": "screens/referral/002.png",
+    "label": "Sponsored invitation request",
+    "start": 83,
+    "end": 86
+  },
+  {
+    "id": "admin-dashboard",
+    "chapter": "admin",
+    "seconds": 6,
+    "text": "L’équipe voit les membres, les rencontres et les personnes isolées.",
+    "screen": "screens/admin/000.png",
+    "label": "Staff dashboard",
     "start": 86,
-    "end": 104,
-    "text": "Pour l’équipe, ce tableau de bord montre les membres et les rencontres. Elle prépare les soirées, génère les badges et les tables tournantes. Ici, trente-huit invités sont mélangés sur trois services. Elle peut aussi repérer les membres isolés."
+    "end": 92
+  },
+  {
+    "id": "admin-prepare",
+    "chapter": "admin",
+    "seconds": 5,
+    "text": "Elle prépare les soirées, génère les badges et les tables tournantes.",
+    "screen": "screens/admin/001.png",
+    "label": "Event preparation",
+    "start": 92,
+    "end": 97
+  },
+  {
+    "id": "admin-tables",
+    "chapter": "admin",
+    "seconds": 7,
+    "text": "Ici, trente-huit invités sont mélangés sur trois services.",
+    "screen": "screens/admin/002.png",
+    "label": "Generated rotating tables",
+    "start": 97,
+    "end": 104
   },
   {
     "id": "closing",
+    "chapter": "closing",
     "seconds": 14,
+    "text": "Pour lancer : hébergement suisse, import des membres, activation des emails. Environ trente francs par mois, hors développement. Un club qui se connaît se retrouve. Merci.",
+    "screen": null,
+    "label": null,
     "start": 104,
-    "end": 118,
-    "text": "Pour lancer : hébergement suisse, import des membres, activation des emails. Environ trente francs par mois, hors développement. Un club qui se connaît se retrouve. Merci."
+    "end": 118
   }
 ]

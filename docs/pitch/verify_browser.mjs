@@ -1,4 +1,4 @@
-// Checks slide layout, offline navigation and real GIF playback in Chrome.
+// Checks static slide layout, repeated chapter copy and offline manual navigation in Chrome.
 import puppeteer from 'puppeteer-core';
 import path from 'node:path';
 import fs from 'node:fs';
@@ -15,12 +15,12 @@ try {
  await page.setViewport({width:1920,height:1080});
  const url='file://'+path.join(here,'deck.html');
  await page.goto(url+'?export=1',{waitUntil:'load'});
- await page.evaluate(async()=>{for(const img of document.querySelectorAll('[data-animation]'))img.src=img.dataset.poster;await document.fonts.ready;await Promise.all([...document.images].map(img=>img.decode()));});
+ await page.evaluate(async()=>{await document.fonts.ready;await Promise.all([...document.images].map(img=>img.decode()));});
  const layout=await page.evaluate(()=>{
   const cropped=[],overlaps=[];
   for(const [i,slide] of [...document.querySelectorAll('section.slide')].entries()){
    const s=slide.getBoundingClientRect();
-   const media=[...slide.querySelectorAll('[data-animation]')].map(img=>img.getBoundingClientRect());
+   const media=[...slide.querySelectorAll('[data-screen]')].map(img=>img.getBoundingClientRect());
    const walker=document.createTreeWalker(slide,NodeFilter.SHOW_TEXT);
    while(walker.nextNode()){
     const node=walker.currentNode;if(!node.textContent.trim())continue;
@@ -33,22 +33,37 @@ try {
   }
   return {slides:document.querySelectorAll('section.slide').length,main:document.querySelectorAll('[data-script]').length,annexes:document.querySelectorAll('.appendix').length,cropped,overlaps};
  });
- assert.equal(layout.slides,15);assert.equal(layout.main,7);assert.equal(layout.annexes,7);
+ assert.equal(layout.slides,26);assert.equal(layout.main,18);assert.equal(layout.annexes,7);
  assert.deepEqual(layout.cropped,[]);assert.deepEqual(layout.overlaps,[]);
+ const copy=await page.evaluate(()=>{
+  const groups={};
+  for(const slide of document.querySelectorAll('[data-script]')) {
+   const clone=slide.cloneNode(true);clone.querySelector('.foot')?.remove();
+   (groups[slide.dataset.chapter] ||= []).push(clone.textContent.replace(/\s+/g,' ').trim());
+  }
+  return groups;
+ });
+ for(const [chapter,count] of Object.entries({web:4,event:5,referral:3,admin:3})) {
+  assert.equal(copy[chapter].length,count);
+  assert.equal(new Set(copy[chapter]).size,1,`Visible text must stay identical within ${chapter}`);
+ }
+ assert.equal(await page.$$eval('[data-animation],video',nodes=>nodes.length),0);
+
  await page.goto(url,{waitUntil:'load'});
  const current=()=>page.$eval('.slide.current',s=>s.dataset.script||'appendix');
  assert.equal(await current(),'intro');
  await page.keyboard.press('ArrowRight');assert.equal(await current(),'problem');
- await page.keyboard.press('ArrowRight');assert.equal(await current(),'web');
- await pause(500);
- const frame1=await (await page.$('.current [data-animation]')).screenshot();
- await pause(5000);
- const frame2=await (await page.$('.current [data-animation]')).screenshot();
- assert(!Buffer.from(frame1).equals(Buffer.from(frame2)),'GIF must animate in the offline presentation');
- await page.keyboard.press('r');
- await pause(500);
- const restarted=await (await page.$('.current [data-animation]')).screenshot();
- assert(Buffer.from(frame1).equals(Buffer.from(restarted)),'Replay must return to the first GIF frame');
+ await page.keyboard.press('ArrowRight');assert.equal(await current(),'web-login');
+ const login=await (await page.$('.current [data-screen]')).screenshot();
+ await pause(1500);
+ const held=await (await page.$('.current [data-screen]')).screenshot();
+ assert(Buffer.from(login).equals(Buffer.from(held)),'The screen must remain fixed until the presenter advances');
+ assert.equal(await current(),'web-login');
+ await page.keyboard.press('ArrowRight');assert.equal(await current(),'web-dashboard');
+ const dashboard=await (await page.$('.current [data-screen]')).screenshot();
+ assert(!Buffer.from(login).equals(Buffer.from(dashboard)),'Advancing must reveal a different screen');
+ await page.keyboard.press('ArrowRight');assert.equal(await current(),'web-album');
+ await page.click('.current [data-screen]');assert.equal(await current(),'web-intros');
  await page.keyboard.press('n');assert(await page.$('.presenter-notes.visible'));
  await page.keyboard.press('n');
  await page.keyboard.press('End');assert.equal(await current(),'closing');
@@ -63,6 +78,6 @@ try {
  assert.deepEqual(size,[1280,720]);
  assert.deepEqual(failures,[]);
  fs.mkdirSync(path.join(here,'.build'),{recursive:true});
- fs.writeFileSync(path.join(here,'.build/browser-check.json'),JSON.stringify({...layout,offlinePlayback:true,navigation:true},null,2)+'\n');
- console.log('PASS: 15 slides, no cropped/overlapping text, offline GIF playback, manual navigation, notes, Q&A, viewport resize.');
+ fs.writeFileSync(path.join(here,'.build/browser-check.json'),JSON.stringify({...layout,staticScreens:true,navigation:true},null,2)+'\n');
+ console.log('PASS: 26 slides, fixed screen until click, requested web order, manual navigation, notes, Q&A, viewport resize; no cropped/overlapping text.');
 } finally {await browser.close();}

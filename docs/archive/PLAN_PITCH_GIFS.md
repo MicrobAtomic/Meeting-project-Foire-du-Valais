@@ -1,4 +1,6 @@
-# Présentation en deux minutes — suivi et reprise
+# Présentation en deux minutes — version GIF archivée
+
+> Remplacée par les captures fixes : [plan actuel](../PLAN_PITCH.md). Les outils et assets GIF de cette recette correspondent au commit `e41c8fd`, conservé dans Git.
 
 Demande du 4 octobre 2026 : intégrer A1 au récit principal, remplacer la vidéo imposant son rythme par des GIF lents, conserver le contrôle manuel, alléger les Markdown. Ce plan remplace [la version vidéo](PLAN_PITCH_VIDEO.md).
 

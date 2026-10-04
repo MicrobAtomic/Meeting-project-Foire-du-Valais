@@ -21,7 +21,7 @@ La deuxième image de l’ancien GIF web (connexion) devient la première de la 
 ## Livraison
 
 - [x] S1 — Plan et captures fixes ; nouvel accueil de Camille, manifestes et reconstruction isolée.
-- [ ] S2 — Séquences de diapositives, notes adaptées, PowerPoint/PDF/HTML statiques.
+- [x] S2 — Séquences de diapositives, notes adaptées, PowerPoint/PDF/HTML statiques.
 - [ ] S3 — Documentation actualisée, vérifications des notes/ordre/cadrage/navigation et livraison poussée.
 
 Chaque étape terminée est cochée, commitée et poussée sur main. Ne pas toucher à l’application ni à `db.sqlite3` ; le serveur 8000 de l’utilisateur reste indépendant. Captures sur une base jetable et un serveur 8010 appartenant au script ; refuser un port déjà occupé. Aucun email réel.
@@ -38,4 +38,10 @@ Le fichier temporaire PowerPoint `~$…pptx` présent au départ appartient à l
 
 ### S1 — Captures terminées
 
-Seize PNG réels : vitrine, connexion, accueil de Camille, album, synergies, cinq écrans rencontre, trois parrainage et trois staff. L’accueil personnel est capturé avant le scan : 2 / 49 cartes et prochain dîner visibles. Les coordonnées et la case bingo de Lukas sont vérifiées. La base jetable `pitch/.build/screens.sqlite3` et le serveur du script sont indépendants de la base utilisateur. Aucun email envoyé.
+Seize PNG réels : vitrine, connexion, accueil de Camille, album, synergies, cinq écrans rencontre, trois parrainage et trois staff. L’accueil personnel est capturé avant le scan : 2 / 49 cartes et paliers du Club visibles. Les coordonnées et la case bingo de Lukas sont vérifiées. La base jetable `pitch/.build/screens.sqlite3` et le serveur du script sont indépendants de la base utilisateur. Aucun email envoyé.
+
+### S2 — Diapositives et notes terminées
+
+18 diapositives principales fixes, séparation et sept annexes : 26 pages. Une capture distincte par diapositive, avec le texte anglais commun à chaque chapitre ; ordre demandé en couverture et aux diapositives 3–6. Les notes françaises sont propres à chaque écran, synchronisées avec `story.json` et PITCH. PNG identiques intégrés au PPTX, aucune animation ou vidéo intégrée et aucune avance chronométrée. Le PDF et le lecteur HTML présentent les mêmes captures ; clic ou clavier pour avancer.
+
+Contrôles fichiers et navigateur réussis : 16 captures uniques, ordre, texte invariant par chapitre, notes, PDF/PPTX, image stable entre deux actions, navigation et annexes. Couverture, accueil personnel et synergies inspectés. Lecture synthétique locale Thomas à 150 mots/min : **226 mots, 93,77 s** de parole ; chaque morceau entre dans son repère. Le conducteur garde 118 s, soit environ 24 s pour les clics et pauses. Répétition personnelle à effectuer.

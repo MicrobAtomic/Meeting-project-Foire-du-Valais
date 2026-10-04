@@ -3,7 +3,6 @@ Run from repo root: .venv/bin/python docs/pitch/make_screens.py [--assets-only |
 No SMTP, no dependency changes, no access to db.sqlite3. Requires Chrome, Node, uv.
 """
 import argparse
-import json
 import os
 from pathlib import Path
 import socket
