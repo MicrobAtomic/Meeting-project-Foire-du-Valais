@@ -10,7 +10,7 @@ from django.core.management import call_command
 from django.template import Context, Template
 from django.test import TestCase, override_settings
 from django.urls import reverse
-from django.utils import translation
+from django.utils import formats, timezone, translation
 from django.utils.translation import ngettext
 
 from club.models import Event, Member, Tag
@@ -234,5 +234,7 @@ class NoFrenchLeftTests(LanguageIsolatedTestCase):
         for text in ("Hallo Camille", "Der Club ist zu 15 % vernetzt", "Nächster Anlass", "Deine Begegnungen", "Dein Album"):
             self.assertContains(home, text)
         event = self.client.get(reverse("club:event_detail", args=[self.dinner.pk]))
-        for text in ("Donnerstag, 15. Oktober 2026", "Dein Sitzplatz", "Vorspeise", "Skitouren"):
+        with translation.override("de"):  # the demo dinner is 12 days ahead: its date depends on the day the suite runs
+            german_date = formats.date_format(timezone.localtime(self.dinner.starts_at), "l, j. F Y")
+        for text in (german_date, "Dein Sitzplatz", "Vorspeise", "Skitouren"):
             self.assertContains(event, text)
