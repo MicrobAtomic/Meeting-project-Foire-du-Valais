@@ -22,7 +22,7 @@ La deuxième image de l’ancien GIF web (connexion) devient la première de la 
 
 - [x] S1 — Plan et captures fixes ; nouvel accueil de Camille, manifestes et reconstruction isolée.
 - [x] S2 — Séquences de diapositives, notes adaptées, PowerPoint/PDF/HTML statiques.
-- [ ] S3 — Documentation actualisée, vérifications des notes/ordre/cadrage/navigation et livraison poussée.
+- [x] S3 — Documentation actualisée, vérifications des notes/ordre/cadrage/navigation et livraison poussée.
 
 Chaque étape terminée est cochée, commitée et poussée sur main. Ne pas toucher à l’application ni à `db.sqlite3` ; le serveur 8000 de l’utilisateur reste indépendant. Captures sur une base jetable et un serveur 8010 appartenant au script ; refuser un port déjà occupé. Aucun email réel.
 
@@ -45,3 +45,23 @@ Seize PNG réels : vitrine, connexion, accueil de Camille, album, synergies, cin
 18 diapositives principales fixes, séparation et sept annexes : 26 pages. Une capture distincte par diapositive, avec le texte anglais commun à chaque chapitre ; ordre demandé en couverture et aux diapositives 3–6. Les notes françaises sont propres à chaque écran, synchronisées avec `story.json` et PITCH. PNG identiques intégrés au PPTX, aucune animation ou vidéo intégrée et aucune avance chronométrée. Le PDF et le lecteur HTML présentent les mêmes captures ; clic ou clavier pour avancer.
 
 Contrôles fichiers et navigateur réussis : 16 captures uniques, ordre, texte invariant par chapitre, notes, PDF/PPTX, image stable entre deux actions, navigation et annexes. Couverture, accueil personnel et synergies inspectés. Lecture synthétique locale Thomas à 150 mots/min : **226 mots, 93,77 s** de parole ; chaque morceau entre dans son repère. Le conducteur garde 118 s, soit environ 24 s pour les clics et pauses. Répétition personnelle à effectuer.
+
+### S3 — Recette finale et livraison
+
+Reconstruction complète depuis la base jetable réussie. Vérifications : 18 principales + séparation + 7 annexes, 26 pages PDF/PPTX, 16 captures distinctes, accueil public en couverture, ordre connexion / accueil Camille / album / rencontres. Texte anglais identique dans chaque séquence, notes françaises identiques entre conducteur / HTML / PowerPoint. Aucun média animé, aucune avance chronométrée. Image stable jusqu’à une action ; clic, clavier, notes, annexes et redimensionnement vérifiés dans Chrome hors ligne. Aucun texte coupé ou superposé aux captures ; aucun appel externe ni erreur JavaScript.
+
+Documentation et références de reconstruction mises à jour. Anciens outils et assets GIF retirés du dossier actif ; historique conservé dans Git (`e41c8fd`) et le journal archivé. Tous les liens Markdown locaux restent valides. Fichier de verrouillage PowerPoint de l’utilisateur conservé et ignoré par Git.
+
+Contrôle Django sans erreur. Recette SQLite avec horloge de référence : **401 tests en 94,58 s, OK, 6 cas PostgreSQL ignorés**. Les fixtures temporelles préexistantes restent inchangées. Aucune modification du code de l’application ; empreinte de `db.sqlite3` identique avant/après ; serveur de capture arrêté. Aucun email réel.
+
+Les 226 mots ont été mesurés à **93,77 s** en lecture synthétique locale ; chaque morceau tient dans son repère. La répétition personnelle avec les 17 changements d’écran reste nécessaire. Les exports contiennent uniquement des PNG fixes ; réouvrir le fichier dans PowerPoint pour charger cette nouvelle version.
+
+## Sauvegardes
+
+| Étape | Commit | État |
+|---|---|---|
+| S1 — captures et accueil de Camille | `6a27fd7` | Poussé sur main |
+| S2 — diapositives fixes et notes | `3504b6b` | Poussé sur main |
+| S3 — reconstruction et recette finales | Commit contenant cette ligne | Poussé avec les livrables finaux |
+
+Livraison : [PowerPoint](pitch/Club-des-Affaires-pitch.pptx), [PDF](pitch/Club-des-Affaires-pitch.pdf), [HTML local](pitch/deck.html), [conducteur](PITCH.md). Toutes les étapes de cette demande sont terminées.

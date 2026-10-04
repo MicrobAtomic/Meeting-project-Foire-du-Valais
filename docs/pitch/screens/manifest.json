@@ -41,12 +41,12 @@
       {
         "file": "002.png",
         "label": "The card joins the album",
-        "url": "http://127.0.0.1:8010/membres/2/"
+        "url": "http://127.0.0.1:8010/membres/52/"
       },
       {
         "file": "003.png",
         "label": "Contact details unlock",
-        "url": "http://127.0.0.1:8010/membres/2/"
+        "url": "http://127.0.0.1:8010/membres/52/"
       },
       {
         "file": "004.png",
@@ -68,7 +68,7 @@
       {
         "file": "002.png",
         "label": "The sponsored invitation request",
-        "url": "http://127.0.0.1:8010/rejoindre/?ref=0AA0CD20"
+        "url": "http://127.0.0.1:8010/rejoindre/?ref=070E84EF"
       }
     ],
     "admin": [

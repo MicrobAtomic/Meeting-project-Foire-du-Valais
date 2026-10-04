@@ -5,7 +5,7 @@
 > three introductions before each event with the reason why, a QR scan at the event that adds the card to your album
 > and unlocks contact details, a people bingo computed for each guest and rotating tables at seated dinners, and
 > shared milestones that show the Club growing closer. Django 5.2, FR / DE / EN, secure by default, automated tests.
-> Two-minute pitch with four embedded animated GIFs: [docs/pitch/](docs/pitch) · submission texts: [submission texts](docs/PITCH.md#textes-de-soumission)
+> Two-minute pitch with manually advanced screenshots: [docs/pitch/](docs/pitch) · submission texts: [submission texts](docs/PITCH.md#textes-de-soumission)
 > · architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 **Plus jamais d'inconnus au Club.** Une web app réservée aux membres du Club des Affaires, qui vit au rythme des
