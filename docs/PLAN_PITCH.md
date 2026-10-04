@@ -24,7 +24,7 @@ La deuxième image de l’ancien GIF web (connexion) devient la première de la 
 - [x] S2 — Séquences de diapositives, notes adaptées, PowerPoint/PDF/HTML statiques.
 - [x] S3 — Documentation actualisée, vérifications des notes/ordre/cadrage/navigation et livraison poussée.
 
-Chaque étape terminée est cochée, commitée et poussée sur main. Ne pas toucher à l’application ni à `db.sqlite3` ; le serveur 8000 de l’utilisateur reste indépendant. Captures sur une base jetable et un serveur 8010 appartenant au script ; refuser un port déjà occupé. Aucun email réel.
+Chaque étape terminée est cochée, commitée et poussée sur main. La refonte initiale concernait uniquement la présentation ; la correction des portraits ci-dessous autorise maintenant un changement ciblé du template de l’application. Ne pas toucher à `db.sqlite3` ; le serveur 8000 de l’utilisateur reste indépendant. Captures sur une base jetable et un serveur 8010 appartenant au script ; refuser un port déjà occupé. Aucun email réel.
 
 ## Sources et reprise
 
@@ -57,6 +57,15 @@ Contrôle Django sans erreur. Recette SQLite avec horloge de référence : **401
 Les 226 mots ont été mesurés à **93,77 s** en lecture synthétique locale ; chaque morceau tient dans son repère. La répétition personnelle avec les 17 changements d’écran reste nécessaire. Les exports contiennent uniquement des PNG fixes ; réouvrir le fichier dans PowerPoint pour charger cette nouvelle version.
 
 ## Sauvegardes
+
+### Correction des portraits — demande du 4 octobre
+
+- [x] P1 — Afficher le même portrait dans l’album, les rencontres de l’accueil et celles de l’événement ; vérifier les accès et le repli sur les initiales.
+- [ ] P2 — Refaire la capture des rencontres et actualiser les exports ; conserver les modifications et notes du PowerPoint existant.
+
+Cause : `_intro.html` affichait toujours les initiales. Le correctif réutilise `member_portrait`, comme les cartes de l’album : photo privée via sa route protégée, portrait de démo autorisé ou initiales si aucun portrait disponible. Les règles d’accès et les données restent inchangées.
+
+P1 vérifiée : même URL de portrait, image chargée dans Chrome sur les trois pages, en FR/DE/EN et aux largeurs 390 / 1120 px. Rendu court et complet contrôlé pour portrait de démo, photo privée, fichier manquant et mode hors démo sans photo. CSS recompilé. Contrôle Django sans erreur ; **401 tests en 93,67 s, OK, 6 cas PostgreSQL ignorés**, avec l’horloge de référence documentée ci-dessus. Aucun test existant modifié.
 
 | Étape | Commit | État |
 |---|---|---|
