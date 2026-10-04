@@ -61,16 +61,22 @@ Les 226 mots ont été mesurés à **93,77 s** en lecture synthétique locale ; 
 ### Correction des portraits — demande du 4 octobre
 
 - [x] P1 — Afficher le même portrait dans l’album, les rencontres de l’accueil et celles de l’événement ; vérifier les accès et le repli sur les initiales.
-- [ ] P2 — Refaire la capture des rencontres et actualiser les exports ; conserver les modifications et notes du PowerPoint existant.
+- [x] P2 — Refaire la capture des rencontres et actualiser les exports ; conserver les modifications et notes du PowerPoint existant.
 
 Cause : `_intro.html` affichait toujours les initiales. Le correctif réutilise `member_portrait`, comme les cartes de l’album : photo privée via sa route protégée, portrait de démo autorisé ou initiales si aucun portrait disponible. Les règles d’accès et les données restent inchangées.
 
 P1 vérifiée : même URL de portrait, image chargée dans Chrome sur les trois pages, en FR/DE/EN et aux largeurs 390 / 1120 px. Rendu court et complet contrôlé pour portrait de démo, photo privée, fichier manquant et mode hors démo sans photo. CSS recompilé. Contrôle Django sans erreur ; **401 tests en 93,67 s, OK, 6 cas PostgreSQL ignorés**, avec l’horloge de référence documentée ci-dessus. Aucun test existant modifié.
+
+P2 vérifiée : capture réelle `screens/web/004.png` refaite sur la base jetable ; portrait de Lukas chargé avant la prise. PNG de la diapositive 6 et PDF reconstruits ; HTML réutilise cette même capture. Dans le PowerPoint déjà retouché par l’utilisateur, seul `ppt/media/image6.png` a été remplacé : tous les autres contenus, notamment les dernières notes, sont conservés octet pour octet. Sauvegarde locale antérieure à ce remplacement : `pitch/.build/pitch-before-image-refresh.pptx`. Les notes retouchées dans PowerPoint restent propres à ce fichier ; elles ne sont pas écrasées par celles du conducteur.
+
+Contrôles exports réussis : 26 pages, 18 principales, 16 captures, ordre et progression manuelle ; contrôle des notes conservées et de tous les autres contenus du PPTX contre sa sauvegarde. Chrome : image stable jusqu’au clic, navigation, notes, annexes, redimensionnement et absence de texte coupé ou superposé. Capture et diapositive inspectées visuellement. Empreinte de `db.sqlite3` inchangée ; serveur 8010 arrêté ; aucun email réel. Réouvrir le PowerPoint pour charger l’image corrigée.
 
 | Étape | Commit | État |
 |---|---|---|
 | S1 — captures et accueil de Camille | `6a27fd7` | Poussé sur main |
 | S2 — diapositives fixes et notes | `3504b6b` | Poussé sur main |
 | S3 — reconstruction et recette finales | Commit contenant cette ligne | Poussé avec les livrables finaux |
+| P1 — portraits dans les rencontres du site | `8a4ca7e` | Poussé sur main |
+| P2 — capture et exports, notes conservées | Commit contenant cette ligne | Poussé avec les livrables corrigés |
 
 Livraison : [PowerPoint](pitch/Club-des-Affaires-pitch.pptx), [PDF](pitch/Club-des-Affaires-pitch.pdf), [HTML local](pitch/deck.html), [conducteur](PITCH.md). Toutes les étapes de cette demande sont terminées.

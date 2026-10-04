@@ -1,4 +1,4 @@
-// One real UI snapshot per manual slide. No app/template changes.
+// One real UI snapshot per manual slide, from an isolated demo.
 import puppeteer from 'puppeteer-core';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -6,7 +6,8 @@ const out = process.argv[2];
 if (!out) throw new Error('Usage: node capture_screens.mjs OUTPUT_DIR');
 const base = process.env.BASE || 'http://127.0.0.1:8010';
 const browser = await puppeteer.launch({executablePath: process.env.CHROME || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', headless: true, args:['--hide-scrollbars','--force-color-profile=srgb']});
-const manifest = {};
+const onlyIntros = process.argv.includes('--only-intros');
+const manifest = onlyIntros ? JSON.parse(fs.readFileSync(path.join(out,'manifest.json'),'utf8')).scenes : {};
 const errors = [];
 const pause = ms => new Promise(r => setTimeout(r, ms));
 async function session(email, desktop = false) {
@@ -30,13 +31,21 @@ async function login(page,email) {
   await Promise.all([page.waitForNavigation({waitUntil:'networkidle0'}),page.click('main form button[type=submit]')]);
   if (new URL(page.url()).pathname === '/connexion/') throw new Error('Demo login failed');
 }
-async function shot(page,name,label) {
+async function shot(page,name,label,index) {
   const frames = manifest[name] ||= [];
   const dir = path.join(out,name);
   fs.mkdirSync(dir,{recursive:true});
-  const file = `${String(frames.length).padStart(3,'0')}.png`;
+  const frameIndex = index ?? frames.length;
+  const file = `${String(frameIndex).padStart(3,'0')}.png`;
+  await page.evaluate(async () => {
+    const visible = [...document.images].filter(img => {
+      const rect = img.getBoundingClientRect();
+      return rect.width && rect.height && rect.bottom > 0 && rect.top < innerHeight;
+    });
+    await Promise.all(visible.map(img => img.decode()));
+  });
   await page.screenshot({path:path.join(dir,file)});
-  frames.push({file,label,url:page.url()});
+  frames[frameIndex] = {file,label,url:page.url()};
   console.log(`${name}: ${label}`);
 }
 async function scrollTo(page,selector,block='start') {
@@ -50,6 +59,36 @@ async function clickText(page,selector,text) {
   await Promise.all([page.waitForNavigation({waitUntil:'networkidle0'}),el.click()]);
 }
 try {
+  if (onlyIntros) {
+    if (manifest.web?.length !== 5) throw new Error('Expected the five existing web screenshots');
+    const camille = await session('camille.rey@example.com');
+    for (const language of ['fr','de','en']) {
+      await camille.setCookie({name:'django_language',value:language,url:base});
+      for (const width of [1120,390]) {
+        await camille.setViewport({width,height:844,deviceScaleFactor:1.5});
+        let albumPortrait;
+        for (const route of ['/album/?aide=marche-alemanique','/accueil/','/evenements/4/']) {
+          await go(camille,route);
+          const card = await camille.waitForFunction(() => [...document.querySelectorAll('main a[href*="/membres/"]')].find(el => el.textContent.includes('Lukas Imboden')));
+          await card.evaluate(el => el.scrollIntoView({block:'center'}));
+          const portrait = await card.evaluate(async el => {
+            const img = el.querySelector('img');
+            if (!img) throw new Error('Lukas portrait missing');
+            await img.decode();
+            if (!img.naturalWidth) throw new Error('Lukas portrait failed to load');
+            return img.getAttribute('src');
+          });
+          if (route.startsWith('/album/')) albumPortrait = portrait;
+          else if (portrait !== albumPortrait) throw new Error(`${route}: inconsistent portrait`);
+        }
+        console.log(`PASS portraits: ${language}, ${width}px, album/home/event`);
+      }
+    }
+    await camille.setViewport({width:390,height:844,deviceScaleFactor:1.5,isMobile:true,hasTouch:true});
+    await go(camille,'/evenements/4/');
+    await scrollTo(camille,'section h2.text-lg');
+    await shot(camille,'web','Suggested introductions and synergies',4);
+  } else {
   const camille = await session();
   await go(camille,'/');
   await shot(camille,'web','Public home');
@@ -109,6 +148,7 @@ try {
     window.scrollBy(0,-84);
   });
   await shot(staff,'admin','Rotating tables for 38 guests');
+  }
   fs.writeFileSync(path.join(out,'manifest.json'),JSON.stringify({scenes:manifest,errors},null,2)+'\n');
   if (errors.length) throw new Error(errors.join('\n'));
 } finally {await browser.close();}

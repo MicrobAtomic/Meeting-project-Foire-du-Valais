@@ -76,6 +76,19 @@ UV_CACHE_DIR=/tmp/club-pitch-uv uv run --no-project --with python-pptx python ve
 
 Le texte anglais commun à chaque chapitre vient de `pitch/template.html`, le texte français par écran de `pitch/story.json`. `build_deck.mjs` génère `deck.html`, les PNG et le PDF. Le script de capture utilise uniquement `pitch/.build/screens.sqlite3`, refuse un port 8010 déjà occupé et arrête son propre serveur en cas d’erreur. Les captures sont de l’application réelle, avec les données fictives ; l’accueil personnel de Camille précède le scan. Aucun email réel.
 
+La reconstruction complète ci-dessus crée un nouveau PowerPoint avec les notes du conducteur. Pour **conserver des notes déjà retouchées dans PowerPoint** et actualiser uniquement la capture des rencontres, utiliser plutôt :
+
+```bash
+.venv/bin/python docs/pitch/make_screens.py --assets-only --only-intros
+cd docs/pitch
+node build_deck.mjs --tests 401
+UV_CACHE_DIR=/tmp/club-pitch-uv uv run --no-project --with python-pptx python build_pptx.py --refresh-images
+UV_CACHE_DIR=/tmp/club-pitch-uv uv run --no-project --with python-pptx python verify_pitch.py --preserved-pptx .build/pitch-before-image-refresh.pptx
+node verify_browser.mjs
+```
+
+Le remplacement des images conserve tous les autres contenus du PPTX et sauvegarde l’original dans `.build/pitch-before-image-refresh.pptx`. Le contrôle compare ces contenus octet pour octet ; les notes personnalisées restent dans le PowerPoint, sans être resynchronisées avec `story.json`. Avec les dépendances déjà en cache, ajouter `--offline` aux commandes uv. Réouvrir le fichier dans PowerPoint après l’export.
+
 Les notes, l’ordre des 16 captures, la couverture, l’absence de média animé et le contrôle manuel sont vérifiés. Résultats et limites : [PLAN_PITCH](PLAN_PITCH.md).
 
 Chiffres du client : environ 50 membres, cotisation de 500 CHF/an, 4–5 soirées/an. Démo : 15 % de paires connectées, prochain palier à 20 %, dîner de 38 invités sur trois services. Coût de fonctionnement **estimé** à ≈ 30 CHF/mois (300–450 CHF/an), mise en place ≈ 20 CHF hors développement ; détails et sources dans [ARCHITECTURE](ARCHITECTURE.md).

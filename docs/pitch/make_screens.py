@@ -18,7 +18,10 @@ PYTHON = ROOT / '.venv/bin/python'
 parser = argparse.ArgumentParser()
 parser.add_argument('--assets-only', action='store_true')
 parser.add_argument('--reuse-captures', action='store_true')
+parser.add_argument('--only-intros', action='store_true', help='Refresh only the introductions screenshot; requires --assets-only.')
 args = parser.parse_args()
+if args.only_intros and (not args.assets_only or args.reuse_captures):
+    parser.error('--only-intros requires --assets-only and cannot use --reuse-captures')
 WORK.mkdir(exist_ok=True)
 env = dict(os.environ, DEBUG='1', DATABASE_URL=f'sqlite:///{WORK}/screens.sqlite3', DEMO_BANNER='0', NOTIFICATIONS_ENABLED='0', BASE='http://127.0.0.1:8010')
 def run(argv, cwd=ROOT):
@@ -41,7 +44,7 @@ if not args.reuse_captures:
                         if response.status == 200: break
                 except OSError: time.sleep(.25)
             else: raise RuntimeError('Capture server did not start')
-            run(['node','capture_screens.mjs',CAPTURES],cwd=HERE)
+            run(['node','capture_screens.mjs',CAPTURES,*(['--only-intros'] if args.only_intros else [])],cwd=HERE)
         finally:
             server.terminate()
             try: server.wait(timeout=5)
