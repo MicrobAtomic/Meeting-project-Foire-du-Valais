@@ -9,7 +9,8 @@ manuelle : un clic, un écran. Le texte anglais de chaque chapitre vient de `tem
 | `Club-des-Affaires-pitch.pptx` | Le PowerPoint : une image par diapositive, les notes en français |
 | `Club-des-Affaires-pitch.pdf` | Les mêmes pages, en secours |
 | `deck.html` + `presenter.js` | La version navigateur : ← / → ou Espace pour avancer, **F** plein écran, **N** notes, **A** annexes |
-| `demo.mp4` | Une vidéo autonome de la démo (environ 77 s), en alternative |
+| `demo-long.mp4` | La vidéo commentée (3 min 15, anglais, voix de synthèse et sous-titres) : tout le parcours, membre et équipe |
+| `demo.mp4` | Une vidéo courte de la démo (environ 77 s), sans voix |
 | `template.html`, `story.json` | Les sources : chapitres en anglais, notes en français |
 | `screens/` | Les captures de l'application |
 
@@ -37,5 +38,17 @@ node build_deck.mjs --tests 403
 uv run --no-project --with python-pptx python build_pptx.py --refresh-images
 ```
 
-L'original est sauvegardé dans `.build/pitch-before-image-refresh.pptx`. La chaîne de la vidéo autonome est dans
-[`video/`](video/) (`make_pitch.sh`).
+L'original est sauvegardé dans `.build/pitch-before-image-refresh.pptx`.
+
+## Les vidéos
+
+Elles sont enregistrées sur l'application réelle (base jetable, port 8010), puis montées avec `ffmpeg`
+(`brew install ffmpeg`). Depuis la racine du dépôt :
+
+```bash
+docs/pitch/video/make_long_video.sh   # la vidéo commentée : scènes et voix dans video/long_scenes.json
+docs/pitch/video/make_pitch.sh 403    # la vidéo courte et l'ancien deck vidéo
+```
+
+Pour changer un texte de la vidéo commentée, modifier `video/long_scenes.json` puis relancer la commande : la voix
+(macOS `say`, voix « Samantha ») et la durée de chaque scène suivent automatiquement.

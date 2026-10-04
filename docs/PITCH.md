@@ -6,6 +6,8 @@
 Le deck ([PowerPoint](pitch/Club-des-Affaires-pitch.pptx) · [PDF](pitch/Club-des-Affaires-pitch.pdf)) compte
 19 diapositives principales, une par écran de l'application, puis 7 annexes pour les questions. **Un clic = un écran.**
 Mon texte est dans les notes de l'orateur ; la fabrication du deck est expliquée dans [pitch/README.md](pitch/README.md).
+Pour une présentation plus longue, la [vidéo commentée](pitch/demo-long.mp4) (3 min 15, en anglais, voix de synthèse)
+montre tout le parcours : un prospect demande une invitation, l'équipe l'accepte, Camille vit sa soirée, l'équipe prépare le dîner.
 
 ## Le texte (1 min 58)
 

@@ -21,6 +21,7 @@ après, l'album se remplit et le Club voit qu'il se resserre.
 | 4 | [Le pitch](docs/PITCH.md) | Le texte de deux minutes, les questions du jury, les textes de soumission |
 | 5 | [Mettre en service](docs/EXPLOITATION.md) | Hébergement, e-mails, photos, sauvegardes, données personnelles |
 
+La **vidéo commentée** (3 min 15, en anglais) montre tout le parcours : [docs/pitch/demo-long.mp4](docs/pitch/demo-long.mp4).
 Le deck se trouve dans [docs/pitch/](docs/pitch/) (PowerPoint et PDF). Les plans de réalisation et les recettes sont
 archivés dans [docs/archive/](docs/archive/).
 

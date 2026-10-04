@@ -1,0 +1,156 @@
+{
+  "voice": "Samantha",
+  "rate": 172,
+  "segments": [
+    {
+      "name": "prospect",
+      "layout": "phone",
+      "scenes": [
+        {
+          "id": "intro",
+          "kicker": "Club des Affaires",
+          "title": "Never a stranger at the Club again",
+          "say": "This is the Club des Affaires of the Foire du Valais: about fifty business leaders who meet four or five times a year. They come, but many don't know each other. I built a platform so that nobody is ever a stranger at the Club again."
+        },
+        {
+          "id": "landing",
+          "kicker": "The showcase",
+          "title": "No member name in public",
+          "say": "From the outside, the showcase never shows a single member name. Anyone curious can request an invitation, with or without a sponsor."
+        },
+        {
+          "id": "join",
+          "kicker": "Joining",
+          "title": "A two-minute request",
+          "say": "Anna fills in a two-minute form. No account is created yet: the team stays in control of who joins."
+        },
+        {
+          "id": "thanks",
+          "kicker": "Joining",
+          "title": "Request sent",
+          "say": "Her request is on its way."
+        }
+      ]
+    },
+    {
+      "name": "admin",
+      "layout": "desk",
+      "scenes": [
+        {
+          "id": "admin-guide",
+          "kicker": "The team",
+          "title": "An admin that explains itself",
+          "say": "On the team's side, the administration opens with a short guide. The events team has very little time, so six simple gestures are enough, and everything else is computed."
+        },
+        {
+          "id": "accept",
+          "kicker": "The team",
+          "title": "Accept a member in one click",
+          "say": "Here is Anna's request. One click accepts it and creates her account. A welcome e-mail with a personal sign-in link is prepared for her."
+        }
+      ]
+    },
+    {
+      "name": "member",
+      "layout": "phone",
+      "scenes": [
+        {
+          "id": "home",
+          "kicker": "Before the evening",
+          "title": "Camille's home",
+          "say": "Meet Camille, who joined the Club this year. Her home shows her album of the members she has met, and the Club's progress: fourteen percent of the member pairs already know each other. At twenty percent, the whole Club wins a round of Petite Arvine."
+        },
+        {
+          "id": "album",
+          "kicker": "Find each other",
+          "title": "The album of member cards",
+          "say": "The album shows every member's card: their sector, their passions, what they love and what they hate, what they can help with, and what they are looking for. Camille needs help with the Swiss German market."
+        },
+        {
+          "id": "card",
+          "kicker": "Find each other",
+          "title": "Lukas can help",
+          "say": "Lukas, a pillar of the Club from Brig, can help with exactly that. His contact details are still locked: they only unlock after a real meeting."
+        },
+        {
+          "id": "event",
+          "kicker": "Before the evening",
+          "title": "The autumn dinner",
+          "say": "Camille is coming to the autumn dinner. Each evening has its own icebreaker: a people bingo during the standing drinks, then rotating tables at dinner."
+        },
+        {
+          "id": "intros",
+          "kicker": "Spot synergies",
+          "title": "Three introductions, and why",
+          "say": "Before the dinner, the platform introduces her to three people, and explains why. With Lukas, they share a love of Petite Arvine and ski touring, and they can help each other: digital for him, the Swiss German market for her."
+        },
+        {
+          "id": "scan",
+          "kicker": "At the dinner",
+          "title": "She scans his badge",
+          "say": "At the dinner, she scans the QR code on his badge. The app even tells her which square of her bingo he can tick."
+        },
+        {
+          "id": "unlocked",
+          "kicker": "At the dinner",
+          "title": "Contacts unlock after a real meeting",
+          "say": "One tap, and his card joins her album. His phone, his LinkedIn and a vCard for her address book are now unlocked. No cold messages, ever."
+        },
+        {
+          "id": "bingo",
+          "kicker": "At the dinner",
+          "title": "A bingo computed for each guest",
+          "say": "Her bingo grid is computed for her alone, from the people present tonight, and a full card is always possible. A full line means a glass at the bar."
+        },
+        {
+          "id": "after",
+          "kicker": "After the evening",
+          "title": "The whole Club gets closer",
+          "say": "Every real encounter moves the whole Club closer to its next milestone."
+        },
+        {
+          "id": "languages",
+          "kicker": "Three languages",
+          "title": "French, German, English",
+          "say": "And everything works in French, German and English, including the events."
+        }
+      ]
+    },
+    {
+      "name": "team",
+      "layout": "desk",
+      "scenes": [
+        {
+          "id": "dashboard",
+          "kicker": "The team",
+          "title": "The dashboard",
+          "say": "Back to the team. The dashboard shows the encounters of the year, the new members, the members who are still isolated, and the invitation requests to handle."
+        },
+        {
+          "id": "prepare",
+          "kicker": "The team",
+          "title": "Prepare the dinner",
+          "say": "A week before the dinner, the team clicks Prepare."
+        },
+        {
+          "id": "seating",
+          "kicker": "The team",
+          "title": "Rotating tables in one click",
+          "say": "One click generates the rotating tables: thirty-eight guests, three courses, about two hundred and fifty new pairs, and a single repeat."
+        },
+        {
+          "id": "badges",
+          "kicker": "The team",
+          "title": "Badges with QR codes",
+          "say": "Another click prints the name badges, each with its own QR code."
+        },
+        {
+          "id": "outro",
+          "kicker": "Club des Affaires",
+          "title": "It works today",
+          "say": "It runs today, secure by default and covered by four hundred automated tests, for about thirty francs a month. A club that knows itself comes back together."
+        }
+      ]
+    }
+  ]
+}
