@@ -19,9 +19,12 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--assets-only', action='store_true')
 parser.add_argument('--reuse-captures', action='store_true')
 parser.add_argument('--only-intros', action='store_true', help='Refresh only the introductions screenshot; requires --assets-only.')
+parser.add_argument('--only-referral', action='store_true', help='Refresh only referral screenshots; requires --assets-only.')
 args = parser.parse_args()
-if args.only_intros and (not args.assets_only or args.reuse_captures):
-    parser.error('--only-intros requires --assets-only and cannot use --reuse-captures')
+if (args.only_intros or args.only_referral) and (not args.assets_only or args.reuse_captures):
+    parser.error('Partial capture requires --assets-only and cannot use --reuse-captures')
+if args.only_intros and args.only_referral:
+    parser.error('Choose one partial capture mode')
 WORK.mkdir(exist_ok=True)
 env = dict(os.environ, DEBUG='1', DATABASE_URL=f'sqlite:///{WORK}/screens.sqlite3', DEMO_BANNER='0', NOTIFICATIONS_ENABLED='0', BASE='http://127.0.0.1:8010')
 def run(argv, cwd=ROOT):
@@ -44,13 +47,14 @@ if not args.reuse_captures:
                         if response.status == 200: break
                 except OSError: time.sleep(.25)
             else: raise RuntimeError('Capture server did not start')
-            run(['node','capture_screens.mjs',CAPTURES,*(['--only-intros'] if args.only_intros else [])],cwd=HERE)
+            capture_args=['--only-intros'] if args.only_intros else ['--only-referral'] if args.only_referral else []
+            run(['node','capture_screens.mjs',CAPTURES,*capture_args],cwd=HERE)
         finally:
             server.terminate()
             try: server.wait(timeout=5)
             except subprocess.TimeoutExpired: server.kill(); server.wait()
 
 if not args.assets_only:
-    run(['node','build_deck.mjs','--tests','401'],cwd=HERE)
+    run(['node','build_deck.mjs','--tests','402'],cwd=HERE)
     env['UV_CACHE_DIR'] = '/tmp/club-pitch-uv'
     run(['uv','run','--no-project','--with','python-pptx','python','build_pptx.py'],cwd=HERE)

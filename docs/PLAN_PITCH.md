@@ -74,11 +74,15 @@ Contrôles exports réussis : 26 pages, 18 principales, 16 captures, ordre et pr
 ### Tarif de parrainage — demande du 4 octobre
 
 - [x] R1 — Montrer 500 CHF barrés, 350 CHF la première année grâce au parrainage, puis 500 CHF/an ; réserver cet affichage aux liens valides avec offre active ; traduire et vérifier.
-- [ ] R2 — Actualiser la capture et les exports de la diapositive 14, conserver les notes PowerPoint, documenter et pousser.
+- [x] R2 — Actualiser la capture et les exports de la diapositive 14, conserver les notes PowerPoint, documenter et pousser.
 
 Les montants viennent de la configuration existante (350 CHF pour le nouveau membre, 500 CHF au tarif normal). L’offre devient visible par défaut en mode démo ; une valeur explicite de `REFERRAL_OFFER_ENABLED` reste prioritaire et hors démo elle reste désactivée par défaut. Les cotisations restent facturées manuellement.
 
 R1 vérifiée : GET et POST invalide dans les trois langues ; offre active/masquée ; demande sans parrain, code inconnu, parrain inactif et code d’un invité exclus de la réduction. Un nouveau test vérifie également des montants configurés différents (490 / 720 CHF). Traductions FR/DE/EN compilées, CSS recompilé, contrôle Django sans erreur. **402 tests en 94,47 s, OK, 6 cas PostgreSQL ignorés**, avec l’horloge de référence ; aucune assertion existante modifiée.
+
+R2 vérifiée : les trois captures de parrainage sont actualisées pour refléter l’offre visible en démo. La diapo 14 montre le badge du parrain, le formulaire, les 500 CHF barrés, les 350 CHF pour la première année, le tarif annuel suivant et le bouton d’envoi. Capture et diapositive inspectées visuellement. PDF, HTML et PPTX actualisés ; les indications du nombre de tests passent à 402.
+
+Dans le PPTX existant, seules les images des diapos 12, 13, 14, 18 et 21 ont changé (parrainage et compte des tests) ; notes et autres contenus conservés octet pour octet. Contrôles fichiers et Chrome réussis : 26 pages, ordre, progression manuelle, stabilité jusqu’au clic, navigation, annexes et absence de texte coupé ou superposé. Le contrôle de stabilité attend maintenant le décodage et le rendu de l’image révélée avant la comparaison, pour ne pas confondre chargement initial et changement automatique. Base utilisateur inchangée, serveur de capture arrêté, aucun email envoyé. Réouvrir le PowerPoint après cette mise à jour.
 
 | Étape | Commit | État |
 |---|---|---|
@@ -86,6 +90,8 @@ R1 vérifiée : GET et POST invalide dans les trois langues ; offre active/masqu
 | S2 — diapositives fixes et notes | `3504b6b` | Poussé sur main |
 | S3 — reconstruction et recette finales | Commit contenant cette ligne | Poussé avec les livrables finaux |
 | P1 — portraits dans les rencontres du site | `8a4ca7e` | Poussé sur main |
-| P2 — capture et exports, notes conservées | Commit contenant cette ligne | Poussé avec les livrables corrigés |
+| P2 — capture et exports, notes conservées | `410180d` | Poussé sur main |
+| R1 — tarif de parrainage sur le site | `5165466` | Poussé sur main |
+| R2 — présentation et capture de parrainage | Commit contenant cette ligne | Poussé avec les livrables corrigés |
 
 Livraison : [PowerPoint](pitch/Club-des-Affaires-pitch.pptx), [PDF](pitch/Club-des-Affaires-pitch.pdf), [HTML local](pitch/deck.html), [conducteur](PITCH.md). Toutes les étapes de cette demande sont terminées.

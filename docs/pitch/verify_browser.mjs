@@ -54,6 +54,11 @@ try {
  assert.equal(await current(),'intro');
  await page.keyboard.press('ArrowRight');assert.equal(await current(),'problem');
  await page.keyboard.press('ArrowRight');assert.equal(await current(),'web-login');
+ // Hidden slide images are decoded when revealed; compare fully rendered frames.
+ await page.$eval('.current [data-screen]',async img => {
+  await img.decode();
+  await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+ });
  const login=await (await page.$('.current [data-screen]')).screenshot();
  await pause(1500);
  const held=await (await page.$('.current [data-screen]')).screenshot();

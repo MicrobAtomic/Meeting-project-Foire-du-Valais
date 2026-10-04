@@ -50,7 +50,7 @@ Le même texte est dans les notes de l’orateur du PowerPoint et dans `pitch/st
 
 Le jury découvre chaque capture quand tu la présentes. Les quatre piliers restent en diapo 2. Les titres et explications de chaque chapitre sont communs à ses écrans successifs : seules la capture et la numérotation changent. Les notes suivent la capture ; le nombre de diapositives ne rajoute pas de chapitre au récit.
 
-Les emails sont préparés mais **SMTP et cron restent à activer**. Le récapitulatif mensuel requiert le consentement. Aucune remise de parrainage n’est activée. Les factures de cotisation restent manuelles. L’hébergement suisse est une étape de lancement.
+Les emails sont préparés mais **SMTP et cron restent à activer**. Le récapitulatif mensuel requiert le consentement. La démo présente la réduction de parrainage : 350 CHF la première année, puis 500 CHF/an. Hors démo, l’offre reste désactivée par défaut et son activation appartient au Club. Les factures de cotisation restent manuelles. L’hébergement suisse est une étape de lancement.
 
 ## Utilisation avant scène
 
@@ -80,8 +80,9 @@ La reconstruction complète ci-dessus crée un nouveau PowerPoint avec les notes
 
 ```bash
 .venv/bin/python docs/pitch/make_screens.py --assets-only --only-intros
+# Pour les trois captures de parrainage, remplacer --only-intros par --only-referral.
 cd docs/pitch
-node build_deck.mjs --tests 401
+node build_deck.mjs --tests 402
 UV_CACHE_DIR=/tmp/club-pitch-uv uv run --no-project --with python-pptx python build_pptx.py --refresh-images
 UV_CACHE_DIR=/tmp/club-pitch-uv uv run --no-project --with python-pptx python verify_pitch.py --preserved-pptx .build/pitch-before-image-refresh.pptx
 node verify_browser.mjs

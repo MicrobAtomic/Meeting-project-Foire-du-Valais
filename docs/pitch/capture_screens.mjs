@@ -7,7 +7,8 @@ if (!out) throw new Error('Usage: node capture_screens.mjs OUTPUT_DIR');
 const base = process.env.BASE || 'http://127.0.0.1:8010';
 const browser = await puppeteer.launch({executablePath: process.env.CHROME || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', headless: true, args:['--hide-scrollbars','--force-color-profile=srgb']});
 const onlyIntros = process.argv.includes('--only-intros');
-const manifest = onlyIntros ? JSON.parse(fs.readFileSync(path.join(out,'manifest.json'),'utf8')).scenes : {};
+const onlyReferral = process.argv.includes('--only-referral');
+const manifest = onlyIntros || onlyReferral ? JSON.parse(fs.readFileSync(path.join(out,'manifest.json'),'utf8')).scenes : {};
 const errors = [];
 const pause = ms => new Promise(r => setTimeout(r, ms));
 async function session(email, desktop = false) {
@@ -88,6 +89,30 @@ try {
     await go(camille,'/evenements/4/');
     await scrollTo(camille,'section h2.text-lg');
     await shot(camille,'web','Suggested introductions and synergies',4);
+  } else if (onlyReferral) {
+    if (manifest.referral?.length !== 3) throw new Error('Expected the three existing referral screenshots');
+    const camille = await session('camille.rey@example.com');
+    await go(camille,'/moi/inviter/');
+    await shot(camille,'referral','A personal invitation link',0);
+    await scrollTo(camille,'#invite-link');
+    await shot(camille,'referral','A QR to invite a future member',1);
+    const link = await camille.$eval('#invite-link',el => el.value);
+    const guest = await session();
+    const route = new URL(link).pathname + new URL(link).search;
+    for (const language of ['fr','de','en']) {
+      await guest.setCookie({name:'django_language',value:language,url:base});
+      await go(guest,route);
+      const fee = await guest.$eval('form .bg-stone-50',el => ({
+        old:el.querySelector('s')?.innerText,new:el.querySelector('strong')?.innerText,text:el.innerText,
+      }));
+      if (!fee.old?.includes('500') || !fee.new?.includes('350')) throw new Error(`${language}: wrong referral fee`);
+      await go(guest,new URL(link).pathname);
+      if (await guest.$('form s')) throw new Error(`${language}: ordinary request received referral discount`);
+      console.log(`PASS referral fee: ${language}, sponsored 350 / standard 500`);
+    }
+    await go(guest,route);
+    await scrollTo(guest,'main .chip');
+    await shot(guest,'referral','The sponsored invitation request',2);
   } else {
   const camille = await session();
   await go(camille,'/');
@@ -130,6 +155,7 @@ try {
   const link = await camille.$eval('#invite-link',el => el.value);
   const guest = await session();
   await go(guest,new URL(link).pathname + new URL(link).search);
+  await scrollTo(guest,'main .chip');
   await shot(guest,'referral','The sponsored invitation request');
 
   const staff = await session('equipe@example.com',true);
