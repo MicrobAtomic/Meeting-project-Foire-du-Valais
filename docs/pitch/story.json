@@ -142,31 +142,41 @@
   {
     "id": "admin-dashboard",
     "chapter": "admin",
-    "seconds": 6,
+    "seconds": 5,
     "text": "L’équipe voit les membres, les rencontres et les personnes isolées.",
     "screen": "screens/admin/000.png",
     "label": "Staff dashboard",
     "start": 86,
-    "end": 92
+    "end": 91
   },
   {
     "id": "admin-prepare",
     "chapter": "admin",
-    "seconds": 5,
-    "text": "Elle prépare les soirées, génère les badges et les tables tournantes.",
+    "seconds": 4,
+    "text": "Elle prépare les soirées et les tables tournantes.",
     "screen": "screens/admin/001.png",
     "label": "Event preparation",
-    "start": 92,
-    "end": 97
+    "start": 91,
+    "end": 95
   },
   {
     "id": "admin-tables",
     "chapter": "admin",
-    "seconds": 7,
+    "seconds": 5,
     "text": "Ici, trente-huit invités sont mélangés sur trois services.",
     "screen": "screens/admin/002.png",
     "label": "Generated rotating tables",
-    "start": 97,
+    "start": 95,
+    "end": 100
+  },
+  {
+    "id": "admin-badges",
+    "chapter": "admin",
+    "seconds": 4,
+    "text": "Elle imprime les badges QR des inscrits.",
+    "screen": "screens/admin/003.png",
+    "label": "Printable QR badges",
+    "start": 100,
     "end": 104
   },
   {

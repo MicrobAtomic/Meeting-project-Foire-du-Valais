@@ -86,6 +86,11 @@
         "file": "002.png",
         "label": "Rotating tables for 38 guests",
         "url": "http://127.0.0.1:8010/staff/evenements/4/"
+      },
+      {
+        "file": "003.png",
+        "label": "Printable QR badges for the event",
+        "url": "http://127.0.0.1:8010/staff/evenements/4/badges/"
       }
     ]
   },

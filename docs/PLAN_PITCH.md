@@ -1,10 +1,10 @@
 # Présentation avec captures fixes — suivi et reprise
 
-Demande actuelle : remplacer chaque image des GIF par une diapositive fixe, conserver le même texte anglais dans chaque séquence, répartir les notes françaises selon l’écran et garder l’avance entièrement manuelle. Cette version remplace [les GIF](archive/PLAN_PITCH_GIFS.md).
+Version actuelle : captures fixes et avance manuelle, avec une nouvelle diapositive d’impression des badges QR après les tables. Le texte anglais reste commun à chaque séquence ; les notes françaises suivent les écrans. Cette version remplace [les GIF](archive/PLAN_PITCH_GIFS.md).
 
 ## Ordre et timing indicatif
 
-**18 diapositives principales, 118 s prévues**, puis séparation et sept annexes (26 pages au total).
+**19 diapositives principales, 118 s prévues**, puis séparation et sept annexes (27 pages au total).
 
 | Diapos | Images / rôle | Temps du chapitre |
 |---|---|---|
@@ -13,8 +13,8 @@ Demande actuelle : remplacer chaque image des GIF par une diapositive fixe, cons
 | 3–6 | Connexion → accueil personnel de Camille → album → rencontres proposées | 0:24–0:46 |
 | 7–11 | QR de Lukas → confirmation → carte ajoutée → coordonnées → bingo | 0:46–1:14 |
 | 12–14 | Lien de parrainage → QR de parrainage → demande parrainée | 1:14–1:26 |
-| 15–17 | Tableau de bord staff → préparation → tables | 1:26–1:44 |
-| 18 | Coût et lancement | 1:44–1:58 |
+| 15–18 | Tableau de bord staff → préparation → tables → impression des badges QR | 1:26–1:44 |
+| 19 | Coût et lancement | 1:44–1:58 |
 
 La deuxième image de l’ancien GIF web (connexion) devient la première de la séquence web ; sa première image (vitrine) passe en couverture. Le nouvel accueil personnel est capturé avant la rencontre, pour montrer la progression initiale de Camille. Aucun changement automatique d’image, aucune attente de boucle.
 
@@ -97,6 +97,19 @@ D2 vérifiée : capture du dashboard après le scan Camille/Lukas, comme dans le
 
 Dans le PPTX retouché par l’utilisateur, seules les images des diapos 15, 18 et 21 changent (dashboard et nombre de tests) ; notes et tous les autres contenus conservés octet pour octet. Contrôles fichiers et navigateur réussis : 26 pages, ordre, stabilité jusqu’au clic, progression manuelle, annexes, redimensionnement et absence de texte coupé ou superposé. Aucun changement des données de la base utilisateur ; serveur de capture arrêté et aucun email envoyé. Réouvrir le PowerPoint pour charger cette version.
 
+### Impression des badges QR — demande du 4 octobre
+
+- [x] B1 — Capturer la page réelle des badges imprimables et ajouter la diapo 18 après les tables ; adapter les notes et garder 118 s.
+- [x] B2 — Actualiser les exports et la documentation ; préserver les notes personnalisées des autres diapositives, vérifier et pousser.
+
+La conclusion passe en diapo 19 ; séparation et sept annexes portent le total à 27 pages. Les quatre vues de l’administration partagent le texte anglais du chapitre. Le passage équipe garde 18 s : dashboard 5 s, préparation 4 s, tables 5 s, badges QR 4 s. Les notes de cette séquence sont ajustées ; le reste des notes PowerPoint personnalisées est conservé.
+
+B1 vérifiée : page réelle `/staff/evenements/4/badges/`, bouton d’impression visible, 38 QR répartis en cinq feuilles de 8 / 8 / 8 / 8 / 6 badges. Contrôlé dans Chrome en FR/DE/EN ; capture `screens/admin/003.png` et diapo 18 inspectées. Aucun changement de l’application. Le conducteur contient 230 mots (comptage par espaces), 19 diapositives principales et 118 s de repères ; une répétition personnelle reste nécessaire.
+
+B2 vérifiée : 27 pages PPTX/PDF, 17 captures fixes, même texte anglais sur les quatre vues équipe, ordre tables → badges → conclusion, navigation manuelle et annexes. Aucun média animé, aucun texte de diapositive coupé ou superposé. Insertion dans le PPTX existant avec conservation octet pour octet des autres éléments ; seules les notes 15–17 sont remplacées et une nouvelle note est créée pour les badges. Les images sont renumérotées ; les propriétés et relations nécessaires à l’ajout sont adaptées. Les notes personnalisées des autres diapositives restent intactes. Sauvegarde locale avant insertion : `pitch/.build/pitch-before-badges-insertion.pptx`.
+
+La mise à jour ultérieure des seules images a également été vérifiée sur la nouvelle structure de 27 pages, en conservant toutes les notes. Sources, index et instructions de reconstruction actualisés. **403 tests Django en 94,33 s, OK, 6 cas PostgreSQL ignorés**, avec l’horloge de référence. Base utilisateur inchangée, serveur de capture arrêté, aucun email envoyé. Réouvrir le PowerPoint pour charger cette version.
+
 | Étape | Commit | État |
 |---|---|---|
 | S1 — captures et accueil de Camille | `6a27fd7` | Poussé sur main |
@@ -107,6 +120,7 @@ Dans le PPTX retouché par l’utilisateur, seules les images des diapos 15, 18 
 | R1 — tarif de parrainage sur le site | `5165466` | Poussé sur main |
 | R2 — présentation et capture de parrainage | `2eeca53` | Poussé sur main |
 | D1 — compteur annuel du dashboard | `5d6108c` | Poussé sur main |
-| D2 — capture du dashboard et diapo 15 | Commit contenant cette ligne | Poussé avec les livrables corrigés |
+| D2 — capture du dashboard et diapo 15 | `e8db5ba` | Poussé sur main |
+| B1/B2 — diapo d’impression des badges QR | Commit contenant cette ligne | Poussé avec les livrables corrigés |
 
 Livraison : [PowerPoint](pitch/Club-des-Affaires-pitch.pptx), [PDF](pitch/Club-des-Affaires-pitch.pdf), [HTML local](pitch/deck.html), [conducteur](PITCH.md). Toutes les étapes de cette demande sont terminées.

@@ -219,8 +219,8 @@
     "image": "slides/slide-15.png",
     "id": "admin-dashboard",
     "chapter": "admin",
-    "seconds": 6,
-    "notes": "(1:26–1:32) L’équipe voit les membres, les rencontres et les personnes isolées.",
+    "seconds": 5,
+    "notes": "(1:26–1:31) L’équipe voit les membres, les rencontres et les personnes isolées.",
     "screens": [
       {
         "source": "screens/admin/000.png",
@@ -235,8 +235,8 @@
     "image": "slides/slide-16.png",
     "id": "admin-prepare",
     "chapter": "admin",
-    "seconds": 5,
-    "notes": "(1:32–1:37) Elle prépare les soirées, génère les badges et les tables tournantes.",
+    "seconds": 4,
+    "notes": "(1:31–1:35) Elle prépare les soirées et les tables tournantes.",
     "screens": [
       {
         "source": "screens/admin/001.png",
@@ -251,8 +251,8 @@
     "image": "slides/slide-17.png",
     "id": "admin-tables",
     "chapter": "admin",
-    "seconds": 7,
-    "notes": "(1:37–1:44) Ici, trente-huit invités sont mélangés sur trois services.",
+    "seconds": 5,
+    "notes": "(1:35–1:40) Ici, trente-huit invités sont mélangés sur trois services.",
     "screens": [
       {
         "source": "screens/admin/002.png",
@@ -265,6 +265,22 @@
   },
   {
     "image": "slides/slide-18.png",
+    "id": "admin-badges",
+    "chapter": "admin",
+    "seconds": 4,
+    "notes": "(1:40–1:44) Elle imprime les badges QR des inscrits.",
+    "screens": [
+      {
+        "source": "screens/admin/003.png",
+        "x": 132,
+        "y": 300,
+        "w": 1120,
+        "h": 700
+      }
+    ]
+  },
+  {
+    "image": "slides/slide-19.png",
     "id": "closing",
     "chapter": "closing",
     "seconds": 14,
@@ -272,7 +288,7 @@
     "screens": []
   },
   {
-    "image": "slides/slide-19.png",
+    "image": "slides/slide-20.png",
     "id": null,
     "chapter": null,
     "seconds": null,
@@ -280,7 +296,7 @@
     "screens": []
   },
   {
-    "image": "slides/slide-20.png",
+    "image": "slides/slide-21.png",
     "id": null,
     "chapter": null,
     "seconds": null,
@@ -288,7 +304,7 @@
     "screens": []
   },
   {
-    "image": "slides/slide-21.png",
+    "image": "slides/slide-22.png",
     "id": null,
     "chapter": null,
     "seconds": null,
@@ -296,7 +312,7 @@
     "screens": []
   },
   {
-    "image": "slides/slide-22.png",
+    "image": "slides/slide-23.png",
     "id": null,
     "chapter": null,
     "seconds": null,
@@ -304,7 +320,7 @@
     "screens": []
   },
   {
-    "image": "slides/slide-23.png",
+    "image": "slides/slide-24.png",
     "id": null,
     "chapter": null,
     "seconds": null,
@@ -312,7 +328,7 @@
     "screens": []
   },
   {
-    "image": "slides/slide-24.png",
+    "image": "slides/slide-25.png",
     "id": null,
     "chapter": null,
     "seconds": null,
@@ -320,7 +336,7 @@
     "screens": []
   },
   {
-    "image": "slides/slide-25.png",
+    "image": "slides/slide-26.png",
     "id": null,
     "chapter": null,
     "seconds": null,
@@ -328,7 +344,7 @@
     "screens": []
   },
   {
-    "image": "slides/slide-26.png",
+    "image": "slides/slide-27.png",
     "id": null,
     "chapter": null,
     "seconds": null,

@@ -1,6 +1,6 @@
 # Présenter le Club des Affaires en deux minutes
 
-Le pitch garde **sept chapitres**, déclinés en **18 diapositives principales fixes**, puis une séparation et sept annexes (26 pages). **Un clic = un nouvel écran**. Le texte anglais reste identique dans chaque séquence ; les notes françaises sont réparties pour suivre l’image.
+Le pitch garde **sept chapitres**, déclinés en **19 diapositives principales fixes**, puis une séparation et sept annexes (27 pages). **Un clic = un nouvel écran**. Le texte anglais reste identique dans chaque séquence ; les notes françaises sont réparties pour suivre l’image.
 
 - [PowerPoint statique et notes françaises par écran](pitch/Club-des-Affaires-pitch.pptx).
 - [Présentation HTML locale](pitch/deck.html) : conserver le dossier `pitch/` complet.
@@ -9,11 +9,11 @@ Le pitch garde **sept chapitres**, déclinés en **18 diapositives principales f
 
 L’accueil public, ancienne première image du GIF de la diapo 3, passe en couverture. La séquence web commence par l’ancienne deuxième image (connexion), puis montre **l’accueil de Camille → son album → ses rencontres proposées**. QR, bingo, parrainage et administration suivent aussi une capture par diapositive.
 
-Le conducteur reste à **1:58**. Les temps ci-dessous sont des repères ; aucune image et aucune diapositive ne changent automatiquement. Les 226 mots durent environ 94 s en lecture synthétique française à 150 mots/min, laissant environ 24 s pour les clics et les pauses. La durée orale et les clics doivent être répétés ensemble.
+Le conducteur reste à **1:58**. Les temps ci-dessous sont des repères ; aucune image et aucune diapositive ne changent automatiquement. Le passage sur l’équipe est réparti entre quatre écrans en 18 s, y compris l’impression des badges QR. La durée orale et les clics doivent être répétés ensemble.
 
 ## Conducteur et texte à dire
 
-Le même texte est dans les notes de l’orateur du PowerPoint et dans `pitch/story.json`. On ne répète pas le texte anglais à chaque nouveau screenshot : on poursuit la phrase au rythme de l’écran.
+Le conducteur est dans `pitch/story.json` et les notes du lecteur HTML ; les notes françaises de la séquence équipe et de la nouvelle diapo sont adaptées dans le PowerPoint. Les notes personnalisées des autres diapositives y restent conservées. On ne répète pas le texte anglais à chaque nouveau screenshot : on poursuit la phrase au rythme de l’écran.
 
 | Temps | Diapo · écran | Texte français |
 |---|---|---|
@@ -31,10 +31,11 @@ Le même texte est dans les notes de l’orateur du PowerPoint et dans `pitch/st
 | 1:14–1:19 | 12 · Parrainage · lien personnel | « Entre les soirées : annonces, relances et récapitulatif des nouveaux membres. » |
 | 1:19–1:23 | 13 · Parrainage · QR | « Le parrainage permet d’inviter une personne de confiance. » |
 | 1:23–1:26 | 14 · Demande parrainée | « L’invité demande à rejoindre le Club. » |
-| 1:26–1:32 | 15 · Équipe · tableau de bord | « L’équipe voit les membres, les rencontres et les personnes isolées. » |
-| 1:32–1:37 | 16 · Équipe · préparer | « Elle prépare les soirées, génère les badges et les tables tournantes. » |
-| 1:37–1:44 | 17 · Équipe · tables | « Ici, trente-huit invités sont mélangés sur trois services. » |
-| 1:44–1:58 | 18 · Coût et lancement | « Pour lancer : hébergement suisse, import des membres, activation des emails. Environ trente francs par mois, hors développement. Un club qui se connaît se retrouve. Merci. » |
+| 1:26–1:31 | 15 · Équipe · tableau de bord | « L’équipe voit les membres, les rencontres et les personnes isolées. » |
+| 1:31–1:35 | 16 · Équipe · préparer | « Elle prépare les soirées et les tables tournantes. » |
+| 1:35–1:40 | 17 · Équipe · tables | « Ici, trente-huit invités sont mélangés sur trois services. » |
+| 1:40–1:44 | 18 · Équipe · impression des badges QR | « Elle imprime les badges QR des inscrits. » |
+| 1:44–1:58 | 19 · Coût et lancement | « Pour lancer : hébergement suisse, import des membres, activation des emails. Environ trente francs par mois, hors développement. Un club qui se connaît se retrouve. Merci. » |
 
 ## Sept chapitres, plusieurs écrans
 
@@ -45,8 +46,8 @@ Le même texte est dans les notes de l’orateur du PowerPoint et dans `pitch/st
 | Avant la soirée | 3–6 | 22 s |
 | Pendant la soirée | 7–11 | 28 s |
 | Entre les soirées | 12–14 | 12 s |
-| Pour l’équipe | 15–17 | 18 s |
-| Lancement | 18 | 14 s |
+| Pour l’équipe | 15–18 | 18 s |
+| Lancement | 19 | 14 s |
 
 Le jury découvre chaque capture quand tu la présentes. Les quatre piliers restent en diapo 2. Les titres et explications de chaque chapitre sont communs à ses écrans successifs : seules la capture et la numérotation changent. Les notes suivent la capture ; le nombre de diapositives ne rajoute pas de chapitre au récit.
 
@@ -55,9 +56,9 @@ Les emails sont préparés mais **SMTP et cron restent à activer**. Le récapit
 ## Utilisation avant scène
 
 - PowerPoint : ouvrir à nouveau le fichier exporté, lancer le diaporama, avancer avec les flèches ou la télécommande. Les notes de chaque image sont accessibles dans le mode présentateur. Aucun média à lancer.
-- HTML : ouvrir `pitch/deck.html` dans Chrome. **clic sur la diapositive, ← / → ou Espace** pour avancer ; **F** plein écran ; **N** notes ; **A** annexes / retour à la conclusion. L’avance s’arrête après la diapo 18. Les commandes s’effacent quand la souris reste immobile.
-- PDF : mêmes 26 pages fixes, utilisables aussi comme présentation. Copier le dossier `pitch/` complet pour utiliser le lecteur HTML hors ligne.
-- Répéter au chronomètre avec les **17 changements d’écran** ; viser 1:55–1:58. Les notes ne sont pas un compte à rebours obligatoire.
+- HTML : ouvrir `pitch/deck.html` dans Chrome. **clic sur la diapositive, ← / → ou Espace** pour avancer ; **F** plein écran ; **N** notes ; **A** annexes / retour à la conclusion. L’avance s’arrête après la diapo 19. Les commandes s’effacent quand la souris reste immobile.
+- PDF : mêmes 27 pages fixes, utilisables aussi comme présentation. Copier le dossier `pitch/` complet pour utiliser le lecteur HTML hors ligne.
+- Répéter au chronomètre avec les **18 changements d’écran** ; viser 1:55–1:58. Les notes ne sont pas un compte à rebours obligatoire.
 
 La version précédente et ses contrôles sont conservés dans [le journal GIF](archive/PLAN_PITCH_GIFS.md). La vidéo autonome reste une alternative ; la présentation principale suit la demande actuelle de captures fixes.
 
@@ -82,6 +83,7 @@ La reconstruction complète ci-dessus crée un nouveau PowerPoint avec les notes
 .venv/bin/python docs/pitch/make_screens.py --assets-only --only-intros
 # Pour les trois captures de parrainage, remplacer --only-intros par --only-referral.
 # Pour le dashboard de la diapo 15, utiliser --only-dashboard.
+# Pour les badges QR de la diapo 18, utiliser --only-badges.
 cd docs/pitch
 node build_deck.mjs --tests 403
 UV_CACHE_DIR=/tmp/club-pitch-uv uv run --no-project --with python-pptx python build_pptx.py --refresh-images
@@ -91,7 +93,9 @@ node verify_browser.mjs
 
 Le remplacement des images conserve tous les autres contenus du PPTX et sauvegarde l’original dans `.build/pitch-before-image-refresh.pptx`. Le contrôle compare ces contenus octet pour octet ; les notes personnalisées restent dans le PowerPoint, sans être resynchronisées avec `story.json`. Avec les dépendances déjà en cache, ajouter `--offline` aux commandes uv. Réouvrir le fichier dans PowerPoint après l’export.
 
-Les notes, l’ordre des 16 captures, la couverture, l’absence de média animé et le contrôle manuel sont vérifiés. Résultats et limites : [PLAN_PITCH](PLAN_PITCH.md).
+L’ajout de la diapo 18 a utilisé `build_pptx.py --insert-slide 18 --update-notes 15 16 17` sur l’ancien PPTX de 26 pages. Ce mode ajoute une seule diapositive, garde les éléments existants et adapte uniquement les notes demandées. Sa vérification ajoute `--inserted-slide 18 --updated-notes 15 16 17` avec l’ancien fichier donné à `--preserved-pptx`. Ne pas rejouer cette insertion sur la version actuelle de 27 pages ; utiliser `--refresh-images` pour les prochains changements de captures.
+
+Les notes, l’ordre des 17 captures, la couverture, l’absence de média animé et le contrôle manuel sont vérifiés. Résultats et limites : [PLAN_PITCH](PLAN_PITCH.md).
 
 Chiffres du client : environ 50 membres, cotisation de 500 CHF/an, 4–5 soirées/an. Démo : 15 % de paires connectées, prochain palier à 20 %, dîner de 38 invités sur trois services. Coût de fonctionnement **estimé** à ≈ 30 CHF/mois (300–450 CHF/an), mise en place ≈ 20 CHF hors développement ; détails et sources dans [ARCHITECTURE](ARCHITECTURE.md).
 

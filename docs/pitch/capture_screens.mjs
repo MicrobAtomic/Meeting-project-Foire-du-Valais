@@ -9,7 +9,8 @@ const browser = await puppeteer.launch({executablePath: process.env.CHROME || '/
 const onlyIntros = process.argv.includes('--only-intros');
 const onlyReferral = process.argv.includes('--only-referral');
 const onlyDashboard = process.argv.includes('--only-dashboard');
-const manifest = onlyIntros || onlyReferral || onlyDashboard ? JSON.parse(fs.readFileSync(path.join(out,'manifest.json'),'utf8')).scenes : {};
+const onlyBadges = process.argv.includes('--only-badges');
+const manifest = onlyIntros || onlyReferral || onlyDashboard || onlyBadges ? JSON.parse(fs.readFileSync(path.join(out,'manifest.json'),'utf8')).scenes : {};
 const errors = [];
 const pause = ms => new Promise(r => setTimeout(r, ms));
 async function session(email, desktop = false) {
@@ -90,8 +91,20 @@ try {
     await go(camille,'/evenements/4/');
     await scrollTo(camille,'section h2.text-lg');
     await shot(camille,'web','Suggested introductions and synergies',4);
+  } else if (onlyBadges) {
+    if (![3,4].includes(manifest.admin?.length)) throw new Error('Expected the existing admin screenshots');
+    const staff = await session('equipe@example.com',true);
+    for (const language of ['fr','de','en']) {
+      await staff.setCookie({name:'django_language',value:language,url:base});
+      await go(staff,'/staff/evenements/4/badges/');
+      const counts = await staff.$$eval('main section',pages => pages.map(page => page.querySelectorAll('article svg').length));
+      if (JSON.stringify(counts)!==JSON.stringify([8,8,8,8,6])) throw new Error(`${language}: incorrect badge sheets`);
+      if (!await staff.$('button[data-print]')) throw new Error(`${language}: missing print button`);
+      console.log(`PASS badges: ${language}, 38 QR badges / five A4 sheets`);
+    }
+    await shot(staff,'admin','Printable QR badges for the event',3);
   } else if (onlyDashboard) {
-    if (manifest.admin?.length !== 3) throw new Error('Expected the three existing admin screenshots');
+    if (![3,4].includes(manifest.admin?.length)) throw new Error('Expected the existing admin screenshots');
     // Same point in the story as the original full capture: Camille has just met Lukas.
     const camille = await session('camille.rey@example.com');
     await go(camille,'/m/demo-lukas/');
@@ -192,6 +205,8 @@ try {
     window.scrollBy(0,-84);
   });
   await shot(staff,'admin','Rotating tables for 38 guests');
+  await go(staff,'/staff/evenements/4/badges/');
+  await shot(staff,'admin','Printable QR badges for the event');
   }
   fs.writeFileSync(path.join(out,'manifest.json'),JSON.stringify({scenes:manifest,errors},null,2)+'\n');
   if (errors.length) throw new Error(errors.join('\n'));

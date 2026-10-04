@@ -21,10 +21,11 @@ parser.add_argument('--reuse-captures', action='store_true')
 parser.add_argument('--only-intros', action='store_true', help='Refresh only the introductions screenshot; requires --assets-only.')
 parser.add_argument('--only-referral', action='store_true', help='Refresh only referral screenshots; requires --assets-only.')
 parser.add_argument('--only-dashboard', action='store_true', help='Refresh only the staff dashboard screenshot; requires --assets-only.')
+parser.add_argument('--only-badges', action='store_true', help='Capture only the printable QR badges; requires --assets-only.')
 args = parser.parse_args()
-if (args.only_intros or args.only_referral or args.only_dashboard) and (not args.assets_only or args.reuse_captures):
+if (args.only_intros or args.only_referral or args.only_dashboard or args.only_badges) and (not args.assets_only or args.reuse_captures):
     parser.error('Partial capture requires --assets-only and cannot use --reuse-captures')
-if sum((args.only_intros, args.only_referral, args.only_dashboard)) > 1:
+if sum((args.only_intros, args.only_referral, args.only_dashboard, args.only_badges)) > 1:
     parser.error('Choose one partial capture mode')
 WORK.mkdir(exist_ok=True)
 env = dict(os.environ, DEBUG='1', DATABASE_URL=f'sqlite:///{WORK}/screens.sqlite3', DEMO_BANNER='0', NOTIFICATIONS_ENABLED='0', BASE='http://127.0.0.1:8010')
@@ -48,7 +49,7 @@ if not args.reuse_captures:
                         if response.status == 200: break
                 except OSError: time.sleep(.25)
             else: raise RuntimeError('Capture server did not start')
-            capture_args=['--only-intros'] if args.only_intros else ['--only-referral'] if args.only_referral else ['--only-dashboard'] if args.only_dashboard else []
+            capture_args=[flag for flag in ('--only-intros','--only-referral','--only-dashboard','--only-badges') if getattr(args,flag[2:].replace('-','_'))]
             run(['node','capture_screens.mjs',CAPTURES,*capture_args],cwd=HERE)
         finally:
             server.terminate()

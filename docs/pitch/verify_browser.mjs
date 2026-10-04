@@ -33,7 +33,7 @@ try {
   }
   return {slides:document.querySelectorAll('section.slide').length,main:document.querySelectorAll('[data-script]').length,annexes:document.querySelectorAll('.appendix').length,cropped,overlaps};
  });
- assert.equal(layout.slides,26);assert.equal(layout.main,18);assert.equal(layout.annexes,7);
+ assert.equal(layout.slides,27);assert.equal(layout.main,19);assert.equal(layout.annexes,7);
  assert.deepEqual(layout.cropped,[]);assert.deepEqual(layout.overlaps,[]);
  const copy=await page.evaluate(()=>{
   const groups={};
@@ -43,7 +43,7 @@ try {
   }
   return groups;
  });
- for(const [chapter,count] of Object.entries({web:4,event:5,referral:3,admin:3})) {
+ for(const [chapter,count] of Object.entries({web:4,event:5,referral:3,admin:4})) {
   assert.equal(copy[chapter].length,count);
   assert.equal(new Set(copy[chapter]).size,1,`Visible text must stay identical within ${chapter}`);
  }
@@ -71,6 +71,10 @@ try {
  await page.click('.current [data-screen]');assert.equal(await current(),'web-intros');
  await page.keyboard.press('n');assert(await page.$('.presenter-notes.visible'));
  await page.keyboard.press('n');
+ for (const id of ['event-qr','event-confirm','event-card','event-contacts','event-bingo','referral-link','referral-qr','referral-request','admin-dashboard','admin-prepare','admin-tables','admin-badges']) {
+  await page.keyboard.press('ArrowRight');assert.equal(await current(),id);
+ }
+ assert.equal(await page.$eval('.current [data-screen]',img => img.dataset.screen),'screens/admin/003.png');
  await page.keyboard.press('End');assert.equal(await current(),'closing');
  await page.keyboard.press('ArrowRight');assert.equal(await current(),'closing','Stop before the appendices');
  await page.keyboard.press('a');assert.equal(await current(),'appendix');
@@ -84,5 +88,5 @@ try {
  assert.deepEqual(failures,[]);
  fs.mkdirSync(path.join(here,'.build'),{recursive:true});
  fs.writeFileSync(path.join(here,'.build/browser-check.json'),JSON.stringify({...layout,staticScreens:true,navigation:true},null,2)+'\n');
- console.log('PASS: 26 slides, fixed screen until click, requested web order, manual navigation, notes, Q&A, viewport resize; no cropped/overlapping text.');
+ console.log('PASS: 27 slides, fixed screen until click, requested web order, QR printing after tables, manual navigation, notes, Q&A, viewport resize; no cropped/overlapping text.');
 } finally {await browser.close();}
