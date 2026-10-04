@@ -2127,3 +2127,13 @@ msgstr "%(new_member_price)s CHF"
 #, python-format
 msgid "Puis %(membership_price)s CHF par an dès la deuxième année."
 msgstr "Ab dem zweiten Jahr %(membership_price)s CHF pro Jahr."
+
+msgid "Rencontres enregistrées cette année"
+msgstr "Begegnungen dieses Jahr"
+
+#, python-format
+msgid "%(n)s au total"
+msgstr "%(n)s insgesamt"
+
+msgid "Nouveaux membres cette année"
+msgstr "Neue Mitglieder dieses Jahr"

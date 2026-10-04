@@ -16,12 +16,13 @@
     <p class="mt-1 text-4xl font-bold">{{ stats.members }}</p>
   </section>
   <section class="card">
-    <p class="text-sm text-stone-600">{% translate "Rencontres enregistrées" %}</p>
-    <p class="mt-1 text-4xl font-bold">{{ stats.connections }}</p>
+    <p class="text-sm text-stone-600">{% translate "Rencontres enregistrées cette année" %}</p>
+    <p class="mt-1 text-4xl font-bold">{{ year_connections }}</p>
+    <p class="mt-2 text-xs text-stone-500">{% blocktranslate with n=stats.connections %}{{ n }} au total{% endblocktranslate %}</p>
     <p class="mt-2 text-xs text-stone-500">{% blocktranslate with n=recent_connections %}dont {{ n }} ces 30 derniers jours{% endblocktranslate %}</p>
   </section>
   <section class="card">
-    <p class="text-sm text-stone-600">{% translate "Nouvelles recrues de l'année" %}</p>
+    <p class="text-sm text-stone-600">{% translate "Nouveaux membres cette année" %}</p>
     <p class="mt-1 text-4xl font-bold text-emerald-700">{{ new_recruits }}</p>
   </section>
 </div>

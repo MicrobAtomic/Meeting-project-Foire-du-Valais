@@ -35,6 +35,7 @@ ISOLATED_SHOWN = 20
 @staff_required
 def dashboard(request):
     now = timezone.now()
+    year_start = timezone.localtime(now).replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0)
     counts = degrees()
     isolated = sorted(isolated_members(), key=lambda m: (counts[m.pk], m.last_name, m.first_name))
     new_requests = InvitationRequest.objects.filter(status=InvitationRequest.Status.NEW).order_by("-created_at")
@@ -42,7 +43,8 @@ def dashboard(request):
     context = {
         "stats": stats,
         "club_progress": club_progress(stats),
-        "recent_connections": active_connections().filter(created_at__gte=now - timedelta(days=30)).count(),
+        "year_connections": active_connections().filter(created_at__gte=year_start, created_at__lte=now).count(),
+        "recent_connections": active_connections().filter(created_at__gte=now - timedelta(days=30), created_at__lte=now).count(),
         "new_recruits": active_members().filter(member_since=timezone.localdate().year).count(),
         "isolated": [(m, counts[m.pk]) for m in isolated[:ISOLATED_SHOWN]],
         "isolated_more": max(len(isolated) - ISOLATED_SHOWN, 0),

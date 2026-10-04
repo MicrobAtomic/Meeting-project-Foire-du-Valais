@@ -24,7 +24,7 @@ La deuxième image de l’ancien GIF web (connexion) devient la première de la 
 - [x] S2 — Séquences de diapositives, notes adaptées, PowerPoint/PDF/HTML statiques.
 - [x] S3 — Documentation actualisée, vérifications des notes/ordre/cadrage/navigation et livraison poussée.
 
-Chaque étape terminée est cochée, commitée et poussée sur main. La refonte initiale concernait uniquement la présentation ; les corrections des portraits et du tarif de parrainage ci-dessous autorisent maintenant des changements ciblés de l’application. Ne pas toucher à `db.sqlite3` ; le serveur 8000 de l’utilisateur reste indépendant. Captures sur une base jetable et un serveur 8010 appartenant au script ; refuser un port déjà occupé. Aucun email réel.
+Chaque étape terminée est cochée, commitée et poussée sur main. La refonte initiale concernait uniquement la présentation ; les corrections des portraits, du tarif de parrainage et du dashboard ci-dessous autorisent maintenant des changements ciblés de l’application. Ne pas toucher à `db.sqlite3` ; le serveur 8000 de l’utilisateur reste indépendant. Captures sur une base jetable et un serveur 8010 appartenant au script ; refuser un port déjà occupé. Aucun email réel.
 
 ## Sources et reprise
 
@@ -83,6 +83,15 @@ R1 vérifiée : GET et POST invalide dans les trois langues ; offre active/masqu
 R2 vérifiée : les trois captures de parrainage sont actualisées pour refléter l’offre visible en démo. La diapo 14 montre le badge du parrain, le formulaire, les 500 CHF barrés, les 350 CHF pour la première année, le tarif annuel suivant et le bouton d’envoi. Capture et diapositive inspectées visuellement. PDF, HTML et PPTX actualisés ; les indications du nombre de tests passent à 402.
 
 Dans le PPTX existant, seules les images des diapos 12, 13, 14, 18 et 21 ont changé (parrainage et compte des tests) ; notes et autres contenus conservés octet pour octet. Contrôles fichiers et Chrome réussis : 26 pages, ordre, progression manuelle, stabilité jusqu’au clic, navigation, annexes et absence de texte coupé ou superposé. Le contrôle de stabilité attend maintenant le décodage et le rendu de l’image révélée avant la comparaison, pour ne pas confondre chargement initial et changement automatique. Base utilisateur inchangée, serveur de capture arrêté, aucun email envoyé. Réouvrir le PowerPoint après cette mise à jour.
+
+### Rencontres annuelles du dashboard — demande du 4 octobre
+
+- [x] D1 — Distinguer le compteur des rencontres de l’année, le total historique et les nouveaux membres ; vérifier la période et les traductions.
+- [ ] D2 — Refaire la capture du dashboard et les exports de la diapositive 15, conserver les notes PowerPoint et pousser.
+
+Le « 6 » de la capture initiale comptait les nouveaux membres ; le total des rencontres était déjà de 181 après le scan Camille/Lukas. L’affichage est clarifié : rencontres enregistrées pendant l’année civile locale jusqu’à maintenant, total historique et 30 derniers jours, nouveaux membres de l’année. Les données de rencontres et l’indice de fédération restent calculés depuis la base, sans multiplier ni ajouter artificiellement les chiffres.
+
+D1 vérifiée : nouveau test du changement d’année à minuit suisse, distinction entre année et total, exclusion des dates futures des périodes année/30 jours, membres inactifs et invités exclus des statistiques de membres. Libellés vérifiés en FR/DE/EN. Traductions compilées, CSS recompilé sans différence, contrôle Django sans erreur ; **403 tests en 94,64 s, OK, 6 cas PostgreSQL ignorés**, avec l’horloge de référence. Tests existants inchangés.
 
 | Étape | Commit | État |
 |---|---|---|
