@@ -24,7 +24,7 @@ La deuxième image de l’ancien GIF web (connexion) devient la première de la 
 - [x] S2 — Séquences de diapositives, notes adaptées, PowerPoint/PDF/HTML statiques.
 - [x] S3 — Documentation actualisée, vérifications des notes/ordre/cadrage/navigation et livraison poussée.
 
-Chaque étape terminée est cochée, commitée et poussée sur main. La refonte initiale concernait uniquement la présentation ; la correction des portraits ci-dessous autorise maintenant un changement ciblé du template de l’application. Ne pas toucher à `db.sqlite3` ; le serveur 8000 de l’utilisateur reste indépendant. Captures sur une base jetable et un serveur 8010 appartenant au script ; refuser un port déjà occupé. Aucun email réel.
+Chaque étape terminée est cochée, commitée et poussée sur main. La refonte initiale concernait uniquement la présentation ; les corrections des portraits et du tarif de parrainage ci-dessous autorisent maintenant des changements ciblés de l’application. Ne pas toucher à `db.sqlite3` ; le serveur 8000 de l’utilisateur reste indépendant. Captures sur une base jetable et un serveur 8010 appartenant au script ; refuser un port déjà occupé. Aucun email réel.
 
 ## Sources et reprise
 
@@ -70,6 +70,15 @@ P1 vérifiée : même URL de portrait, image chargée dans Chrome sur les trois 
 P2 vérifiée : capture réelle `screens/web/004.png` refaite sur la base jetable ; portrait de Lukas chargé avant la prise. PNG de la diapositive 6 et PDF reconstruits ; HTML réutilise cette même capture. Dans le PowerPoint déjà retouché par l’utilisateur, seul `ppt/media/image6.png` a été remplacé : tous les autres contenus, notamment les dernières notes, sont conservés octet pour octet. Sauvegarde locale antérieure à ce remplacement : `pitch/.build/pitch-before-image-refresh.pptx`. Les notes retouchées dans PowerPoint restent propres à ce fichier ; elles ne sont pas écrasées par celles du conducteur.
 
 Contrôles exports réussis : 26 pages, 18 principales, 16 captures, ordre et progression manuelle ; contrôle des notes conservées et de tous les autres contenus du PPTX contre sa sauvegarde. Chrome : image stable jusqu’au clic, navigation, notes, annexes, redimensionnement et absence de texte coupé ou superposé. Capture et diapositive inspectées visuellement. Empreinte de `db.sqlite3` inchangée ; serveur 8010 arrêté ; aucun email réel. Réouvrir le PowerPoint pour charger l’image corrigée.
+
+### Tarif de parrainage — demande du 4 octobre
+
+- [x] R1 — Montrer 500 CHF barrés, 350 CHF la première année grâce au parrainage, puis 500 CHF/an ; réserver cet affichage aux liens valides avec offre active ; traduire et vérifier.
+- [ ] R2 — Actualiser la capture et les exports de la diapositive 14, conserver les notes PowerPoint, documenter et pousser.
+
+Les montants viennent de la configuration existante (350 CHF pour le nouveau membre, 500 CHF au tarif normal). L’offre devient visible par défaut en mode démo ; une valeur explicite de `REFERRAL_OFFER_ENABLED` reste prioritaire et hors démo elle reste désactivée par défaut. Les cotisations restent facturées manuellement.
+
+R1 vérifiée : GET et POST invalide dans les trois langues ; offre active/masquée ; demande sans parrain, code inconnu, parrain inactif et code d’un invité exclus de la réduction. Un nouveau test vérifie également des montants configurés différents (490 / 720 CHF). Traductions FR/DE/EN compilées, CSS recompilé, contrôle Django sans erreur. **402 tests en 94,47 s, OK, 6 cas PostgreSQL ignorés**, avec l’horloge de référence ; aucune assertion existante modifiée.
 
 | Étape | Commit | État |
 |---|---|---|

@@ -13,7 +13,7 @@
 
 L’application propose les cartes, les synergies, les rencontres QR, le bingo, les tables, les paliers et les outils d’équipe. Photos normalisées avec aperçu, notes privées, remplaçants temporaires et langue de communication sont implémentés.
 
-Les emails sont préparés ; SMTP et ordonnanceur restent à configurer et à tester avant activation. Les photos de production nécessitent un stockage privé durable. Hébergement suisse, import des membres, sauvegardes/restauration et contrôles de production font partie du lancement. Les cotisations sont facturées manuellement. Les montants promotionnels du parrainage restent désactivés par défaut.
+Les emails sont préparés ; SMTP et ordonnanceur restent à configurer et à tester avant activation. Les photos de production nécessitent un stockage privé durable. Hébergement suisse, import des membres, sauvegardes/restauration et contrôles de production font partie du lancement. Les cotisations sont facturées manuellement. La démo montre l’offre de parrainage : 350 CHF la première année, puis 500 CHF/an. Hors démo, elle reste désactivée par défaut ; `REFERRAL_OFFER_ENABLED` permet de l’activer ou de la désactiver explicitement.
 
 Le deck suit **7 chapitres sur 18 diapositives fixes + séparation + 7 annexes** (26 pages), avec un conducteur de **1:58**. Chaque changement d’écran est manuel, dans PowerPoint, HTML et PDF. Une répétition personnelle avec les 17 changements reste à faire sur l’ordinateur de scène.
 

@@ -39,7 +39,9 @@ Le choix de langue est visible dans l'admin pour les emails et les courriers pap
 Les photos JPEG/PNG/WebP/HEIC/HEIF/AVIF sont orientées, recadrées et compressées automatiquement en JPEG ;
 les fichiers de téléphone sont acceptés jusqu’à 20 Mio et 50 mégapixels. Les remplaçants validés ont une identité et un QR distincts : leurs rencontres restent les leurs, leur accès expire
 et ils ne gonflent pas les compteurs de cotisants. La cotisation configurable est affichée sur la demande d'invitation
-(500 CHF par défaut) ; les factures restent gérées manuellement. L'offre commerciale de parrainage est masquée par défaut.
+(500 CHF par défaut) ; les factures restent gérées manuellement. En démo, un lien de parrainage valide affiche
+500 CHF barrés puis 350 CHF la première année, et 500 CHF/an ensuite. Hors démo, l'offre reste masquée par défaut ;
+`REFERRAL_OFFER_ENABLED=1` l'active et `REFERRAL_OFFER_ENABLED=0` la masque explicitement dans tous les modes.
 
 Annoncer un événement prépare des emails et des relances pour les membres sans réponse. Le récapitulatif mensuel
 montre des aperçus de nouveaux profils avec consentement et lien vers le site. **Les envois automatiques sont désactivés**

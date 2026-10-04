@@ -142,7 +142,8 @@ if not 1 <= GUEST_ACCESS_HOURS <= 168:
 
 # Membership & referral offer (CHF) — placeholder amounts, to be validated with the client.
 MEMBERSHIP_PRICE = 500
-REFERRAL_OFFER_ENABLED = os.environ.get("REFERRAL_OFFER_ENABLED", "0") == "1"
+# Show the configured example offer in the demo; real clubs explicitly opt in.
+REFERRAL_OFFER_ENABLED = os.environ.get("REFERRAL_OFFER_ENABLED", "1" if DEMO_MODE else "0") == "1"
 REFERRAL_NEW_MEMBER_PRICE = 350
 REFERRAL_SPONSOR_DISCOUNT = 100
 

@@ -2071,3 +2071,18 @@ msgstr "Table %(number)s"
 
 msgid "Aucun plan généré pour l'instant."
 msgstr "No seating plan generated yet."
+
+msgid "Réduction de parrainage · première année"
+msgstr "Referral discount · first year"
+
+#, python-format
+msgid "%(membership_price)s CHF"
+msgstr "CHF %(membership_price)s"
+
+#, python-format
+msgid "%(new_member_price)s CHF"
+msgstr "CHF %(new_member_price)s"
+
+#, python-format
+msgid "Puis %(membership_price)s CHF par an dès la deuxième année."
+msgstr "Then CHF %(membership_price)s per year from year two."

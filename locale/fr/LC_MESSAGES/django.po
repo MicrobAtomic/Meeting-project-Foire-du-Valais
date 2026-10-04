@@ -2102,3 +2102,18 @@ msgstr "Table %(number)s"
 
 msgid "Aucun plan généré pour l'instant."
 msgstr "Aucun plan généré pour l'instant."
+
+msgid "Réduction de parrainage · première année"
+msgstr "Réduction de parrainage · première année"
+
+#, python-format
+msgid "%(membership_price)s CHF"
+msgstr "%(membership_price)s CHF"
+
+#, python-format
+msgid "%(new_member_price)s CHF"
+msgstr "%(new_member_price)s CHF"
+
+#, python-format
+msgid "Puis %(membership_price)s CHF par an dès la deuxième année."
+msgstr "Puis %(membership_price)s CHF par an dès la deuxième année."

@@ -2112,3 +2112,18 @@ msgstr "Tisch %(number)s"
 
 msgid "Aucun plan généré pour l'instant."
 msgstr "Noch kein Tischplan erzeugt."
+
+msgid "Réduction de parrainage · première année"
+msgstr "Empfehlungsrabatt · erstes Jahr"
+
+#, python-format
+msgid "%(membership_price)s CHF"
+msgstr "%(membership_price)s CHF"
+
+#, python-format
+msgid "%(new_member_price)s CHF"
+msgstr "%(new_member_price)s CHF"
+
+#, python-format
+msgid "Puis %(membership_price)s CHF par an dès la deuxième année."
+msgstr "Ab dem zweiten Jahr %(membership_price)s CHF pro Jahr."

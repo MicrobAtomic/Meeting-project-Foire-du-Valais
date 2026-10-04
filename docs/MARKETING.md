@@ -29,7 +29,7 @@ cette personne ? »
 
 | # | Canal | Comment | Ce que fait déjà la plateforme | Indicateur |
 |---|---|---|---|---|
-| 1 | **Le parrainage** (canal n°1) | Une fois par an, après la Soirée Wow, un message personnel du président : « Qui aimerais-tu voir au Club l'an prochain ? Un seul nom suffit. » | Page « Inviter quelqu'un » : lien et QR code personnels ; remise configurable mais désactivée, à valider par le comité | Part des membres qui ont parrainé ; demandes avec un parrain |
+| 1 | **Le parrainage** (canal n°1) | Une fois par an, après la Soirée Wow, un message personnel du président : « Qui aimerais-tu voir au Club l'an prochain ? Un seul nom suffit. » | Page « Inviter quelqu'un » : lien et QR code personnels ; offre illustrée en démo (350 CHF la première année, puis 500 CHF/an), désactivée par défaut hors démo, à valider par le comité | Part des membres qui ont parrainé ; demandes avec un parrain |
 | 2 | **L'invité·e découverte** | À l'Apéro de Noël, chaque membre peut venir avec une personne. On vend mieux une soirée en la faisant vivre qu'en la décrivant. | Badge « Invité·e de… » ; e-mail de suivi avec le lien parrainé (à ajouter : ½ jour, sur le modèle des remplaçants) | Invités qui demandent une invitation |
 | 3 | **Les remplaçants d'un soir** | Un membre empêché envoie une ou un collègue à sa place. | Accès temporaire et badge propres au remplaçant ; message d’accès préparé, envoi SMTP à activer | Remplaçants qui demandent une invitation |
 | 4 | **Les exposants et partenaires de la Foire** | Le vivier le plus naturel : des entreprises déjà engagées dans la Foire. Pendant la Foire, chaque membre peut inviter à la Soirée Wow un exposant qu'il apprécie. L'équipe repère aussi 20 à 30 exposants qui correspondent à la cible et leur écrit une lettre signée. | Demande d'invitation en 2 minutes (FR, DE, EN), vitrine sans nom de membre | Réponses aux lettres ; demandes après la Foire |
@@ -84,7 +84,7 @@ masse, publier la liste des membres, démarcher par téléphone.
 | Invités découverte (environ 25 personnes, boissons et raclette) | 1'000 CHF |
 | Lettres personnelles aux exposants (30 lettres) | 100 CHF |
 | Cadeau de bienvenue : une bouteille par nouveau membre (15 à 20) | 400 à 500 CHF |
-| Parrainage : 150 CHF de rabais au filleul et 100 CHF au parrain par adhésion | 250 CHF par nouveau membre si l’offre est validée ; aujourd’hui désactivée |
+| Parrainage : 150 CHF de rabais au filleul et 100 CHF au parrain par adhésion | 250 CHF par nouveau membre si l’offre est validée ; affichage de démonstration actif, offre désactivée par défaut hors démo |
 | Publicité payante | 0 CHF |
 
 ## 8. Ce que l'on mesure

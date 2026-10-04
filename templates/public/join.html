@@ -24,7 +24,16 @@
       </div>
       <div class="hidden" aria-hidden="true"><label>Website {{ form.website }}</label></div>
       <div class="rounded-xl bg-stone-50 p-3 text-sm text-stone-700">
+        {% if referrer and referral_offer_enabled %}
+        <p class="font-semibold">{% translate "Réduction de parrainage · première année" %}</p>
+        <p class="flex flex-wrap items-baseline gap-2">
+          <s class="text-stone-500">{% blocktranslate %}{{ membership_price }} CHF{% endblocktranslate %}</s>
+          <strong class="text-lg text-red-700">{% blocktranslate %}{{ new_member_price }} CHF{% endblocktranslate %}</strong>
+        </p>
+        <p>{% blocktranslate %}Puis {{ membership_price }} CHF par an dès la deuxième année.{% endblocktranslate %}</p>
+        {% else %}
         <p class="font-semibold">{% blocktranslate %}Cotisation annuelle : {{ membership_price }} CHF.{% endblocktranslate %}</p>
+        {% endif %}
         <p>{% translate "Paiement sur facture, géré par l'équipe du Club." %}</p>
         <p class="mt-1">{% translate "Envoyer une demande d'invitation ne déclenche aucun paiement." %}</p>
       </div>

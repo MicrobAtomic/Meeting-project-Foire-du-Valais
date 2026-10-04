@@ -68,6 +68,8 @@ def join(request):
         form = InvitationRequestForm()
     return render(request, "public/join.html", {
         "form": form, "referrer": referrer, "membership_price": settings.MEMBERSHIP_PRICE,
+        "referral_offer_enabled": settings.REFERRAL_OFFER_ENABLED,
+        "new_member_price": settings.REFERRAL_NEW_MEMBER_PRICE,
     })
 
 
