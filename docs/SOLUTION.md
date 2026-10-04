@@ -1,5 +1,8 @@
 # Le sujet et la solution
 
+> **▶ En vidéo** : [la démo commentée, 3 min 15](pitch/demo-long.mp4) ([lecture directe](https://github.com/MicrobAtomic/Meeting-project-Foire-du-Valais/raw/main/docs/pitch/demo-long.mp4)) montre tout ce
+> qui suit en action, du premier contact d'un futur membre jusqu'au plan de tables de l'équipe.
+
 ## Le défi
 
 Le Club des Affaires de la Foire du Valais réunit une cinquantaine de dirigeantes et de dirigeants. Ils paient
